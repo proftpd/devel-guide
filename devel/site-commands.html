@@ -44,7 +44,7 @@ MODRET site_time(cmd_rec *cmd) {
 
   <font color=green>/* This case does the work of returning the local time to the client
    */</font>
-  if (!strcasecmp(cmd->argv[1], "TIME")) {
+  if (strcasecmp(cmd->argv[1], "TIME") == 0) {
     char timestr[80] = {'\0'};
     time_t now = time(NULL);
     struct tm *tnow = NULL;
@@ -54,19 +54,19 @@ MODRET site_time(cmd_rec *cmd) {
      * the SITE command being implemented.
      */</font>
     if (get_param_int(cmd->server->conf, "authenticated", FALSE) != TRUE) {
-      send_response(R_530, "Please login with USER and PASS.");
+      pr_response_send(R_530, "Please login with USER and PASS.");
       return ERROR(cmd);
     }
 
     <font color=green>/* Check for &lt;Limit&gt; restrictions */</font>
     if (!dir_check(cmd->tmp_pool, "SITE_TIME", "MISC", session.cwd, NULL)) {
-      add_response_err(R_550, "%s: %s", cmd->arg, strerror(EPERM));
+      pr_response_add_err(R_550, "%s: %s", cmd->arg, strerror(EPERM));
       return ERROR(cmd);
     }
 
     <font color=green>/* Log that the user requested the time.
      */</font>
-    log_pri(LOG_INFO, "SITE TIME requested by user %s", session.user);
+    pr_log_pri(PR_LOG_INFO, "SITE TIME requested by user %s", session.user);
 
     <font color=green>/* Prepare the time string to be returned.
      */</font>
@@ -77,12 +77,12 @@ MODRET site_time(cmd_rec *cmd) {
        * error, command not recognized), 501 (syntax error in parameters or
        * arguments), and 530 (not logged in).
        */</font>
-      add_response(R_202, "Unable to provide the time right now");
+      pr_response_add(R_202, "Unable to provide the time right now");
 
       <font color=green>/* Of course, if something like localtime(3) fails, it should be
        * logged as well.
        */</font>
-      log_pri(LOG_NOTICE, "notice: localtime() returned NULL?!?");
+      pr_log_pri(PR_LOG_NOTICE, "notice: localtime() returned NULL?!?");
 
       return HANDLED(cmd);
     }
@@ -90,34 +90,34 @@ MODRET site_time(cmd_rec *cmd) {
     <font color=green>/* Print the local time into the string buffer.
      */</font>
     strftime(timestr, sizeof(timestr), "%a %b %d %T %Z %Y", tnow); 
-    timestr[sizeof(timestr) - 1] = '\0';
+    timestr[sizeof(timestr)-1] = '\0';
 
     <font color=green>/* The 200 response code is the normal value for such "generic" commands
      * as site-specific SITE commands.
      */</font>
-    add_response(R_200, "The current time is: %s", timestr);
+    pr_response_add(R_200, "The current time is: %s", timestr);
 
     <font color=green>/* If you want to add a multiline response, use the R_DUP macro, like
      * so:
      *
-     *  add_response(R_DUP, ...);
+     *  pr_response_add(R_DUP, ...);
      */</font>
 
     return HANDLED(cmd);
   }
 
-  if (!strcasecmp(cmd->argv[1], "HELP")) {
+  if (strcasecmp(cmd->argv[1], "HELP") == 0) {
 
     <font color=green>/* Add a description of SITE TIME to the output.  The response code
      * 214 is the appropriate value to use for "helpful" responses.
      */</font>
-    add_response(R_214, "TIME");
+    pr_response_add(R_214, "TIME");
 
     <font color=green>/* If this SITE command has needed a parameter (RFC959 only allows
      * one parameter to the SITE command, although not many servers seem to
      * strictly enforce this), this HELP line would have looked something like:
      *
-     *  add_response(R_214, "TIME <param>");
+     *  pr_response_add(R_214, "TIME <param>");
      */</font>
   }
 
@@ -136,7 +136,7 @@ MODRET site_time(cmd_rec *cmd) {
 The only remaining task is to register this command handler by adding
 an appropriate entry to the module's <code>cmdtable</code>:
 <pre>
-  { CMD, C_SITE, G_NONE, site_time, FALSE, FALSE },
+  { CMD, C_SITE, G_NONE, site_time, FALSE, FALSE, CL_MISC },
 </pre>
 
 Simple.  The key points to keep in mind are: use the correct response codes
@@ -156,6 +156,13 @@ This is normal, and in general a good idea: let your <code>SITE</code>
 handlers determine if and how to perform an authentication/authorization
 check for themselves, rather than always relying on the core checking
 ability.
+
+<p>
+The <code>CL_MISC</code> value indicates that the registered SITE command
+is &quot;miscellaneous&quot; for <code>ExtendedLog</code> logging purposes.
+Custom SITE commands should always use this logging class so that
+administrators' <code>ExtendedLog</code>s properly show when that SITE command
+is used.
 
 <p>
 <center><a href="../toc.html">Table of Contents</a></center><br>

@@ -1,0 +1,103 @@
+<!-- $Id$ -->
+<!-- $Source$ -->
+
+<html>
+<head>
+<title>ProFTPD Developer's Guide: Obtaining Copies</title>
+</head>
+
+<body bgcolor=white>
+
+<hr><br>
+<center>
+<img src="images/proftpd.png">
+<br><br>
+<h3><b>ProFTPD Developer's Guide: Obtaining Copies</b></h3>
+<i><b>ProFTPD Version 1.2</b></i><br>
+</center>
+<hr><br>
+
+<p>
+<center><a href="toc.html">Table of Contents</a></center><br>
+
+<p>
+<b>Obtaining the ProFTPD Developer's Guide</b><br>
+This guide is distributed in two parts: the descriptive pages, and the source
+code pages.  This is a necessary arrangement.
+
+<p>
+The descriptive pages, including the API indices, are available via CVS from
+SourceForge.net.  When prompted for a password for <code>anonymous</code>,
+simply press the <code>Enter</code> key:
+<pre>
+  cvs -d:pserver:anonymous@cvs.PDD.sourceforge.net:/cvsroot/pdd login 
+                      
+  cvs -z3 -d:pserver:anonymous@cvs.PDD.sourceforge.net:/cvsroot/pdd co devel-guide
+</pre>
+Updates from within the module's directory do not need the <code>-d</code>
+parameter.
+
+<p>
+To obtain the source code pages, obtain the latest source code tarball from
+the <a href="http://www.proftpd.org">www.proftpd.org</a> site, and use
+my <a href="bin/c2html">c2html</a> Perl script (<code>c2html -h</code> for
+usage):
+<ul>
+  <li>Unpack the source code tarball, and <code>cd</code> into that
+      directory:
+<pre>
+    tar zxvf proftpd-<i>release</i>.tar.gz
+    cd proftpd-<i>release</i>
+</pre>
+  </li>
+
+  <li>Create a directory <b>outside the source code directory</b> for
+      the generated HTML pages:
+<pre>
+    mkdir /tmp/proftpd
+</pre>  
+  </li>
+
+  <li>Use the <code>ctags</code> program to generate the information needed
+      by <code>c2html</code>:
+<pre>
+    ctags -R -x --sort=no > tags
+</pre>
+  </li>
+
+  <li>Invoke <code>c2html</code> to generate the HTML pages:
+<pre>
+    c2html -r -v -d /tmp/proftpd
+</pre>
+  </li>
+
+  <li>Once the HTML has been generated, move the created directory under the
+      <code>devel-guide</code> directory as <code>src/</code>:
+<pre>
+    mv /tmp/proftpd <i>devel-guide</i>/src
+</pre>
+  </li>
+</ul>
+
+<p>
+You should now have a complete local copy of the ProFTPD Developer's Guide.
+
+<p>
+<center><a href="toc.html">Table of Contents</a></center><br>
+
+<hr><br>
+
+Author: <i>$Author$</i><br>
+Last Updated: <i>$Date$</i><br>
+
+<br><hr>
+
+<font size=2><b><i>
+&copy; Copyright 2000,2001 TJ Saunders<br>
+ All Rights Reserved<br>
+</i></b></font>
+
+<hr><br>
+
+</body>
+</html>

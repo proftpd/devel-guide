@@ -518,10 +518,10 @@ more or less like this:
     <font color=green>/* get an adjusted requested filename
      */</font>
     if (conf_downcase->argv[0] == TRUE)
-      new_filename = (cmd->server->pool, cmd->arg, PR_CASE_DOWN);
+      new_filename = adjust_filename(cmd->server->pool, cmd->arg, PR_CASE_DOWN);
 
     else if (conf_upcase->argv[0] == TRUE)
-      new_filename = (cmd->server->pool, cmd->arg, PR_CASE_UP);
+      new_filename = adjust_filename(cmd->server->pool, cmd->arg, PR_CASE_UP);
 
     <font color=green>/* copy the new filename into the command record */</font>
     sstrcpy(cmd->arg, new_filename, strlen(new_filename));
@@ -533,6 +533,13 @@ more or less like this:
 </pre>
 
 <p>
+The registration of this as a command handler for downloads (the
+FTP <code>RETR</code> command) is done in the cmdtable, shown earlier:
+<pre>
+  { PRE_CMD, C_RETR, G_NONE, fixup_filenames, TRUE, FALSE },
+</pre>
+
+<p>
 The <code>DowncaseFileNames</code> or <code>UpcaseFileNames</code>
 configuration directives are retrieved.  If neither applies to the file
 requested for the RETR command, the handler <code>DECLINE</code>s, and
@@ -540,7 +547,12 @@ processing continues on to the next handler that is registered for this
 command.  If one of the configuration directives <i>do</i> apply, the
 &quot;fixup&quot; is done on the filename, then the handler exits with
 a <code>DECLINE</code>, letting other handlers work on the <code>cmd_rec</code>,
-which now has the adjusted filename.<br>
+which now has the adjusted filename.
+
+<p>
+The writing of the <code>adjust_filename()</code> function is left as an
+exercise to you, the budding module developer.<br>
+
 <br>
 
 <hr>

@@ -27,158 +27,210 @@ authentication, UID/GID-to-name and name-to-UID/GID mappings.
 
 <p>
 In order for a module to provide this functionality, it must export an
-<code>authtable</code> (via the module structure), and define <i>all</i> of the
+<code><a href="../api/typedefs.html#authtable">authtable</a></code>
+(via the module structure), and define <i>all</i> of the
 following handler <i>names</i>.  Even if the module is not going to do
 anything for a particular authentication function, it should define a handler,
 so that a slot is properly reserved for the module.
 
 <p>
-Each handler accepts data via the <code>cmd</code> structure and should return
-its data via the <code>MODRET->data</code> field.  The core function
-<a href="../api/functions.html#mod_create_data"><code>mod_create_data()</code></a> can create this data structure properly, for return to the caller.
+Each handler accepts data via the <code>cmd_rec</code> structure and should
+return its data via the <code>MODRET->data</code> member.  The
+<a href="../api/functions.html#mod_create_data"><code>mod_create_data()</code></a> function is usually used by an authentication handler to create and
+populate this data structure properly, for return to the caller.
 
 <p>
-Defined <code>authtable</code> names are:
+Defined <code>authtable</code> handler names are:
 <ul>
   <li><b><code>setpwent</code></b><br>
-      custom implementation of <code>setpwent(3)</code> function.  Called by
-      src/auth.c's <code>auth_setpwent()</code> function.<br>
+      This handler provides a custom implementation of the
+      <code>setpwent(3)</code> library function.  The handler is accessed
+      via the
+      <code><a href="../api/functions.html#auth_setpwent">auth_setpwent()</a></code> function.<br>
   </li>
   <br>
 
   <li><b><code>setgrent</code></b><br>
-      custom implementation of <code>setgrent(3)</code> function.  Called by
-      src/auth.c's <code>auth_setgrent()</code> function.<br>
+      This handler provides a custom implementation of the
+      <code>setgrent(3)</code> library function.  The handler is accessed
+      via the
+      <code><a href="../api/functions.html#auth_setgrent">auth_setgrent()</a></code> function.<br>
   </li>
   <br>
 
   <li><b><code>endpwent</code></b><br>
-      custom implementation of <code>endpwent(3)</code> function.  Called by
-      src/auth.c's <code>auth_endpwent()</code> function.<br>
+      This handler provides a custom implementation of the
+      <code>endpwent(3)</code> library function.  The handler is accessed
+      via the
+      <code><a href="../api/functions.html#auth_endpwent">auth_endpwent()</a></code> function.<br> 
   </li>
   <br>
 
   <li><b><code>endgrent</code></b><br>
-      custom implementation of <code>endgrent(3)</code> function.  Called by
-      src/auth.c's <code>auth_endgrent()</code> function.<br>
+      This handler provides a custom implementation of the
+      <code>endgrent(3)</code> library function.  The handler is accessed
+      via the
+      <code><a href="../api/functions.html#auth_endgrent">auth_endgrent()</a></code> function.<br>
   </li>
   <br>
 
   <li><b><code>getpwent</code></b><br>
-      custom implementation of <code>getpwent(3)</code> function.  Called by
-      src/auth.c's <code>auth_getpwent()</code> function.<br>
+      This handler provides a custom implementation of the
+      <code>getpwent(3)</code> library function.  The handler is accessed
+      via the
+      <code><a href="../api/functions.html#auth_getpwent">auth_getpwent()</a></code> function.<br>
   </li>
   <br>
 
   <li><b><code>getgrent</code></b><br>
-      custom implementation of <code>getgrent(3)</code> function.  Called by
-      src/auth.c's <code>auth_getgrent()</code> function.<br>
+      This handler provides a custom implementation of the
+      <code>getgrent(3)</code> library function.  The handler is accessed
+      via the
+      <code><a href="../api/functions.html#auth_getgrent">auth_getgrent()</a></code> function.<br>
   </li>
   <br>
 
   <li><b><code>getpwnam</code></b><br>
-      custom implementation of <code>getpwnam(3)</code> function.  Called by
-      src/auth.c's <code>auth_getpwnam()</code> function.<br>
+      This handler provides a custom implementation of the
+      <code>getpwnam(3)</code> library function.  The handler is accessed
+      via the
+      <code><a href="../api/functions.html#auth_getpwnam">auth_getpwnam()</a></code> function.<br>
   </li>
   <br>
 
   <li><b><code>getgrnam</code></b><br>
-      custom implementation of <code>getgrnam(3)</code> function.  Called by
-      src/auth.c's <code>auth_getgrnam()</code> function.<br>
+      This handler provides a custom implementation of the
+      <code>getgrnam(3)</code> library function.  The handler is accessed
+      via the
+      <code><a href="../api/functions.html#auth_getgrpnam">auth_getgrpnam()</a></code> function.<br>
   </li>
   <br>
 
   <li><b><code>getpwuid</code></b><br>
-      custom implementation of <code>getpwuid(3)</code> function.  Called by
-      src/auth.c's <code>auth_getpwuid()</code> function.<br>
+      This handler provides a custom implementation of the
+      <code>getpwuid(3)</code> library function.  The handler is accessed
+      via the
+      <code><a href="../api/functions.html#auth_getpwuid">auth_getpwuid()</a></code> function.<br>
   </li>
   <br>
 
   <li><b><code>getgrgid</code></b><br>
-      custom implementation of <code>getgrgid(3)</code> function.  Called by
-      src/auth.c's <code>auth_getgrid()</code> function.<br>
+      This handler provides a custom implementation of the
+      <code>getgrgid(3)</code> library function.  The handler is accessed
+      via the
+      <code><a href="../api/functions.html#auth_getgrgid">auth_getgrgid()</a></code> function.<br>
   </li>
   <br>
 
   <li><b><code>auth</code></b><br>
-      authenticate user.  Called by src/auth.c's
-      <code>auth_authenticate()</code> function.<br>
-      <code>cmd->argv[0]</code> = user<br>
-      <code>cmd->argv[1]</code> = cleartext password<br>
+      This handler provides a function to authenticate a user, in whatever
+      manner the developer wishes.  The user name, and the cleartext password
+      given for the <code>USER</code> and <code>PASS</code> FTP commands,
+      are passed via <code>cmd_rec</code>:
+<pre>
+    cmd->argv[0] = <i>user-name</i>
+    cmd->argv[1] = <i>cleartext-password</i>
+</pre>
+      The handler is accessed via the
+      <code><a href="../api/functions.html#auth_authenticate">auth_authenticate()</a></code> function.<br>
   </li>
   <br>
 
   <li><b><code>check</code></b><br>
-      compare supplied passwords.  Called by src/auth.c's
+      This handler provides a function for comparing the supplied password
+      against a stored password hash, in whatever manner the developer wishes.
+      The user name, the given cleartext password, and the retrieved hashed
+      password are passed via <code>cmd_rec</code>:
       <code>auth_check()</code> function.<br>
-      <code>cmd->argv[0]</code> = hashed password<br>
-      <code>cmd->argv[1]</code> = user<br>
-      <code>cmd->argv[2]</code> = cleartext password<br>
+<pre>
+    cmd->argv[0] = <i>hashed-password</i>
+    cmd->argv[1] = <i>user-name</i>
+    cmd->argv[2] = <i>cleartext-password</i>
+</pre>
+      The handler is accessed via the
+      <code><a href="../api/functions.html#auth_check">auth_check()</a></code>
+      function.<br>
   </li>
   <br>
 
   <li><b><code>uid_name</code></b><br>
-      map UID to name.  Called by src/auth.c's
-      <code>auth_uid_name()</code> function.<br>
-      <code>cmd->argv[0] = (char *) uid</code><br>
+      This handler is used to map a UID to a user name.  The UID to be mapped
+      is passed via <code>cmd_rec</code>:
+<pre>
+    cmd->argv[0] = (char *) <i>uid</i>
+</pre>
+      The handler is accessed via the
+      <code><a href="../api/functions.html#auth_uid_name">auth_uid_name()</a></code> function.<br>
   </li>
   <br>
 
   <li><b><code>gid_name</code></b><br>
-      map GID to group.  Called by src/auth.c's
-      <code>auth_gid_name()</code> function.<br>
-      <code>cmd->argv[0] = (char *) gid</code><br>
+      This handler is used to map a GID to a group name.  The GID to be mapped
+      is passed via <code>cmd_rec</code>:
+<pre>
+    cmd->argv[0] = (char *) <i>gid</i>
+</pre>
+      The handler is accessed via the
+      <code><a href="../api/functions.html#auth_gid_name">auth_gid_name()</a></code> function.<br>
   </li>
   <br>
 
   <li><b><code>name_uid</code></b><br>
-      map name to UID.  Called by src/auth.c's
-      <code>auth_name_uid()</code> function.<br>
-      <code>cmd->argv[0] = name</code><br>
+      This handler is used to map a user name to a UID.  The name to be mapped
+      is passed via <code>cmd_rec</code>:
+<pre>
+    cmd->argv[0] = <i>user-name</i>
+</pre>
+      The handler is accessed via the
+      <code><a href="../api/functions.html#auth_name_uid">auth_name_uid()</a></code> function.<br>
   </li>
   <br>
 
   <li><b><code>name_gid</code></b><br>
-      map group to GID.  Called by src/auth.c's
-      <code>auth_name_gid()</code> function.<br>
-      <code>cmd->argv[0] = name</code><br>
+      This handler is used to map a group name to a GID.  The name to be mapped
+      is passed via <code>cmd_rec</code>:
+<pre>
+    cmd->argv[0] = <i>group-name</i>
+</pre>
+      The handler is accessed via the
+      <code><a href="../api/functions.html#auth_name_gid">auth_name_gid()</a></code> function.<br>
   </li>
 </ul>
-
-<p>
-In the 1.3.x series, expect to see a new authentication handler hook
-added, <code>get_groups</code>, so that an authentication module may override
-the process of retrieving the supplemental group membership lists for incoming
-connections.
 
 <p>
 <b>Authentication Cascade Order</b><br>
 The cascaded order of authentication handlers is similar to that of command
 handlers:
 <ol>
-  <li>If an authentication handler returns <code>DECLINED</code>, handlers in
-      other modules are called in priority load order, just as with command
-      handlers.  If <i>all</i> handlers for a particular function return
-      <code>DECLINED</code>, ProFTPD will assume that the operation failed.<br>
+  <li>If an authentication handler returns
+      <code><a href="../api/macros.html#DECLINED">DECLINED</a></code>,
+      handlers in other modules are called in priority load order, just as with
+      command handlers.  If <i>all</i> handlers for a particular function return
+      <code><a href="../api/macros.html#DECLINED">DECLINED</a></code>,
+      the core engine will assume that the operation failed.<br>
   </li>
   <br>
 
-  <li>If an authentication handler returns <code>HANDLED</code>, ProFTPD assumes
-      that the operation completed successfully, and will stop calling
-      auth handlers.  Most authentication handlers <i>must</i> return data if
-      they complete successfully.  Note that some <code>void</code>-style
-      handlers do not have this requirement; <i>ie</i> <code>setpwent</code>
-      and friends.<br>
+  <li>If an authentication handler returns
+      <code><a href="../api/macros.html#HANDLED">HANDLED</a></code>, the
+      core engine assumes that the operation completed successfully, and will
+      stop calling module authentication handlers.  Most authentication
+      handlers <i>must</i> return data if they complete successfully.  Note
+      that some <code>void</code>-style handlers do not have this requirement;
+      <i>ie</i> <code>setpwent</code> and friends.<br>
   </li>
   <br>
 
-  <li>If an authentication handler returns <code>ERROR</code>, ProFTPD assumes
-      an error has occured and discontinues calling other handlers.  Some
-      functions (<code>auth</code>, for example), should use the
-      <code>ERROR_INT</code> macro to return a numeric error code (one of the
+  <li>If an authentication handler returns
+      <code><a href="../api/macros.html#ERROR">ERROR</a></code>, the core
+      engine assumes that an error has occured, and discontinues calling other
+      handlers.  Some authenticatio handlers, <code>auth</code>, for example,
+      should use the
+      <code><a href="../api/macros.html#ERROR_INT">ERROR_INT</a></code> macro
+      to return a numeric error code, such as one of the
       <code>AUTH_</code>* macros in
       <a href="../src/include/modules.h.html#AUTH_NOPWD">
-      include/modules.h</a>) indicating the reason for failure.<br>
+      include/modules.h</a>, indicating the reason for failure.<br>
   </li>
   <br>
 </ol>

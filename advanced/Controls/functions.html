@@ -127,13 +127,17 @@ the strings from <i>resp_pool</i>.  The return value of the control handler
 will be stored in <i>status</i>, and the array of response strings in
 <i>respargv</i>, if not <code>NULL</code>.  <i>respargv</i> may indeed be
 <code>NULL</code>, as when the client does not really care about the
-responses and simply wants the status, or to know that the response was
-successfully received.  This functions returns the number of responses
+responses and simply wants the status or to know that the response was
+successfully received.  This function returns the number of responses
 received, or <code>-1</code> with <code>errno</code> set properly if there
 was an error.
 
 <p>
-The <code>pr_ctrls_send_msg()</code> function
+The <code>pr_ctrls_send_msg()</code> function is used to send both requests
+and responses.  It sends <i>msgargc</i> number of strings, <i>msgargv</i>,
+to the socket <i>sockfd</i>.  For requests, <i>msgstatus</i> is largely
+ignored; for responses, it contains the return value of the control handlers
+that handled the request.
 
 <p>
 The <code>pr_ctrls_find_ctrls()</code> function returns a pointer to a
@@ -161,7 +165,10 @@ list to useable status, signalling that the state of the list is once more
 stable.
 
 <p>
-The <code>pr_check_ctrls()</code> function
+The <code>pr_check_ctrls()</code> function is used to do a sanity check of
+the register control handlers.  Some control handlers allow of only a single
+instance to handle a requested action, some allow multiple handlers for a
+requested action.
 
 <p>
 The <code>pr_run_ctrls()</code> function iterates through the list of
@@ -172,7 +179,9 @@ was a problem (as when controls are blocked).  Modules and control handlers
 should <b>not</b> need to make use of this function.
 
 <p>
-The <code>pr_clear_ctrls()</code> function
+The <code>pr_clear_ctrls()</code> function removes the control objects from
+the list that were registered in response to client requests, clearing the
+list for new client requests.
 
 <p>
 The <code>pr_init_ctrls()</code> function initializes the Controls layer.
@@ -188,7 +197,7 @@ Last Updated: <i>$Date$</i><br>
 <br><hr>
 
 <font size=2><b><i>
-&copy; Copyright 2000,2001 TJ Saunders<br>
+&copy; Copyright 2000-2002 TJ Saunders<br>
  All Rights Reserved<br>
 </i></b></font>
 

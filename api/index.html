@@ -108,12 +108,6 @@ get_param_ptr_next
 remove_config
 </ul>
 
-<b>Exit Handlers API</b><br>
-<ul>
-pr_exit_register_handler
-run_exit_handlers
-</ul>
-
 <b>File/Directory API</b><br>
 <ul>
 _recur_match_path
@@ -137,74 +131,55 @@ is_dotdir
 
 <b>Filesystem API</b><br>
 <ul>
-fs_chdir
-fs_chdir_canon
-fs_chmod
-fs_chmod_canon
-fs_chown
-fs_chown_canon
-fs_clean_path
-fs_close
-fs_closedir
-fs_creat
-fs_creat_canon
-fs_dircat
-fs_getcwd
-fs_gets
-fs_getvwd
-fs_glob
-fs_globfree
-fs_interpolate
-fs_link
-fs_link_canon
-fs_lookup_dir
-fs_lookup_file
-fs_lookup_file_canon
-fs_lseek
-fs_lstat
-fs_lstat_canon
-fs_open
-fs_open_canon
-fs_opendir
-fs_read
-fs_readdir
-fs_readlink
-fs_readlink_canon
-fs_register
-fs_register_match
-fs_rename
-fs_rename_canon
-fs_resolve_partial
-fs_resolve_path
-fs_setcwd
-fs_stat
-fs_stat_canon
-fs_symlink
-fs_symlink_canon
-fs_unlink
-fs_unlink_canon
-fs_virtual_path
-fs_write
+pr_fsio_chdir
+pr_fsio_chdir_canon
+pr_fsio_chmod
+pr_fsio_chmod_canon
+pr_fsio_chown
+pr_fsio_chown_canon
+pr_fsio_close
+pr_fsio_closedir
+pr_fsio_creat
+pr_fsio_creat_canon
+pr_fsio_gets
+pr_fsio_link
+pr_fsio_link_canon
+pr_fsio_lseek
+pr_fsio_lstat
+pr_fsio_lstat_canon
+pr_fsio_open
+pr_fsio_open_canon
+pr_fsio_opendir
+pr_fsio_read
+pr_fsio_readdir
+pr_fsio_readlink
+pr_fsio_readlink_canon
+pr_fsio_rename
+pr_fsio_rename_canon
+pr_fsio_stat
+pr_fsio_stat_canon
+pr_fsio_symlink
+pr_fsio_symlink_canon
+pr_fsio_unlink
+pr_fsio_unlink_canon
+pr_fsio_write
+pr_fs_clean_path
+pr_fs_dircat
+pr_fs_getcwd
+pr_fs_getvwd
+pr_fs_glob
+pr_fs_globfree
+pr_fs_interpolate
+pr_fs_lookup_dir
+pr_fs_lookup_file
+pr_fs_lookup_file_canon
+pr_fs_virtual_path
+pr_fs_register
+pr_fs_register_match
+pr_fs_resolve_partial
+pr_fs_resolve_path
+pr_fs_setcwd
 init_fs
-std_chdir
-std_chmod
-std_chown
-std_close
-std_closedir
-std_creat
-std_link
-std_lseek
-std_lstat
-std_open
-std_opendir
-std_read
-std_readdir
-std_readlink
-std_rename
-std_stat
-std_symlink
-std_unlink
-std_write
 </ul>
 
 <b>IO API</b><br>
@@ -293,11 +268,11 @@ get_config_cmd
 get_context_name
 get_num_bytes
 get_token
-get_word
 init_conf_stacks
 init_config
 init_dyn_stacks
 parse_config_file
+pr_str_get_word
 resolve_anonymous_dirs
 resolve_defered_dirs
 start_new_server
@@ -307,7 +282,6 @@ strip_end
 
 <b>Pools API</b><br>
 <ul>
-clear_inet_pool
 clear_pool
 make_sub_pool
 palloc
@@ -383,13 +357,13 @@ timer_sleep
 
 <b>Timers API</b><br>
 <ul>
+handle_alarm
 timer_cmp
-add_timer
+pr_timer_add
 pr_alarms_block
 pr_alarms_unblock
-handle_alarm
-remove_timer
-reset_timer
+pr_timer_remove
+pr_timer_reset
 </ul>
 
 <b>Command handlers</b><br>
@@ -613,8 +587,8 @@ _prepare_core
 retr_abort
 retr_complete
 server_conn_cleanup_cb
-_set_oobinline
-_set_owner
+set_oobinline
+set_owner
 _sethide
 _setup_environment
 sleep_cb
@@ -642,7 +616,6 @@ check_context
 check_shutmsg
 cmp
 core_chmod
-core_display_file
 daemon_loop
 data_abort
 data_cleanup
@@ -675,34 +648,27 @@ get_ident
 get_name_max
 get_next_meta
 idle_time
-inet_accept
-inet_accept_nowait
-inet_ascii
-inet_associate
-inet_close
-inet_connect
-inet_connect_nowait
-inet_copy_connection
-inet_create_connection
-inet_create_connection_portrange
-inet_fqdn
-inet_get_conn_info
-inet_getaddr
-inet_gethostname
-inet_getname
-inet_getservport
-inet_initialize_connection
-inet_listen
-inet_openrw
-inet_resetlisten
-inet_resolve_ip
-inet_reverse_dns
-inet_set_proto_options
-inet_setasync
-inet_setblock
-inet_setnonblock
-inet_setoptions
-inet_validate
+pr_display_file
+pr_inet_accept
+pr_inet_accept_nowait
+pr_inet_associate
+pr_inet_close
+pr_inet_connect
+pr_inet_connect_nowait
+pr_inet_copy_connection
+pr_inet_create_connection
+pr_inet_create_connection_portrange
+pr_inet_get_conn_info
+pr_inet_getservport
+pr_inet_listen
+pr_inet_openrw
+pr_inet_resetlisten
+pr_inet_set_proto_options
+pr_inet_setasync
+pr_inet_setblock
+pr_inet_setnonblock
+pr_inet_setoptions
+pr_inet_validate
 inetd_main
 init_child_modules
 init_inet
@@ -725,7 +691,7 @@ mod_create_error
 mod_create_ret
 mod_privdata_alloc
 mod_privdata_find
-pr_parse_expression
+pr_expr_create
 pr_stash_get_symbol
 passwd_dup
 pop_cwd
@@ -812,8 +778,6 @@ daemonize
   <li><a href="functions.html#_recur_match_path">_recur_match_path</a>
   <li><a href="functions.html#_reorder_dirs">_reorder_dirs</a>
   <li><a href="functions.html#_reparent_all">_reparent_all</a>
-  <li><a href="functions.html#_set_oobinline">_set_oobinline</a>
-  <li><a href="functions.html#_set_owner">_set_owner</a>
   <li><a href="functions.html#_sethide">_sethide</a>
   <li><a href="functions.html#_setup_environment">_setup_environment</a>
   <li><a href="functions.html#_stor_chown">_stor_chown</a>
@@ -860,7 +824,6 @@ daemonize
   <li><a href="functions.html#add_masqueradeaddress">add_masqueradeaddress</a>
   <li><a href="functions.html#add_meta">add_meta</a>
   <li><a href="functions.html#add_order">add_order</a>
-  <li><a href="functions.html#add_timer">add_timer</a>
   <li><a href="functions.html#add_transferlog">add_transferlog</a>
   <li><a href="functions.html#add_userdirroot">add_userdirroot</a>
   <li><a href="functions.html#add_userowner">add_userowner</a>
@@ -871,26 +834,12 @@ daemonize
   <li><a href="functions.html#append_arrays">append_arrays</a>
   <li><a href="functions.html#array_cat">array_cat</a>
   <li><a href="functions.html#auth_acct">auth_acct</a>
-  <li><a href="functions.html#auth_authenticate">auth_authenticate</a>
-  <li><a href="functions.html#auth_check">auth_check</a>
-  <li><a href="functions.html#auth_check_ftpusers">auth_check_ftpusers</a>
+  <li><a href="functions.html#pr_auth_check_ftpusers">auth_check_ftpusers</a>
   <li><a href="functions.html#auth_check_shell">auth_check_shell</a>
   <li><a href="functions.html#auth_cmd_chk_cb">auth_cmd_chk_cb</a>
   <li><a href="functions.html#auth_count_scoreboard">auth_count_scoreboard</a>
-  <li><a href="functions.html#auth_endgrent">auth_endgrent</a>
-  <li><a href="functions.html#auth_endpwent">auth_endpwent</a>
-  <li><a href="functions.html#auth_getgrent">auth_getgrent</a>
-  <li><a href="functions.html#auth_getgrgid">auth_getgrgid</a>
-  <li><a href="functions.html#auth_getgrnam">auth_getgrnam</a>
-  <li><a href="functions.html#auth_getgroups">auth_getgroups</a>
-  <li><a href="functions.html#auth_getpwent">auth_getpwent</a>
-  <li><a href="functions.html#auth_getpwnam">auth_getpwnam</a>
-  <li><a href="functions.html#auth_getpwuid">auth_getpwuid</a>
-  <li><a href="functions.html#auth_gid_name">auth_gid_name</a>
   <li><a href="functions.html#auth_init">auth_init</a>
   <li><a href="functions.html#auth_login_timeout_cb">auth_login_timeout_cb</a>
-  <li><a href="functions.html#auth_name_gid">auth_name_gid</a>
-  <li><a href="functions.html#auth_name_uid">auth_name_uid</a>
   <li><a href="functions.html#auth_pass">auth_pass</a>
   <li><a href="functions.html#auth_post_pass">auth_post_pass</a>
   <li><a href="functions.html#auth_pre_pass">auth_pre_pass</a>
@@ -898,9 +847,6 @@ daemonize
   <li><a href="functions.html#auth_rein">auth_rein</a>
   <li><a href="functions.html#auth_scan_scoreboard">auth_scan_scoreboard</a>
   <li><a href="functions.html#auth_sess_init">auth_sess_init</a>
-  <li><a href="functions.html#auth_setgrent">auth_setgrent</a>
-  <li><a href="functions.html#auth_setpwent">auth_setpwent</a>
-  <li><a href="functions.html#auth_uid_name">auth_uid_name</a>
   <li><a href="functions.html#auth_user">auth_user</a>
   <li><a href="functions.html#build_dyn_config">build_dyn_config</a>
   <li><a href="functions.html#bytes_in_block_list">bytes_in_block_list</a>
@@ -910,7 +856,6 @@ daemonize
   <li><a href="functions.html#check_context">check_context</a>
   <li><a href="functions.html#check_shutmsg">check_shutmsg</a>
   <li><a href="functions.html#chk_on_blk_list">chk_on_blk_list</a>
-  <li><a href="functions.html#clear_inet_pool">clear_inet_pool</a>
   <li><a href="functions.html#clear_pool">clear_pool</a>
   <li><a href="functions.html#cmd_loop">cmd_loop</a>
   <li><a href="functions.html#cmp">cmp</a>
@@ -923,7 +868,6 @@ daemonize
   <li><a href="functions.html#core_chmod">core_chmod</a>
   <li><a href="functions.html#core_cwd">core_cwd</a>
   <li><a href="functions.html#core_dele">core_dele</a>
-  <li><a href="functions.html#core_display_file">core_display_file</a>
   <li><a href="functions.html#core_help">core_help</a>
   <li><a href="functions.html#core_mdtm">core_mdtm</a>
   <li><a href="functions.html#core_mkd">core_mkd</a>
@@ -1041,40 +985,11 @@ daemonize
   <li><a href="functions.html#get_param_ptr">get_param_ptr</a>
   <li><a href="functions.html#get_param_ptr_next">get_param_ptr_next</a>
   <li><a href="functions.html#get_token">get_token</a>
-  <li><a href="functions.html#get_word">get_word</a>
-  <li><a href="functions.html#group_expression">group_expression</a>
   <li><a href="functions.html#handle_alarm">handle_alarm</a>
   <li><a href="functions.html#ident_timeout_cb">ident_timeout_cb</a>
   <li><a href="functions.html#idle_timeout_cb">idle_timeout_cb</a>
-  <li><a href="functions.html#inet_accept">inet_accept</a>
-  <li><a href="functions.html#inet_accept_nowait">inet_accept_nowait</a>
-  <li><a href="functions.html#inet_ascii">inet_ascii</a>
-  <li><a href="functions.html#inet_associate">inet_associate</a>
-  <li><a href="functions.html#inet_close">inet_close</a>
-  <li><a href="functions.html#inet_connect">inet_connect</a>
-  <li><a href="functions.html#inet_connect_nowait">inet_connect_nowait</a>
-  <li><a href="functions.html#inet_copy_connection">inet_copy_connection</a>
-  <li><a href="functions.html#inet_create_connection">inet_create_connection</a>
-  <li><a href="functions.html#inet_create_connection_portrange">inet_create_connection_portrange</a>
-  <li><a href="functions.html#inet_fqdn">inet_fqdn</a>
-  <li><a href="functions.html#inet_get_conn_info">inet_get_conn_info</a>
-  <li><a href="functions.html#inet_getaddr">inet_getaddr</a>
-  <li><a href="functions.html#inet_gethostname">inet_gethostname</a>
-  <li><a href="functions.html#inet_getname">inet_getname</a>
-  <li><a href="functions.html#inet_getservport">inet_getservport</a>
   <li><a href="functions.html#inet_initialize_connection">inet_initialize_connection</a>
-  <li><a href="functions.html#inet_listen">inet_listen</a>
-  <li><a href="functions.html#inet_openrw">inet_openrw</a>
   <li><a href="functions.html#inet_pool_cleanup_cb">inet_pool_cleanup_cb</a>
-  <li><a href="functions.html#inet_resetlisten">inet_resetlisten</a>
-  <li><a href="functions.html#inet_resolve_ip">inet_resolve_ip</a>
-  <li><a href="functions.html#inet_reverse_dns">inet_reverse_dns</a>
-  <li><a href="functions.html#inet_set_proto_options">inet_set_proto_options</a>
-  <li><a href="functions.html#inet_setasync">inet_setasync</a>
-  <li><a href="functions.html#inet_setblock">inet_setblock</a>
-  <li><a href="functions.html#inet_setnonblock">inet_setnonblock</a>
-  <li><a href="functions.html#inet_setoptions">inet_setoptions</a>
-  <li><a href="functions.html#inet_validate">inet_validate</a>
   <li><a href="functions.html#inetd_main">inetd_main</a>
   <li><a href="functions.html#init_child_modules">init_child_modules</a>
   <li><a href="functions.html#init_conf_stacks">init_conf_stacks</a>
@@ -1142,7 +1057,6 @@ daemonize
   <li><a href="functions.html#mod_create_ret">mod_create_ret</a>
   <li><a href="functions.html#mod_privdata_alloc">mod_privdata_alloc</a>
   <li><a href="functions.html#mod_privdata_find">mod_privdata_find</a>
-  <li><a href="functions.html#module_exists">module_exists</a>
   <li><a href="functions.html#netio_buffer_alloc">netio_buffer_alloc</a>
   <li><a href="functions.html#new_block">new_block</a>
   <li><a href="functions.html#nlstdir">nlstdir</a>
@@ -1178,9 +1092,34 @@ daemonize
   <li><a href="functions.html#pr_alarms_block">pr_alarms_block</a>
   <li><a href="functions.html#pr_alarms_unblock">pr_alarms_unblock</a>
   <li><a href="functions.html#pr_alloc_netio">pr_alloc_netio</a>
-  <li><a href="functions.html#pr_class_and_expression">pr_class_and_expression</a>
-  <li><a href="functions.html#pr_class_or_expression">pr_class_or_expression</a>
-  <li><a href="functions.html#pr_exit_register_handler">pr_exit_register_handler</a>
+  <li><a href="functions.html#pr_auth_authenticate">pr_auth_authenticate</a>
+  <li><a href="functions.html#pr_auth_check">pr_auth_check</a>
+  <li><a href="functions.html#pr_auth_endgrent">pr_auth_endgrent</a>
+  <li><a href="functions.html#pr_auth_endpwent">pr_auth_endpwent</a>
+  <li><a href="functions.html#pr_auth_getgrent">pr_auth_getgrent</a>
+  <li><a href="functions.html#pr_auth_getgrgid">pr_auth_getgrgid</a>
+  <li><a href="functions.html#pr_auth_getgrnam">pr_auth_getgrnam</a>
+  <li><a href="functions.html#pr_auth_getgroups">pr_auth_getgroups</a>
+  <li><a href="functions.html#pr_auth_getpwent">pr_auth_getpwent</a>
+  <li><a href="functions.html#pr_auth_getpwnam">pr_auth_getpwnam</a>
+  <li><a href="functions.html#pr_auth_getpwuid">pr_auth_getpwuid</a>
+  <li><a href="functions.html#pr_auth_gid2name">pr_auth_gid2name</a>
+  <li><a href="functions.html#pr_auth_name2gid">pr_auth_name2gid</a>
+  <li><a href="functions.html#pr_auth_name2uid">pr_auth_name2uid</a>
+  <li><a href="functions.html#pr_auth_setgrent">pr_auth_setgrent</a>
+  <li><a href="functions.html#pr_auth_setpwent">pr_auth_setpwent</a>
+  <li><a href="functions.html#pr_auth_uid2name">pr_auth_uid2name</a>
+  <li><a href="functions.html#pr_display_file">pr_display_file</a>
+  <li><a href="functions.html#pr_expr_create">pr_expr_create</a>
+  <li><a href="functions.html#pr_expr_eval_class_and">pr_expr_eval_class_and</a>
+  <li><a href="functions.html#pr_expr_eval_class_or">pr_expr_eval_class_or</a>
+  <li><a href="functions.html#pr_expr_eval_group_and">pr_expr_eval_group_and</a>
+  <li><a href="functions.html#pr_expr_eval_group_or">pr_expr_eval_group_or</a>
+  <li><a href="functions.html#pr_expr_eval_user_and">pr_expr_eval_user_and</a>
+  <li><a href="functions.html#pr_expr_eval_user_or">pr_expr_eval_user_or</a>
+  <li><a href="functions.html#pr_feat_add">pr_feat_add</a>
+  <li><a href="functions.html#pr_feat_get">pr_feat_get</a>
+  <li><a href="functions.html#pr_feat_get_next">pr_feat_get_next</a>
   <li><a href="functions.html#pr_fs_clean_path">pr_fs_clean_path</a>
   <li><a href="functions.html#pr_fs_clear_cache">pr_fs_clear_cache</a>
   <li><a href="functions.html#pr_fs_dircat">pr_fs_dircat</a>
@@ -1233,11 +1172,35 @@ daemonize
   <li><a href="functions.html#pr_fsio_unlink">pr_fsio_unlink</a>
   <li><a href="functions.html#pr_fsio_unlink_canon">pr_fsio_unlink_canon</a>
   <li><a href="functions.html#pr_fsio_write">pr_fsio_write</a>
-  <li><a href="functions.html#pr_group_and_expression">pr_group_and_expression</a>
-  <li><a href="functions.html#pr_group_or_expression">pr_group_or_expression</a>
   <li><a href="functions.html#pr_ident_lookup">pr_ident_lookup</a>
+  <li><a href="functions.html#pr_inet_accept">pr_inet_accept</a>
+  <li><a href="functions.html#pr_inet_accept_nowait">pr_inet_accept_nowait</a>
+  <li><a href="functions.html#pr_inet_associate">pr_inet_associate</a>
+  <li><a href="functions.html#pr_inet_clear">pr_inet_clear</a>
+  <li><a href="functions.html#pr_inet_close">pr_inet_close</a>
+  <li><a href="functions.html#pr_inet_connect">pr_inet_connect</a>
+  <li><a href="functions.html#pr_inet_connect_nowait">pr_inet_connect_nowait</a>
+  <li><a href="functions.html#pr_inet_copy_connection">pr_inet_copy_connection</a>
+  <li><a href="functions.html#pr_inet_create_connection">pr_inet_create_connection</a>
+  <li><a href="functions.html#pr_inet_create_connection_portrange">pr_inet_create_connection_portrange</a>
+  <li><a href="functions.html#pr_inet_get_conn_info">pr_inet_get_conn_info</a>
+  <li><a href="functions.html#pr_inet_getservport">pr_inet_getservport</a>
+  <li><a href="functions.html#pr_inet_lingering_abort">pr_inet_lingering_abort</a>
+  <li><a href="functions.html#pr_inet_lingering_close">pr_inet_lingering_close</a>
+  <li><a href="functions.html#pr_inet_listen">pr_inet_listen</a>
+  <li><a href="functions.html#pr_inet_openrw">pr_inet_openrw</a>
+  <li><a href="functions.html#pr_inet_resetlisten">pr_inet_resetlisten</a>
+  <li><a href="functions.html#pr_inet_set_async">pr_inet_set_async</a>
+  <li><a href="functions.html#pr_inet_set_block">pr_inet_set_block</a>
+  <li><a href="functions.html#pr_inet_set_default_family">pr_inet_set_default_family</a>
+  <li><a href="functions.html#pr_inet_set_nonblock">pr_inet_set_nonblock</a>
+  <li><a href="functions.html#pr_inet_set_proto_opts">pr_inet_set_proto_opts</a>
+  <li><a href="functions.html#pr_inet_set_socket_opts">pr_inet_set_socket_opts</a>
+  <li><a href="functions.html#pr_inet_validate">pr_inet_validate</a>
   <li><a href="functions.html#pr_init_netio">pr_init_netio</a>
   <li><a href="functions.html#pr_init_pools">pr_init_pools</a>
+  <li><a href="functions.html#pr_module_exists">pr_module_exists</a>
+  <li><a href="functions.html#pr_module_get">pr_module_get</a>
   <li><a href="functions.html#pr_netio_abort">pr_netio_abort</a>
   <li><a href="functions.html#pr_netio_close">pr_netio_close</a>
   <li><a href="functions.html#pr_netio_gets">pr_netio_gets</a>
@@ -1254,7 +1217,6 @@ daemonize
   <li><a href="functions.html#pr_netio_telnet_gets">pr_netio_telnet_gets</a>
   <li><a href="functions.html#pr_netio_write">pr_netio_write</a>
   <li><a href="functions.html#pr_netio_write_async">pr_netio_write_async</a>
-  <li><a href="functions.html#pr_parse_expression">pr_parse_expression</a>
   <li><a href="functions.html#pr_regexp_alloc">pr_regexp_alloc</a>
   <li><a href="functions.html#pr_regexp_free">pr_regexp_free</a>
   <li><a href="functions.html#pr_register_fs">pr_register_fs</a>
@@ -1276,8 +1238,11 @@ daemonize
   <li><a href="functions.html#pr_stash_add_symbol">pr_stash_add_symbol</a>
   <li><a href="functions.html#pr_stash_get_symbol">pr_stash_get_symbol</a>
   <li><a href="functions.html#pr_stash_remove_symbol">pr_stash_remove_symbol</a>
-  <li><a href="functions.html#pr_user_and_expression">pr_user_and_expression</a>
-  <li><a href="functions.html#pr_user_or_expression">pr_user_or_expression</a>
+  <li><a href="functions.html#pr_str_get_word">pr_str_get_word</a>
+  <li><a href="functions.html#pr_timer_add">pr_timer_add</a>
+  <li><a href="functions.html#pr_timer_remove">pr_timer_remove</a>
+  <li><a href="functions.html#pr_timer_reset">pr_timer_reset</a>
+  <li><a href="functions.html#pr_timer_sleep">pr_timer_sleep</a>
   <li><a href="functions.html#pstrcat">pstrcat</a>
   <li><a href="functions.html#pstrdup">pstrdup</a>
   <li><a href="functions.html#pstrndup">pstrndup</a>
@@ -1306,15 +1271,11 @@ daemonize
   <li><a href="functions.html#register_fd_cleanups">register_fd_cleanups</a>
   <li><a href="functions.html#register_file_cleanups">register_file_cleanups</a>
   <li><a href="functions.html#remove_config">remove_config</a>
-  <li><a href="functions.html#remove_exit_handlers">remove_exit_handlers</a>
-  <li><a href="functions.html#remove_timer">remove_timer</a>
-  <li><a href="functions.html#reset_timer">reset_timer</a>
   <li><a href="functions.html#resolve_anonymous_dirs">resolve_anonymous_dirs</a>
   <li><a href="functions.html#resolve_defered_dirs">resolve_defered_dirs</a>
   <li><a href="functions.html#retr_abort">retr_abort</a>
   <li><a href="functions.html#retr_complete">retr_complete</a>
   <li><a href="functions.html#run_cleanups">run_cleanups</a>
-  <li><a href="functions.html#run_exit_handlers">run_exit_handlers</a>
   <li><a href="functions.html#run_schedule">run_schedule</a>
   <li><a href="functions.html#safe_token">safe_token</a>
   <li><a href="functions.html#schedule">schedule</a>
@@ -1377,6 +1338,8 @@ daemonize
   <li><a href="functions.html#set_maxinstances">set_maxinstances</a>
   <li><a href="functions.html#set_maxloginattempts">set_maxloginattempts</a>
   <li><a href="functions.html#set_multilinerfc2228">set_multilinerfc2228</a>
+  <li><a href="functions.html#set_oobinline">set_oobinline</a>
+  <li><a href="functions.html#set_owner">set_owner</a>
   <li><a href="functions.html#set_passiveports">set_passiveports</a>
   <li><a href="functions.html#set_pathallowfilter">set_pathallowfilter</a>
   <li><a href="functions.html#set_pathdenyfilter">set_pathdenyfilter</a>
@@ -1450,25 +1413,6 @@ daemonize
   <li><a href="functions.html#start_ifmodule">start_ifmodule</a>
   <li><a href="functions.html#start_new_server">start_new_server</a>
   <li><a href="functions.html#start_sub_config">start_sub_config</a>
-  <li><a href="functions.html#std_chdir">std_chdir</a>
-  <li><a href="functions.html#std_chmod">std_chmod</a>
-  <li><a href="functions.html#std_chown">std_chown</a>
-  <li><a href="functions.html#std_close">std_close</a>
-  <li><a href="functions.html#std_closedir">std_closedir</a>
-  <li><a href="functions.html#std_creat">std_creat</a>
-  <li><a href="functions.html#std_link">std_link</a>
-  <li><a href="functions.html#std_lseek">std_lseek</a>
-  <li><a href="functions.html#std_lstat">std_lstat</a>
-  <li><a href="functions.html#std_open">std_open</a>
-  <li><a href="functions.html#std_opendir">std_opendir</a>
-  <li><a href="functions.html#std_read">std_read</a>
-  <li><a href="functions.html#std_readdir">std_readdir</a>
-  <li><a href="functions.html#std_readlink">std_readlink</a>
-  <li><a href="functions.html#std_rename">std_rename</a>
-  <li><a href="functions.html#std_stat">std_stat</a>
-  <li><a href="functions.html#std_symlink">std_symlink</a>
-  <li><a href="functions.html#std_unlink">std_unlink</a>
-  <li><a href="functions.html#std_write">std_write</a>
   <li><a href="functions.html#stor_abort">stor_abort</a>
   <li><a href="functions.html#stor_complete">stor_complete</a>
   <li><a href="functions.html#strip_end">strip_end</a>
@@ -1477,7 +1421,6 @@ daemonize
   <li><a href="functions.html#supp_getpwent">supp_getpwent</a>
   <li><a href="functions.html#supp_grplist">supp_grplist</a>
   <li><a href="functions.html#timer_cmp">timer_cmp</a>
-  <li><a href="functions.html#timer_sleep">timer_sleep</a>
   <li><a href="functions.html#unixpw_init">unixpw_init</a>
   <li><a href="functions.html#unixpw_sess_init">unixpw_sess_init</a>
   <li><a href="functions.html#xaset_copy">xaset_copy</a>

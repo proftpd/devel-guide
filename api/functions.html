@@ -555,17 +555,6 @@ in microseconds, between <code>timeval</code>'s.<br>
   <a href="../src/modules/mod_xfer.c.html#_rate_diffusec">modules/mod_xfer.c</a><br>
 
 <hr>
-<a name="_rate_throttle"><b>_rate_throttle</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static void _rate_throttle(unsigned long <i>rate_pos</i>, long <i>rate_bytes</i>, struct timeval <i>rate_tvlast</i>,
-    long <i>rate_freebytes</i>, long <i>rate_bps</i>, int <i>rate_hardbps</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#_rate_throttle">modules/mod_xfer.c</a><br>
-
-<hr>
 <a name="_recur_match_path"><b>_recur_match_path</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -605,26 +594,6 @@ configuration set, <i>newparent</i>.<br>
   <a href="../src/src/dirtree.c.html#_reparent_all">src/dirtree.c</a><br>
 
 <hr>
-<a name="_set_oobinline"><b>_set_oobinline</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void _set_oobinline(int <i>fd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#_set_oobinline">src/inet.c</a><br>
-
-<hr>
-<a name="_set_owner"><b>_set_owner</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void _set_owner(int <i>fd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#_set_owner">src/inet.c</a><br>
-
-<hr>
 <a name="_sethide"><b>_sethide</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -646,16 +615,6 @@ broken up, rearranged!</i><br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_auth.c.html#_setup_environment">modules/mod_auth.c</a><br>
-
-<hr>
-<a name="_stor_chown"><b>_stor_chown</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static void _stor_chown(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#_stor_chown">modules/mod_xfer.c</a><br>
 
 <hr>
 <a name="_strmatch"><b>_strmatch</b><br>
@@ -685,36 +644,6 @@ symlink).  This recursing function catches symlink loops via the
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/support.c.html#_symlink">src/support.c</a><br>
-
-<hr>
-<a name="_transmit_data"><b>_transmit_data</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static long _transmit_data(int <i>rate_bps</i>, unsigned long <i>count</i>, off_t <i>offset</i>, char *<i>buf</i>, long <i>bufsize</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#_transmit_data">modules/mod_xfer.c</a><br>
-
-<hr>
-<a name="_transmit_normal"><b>_transmit_normal</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int _transmit_normal(char *<i>buf</i>, long <i>bufsize</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#_transmit_normal">modules/mod_xfer.c</a><br>
-
-<hr>
-<a name="_transmit_sendfile"><b>_transmit_sendfile</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int _transmit_sendfile(int <i>rate_bps</i>, unsigned long <i>count</i>, off_t <i>offset</i>, pr_sendfile_t *<i>retval</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#_transmit_sendfile">modules/mod_xfer.c</a><br>
 
 <hr>
 <a name="_xlate_ascii_read"><b>_xlate_ascii_read</b><br>
@@ -1206,49 +1135,6 @@ name <i>name</i>.<br>
   <a href="../src/modules/mod_core.c.html#add_order">modules/mod_core.c</a><br>
 
 <hr>
-<a name="add_ratebool"><b>add_ratebool</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET add_ratebool(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Configuration directive handler for the
-<code>RateReadHardBPS</code> and <code>RateWriteHardBPS</code> directives.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#add_ratebool">modules/mod_xfer.c</a><br>
-
-<hr>
-<a name="add_ratenum"><b>add_ratenum</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET add_ratenum(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Configuration directive handler for the
-<code>RateReadBPS</code>, <code>RateReadFreeBytes</code>,
-<code>RateWriteBPS</code>, and <code>RateWriteFreeBytes</code> directives.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#add_ratenum">modules/mod_xfer.c</a><br>
-
-<hr>
-<a name="add_timer"><b>add_timer</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int add_timer(int <i>seconds</i>, int <i>timerno</i>, module *<i>mod</i>, callback_t <i>cb</i>)
-</pre>
-<font color=blue>Comments</font>:  Create and activate a new timer with an
-interval <i>seconds</i>, a timer ID number of <i>timerno</i>, and a callback
-of <i>cb</i>.  Note that if a <i>timerno</i> of -1 is given, a
-&quot;dynamic&quot; timer ID number will be assigned.  The <i>timerno</i>
-of the timer is returned.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/timers.c.html#add_timer">src/timers.c</a><br>
-
-<hr>
 <a name="add_transferlog"><b>add_transferlog</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -1382,43 +1268,6 @@ FTP command.<br>
   <a href="../src/modules/mod_auth.c.html#auth_acct">modules/mod_auth.c</a><br>
 
 <hr>
-<a name="auth_authenticate"><b>auth_authenticate</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int auth_authenticate(pool *<i>p</i>, const char *<i>name</i>, const char *<i>pw</i>)
-</pre>
-<font color=blue>Comments</font>: Dispatcher for the
-<code>auth()</code> authentication handler.<br>
-<br>
-The purpose of the dispatched-to authentication handler is to provide a
-higher-level &quot;yes or no&quot; answer of whether a the given
-user <i>name</i> is successfully authenticated by the given cleartext
-password <i>pw</i>.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/auth.c.html#auth_authenticate">src/auth.c</a><br>
-
-<hr>
-<a name="auth_check"><b>auth_check</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int auth_check(pool *<i>p</i>, const char *<i>cpw</i>, const char *<i>name</i>, const char *<i>pw</i>)
-</pre>
-<font color=blue>Comments</font>: Dispatcher for the
-<code>check()</code> authentication handler.<br>
-<br>
-The purpose of the dispatched-to authentication handler is to, given the
-hashed password <i>cpw</i>, the username <i>name</i>, and the cleartext password
-<i>pw</i>, and using whatever method the module developer desires, determine
-whether the hashed password is sufficient and proper for that user, if the
-the cleartext password belongs to that user.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/auth.c.html#auth_check">src/auth.c</a><br>
-
-<hr>
 <a name="auth_check_ftpusers"><b>auth_check_ftpusers</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -1469,167 +1318,6 @@ connecting user against a list of valid system shells, usually contained in
   <a href="../src/modules/mod_auth.c.html#auth_count_scoreboard">modules/mod_auth.c</a><br>
 
 <hr>
-<a name="auth_endgrent"><b>auth_endgrent</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void auth_endgrent(pool *<i>p</i>)
-</pre>
-<font color=blue>Comments</font>: Dispatcher for the
-<code>endgrent()</code> authentication handler.<br>
-<br>
-The purpose of the dispatched-to authentication handler is to provide a
-custom implementation of the <code>endgrent(3)</code> libc function.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/auth.c.html#auth_endgrent">src/auth.c</a><br>
-
-<hr>
-<a name="auth_endpwent"><b>auth_endpwent</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void auth_endpwent(pool *<i>p</i>)
-</pre>
-<font color=blue>Comments</font>: Dispatcher for the
-<code>endpwent()</code> authentication handler.<br>
-<br>
-The purpose of the dispatched-to authentication handler is to provide a
-custom implementation of the <code>endpwent(3)</code> libc function.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/auth.c.html#auth_endpwent">src/auth.c</a><br>
-
-<hr>
-<a name="auth_getgrent"><b>auth_getgrent</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  struct group *auth_getgrent(pool *<i>p</i>)
-</pre>
-<font color=blue>Comments</font>: Dispatcher for the
-<code>getgrent()</code> authentication handler.<br>
-<br>
-The purpose of the dispatched-to authentication handler is to provide a
-custom implementation of the <code>getgrent(3)</code> libc function.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/auth.c.html#auth_getgrent">src/auth.c</a><br>
-
-<hr>
-<a name="auth_getgrgid"><b>auth_getgrgid</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  struct group *auth_getgrgid(pool *<i>p</i>, gid_t <i>gid</i>)
-</pre>
-<font color=blue>Comments</font>: Dispatcher for the
-<code>getgrgid()</code> authentication handler.<br>
-<br>
-The purpose of the dispatched-to authentication handler is to provide a
-custom implementation of the <code>getgrgid(3)</code> libc function.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/auth.c.html#auth_getgrgid">src/auth.c</a><br>
-
-<hr>
-<a name="auth_getgrnam"><b>auth_getgrnam</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  struct group *auth_getgrnam(pool *<i>p</i>, const char *<i>name</i>)
-</pre>
-<font color=blue>Comments</font>: Dispatcher for the
-<code>getgrnam()</code> authentication handler.<br>
-<br>
-The purpose of the dispatched-to authentication handler is to provide a
-custom implementation of the <code>getgrnam(3)</code> libc function.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/auth.c.html#auth_getgrnam">src/auth.c</a><br>
-
-<hr>
-<a name="auth_getpwent"><b>auth_getpwent</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  struct passwd *auth_getpwent(pool *<i>p</i>)
-</pre>
-<font color=blue>Comments</font>: Dispatcher for the
-<code>getpwent()</code> authentication handler.<br>
-<br>
-The purpose of the dispatched-to authentication handler is to provide a
-custom implementation of the <code>getpwent(3)</code> libc function.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/auth.c.html#auth_getpwent">src/auth.c</a><br>
-
-<hr>
-<a name="auth_getpwnam"><b>auth_getpwnam</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  struct passwd *auth_getpwnam(pool *<i>p</i>, const char *<i>name</i>)
-</pre>
-<font color=blue>Comments</font>: Dispatcher for the
-<code>getpwnam()</code> authentication handler.<br>
-<br>
-The purpose of the dispatched-to authentication handler is to provide a
-custom implementation of the <code>getpwnam(3)</code> libc function.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/auth.c.html#auth_getpwnam">src/auth.c</a><br>
-
-<hr>
-<a name="auth_getgroups"><b>auth_getgroups</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  struct passwd *auth_getgroups(pool *<i>p</i>, const char *<i>name</i>, array_header **<i>group_ids</i>,
-    array_header **<i>group_names</i>)
-</pre>
-<font color=blue>Comments</font>: Dispatcher for the
-<code>getgroups()</code> authentication handler.<br>
-<br>
-The purpose of the dispatched-to authentication handler is to provide a
-custom implementation of the <code>getgroups(2)</code> system call.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/auth.c.html#auth_getpwnam">src/auth.c</a><br>
-
-<hr>
-<a name="auth_getpwuid"><b>auth_getpwuid</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  struct passwd *auth_getpwuid(pool *<i>p</i>, uid_t <i>uid</i>)
-</pre>
-<font color=blue>Comments</font>: Dispatcher for the
-<code>getpwuid()</code> authentication handler.<br>
-<br>
-The purpose of the dispatched-to authentication handler is to provide a
-custom implementation of the <code>getpwuid(3)</code> libc function.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/auth.c.html#auth_getpwuid">src/auth.c</a><br>
-
-<hr>
-<a name="auth_gid_name"><b>auth_gid_name</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  const char *auth_gid_name(pool *<i>p</i>, gid_t <i>gid</i>)
-</pre>
-<font color=blue>Comments</font>: Dispatcher for the
-<code>gid_name()</code> authentication handler.<br>
-<br>
-The purpose of the dispatched-to authentication handler is to do a
-GID-to-name lookup for the given GID <i>gid</i>.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/auth.c.html#auth_gid_name">src/auth.c</a><br>
-
-<hr>
 <a name="auth_init"><b>auth_init</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -1653,46 +1341,6 @@ successfully authenticated.  The timer length is configurable via the
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_auth.c.html#auth_login_timeout_cb">modules/mod_auth.c</a><br>
-
-<hr>
-<a name="auth_name_gid"><b>auth_name_gid</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  gid_t auth_name_gid(pool *<i>p</i>, const char *<i>name</i>)
-</pre>
-<font color=blue>Comments</font>: Dispatcher for the
-<code>name_gid()</code> authentication handler.<br>
-<br>
-The purpose of the dispatched-to authentication handler is to do a
-name-to-GID lookup for the given group <i>name</i>.<br>
-<br>
-<font color=blue>Notes:</font> The caller of this function must take due
-caution when handling the returned <code>gid_t</code>, and treat a
-<code>gid_t</code> of <code>-1</code> properly.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/auth.c.html#auth_name_gid">src/auth.c</a><br>
-
-<hr>
-<a name="auth_name_uid"><b>auth_name_uid</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  uid_t auth_name_uid(pool *<i>p</i>, const char *<i>name</i>)
-</pre>
-<font color=blue>Comments</font>: Dispatcher for the
-<code>name_uid()</code> authentication handler.<br>
-<br>
-The purpose of the dispatched-to authentication handler is to do a
-name-to-UID lookup for the given user <i>name</i>.<br>
-<br>
-<font color=blue>Notes:</font> The caller of this function must take due
-caution when handling the returned <code>uid_t</code>, and treat a
-<code>uid_t</code> of <code>-1</code> properly.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/auth.c.html#auth_name_uid">src/auth.c</a><br>
 
 <hr>
 <a name="auth_pass"><b>auth_pass</b><br>
@@ -1769,54 +1417,6 @@ FTP command.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_auth.c.html#auth_sess_init">modules/mod_auth.c</a><br>
-
-<hr>
-<a name="auth_setgrent"><b>auth_setgrent</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void auth_setgrent(pool *<i>p</i>)
-</pre>
-<font color=blue>Comments</font>: Dispatcher for the
-<code>setgrent()</code> authentication handler.<br>
-<br>
-The purpose of the dispatched-to authentication handler is to provide a
-custom implementation of the <code>setgrent(3)</code> libc function.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/auth.c.html#auth_setgrent">src/auth.c</a><br>
-
-<hr>
-<a name="auth_setpwent"><b>auth_setpwent</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void auth_setpwent(pool *<i>p</i>)
-</pre>
-<font color=blue>Comments</font>: Dispatcher for the
-<code>setpwent()</code> authentication handler.<br>
-<br>
-The purpose of the dispatched-to authentication handler is to provide a
-custom implementation of the <code>setpwent(3)</code> libc function.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/auth.c.html#auth_setpwent">src/auth.c</a><br>
-
-<hr>
-<a name="auth_uid_name"><b>auth_uid_name</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  const char *auth_uid_name(pool *<i>p</i>, uid_t <i>uid</i>)
-</pre>
-<font color=blue>Comments</font>: Dispatcher for the
-<code>uid_name()</code> authentication handler.<br>
-<br>
-The purpose of the dispatched-to authentication handler is to do a
-UID-to-name lookup for the given UID <i>uid</i>.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/auth.c.html#auth_uid_name">src/auth.c</a><br>
 
 <hr>
 <a name="auth_user"><b>auth_user</b><br>
@@ -1935,16 +1535,6 @@ chained <code>union block_hdr</code>s point to <code>union block_hdr</code>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/pool.c.html#chk_on_blk_list">src/pool.c</a><br>
-
-<hr>
-<a name="clear_inet_pool"><b>clear_inet_pool</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void clear_inet_pool(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#clear_inet_pool">src/inet.c</a><br>
 
 <hr>
 <a name="clear_pool"><b>clear_pool</b><br>
@@ -2094,24 +1684,6 @@ FTP command.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_core.c.html#core_dele">modules/mod_core.c</a><br>
-
-<hr>
-<a name="core_display_file"><b>core_display_file</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int core_display_file(const char *<i>numeric</i>, const char *<i>fn</i>, const char *<i>fs</i>)
-</pre>
-<font color=blue>Comments</font>: Displays the file <i>fn</i>, which lives on
-the filesystem <i>fs</i>, via the given response <i>numeric</i>.  The file is
-displayed in normal RFC959 multiline mode, unless <code>MultilineRFC2228</code>
-is set.<br>
-<br>
-This function returns <code>-1</code> on error, or <code>0</code> if the
-file is displayed without trouble.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#core_display_file">modules/mod_core.c</a><br>
 
 <hr>
 <a name="core_help"><b>core_help</b><br>
@@ -3569,20 +3141,6 @@ or <code>NULL</code>, the next token returned will be <code>NULL</code>.<br>
   <a href="../src/src/support.c.html#get_token">src/support.c</a><br>
 
 <hr>
-<a name="get_word"><b>get_word</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  char *get_word(char **<i>cp</i>)
-</pre>
-<font color=blue>Comments</font>: Retrieve an individual word, space-delimited,
-from the given string <i>cp</i>, respecting quotes and escapes.  The <i>cp</i>
-pointer is advanced as the word is consumed from the string.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/dirtree.c.html#get_word">src/dirtree.c</a><br>
-
-<hr>
 <a name="handle_alarm"><b>handle_alarm</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -3622,222 +3180,6 @@ an idle session.  The timer length is configurable via the
   <a href="../src/src/main.c.html#idle_timeout_cb">src/main.c</a><br>
 
 <hr>
-<a name="inet_accept"><b>inet_accept</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  conn_t *inet_accept(pool *<i>pool</i>, conn_t *<i>d</i>, conn_t *<i>c</i>, int <i>rfd</i>, int <i>wfd</i>, int <i>resolve</i>)
-</pre>
-<font color=blue>Comments</font>: Accepts a new connection, cloning the
-existing <code>conn_t</code> and returning it, or <code>NULL</code> upon
-error.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_accept">src/inet.c</a><br>
-
-<hr>
-<a name="inet_accept_nowait"><b>inet_accept_nowait</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int inet_accept_nowait(pool *<i>pool</i>, conn_t *<i>c</i>)
-</pre>
-<font color=blue>Comments</font>: Accepts a new connection, return immediately
-with <code>-1</code> if no connection is available.  If a connection is
-accepted, creating a new <code>conn_t</code> and potential resolving is
-deferred, and a normal socket <code>fd</code> is returned for the new
-connection, which can later be used in <code>inet_openrw</code> to fully open
-and resolve addresses.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_accept_nowait">src/inet.c</a><br>
-
-<hr>
-<a name="inet_ascii"><b>inet_ascii</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  char *inet_ascii(pool *<i>pool</i>, p_in_addr_t *<i>addr</i>)
-</pre>
-<font color=blue>Comments</font>: Wrapper function for <code>inet_ntoa</code>,
-except it stores the result in memory allocated from <i>pool</i>.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_ascii">src/inet.c</a><br>
-
-<hr>
-<a name="inet_associate"><b>inet_associate</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  conn_t *inet_associate(pool *<i>pool</i>, conn_t *<i>c</i>, p_in_addr_t *<i>addr</i>, IOFILE *<i>inf</i>,
-    IOFILE *<i>outf</i>, int <i>resolve</i>)
-</pre>
-<font color=blue>Comments</font>: Associate the already open streams with
-a connection, returning <code>NULL</code> if either stream points to a
-non-socket descriptor.  If <code>addr</code> is non-<code>NULL</code>,
-remote address discovery is attempted.  If <code>resolve</code> is non-zero,
-the remote address is reverse solved.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_associate">src/inet.c</a><br>
-
-<hr>
-<a name="inet_close"><b>inet_close</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void inet_close(pool *<i>pool</i>, conn_t *<i>c</i>)
-</pre>
-<font color=blue>Comments</font>:  With this function, it is not necessary
-to close file descriptors or schedule <code>IOFILE</code>s for removal
-because the creator of the connection, either <a href="#inet_create_connection"><code>inet_create_connection()</code></a> or <a href="#inet_copy_connection"><code>inet_copy_connection()</code></a> will have registered a <code>pool</code>
-cleanup handler (<a href="#conn_cleanup_cb"><code>conn_cleanup_cb()</code></a>)
-which will do all of this work for us.  Simply destroy the connection <i>c</i>'s
-<code>pool</code>, and it will do the rest.  The given <i>pool</i> is not used
-by this function.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_close">src/inet.c</a><br>
-
-<hr>
-<a name="inet_connect"><b>inet_connect</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int inet_connect(pool *<i>pool</i>, conn_t *<i>c</i>, p_in_addr_t *<i>addr</i>, int <i>port</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_connect">src/inet.c</a><br>
-
-<hr>
-<a name="inet_connect_nowait"><b>inet_connect_nowait</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int inet_connect_nowait(pool *<i>pool</i>, conn_t *<i>c</i>, p_in_addr_t *<i>addr</i>, int <i>port</i>)
-</pre>
-<font color=blue>Comments</font>: Attempt to connect a connection, returning
-immediately with <code>1</code> if connected, <code>0</code> if not
-connected, or <code>-1</code> if error.  This only needs to be called once,
-and can then be selected for writing.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_connect_nowait">src/inet.c</a><br>
-
-<hr>
-<a name="inet_copy_connection"><b>inet_copy_connection</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  conn_t *inet_copy_connection(pool *<i>p</i>, conn_t *<i>c</i>)
-</pre>
-<font color=blue>Comments</font>: Copy a connection structure, also
-creating a subpool for the new connection.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_copy_connection">src/inet.c</a><br>
-
-<hr>
-<a name="inet_create_connection"><b>inet_create_connection</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  conn_t *inet_create_connection(pool *<i>p</i>, xaset_t *<i>servers</i>, int <i>fd</i>, p_in_addr_t *<i>bind_addr</i>,
-    int <i>port</i>, int <i>retry_bind</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_create_connection">src/inet.c</a><br>
-
-<hr>
-<a name="inet_create_connection_portrange"><b>inet_create_connection_portrange</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  conn_t *inet_create_connection_portrange(pool *<i>p</i>, xaset_t *<i>servers</i>, p_in_addr_t *<i>bind_addr</i>,
-    int <i>low_port</i>, int <i>high_port</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_create_connection_portrange">src/inet.c</a><br>
-
-<hr>
-<a name="inet_fqdn"><b>inet_fqdn</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  char *inet_fqdn(pool *<i>pool</i>, const char *<i>addr</i>)
-</pre>
-<font color=blue>Comments</font>: Returns the FQDN (<b>F</b>ully
-<b>Q</b>ualified <b>D</b>omain <b>N</b>ame) of an address.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_fqdn">src/inet.c</a><br>
-
-<hr>
-<a name="inet_get_conn_info"><b>inet_get_conn_info</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int inet_get_conn_info(conn_t *<i>c</i>, int <i>fd</i>)
-</pre>
-<font color=blue>Comments</font>:  Using the socket descriptor <i>fd</i>,
-retrieve the local and remote IP addresses and ports in use, and store them
-in <i>c</i>'s fields.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_get_conn_info">src/inet.c</a><br>
-
-<hr>
-<a name="inet_getaddr"><b>inet_getaddr</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  p_in_addr_t *inet_getaddr(pool *<i>pool</i>, char *<i>name</i>)
-</pre>
-<font color=blue>Comments</font>: DNS/hosts lookup for a particular <i>name</i>.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_getaddr">src/inet.c</a><br>
-
-<hr>
-<a name="inet_gethostname"><b>inet_gethostname</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-   char *inet_gethostname(pool *<i>pool</i>)
-</pre>
-<font color=blue>Comments</font>: Return the hostname (wrapper for
-<code>gethostname(2)</code>, except that it returns the FQDN).<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_gethostname">src/inet.c</a><br>
-
-<hr>
-<a name="inet_getname"><b>inet_getname</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  char *inet_getname(pool *<i>pool</i>, p_in_addr_t *<i>addr</i>)
-</pre>
-<font color=blue>Comments</font>: Given an IP address, return the FQDN.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_getname">src/inet.c</a><br>
-
-<hr>
-<a name="inet_getservport"><b>inet_getservport</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int inet_getservport(pool *<i>pool</i>, char *<i>serv</i>, char *<i>proto</i>)
-</pre>
-<font color=blue>Comments</font>: Find a service, and return its port number
-(in network byte order).<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_getservport">src/inet.c</a><br>
-
-<hr>
 <a name="inet_initialize_connection"><b>inet_initialize_connection</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -3852,44 +3194,6 @@ also creating a new subpool just for the new connection.<br>
   <a href="../src/src/inet.c.html#inet_initialize_connection">src/inet.c</a><br>
 
 <hr>
-<a name="inet_listen"><b>inet_listen</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int inet_listen(pool *<i>pool</i>, conn_t *<i>c</i>, int <i>backlog</i>)
-</pre>
-<font color=blue>Comments</font>: Puts a connection in listening mode.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_listen">src/inet.c</a><br>
-
-<hr>
-<a name="inet_openrw"><b>inet_openrw</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  conn_t *inet_openrw(pool *<i>pool</i>, conn_t *<i>c</i>, p_in_addr_t *<i>addr</i>, int <i>fd</i>, int <i>rfd</i>,
-    int <i>wfd</i>, int <i>resolve</i>)
-</pre>
-<font color=blue>Comments</font>: Open streams for a new socket; if
-<i>rfd</i> and <code><i>wfd</i> != -1</code>, two new <code>fd</code>s are
-<code>dup()</code>ed to the respective read/write <code>fd</code>s.  If the
-<code>fd</code>s specified correspond to the normal <code>stdin</code> and
-<code>stdout</code>, the streams opened will be assigned to <code>stdin</code>
-and <code>stdout</code> in an intuitive fashion (so that they may be later used
-by <code>printf()</code>/<code>fgets()</code> type <code>libc</code> functions).
-If <i>addr</i> is non-<code>NULL</code>, the address is assigned
-to the connection (as the <i>source</i> of the connection).  If it is
-<code>NULL</code>, remote address discovery will be attempted.  The
-connection structure's appropriate fields are filled in, including the
-<i>destination</i> address.  Finally, if <i>resolve</i> is non-zero,
-<code>inet_openrw()</code> will attempt to reverse resolve the remote
-address.  A new connection structure is created from <i>pool</i>.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_openrw">src/inet.c</a><br>
-
-<hr>
 <a name="inet_pool_cleanup_cb"><b>_inet_pool_cleanup</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -3898,125 +3202,6 @@ address.  A new connection structure is created from <i>pool</i>.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/inet.c.html#inet_pool_cleanup_cb">src/inet.c</a><br>
-
-<hr>
-<a name="inet_resetlisten"><b>inet_resetlisten</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int inet_resetlisten(pool *<i>pool</i>, conn_t *<i>c</i>)
-</pre>
-<font color=blue>Comments</font>: Reset a connection back to listening mode.
-Enables blocking mode for safety.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_resetlisten">src/inet.c</a><br>
-
-<hr>
-<a name="inet_resolve_ip"><b>inet_resolve_ip</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void inet_resolve_ip(pool *<i>pool</i>, conn_t *<i>c</i>)
-</pre>
-<font color=blue>Comments</font>: Performs reverse IP resolution via DNS on
-an existing connection.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_resolve_ip">src/inet.c</a><br>
-
-<hr>
-<a name="inet_reverse_dns"><b>inet_reverse_dns</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int inet_reverse_dns(pool *<i>pool</i>, int <i>enable</i>)
-</pre>
-<font color=blue>Comments</font>: Enable or disable reverse DNS lookups.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_reverse_dns">src/inet.c</a><br>
-
-<hr>
-<a name="inet_set_proto_options"><b>inet_set_proto_options</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int inet_set_proto_options(pool *<i>pool</i>, conn_t *<i>c</i>, int <i>nodelay</i>, int <i>lowdelay</i>, int <i>throughput</i>,
-    int <i>nopush</i>)
-</pre>
-<font color=blue>Comments</font>:  Sets the following protocol-level options
-(if supported by the OS) on the given connection <i>c</i>:
-<code>TCP_NODELAY</code>, <code>IP_TOS</code> (for <i>low delay</i> and
-<i>throughput</i> options), and <code>TCP_NOPUSH</code>.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_set_proto_options">src/inet.c</a><br>
-
-<hr>
-<a name="inet_setasync"><b>inet_setasync</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int inet_setasync(pool *<i>pool</i>, conn_t *<i>c</i>)
-</pre>
-<font color=blue>Comments</font>: Puts a socket in asynchronous mode, so
-that <code>SIGURG</code> is raised on OOB data.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_setasync">src/inet.c</a><br>
-
-<hr>
-<a name="inet_setblock"><b>inet_setblock</b><br>
-<br>
-<font color=blue>Comments</font>: Puts a socket in blocking mode.<br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int inet_setblock(pool *<i>pool</i>, conn_t *<i>c</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_setblock">src/inet.c</a><br>
-
-<hr>
-<a name="inet_setnonblock"><b>inet_setnonblock</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int inet_setnonblock(pool *<i>pool</i>, conn_t *<i>c</i>)
-</pre>
-<font color=blue>Comments</font>: Puts a socket in non-blocking mode.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_setnonblock">src/inet.c</a><br>
-
-<hr>
-<a name="inet_setoptions"><b>inet_setoptions</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int inet_setoptions(pool *<i>pool</i>, conn_t *<i>c</i>, int <i>rcvbuf</i>, int <i>sndbuf</i>)
-</pre>
-<font color=blue>Comments</font>: Set socket-level options on a connection.  If
-file descriptor sets of <i>c</i> are <code>-1</code>, the socket
-<code>snd</code>/<code>rcv</code> buffers will be set according to the
-server configuration.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#inet_setoptions">src/inet.c</a><br>
-
-<hr>
-<a name="inet_validate"><b>inet_validate</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  char *inet_validate(char *<i>buf</i>)
-</pre>
-<font color=blue>Comments</font>: Validate anything returned from the
-<i>outside</i>, since it's untrusted information.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/utils.c.html#inet_validate">src/utils.c</a><br>
 
 <hr>
 <a name="inetd_main"><b>inetd_main</b><br>
@@ -4780,16 +3965,6 @@ explicit match; <code>-1</code> if it is an explicit mismatch (<i>i.e.</i>
   <a href="../src/src/modules.c.html#mod_privdata_find">src/modules.c</a><br>
 
 <hr>
-<a name="module_exists"><b>module_exists</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int module_exists(const char *<i>name</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/modules.c.html#module_exists">src/modules.c</a><br>
-
-<hr>
 <a name="netio_buffer_alloc"><b>netio_buffer_alloc</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -5166,40 +4341,429 @@ allocating a subpool from <i>parent_pool</i> for the new object.<br>
   <a href="../src/src/netio.c.html#pr_alloc_netio">src/netio.c</a><br>
 
 <hr>
-<a name="pr_class_and_expression"><b>pr_class_and_expression</b><br>
+<a name="pr_auth_authenticate"><b>pr_auth_authenticate</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  unsigned char pr_class_and_expression(char **<i>expr</i>)
+  int pr_auth_authenticate(pool *<i>p</i>, const char *<i>name</i>, const char *<i>pw</i>)
 </pre>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>auth()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to provide a
+higher-level &quot;yes or no&quot; answer of whether a the given
+user <i>name</i> is successfully authenticated by the given cleartext
+password <i>pw</i>.<br>
+<br>
 <font color=blue>Source File</font>:
-  <a href="../src/src/dirtree.c.html#pr_class_and_expression">src/dirtree.c</a><br>
+  <a href="../src/src/auth.c.html#pr_auth_authenticate">src/auth.c</a><br>
 
 <hr>
-<a name="pr_class_or_expression"><b>pr_class_or_expression</b><br>
+<a name="pr_auth_check"><b>pr_auth_check</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  unsigned char pr_class_or_expression(char **<i>expr</i>)
+  int pr_auth_check(pool *<i>p</i>, const char *<i>cpw</i>, const char *<i>name</i>, const char *<i>pw</i>)
 </pre>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>check()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to, given the
+hashed password <i>cpw</i>, the username <i>name</i>, and the cleartext password
+<i>pw</i>, and using whatever method the module developer desires, determine
+whether the hashed password is sufficient and proper for that user, if the
+the cleartext password belongs to that user.<br>
+<br>
 <font color=blue>Source File</font>:
-  <a href="../src/src/dirtree.c.html#pr_class_or_expression">src/dirtree.c</a><br>
+  <a href="../src/src/auth.c.html#pr_auth_check">src/auth.c</a><br>
 
 <hr>
-<a name="pr_exit_register_handler"><b>pr_exit_register_handler</b><br>
+<a name="pr_auth_endgrent"><b>pr_auth_endgrent</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void pr_exit_register_handler(void (*<i>f</i>)())
+  void pr_auth_endgrent(pool *<i>p</i>)
 </pre>
-<font color=blue>Comments</font>:  Register a function <i>f</i> to be run
-when the server exits normally, and the
-<a href="#run_exit_handlers"><code>run_exit_handlers()</code></a> function is
-called, which happens in
-<a href="#end_login_noexit"><code>end_login_noexit()</code></a>.<br>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>endgrent()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to provide a
+custom implementation of the <code>endgrent(3)</code> libc function.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/src/support.c.html#pr_exit_register_handler">src/support.c</a><br>
+  <a href="../src/src/auth.c.html#pr_auth_endgrent">src/auth.c</a><br>
+
+<hr>
+<a name="pr_auth_endpwent"><b>pr_auth_endpwent</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_auth_endpwent(pool *<i>p</i>)
+</pre>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>endpwent()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to provide a
+custom implementation of the <code>endpwent(3)</code> libc function.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/auth.c.html#pr_auth_endpwent">src/auth.c</a><br>
+
+<hr>
+<a name="pr_auth_getgrent"><b>pr_auth_getgrent</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  struct group *pr_auth_getgrent(pool *<i>p</i>)
+</pre>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>getgrent()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to provide a
+custom implementation of the <code>getgrent(3)</code> libc function.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/auth.c.html#pr_auth_getgrent">src/auth.c</a><br>
+
+<hr>
+<a name="pr_auth_getgrgid"><b>pr_auth_getgrgid</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  struct group *pr_auth_getgrgid(pool *<i>p</i>, gid_t <i>gid</i>)
+</pre>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>getgrgid()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to provide a
+custom implementation of the <code>getgrgid(3)</code> libc function.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/auth.c.html#pr_auth_getgrgid">src/auth.c</a><br>
+
+<hr>
+<a name="pr_auth_getgrnam"><b>pr_auth_getgrnam</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  struct group *pr_auth_getgrnam(pool *<i>p</i>, const char *<i>name</i>)
+</pre>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>getgrnam()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to provide a
+custom implementation of the <code>getgrnam(3)</code> libc function.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/auth.c.html#pr_auth_getgrnam">src/auth.c</a><br>
+
+<hr>
+<a name="pr_auth_getpwent"><b>pr_auth_getpwent</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  struct passwd *pr_auth_getpwent(pool *<i>p</i>)
+</pre>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>getpwent()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to provide a
+custom implementation of the <code>getpwent(3)</code> libc function.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/auth.c.html#pr_auth_getpwent">src/auth.c</a><br>
+
+<hr>
+<a name="pr_auth_getpwnam"><b>pr_auth_getpwnam</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  struct passwd *pr_auth_getpwnam(pool *<i>p</i>, const char *<i>name</i>)
+</pre>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>getpwnam()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to provide a
+custom implementation of the <code>getpwnam(3)</code> libc function.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/auth.c.html#pr_auth_getpwnam">src/auth.c</a><br>
+
+<hr>
+<a name="pr_auth_getgroups"><b>pr_auth_getgroups</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  struct passwd *pr_auth_getgroups(pool *<i>p</i>, const char *<i>name</i>, array_header **<i>group_ids</i>,
+    array_header **<i>group_names</i>)
+</pre>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>getgroups()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to provide a
+custom implementation of the <code>getgroups(2)</code> system call.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/auth.c.html#pr_auth_getpwnam">src/auth.c</a><br>
+
+<hr>
+<a name="pr_auth_getpwuid"><b>pr_auth_getpwuid</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  struct passwd *pr_auth_getpwuid(pool *<i>p</i>, uid_t <i>uid</i>)
+</pre>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>getpwuid()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to provide a
+custom implementation of the <code>getpwuid(3)</code> libc function.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/auth.c.html#pr_auth_getpwuid">src/auth.c</a><br>
+
+<hr>
+<a name="pr_auth_gid2name"><b>auth_gid2name</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  const char *pr_auth_gid2name(pool *<i>p</i>, gid_t <i>gid</i>)
+</pre>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>gid_name()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to do a
+GID-to-name lookup for the given GID <i>gid</i>.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/auth.c.html#pr_auth_gid2name">src/auth.c</a><br>
+
+<hr>
+<a name="pr_auth_name2gid"><b>pr_auth_name2gid</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  gid_t pr_auth_name2gid(pool *<i>p</i>, const char *<i>name</i>)
+</pre>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>name2gid()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to do a
+name-to-GID lookup for the given group <i>name</i>.<br>
+<br>
+<font color=blue>Notes:</font> The caller of this function must take due
+caution when handling the returned <code>gid_t</code>, and treat a
+<code>gid_t</code> of <code>-1</code> properly.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/auth.c.html#pr_auth_name2gid">src/auth.c</a><br>
+
+<hr>
+<a name="pr_auth_name2uid"><b>pr_auth_name2uid</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  uid_t pr_auth_name2uid(pool *<i>p</i>, const char *<i>name</i>)
+</pre>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>name2uid()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to do a
+name-to-UID lookup for the given user <i>name</i>.<br>
+<br>
+<font color=blue>Notes:</font> The caller of this function must take due
+caution when handling the returned <code>uid_t</code>, and treat a
+<code>uid_t</code> of <code>-1</code> properly.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/auth.c.html#pr_auth_name2uid">src/auth.c</a><br>
+
+<hr>
+<a name="pr_auth_setgrent"><b>pr_auth_setgrent</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_auth_setgrent(pool *<i>p</i>)
+</pre>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>setgrent()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to provide a
+custom implementation of the <code>setgrent(3)</code> libc function.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/auth.c.html#pr_auth_setgrent">src/auth.c</a><br>
+
+<hr>
+<a name="pr_auth_setpwent"><b>pr_auth_setpwent</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_auth_setpwent(pool *<i>p</i>)
+</pre>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>setpwent()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to provide a
+custom implementation of the <code>setpwent(3)</code> libc function.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/auth.c.html#pr_auth_setpwent">src/auth.c</a><br>
+
+<hr>
+<a name="pr_auth_uid2name"><b>pr_auth_uid2name</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  const char *pr_auth_uid2name(pool *<i>p</i>, uid_t <i>uid</i>)
+</pre>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>uid2name()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to do a
+UID-to-name lookup for the given UID <i>uid</i>.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/auth.c.html#pr_auth_uid2name">src/auth.c</a><br>
+
+<hr>
+<a name="pr_display_file"><b>pr_display_file</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_display_file(const char *<i>path</i>, const char *<i>fs</i>, const char *<i>code</i>)
+</pre>
+<font color=blue>Comments</font>: Displays the file <i>path</i>, which lives on
+the filesystem <i>fs</i>, via the given response <i>code</i>.  The file is
+displayed in normal RFC959 multiline mode, unless <code>MultilineRFC2228</code>
+is set.<br>
+<br>
+This function returns <code>-1</code> on error, or <code>0</code> if the
+file is displayed without trouble.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/display.c.html#pr_display_file">src/display.c</a><br>
+
+<hr>
+<a name="pr_expr_create"><b>pr_expr_create</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  array_header *pr_expr_create(pool *<i>p</i>, int *<i>argc</i>, char **<i>argv</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/dirtree.c.html#pr_expr_create">src/dirtree.c</a><br>
+
+<hr>
+<a name="pr_expr_eval_class_and"><b>pr_expr_eval_class_and</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  unsigned char pr_expr_eval_class_and(char **<i>expr</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/dirtree.c.html#pr_expr_eval_class_and">src/dirtree.c</a><br>
+
+<hr>
+<a name="pr_expr_eval_class_or"><b>pr_expr_eval_class_or</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  unsigned char pr_expr_eval_class_or(char **<i>expr</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/dirtree.c.html#pr_expr_eval_class_or">src/dirtree.c</a><br>
+
+<hr>
+<a name="pr_expr_eval_group_and"><b>pr_expr_eval_group_and</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  unsigned char pr_expr_eval_group_and(char **<i>expr</i>)
+</pre>
+<font color=blue>Comments</font>:  Evaluates the given expression <i>expr</i>
+as a group <code>AND</code> expression, which means that <i>all</i> group
+memberships must be valid for the expression to be true.  Returns
+<code>TRUE</code> if the current connected user matches the group expression,
+<code>FALSE</code> otherwise.<br>
+<br>
+<font color=blue>Bugs</font>: This function assumes use of
+<code>session.groups</code>.  Better would be to evaluate <i>expr</i> against
+a caller-provided array of group names.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/dirtree.c.html#pr_expr_eval_group_and">src/dirtree.c</a><br>
+
+<hr>
+<a name="pr_expr_eval_group_or"><b>pr_expr_eval_group_or</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  unsigned char pr_expr_eval_group_or(char **<i>expr</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/dirtree.c.html#pr_expr_eval_group_or">src/dirtree.c</a><br>
+
+<hr>
+<a name="pr_expr_eval_user_and"><b>pr_expr_eval_user_and</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  unsigned char pr_expr_eval_user_and(char **<i>expr</i>)
+</pre>
+<font color=blue>Comments</font>:  Evaluates the given expression <i>expr</i>
+as a user <code>AND</code> expression, which means that <i>all</i> user
+conditions must match for the current connected user for the expression to be
+true.  Returns <code>TRUE</code> if the expression evaluates thus for the
+current user, <code>FALSE</code> otherwise.<br>
+<br>
+<font color=blue>Bugs</font>: This function assumes use of
+<code>session.user</code>.  Better would be to evaluate <i>expr</i> against
+a caller-provided user name.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/dirtree.c.html#pr_expr_eval_user_and">src/dirtree.c</a><br>
+
+<hr>
+<a name="pr_expr_eval_user_or"><b>pr_expr_eval_user_or</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  unsigned char pr_expr_eval_user_or(char **<i>expr</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/dirtree.c.html#pr_expr_eval_user_or">src/dirtree.c</a><br>
+
+<hr>
+<a name="pr_feat_add"><b>pr_feat_add</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_feat_add(const char *<i>str</i>);
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/feat.c.html#pr_feat_add">src/feat.c</a><br>
+
+<hr>
+<a name="pr_feat_get"><b>pr_feat_get</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  const char *pr_feat_get(void);
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/feat.c.html#pr_feat_get">src/feat.c</a><br>
+
+<hr>
+<a name="pr_feat_get_next"><b>pr_feat_get_next</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  const char *pr_feat_get_next(void);
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/feat.c.html#pr_feat_get_next">src/feat.c</a><br>
+
 
 <hr>
 <a name="pr_fs_clean_path"><b>pr_fs_clean_path</b><br>
@@ -5746,36 +5310,6 @@ read in, so that errors can be reported with the correct line numbers.<br>
   <a href="../src/src/fsio.c.html#pr_fsio_write">src/fsio.c</a><br>
 
 <hr>
-<a name="pr_group_and_expression"><b>pr_group_and_expression</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  unsigned char pr_group_and_expression(char **<i>expr</i>)
-</pre>
-<font color=blue>Comments</font>:  Evaluates the given expression <i>expr</i>
-as a group <code>AND</code> expression, which means that <i>all</i> group
-memberships must be valid for the expression to be true.  Returns
-<code>TRUE</code> if the current connected user matches the group expression,
-<code>FALSE</code> otherwise.<br>
-<br>
-<font color=blue>Bugs</font>: This function assumes use of
-<code>session.groups</code>.  Better would be to evaluate <i>expr</i> against
-a caller-provided array of group names.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/dirtree.c.html#pr_group_and_expression">src/dirtree.c</a><br>
-
-<hr>
-<a name="pr_group_or_expression"><b>pr_group_or_expression</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  unsigned char pr_group_or_expression(char **<i>expr</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/dirtree.c.html#pr_group_or_expression">src/dirtree.c</a><br>
-
-<hr>
 <a name="pr_ident_lookup"><b>pr_ident_lookup</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -5788,6 +5322,335 @@ determined by the RFC 1413 ident protocol.  Returns
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/ident.c.html#pr_ident_lookup">src/ident.c</a><br>
+
+<hr>
+<a name="pr_inet_accept"><b>pr_inet_accept</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  conn_t *pr_inet_accept(pool *<i>pool</i>, conn_t *<i>d</i>, conn_t *<i>c</i>, int <i>rfd</i>, int <i>wfd</i>, int <i>resolve</i>)
+</pre>
+<font color=blue>Comments</font>: Accepts a new connection, cloning the
+existing <code>conn_t</code> and returning it, or <code>NULL</code> upon
+error.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#pr_inet_accept">src/inet.c</a><br>
+
+<hr>
+<a name="pr_inet_accept_nowait"><b>pr_inet_accept_nowait</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_inet_accept_nowait(pool *<i>pool</i>, conn_t *<i>c</i>)
+</pre>
+<font color=blue>Comments</font>: Accepts a new connection, return immediately
+with <code>-1</code> if no connection is available.  If a connection is
+accepted, creating a new <code>conn_t</code> and potential resolving is
+deferred, and a normal socket <code>fd</code> is returned for the new
+connection, which can later be used in <code>pr_inet_openrw</code> to fully open
+and resolve addresses.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#pr_inet_accept_nowait">src/inet.c</a><br>
+
+<hr>
+<a name="pr_inet_associate"><b>pr_inet_associate</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  conn_t *pr_inet_associate(pool *<i>p</i>, conn_t *<i>c</i>, pr_netaddr_t *<i>addr</i>, pr_netio_stream_t *<i>in</i>,
+    pr_netio_stream_t *<i>out</i>, int <i>resolve</i>)
+</pre>
+<font color=blue>Comments</font>: Associate the already open streams with
+a connection, returning <code>NULL</code> if either stream points to a
+non-socket descriptor.  If <code>addr</code> is non-<code>NULL</code>,
+remote address discovery is attempted.  If <code>resolve</code> is non-zero,
+the remote address is reverse solved.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#pr_inet_associate">src/inet.c</a><br>
+
+<hr>
+<a name="pr_inet_clear"><b>pr_inet_clear</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_inet_clear(void)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#pr_inet_clear">src/inet.c</a><br>
+
+<hr>
+<a name="pr_inet_close"><b>pr_inet_close</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_inet_close(pool *<i>pool</i>, conn_t *<i>c</i>)
+</pre>
+<font color=blue>Comments</font>:  With this function, it is not necessary
+to close file descriptors or schedule NetIO streams for removal because the
+creator of the connection, either <a href="#pr_inet_create_connection"><code>pr_inet_create_connection()</code></a> or <a href="#pr_inet_copy_connection"><code>pr_inet_copy_connection()</code></a> will have registered a <code>pool</code>
+cleanup handler (<a href="#conn_cleanup_cb"><code>conn_cleanup_cb()</code></a>)
+which will do all of this work for us.  Simply destroy the connection <i>c</i>'s
+<code>pool</code>, and it will do the rest.  The given <i>pool</i> is not used
+by this function.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#pr_inet_close">src/inet.c</a><br>
+
+<hr>
+<a name="pr_inet_connect"><b>pr_inet_connect</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_inet_connect(pool *<i>pool</i>, conn_t *<i>c</i>, p_in_addr_t *<i>addr</i>, int <i>port</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#pr_inet_connect">src/inet.c</a><br>
+
+<hr>
+<a name="pr_inet_connect_nowait"><b>pr_inet_connect_nowait</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_inet_connect_nowait(pool *<i>pool</i>, conn_t *<i>c</i>, p_in_addr_t *<i>addr</i>, int <i>port</i>)
+</pre>
+<font color=blue>Comments</font>: Attempt to connect a connection, returning
+immediately with <code>1</code> if connected, <code>0</code> if not
+connected, or <code>-1</code> if error.  This only needs to be called once,
+and can then be selected for writing.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#pr_inet_connect_nowait">src/inet.c</a><br>
+
+<hr>
+<a name="pr_inet_copy_connection"><b>pr_inet_copy_connection</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  conn_t *pr_inet_copy_connection(pool *<i>p</i>, conn_t *<i>c</i>)
+</pre>
+<font color=blue>Comments</font>: Copy a connection structure, also
+creating a subpool for the new connection.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#pr_inet_copy_connection">src/inet.c</a><br>
+
+<hr>
+<a name="pr_inet_create_connection"><b>pr_inet_create_connection</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  conn_t *pr_inet_create_connection(pool *<i>p</i>, xaset_t *<i>servers</i>, int <i>fd</i>, p_in_addr_t *<i>bind_addr</i>,
+    int <i>port</i>, int <i>retry_bind</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#pr_inet_create_connection">src/inet.c</a><br>
+
+<hr>
+<a name="pr_inet_create_connection_portrange"><b>pr_inet_create_connection_portrange</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  conn_t *pr_inet_create_connection_portrange(pool *<i>p</i>, xaset_t *<i>servers</i>, p_in_addr_t *<i>bind_addr</i>,
+    int <i>low_port</i>, int <i>high_port</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#pr_inet_create_connection_portrange">src/inet.c</a><br>
+
+<hr>
+<a name="pr_inet_get_conn_info"><b>pr_inet_get_conn_info</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_inet_get_conn_info(conn_t *<i>c</i>, int <i>fd</i>)
+</pre>
+<font color=blue>Comments</font>:  Using the socket descriptor <i>fd</i>,
+retrieve the local and remote IP addresses and ports in use, and store them
+in <i>c</i>'s fields.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#pr_inet_get_conn_info">src/inet.c</a><br>
+
+<hr>
+<a name="pr_inet_getservport"><b>pr_inet_getservport</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_inet_getservport(pool *<i>pool</i>, const char *<i>serv</i>, const char *<i>proto</i>)
+</pre>
+<font color=blue>Comments</font>: Find a service, and return its port number
+(in network byte order).<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#pr_inet_getservport">src/inet.c</a><br>
+
+<hr>
+<a name="pr_inet_lingering_abort"><b>pr_inet_lingering_abort</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_inet_lingering_abort(pool *<i>p</i>, conn_t *<i>c</i>, long <i>linger</i>)
+</pre>
+<font color=blue>Comments</font>:
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#pr_inet_lingering_abort">src/inet.c</a><br>
+
+<hr>
+<a name="pr_inet_lingering_close"><b>pr_inet_lingering_close</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_inet_lingering_close(pool *<i>p</i>, conn_t *<i>c</i>, long <i>linger</i>)
+</pre>
+<font color=blue>Comments</font>:
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#pr_inet_lingering_close">src/inet.c</a><br>
+
+<hr>
+<a name="pr_inet_listen"><b>pr_inet_listen</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_inet_listen(pool *<i>pool</i>, conn_t *<i>c</i>, int <i>backlog</i>)
+</pre>
+<font color=blue>Comments</font>: Puts a connection in listening mode.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#pr_inet_listen">src/inet.c</a><br>
+
+<hr>
+<a name="pr_inet_openrw"><b>pr_inet_openrw</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  conn_t *pr_inet_openrw(pool *<i>pool</i>, conn_t *<i>c</i>, pr_netaddr_t *<i>addr</i>, int <i>fd</i>, int <i>rfd</i>,
+    int <i>wfd</i>, int <i>resolve</i>)
+</pre>
+<font color=blue>Comments</font>: Open streams for a new socket; if
+<i>rfd</i> and <code><i>wfd</i> != -1</code>, two new <code>fd</code>s are
+<code>dup()</code>ed to the respective read/write <code>fd</code>s.  If the
+<code>fd</code>s specified correspond to the normal <code>stdin</code> and
+<code>stdout</code>, the streams opened will be assigned to <code>stdin</code>
+and <code>stdout</code> in an intuitive fashion (so that they may be later used
+by <code>printf()</code>/<code>fgets()</code> type <code>libc</code> functions).
+If <i>addr</i> is non-<code>NULL</code>, the address is assigned
+to the connection (as the <i>source</i> of the connection).  If it is
+<code>NULL</code>, remote address discovery will be attempted.  The
+connection structure's appropriate fields are filled in, including the
+<i>destination</i> address.  Finally, if <i>resolve</i> is non-zero,
+<code>pr_inet_openrw()</code> will attempt to reverse resolve the remote
+address.  A new connection structure is created from <i>pool</i>.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#pr_inet_openrw">src/inet.c</a><br>
+
+<hr>
+<a name="pr_inet_resetlisten"><b>pr_inet_resetlisten</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_inet_resetlisten(pool *<i>pool</i>, conn_t *<i>c</i>)
+</pre>
+<font color=blue>Comments</font>: Reset a connection back to listening mode.
+Enables blocking mode for safety.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#pr_inet_resetlisten">src/inet.c</a><br>
+
+<hr>
+<a name="pr_inet_set_async"><b>pr_inet_set_async</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_inet_set_async(pool *<i>pool</i>, conn_t *<i>c</i>)
+</pre>
+<font color=blue>Comments</font>: Puts a socket in asynchronous mode, so
+that <code>SIGURG</code> is raised on OOB data.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#pr_inet_set_async">src/inet.c</a><br>
+
+<hr>
+<a name="pr_inet_set_block"><b>pr_inet_set_block</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_inet_set_block(pool *<i>pool</i>, conn_t *<i>c</i>)
+</pre>
+<font color=blue>Comments</font>: Puts a socket in blocking mode.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#pr_inet_set_block">src/inet.c</a><br>
+
+<hr>
+<a name="pr_inet_set_default_family"><b>pr_inet_set_default_family</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_inet_set_default_family(pool *<i>p</i>, int <i>family</i>)
+</pre>
+<font color=blue>Source File</font>: 
+  <a href="../src/src/inet.c.html#pr_inet_set_default_family">src/inet.c</a><br>
+
+<hr>
+<a name="pr_inet_set_nonblock"><b>pr_inet_set_nonblock</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_inet_set_nonblock(pool *<i>pool</i>, conn_t *<i>c</i>)
+</pre>
+<font color=blue>Comments</font>: Puts a socket in non-blocking mode.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#pr_inet_set_nonblock">src/inet.c</a><br>
+
+<hr>
+<a name="pr_inet_set_proto_opts"><b>pr_inet_set_proto_opts</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_inet_set_proto_opts(pool *<i>pool</i>, conn_t *<i>c</i>, int <i>nodelay</i>, int <i>lowdelay</i>, int <i>throughput</i>,
+    int <i>nopush</i>)
+</pre>
+<font color=blue>Comments</font>:  Sets the following protocol-level options
+(if supported by the OS) on the given connection <i>c</i>:
+<code>TCP_NODELAY</code>, <code>IP_TOS</code> (for <i>low delay</i> and
+<i>throughput</i> options), and <code>TCP_NOPUSH</code>.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#pr_inet_set_proto_opts">src/inet.c</a><br>
+
+<hr>
+<a name="pr_inet_set_socket_opts"><b>pr_inet_set_socket_opts</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_inet_set_socket_opts(pool *<i>pool</i>, conn_t *<i>c</i>, int <i>rcvbuf</i>, int <i>sndbuf</i>)
+</pre>
+<font color=blue>Comments</font>: Set socket-level options on a connection.  If
+file descriptor sets of <i>c</i> are <code>-1</code>, the socket
+<code>snd</code>/<code>rcv</code> buffers will be set according to the
+server configuration.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#pr_inet_set_socket_opts">src/inet.c</a><br>
+
+<hr>
+<a name="pr_inet_validate"><b>pr_inet_validate</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  char *pr_inet_validate(char *<i>buf</i>)
+</pre>
+<font color=blue>Comments</font>: Validate anything returned from the
+<i>outside</i>, since it's untrusted information.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/utils.c.html#pr_inet_validate">src/utils.c</a><br>
 
 <hr>
 <a name="pr_init_netio"><b>pr_init_netio</b><br>
@@ -5811,6 +5674,26 @@ base <code>permanent_pool</code>.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/pool.c.html#pr_init_pools">src/pool.c</a><br>
+
+<hr>
+<a name="pr_module_exists"><b>pr_module_exists</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  unsigned char pr_module_exists(const char *<i>name</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/modules.c.html#pr_module_exists">src/modules.c</a><br>
+
+<hr>
+<a name="pr_module_get"><b>pr_module_get</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  module *pr_module_get(const char *<i>name</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/modules.c.html#pr_module_get">src/modules.c</a><br>
 
 <hr>
 <a name="pr_netio_abort"><b>pr_netio_abort</b><br>
@@ -6034,16 +5917,6 @@ the number of bytes written is returned.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/netio.c.html#pr_netio_write_async">src/netio.c</a><br>
-
-<hr>
-<a name="pr_parse_expression"><b>pr_parse_expression</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  array_header *pr_parse_expression(pool *<i>p</i>, int *<i>argc</i>, char **<i>argv</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/dirtree.c.html#pr_parse_expression">src/dirtree.c</a><br>
 
 <hr>
 <a name="pr_regexp_alloc"><b>pr_regexp_alloc</b><br>
@@ -6296,34 +6169,78 @@ type <i>sym_type</i> into the stash.  This function returns the index at which
   <a href="../src/src/modules.c.html#pr_stash_remove_symbol">src/modules.c</a><br>
 
 <hr>
-<a name="pr_user_and_expression"><b>pr_user_and_expression</b><br>
+<a name="pr_str_get_word"><b>pr_str_get_word</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  unsigned char pr_user_and_expression(char **<i>expr</i>)
+  char *pr_str_get_word(char **<i>cp</i>)
 </pre>
-<font color=blue>Comments</font>:  Evaluates the given expression <i>expr</i>
-as a user <code>AND</code> expression, which means that <i>all</i> user
-conditions must match for the current connected user for the expression to be
-true.  Returns <code>TRUE</code> if the expression evaluates thus for the
-current user, <code>FALSE</code> otherwise.<br>
-<br>
-<font color=blue>Bugs</font>: This function assumes use of
-<code>session.user</code>.  Better would be to evaluate <i>expr</i> against
-a caller-provided user name.<br>
+<font color=blue>Comments</font>: Retrieve an individual word, space-delimited,
+from the given string <i>cp</i>, respecting quotes and escapes.  The <i>cp</i>
+pointer is advanced as the word is consumed from the string.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/src/dirtree.c.html#pr_user_and_expression">src/dirtree.c</a><br>
+  <a href="../src/src/dirtree.c.html#pr_str_get_word">src/dirtree.c</a><br>
 
 <hr>
-<a name="pr_user_or_expression"><b>pr_user_or_expression</b><br>
+<a name="pr_timer_add"><b>pr_timer_add</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  unsigned char pr_user_or_expression(char **<i>expr</i>)
+  int pr_timer_add(int <i>seconds</i>, int <i>timerno</i>, module *<i>mod</i>, callback_t <i>cb</i>)
+</pre>
+<font color=blue>Comments</font>:  Create and activate a new timer with an
+interval <i>seconds</i>, a timer ID number of <i>timerno</i>, and a callback
+of <i>cb</i>.  Note that if a <i>timerno</i> of -1 is given, a
+&quot;dynamic&quot; timer ID number will be assigned.  The <i>timerno</i>
+of the timer is returned.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/timers.c.html#pr_timer_add">src/timers.c</a><br>
+
+<hr>
+<a name="pr_timer_remove"><b>pr_timer_remove</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_timer_remove(int <i>timerno</i>, module *<i>mod</i>)
+</pre>
+<font color=blue>Comments</font>:  Removes an active timer from play. The
+timer must have the <i>timerno</i> given, and be registered by module
+<i>mod</i>.  If found, the <i>timerno</i> is returned, otherwise 0 is returned.
+As a special case, the macro <code>ANY_MODULE</code> may be used for the
+<i>mod</i> argument, in which case a timer with the given <i>timerno</i> will
+be removed, regardless of the registering module.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/timers.c.html#pr_timer_remove">src/timers.c</a><br>
+
+<hr>
+<a name="pr_timer_reset"><b>pr_timer_reset</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_timer_reset(int <i>timerno</i>, module *<i>mod</i>)
+</pre>
+<font color=blue>Comments</font>:  Resets the time on an active timer. The
+timer must have the <i>timerno</i> given, and be registered by module
+<i>mod</i>.  If found, the <i>timerno</i> is returned, otherwise 0 is returned.
+As a special case, the macro <code>ANY_MODULE</code> may be used for the
+<i>mod</i> argument, in which case a timer with the given <i>timerno</i> will
+be removed, regardless of the registering module.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/timers.c.html#pr_timer_reset">src/timers.c</a><br>
+
+<hr>
+<a name="pr_timer_sleep"><b>pr_timer_sleep</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_timer_sleep(int <i>seconds</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/src/dirtree.c.html#pr_user_or_expression">src/dirtree.c</a><br>
+  <a href="../src/src/timers.c.html#pr_timer_sleep">src/timers.c</a><br>
 
 <hr>
 <a name="pstrcat"><b>pstrcat</b><br>
@@ -6638,50 +6555,6 @@ quotes must be duplicated.<br>
   <a href="../src/src/dirtree.c.html#remove_config">src/dirtree.c</a><br>
 
 <hr>
-<a name="remove_exit_handlers"><b>remove_exit_handlers</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void remove_exit_handlers(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/support.c.html#remove_exit_handlers">src/support.c</a><br>
-
-<hr>
-<a name="remove_timer"><b>remove_timer</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int remove_timer(int <i>timerno</i>, module *<i>mod</i>)
-</pre>
-<font color=blue>Comments</font>:  Removes an active timer from play. The
-timer must have the <i>timerno</i> given, and be registered by module
-<i>mod</i>.  If found, the <i>timerno</i> is returned, otherwise 0 is returned.
-As a special case, the macro <code>ANY_MODULE</code> may be used for the
-<i>mod</i> argument, in which case a timer with the given <i>timerno</i> will
-be removed, regardless of the registering module.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/timers.c.html#remove_timer">src/timers.c</a><br>
-
-<hr>
-<a name="reset_timer"><b>reset_timer</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int reset_timer(int <i>timerno</i>, module *<i>mod</i>)
-</pre>
-<font color=blue>Comments</font>:  Resets the time on an active timer. The
-timer must have the <i>timerno</i> given, and be registered by module
-<i>mod</i>.  If found, the <i>timerno</i> is returned, otherwise 0 is returned.
-As a special case, the macro <code>ANY_MODULE</code> may be used for the
-<i>mod</i> argument, in which case a timer with the given <i>timerno</i> will
-be removed, regardless of the registering module.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/timers.c.html#reset_timer">src/timers.c</a><br>
-
-<hr>
 <a name="resolve_anonymous_dirs"><b>resolve_anonymous_dirs</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -6739,16 +6612,6 @@ is usually called after a connection has been made to a server.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/pool.c.html#run_cleanups">src/pool.c</a><br>
-
-<hr>
-<a name="run_exit_handlers"><b>run_exit_handlers</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void run_exit_handlers(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/support.c.html#run_exit_handlers">src/support.c</a><br>
 
 <hr>
 <a name="run_schedule"><b>run_schedule</b><br>
@@ -7547,6 +7410,26 @@ directives.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_core.c.html#set_multilinerfc2228">modules/mod_core.c</a><br>
+
+<hr>
+<a name="set_oobinline"><b>set_oobinline</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void set_oobinline(int <i>fd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#set_oobinline">src/inet.c</a><br>
+
+<hr>
+<a name="set_owner"><b>set_owner</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void set_owner(int <i>fd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#set_owner">src/inet.c</a><br>
 
 <hr>
 <a name="set_passiveports"><b>set_passiveports</b><br>
@@ -8447,196 +8330,6 @@ end of <i>dest</i> and refusing to copy more than <i>n</i> bytes.<br>
   <a href="../src/src/dirtree.c.html#start_sub_config">src/dirtree.c</a><br>
 
 <hr>
-<a name="std_chdir"><b>std_chdir</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int std_chdir(fsdir_t *<i>f</i>, const char *<i>path</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#std_chdir">src/fs.c</a><br>
-
-<hr>
-<a name="std_chmod"><b>std_chmod</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int std_chmod(fsdir_t *<i>f</i>, const char *<i>path</i>, mode_t <i>mode</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#std_chmod">src/fs.c</a><br>
-
-<hr>
-<a name="std_chown"><b>std_chown</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int std_chown(fsdir_t *<i>f</i>, const char *<i>path</i>, uid_t <i>uid</i>, gid_t <i>gid</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#std_chown">src/fs.c</a><br>
-
-<hr>
-<a name="std_close"><b>std_close</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int std_close(fsdir_t *<i>f</i>, int <i>fd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#std_close">src/fs.c</a><br>
-
-<hr>
-<a name="std_closedir"><b>std_closedir</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int std_closedir(fsdir_t *<i>f</i>, void *<i>dir</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#std_closedir">src/fs.c</a><br>
-
-<hr>
-<a name="std_creat"><b>std_creat</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int std_creat(fsdir_t *<i>f</i>, const char *<i>path</i>, mode_t <i>mode</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#std_creat">src/fs.c</a><br>
-
-<hr>
-<a name="std_link"><b>std_link</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int std_link(fsdir_t *<i>f</i>, const char *<i>path1</i>, const char *<i>path2</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#std_link">src/fs.c</a><br>
-
-<hr>
-<a name="std_lseek"><b>std_lseek</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static off_t std_lseek(fsdir_t *<i>f</i>, int <i>fd</i>, off_t <i>offset</i>, int <i>whence</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#std_lseek">src/fs.c</a><br>
-
-<hr>
-<a name="std_lstat"><b>std_lstat</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int std_lstat(fsdir_t *<i>f</i>, const char *<i>path</i>, struct stat *<i>sbuf</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#std_lstat">src/fs.c</a><br>
-
-<hr>
-<a name="std_open"><b>std_open</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int std_open(fsdir_t *<i>f</i>, const char *<i>path</i>, int <i>access</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#std_open">src/fs.c</a><br>
-
-<hr>
-<a name="std_opendir"><b>std_opendir</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static void *std_opendir(fsdir_t *<i>f</i>, const char *<i>path</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#std_opendir">src/fs.c</a><br>
-
-<hr>
-<a name="std_read"><b>std_read</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int std_read(fsdir_t *<i>f</i>, int <i>fd</i>, char *<i>buf</i>, size_t <i>size</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#std_read">src/fs.c</a><br>
-
-<hr>
-<a name="std_readdir"><b>std_readdir</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static struct dirent *std_readdir(fsdir_t *<i>f</i>, void *<i>dir</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#std_readdir">src/fs.c</a><br>
-
-<hr>
-<a name="std_readlink"><b>std_readlink</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int std_readlink(fsdir_t *<i>f</i>, const char *<i>path</i>, char *<i>buf</i>, size_t <i>max</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#std_readlink">src/fs.c</a><br>
-
-<hr>
-<a name="std_rename"><b>std_rename</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int std_rename(fsdir_t *<i>f</i>, const char *<i>ren_from</i>, const char *<i>ren_to</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#std_rename">src/fs.c</a><br>
-
-<hr>
-<a name="std_stat"><b>std_stat</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int std_stat(fsdir_t *<i>f</i>, const char *<i>path</i>, struct stat *<i>sbuf</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#std_stat">src/fs.c</a><br>
-
-<hr>
-<a name="std_symlink"><b>std_symlink</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int std_symlink(fsdir_t *<i>f</i>, const char *<i>path1</i>, const char *<i>path2</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#std_symlink">src/fs.c</a><br>
-
-<hr>
-<a name="std_unlink"><b>std_unlink</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int std_unlink(fsdir_t *<i>f</i>, const char *<i>path</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#std_unlink">src/fs.c</a><br>
-
-<hr>
-<a name="std_write"><b>std_write</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int std_write(fsdir_t *<i>f</i>, int <i>fd</i>, const char *<i>buf</i>, size_t <i>size</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#std_write">src/fs.c</a><br>
-
-<hr>
 <a name="stor_abort"><b>stor_abort</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -8715,16 +8408,6 @@ end of <i>dest</i> and refusing to copy more than <i>n</i> bytes.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/timers.c.html#timer_cmp">src/timers.c</a><br>
-
-<hr>
-<a name="timer_sleep"><b>timer_sleep</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int timer_sleep(int <i>seconds</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/timers.c.html#timer_sleep">src/timers.c</a><br>
 
 <hr>
 <a name="auth_unix_init"><b>auth_unix_init</b><br>

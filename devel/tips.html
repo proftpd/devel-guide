@@ -10,7 +10,7 @@
 
 <hr><br>
 <center>
-<img src="../images/proftpd.png">
+<img src="../images/proftpd.png" border=0>
 <br><br>
 <h3><b>ProFTPD Developer's Guide: Module Tips</b></h3>
 <i><b>ProFTPD Version 1.2</b></i><br>
@@ -20,12 +20,13 @@
 <p>
 <center><a href="../toc.html">Table of Contents</a></center><br>
 
-    <li>style notes: respecting other modules, log_pri() at various debug levels
+    <li>style notes: respecting other modules, <code>log_pri()</code> for
+        notices and errors, <code>log_debug()</code> at various levels
     <li>use command dispatch system, not change core code
     <li>code submission: documentation, diffs
-    <li>OS dependencies and idiosyncrasies, #defines
+    <li>OS dependencies and idiosyncrasies, #defines, autoconf detection
     <li>Command handlers that handle every command except some...
-    <li>proper log_{pri,auth,debug}() calls -- at least _three_ parameters
+    <li>proper log_{pri,auth,debug}() calls -- at least <b>three</b> arguments
         to prevent format string attacks!
     <li>preventing mergedown bugs: in general, if directive is allowed in
         <code>CONF_ANON</code>, <code>CONF_DIR</code>, or
@@ -36,36 +37,36 @@
 These are some recommendations and things to keep in mind when programming
 a module for ProFTPD.
 
+Remember that each session is handled by a forked process, and so that
+child can overwrite/rearrange its configuration tree without affecting
+the parent.
+
+nickh>I was thinking more of a proftpd global _auth_state variable
+nickh>or something like that.  Now that I think more about it, I
+nickh>guess the only states I care about are pre and post-successful
+nickh>login.  I bet I can get that from the session info somehow.
+
+There're some config_recs added/removed during the handling of the USER
+and PASS commands.  I think the one that may interest you is a config_rec
+that can be retrieved by the name "authenticated".  It's used to determine
+which commands can be used by a client without authentication, and is only
+set after a successful authentication.  Prior to a successful
+_setup_environment() call, that config_rec isn't present.
+
 <ol>
-  <li><i><b>Always</b> check function return values for errors</i>.
-  </li>
-  <br>
+  <li><i><b>Always</b> check function return values for errors</i>.<br>
 
   <li><i>Always add the proper argument checks to handlers</i> (<i>eg</i>
-      CHECK_ARGS, CHECK_CONF)
-  </li>
-  <br>
+      CHECK_ARGS, CHECK_CONF)<br>
 
   <li>Always be aware of the current context when retrieving configuration
-      records.
-  </li>
-  <br>
+      records.<br>
 
-  <li>Keep in mind the lifetime of a pool when allocating memory from it.
-  </li>
-  <br>
-
-  <li>#define version in the module:<br>
-<pre>
-        <code>#define MOD_NIFTY_VERSION "mod_nifty/2.0"</code>
-</pre>
-  </li>
-  <br>
+  <li>Keep in mind the lifetime of a pool when allocating memory from it.<br>
 
   <li>respect other modules' configuration records, <i>especially</i> if
-      relevant.  TimesGMT, UserAlias
-  </li>
-  <br>
+      relevant (<i>e.g.</i> <code>TimesGMT</code>, <code>UserAlias</code>,
+      etc)<br>
 
   <li>use <code>log_debug()</code> for debugging, <code>log_auth()</code>
       during the authentication/authorization of a connection, and use
@@ -138,7 +139,7 @@ Last Updated: <i>$Date$</i><br>
 <br><hr>
 
 <font size=2><b><i>
-&copy; Copyright 2000,2001 TJ Saunders<br>
+&copy; Copyright 2000-2002 TJ Saunders<br>
  All Rights Reserved<br>
 </i></b></font>
 

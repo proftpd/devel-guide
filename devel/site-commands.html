@@ -36,44 +36,50 @@ The example command handler below implements <code>SITE TIME</code>:
 <pre>
 MODRET site_time(cmd_rec *cmd) {
 
-  <font color=blue>/* Make sure it's a valid SITE TIME command, with no additional
+  <font color=green>/* Make sure it's a valid SITE TIME command, with no additional
    * parameters sent by the client.
    */</font>
   if (cmd->argc != 2)
     return DECLINED(cmd);
 
-  <font color=blue>/* This case does the work of returning the local time to the client
+  <font color=green>/* This case does the work of returning the local time to the client
    */</font>
   if (!strcasecmp(cmd->argv[1], "TIME")) {
     char timestr[80] = {'\0'};
     time_t now = time(NULL);
     struct tm *tnow = NULL;
 
-    <font color=blue>/* If the user is required to be authenticated/logged in, do the
+    <font color=green>/* If the user is required to be authenticated/logged in, do the
      * necessary check.  This may or may not be required, depending on
      * the SITE command being implemented.
      */</font>
     if (get_param_int(cmd->server->conf, "authenticated", FALSE) != TRUE) {
-      send_response(R_530,"Please login with USER and PASS.");
+      send_response(R_530, "Please login with USER and PASS.");
       return ERROR(cmd);
     }
 
-    <font color=blue>/* Log that the user requested the time.
+    <font color=green>/* Check for &lt;Limit&gt; restrictions */</font>
+    if (!dir_check(cmd->tmp_pool, "SITE_TIME", "MISC", session.cwd, NULL)) {
+      add_response_err(R_550, "%s: %s", cmd->arg, strerror(EPERM));
+      return ERROR(cmd);
+    }
+
+    <font color=green>/* Log that the user requested the time.
      */</font>
     log_pri(LOG_INFO, "SITE TIME requested by user %s", session.user);
 
-    <font color=blue>/* Prepare the time string to be returned.
+    <font color=green>/* Prepare the time string to be returned.
      */</font>
     if ((tnow = localtime(&now)) == NULL) {
 
-      <font color=blue>/* If, for some reason, an error occurs, use the 202 error code.
+      <font color=green>/* If, for some reason, an error occurs, use the 202 error code.
        * Other legal error codes for a SITE command include 500 (syntax
        * error, command not recognized), 501 (syntax error in parameters or
        * arguments), and 530 (not logged in).
        */</font>
       add_response(R_202, "Unable to provide the time right now");
 
-      <font color=blue>/* Of course, if something like localtime(3) fails, it should be
+      <font color=green>/* Of course, if something like localtime(3) fails, it should be
        * logged as well.
        */</font>
       log_pri(LOG_NOTICE, "notice: localtime() returned NULL?!?");
@@ -81,17 +87,17 @@ MODRET site_time(cmd_rec *cmd) {
       return HANDLED(cmd);
     }
 
-    <font color=blue>/* Print the local time into the string buffer.
+    <font color=green>/* Print the local time into the string buffer.
      */</font>
     strftime(timestr, sizeof(timestr), "%a %b %d %T %Z %Y", tnow); 
     timestr[sizeof(timestr) - 1] = '\0';
 
-    <font color=blue>/* The 200 response code is the normal value for such "generic" commands
+    <font color=green>/* The 200 response code is the normal value for such "generic" commands
      * as site-specific SITE commands.
      */</font>
     add_response(R_200, "The current time is: %s", timestr);
 
-    <font color=blue>/* If you want to add a multiline response, use the R_DUP macro, like
+    <font color=green>/* If you want to add a multiline response, use the R_DUP macro, like
      * so:
      *
      *  add_response(R_DUP, ...);
@@ -102,12 +108,12 @@ MODRET site_time(cmd_rec *cmd) {
 
   if (!strcasecmp(cmd->argv[1], "HELP")) {
 
-    <font color=blue>/* Add a description of SITE TIME to the output.  The response code
+    <font color=green>/* Add a description of SITE TIME to the output.  The response code
      * 214 is the appropriate value to use for "helpful" responses.
      */</font>
     add_response(R_214, "TIME");
 
-    <font color=blue>/* If this SITE command has needed a parameter (RFC959 only allows
+    <font color=green>/* If this SITE command has needed a parameter (RFC959 only allows
      * one parameter to the SITE command, although not many servers seem to
      * strictly enforce this), this HELP line would have looked something like:
      *
@@ -115,7 +121,7 @@ MODRET site_time(cmd_rec *cmd) {
      */</font>
   }
 
-  <font color=blue>/* This defaults to returning DECLINED in the case of a SITE HELP command.
+  <font color=green>/* This defaults to returning DECLINED in the case of a SITE HELP command.
    * This may seem wrong, but is actually correct: the case above adds
    * a response to the response chain for the current command, but does
    * not actually handle the command.  By returning DECLINED now, it

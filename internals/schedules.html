@@ -33,7 +33,7 @@ more quickly than a quiescent one.
 The main functions to use when dealing with schedules are defined in
 <a href="../src/include/support.h.html#schedule"><code>support.h</code></a>:
 <pre>
-  void schedule(void <i>(*f)(void *, void *, void *, void *)</i>, int <i>nloops</i>, void *a1, void *a2,
+  void schedule(void <i>(*cb)(void *, void *, void *, void *)</i>, int <i>nloops</i>, void *a1, void *a2,
     void *a3, void *a4)
   void run_schedule()
 </pre>
@@ -41,8 +41,8 @@ The main functions to use when dealing with schedules are defined in
 <p>
 The <code>schedule()</code> function (which would ideally be named
 <code>add_schedule()</code>) registers a schedule callback function
-<i>f</i>, which handles four <code>void *</code> arguments, to be run every
-<i>nloops</i>.  When the called, <i>f</i> will be passed the registered
+<i>cb</i>, which handles four <code>void *</code> arguments, to be run every
+<i>nloops</i>.  When the called, <i>cb</i> will be passed the registered
 pointers <i>a1</i> through <i>a4</i>.
 
 <p>
@@ -58,20 +58,18 @@ defines the schedule callback for rehashing -- the registration of this
 schedule occurs in the <code>SIGHUP</code> signal handler,
 <a href="../src/src/main.c.html#sig_rehash"><code>sig_rehash()</code></a>:
 <pre>
-static RETSIGTYPE sig_rehash(int sig)
-{
-  schedule(main_rehash,0,NULL,NULL,NULL,NULL);
+static RETSIGTYPE sig_rehash(int signo) {
+  schedule(main_rehash, 0, NULL, NULL, NULL, NULL);
 
-  signal(SIGHUP,sig_rehash);
+  signal(SIGHUP, sig_rehash);
 }
 </pre>
 
 And here one see how the rehashing of the configuration file, signalled via
 <code>SIGHUP</code>, is scheduled:
 <pre>
-void main_rehash(void *d1, void *d2, void *d3, void *d4)
-{
-  <font color=blue>/* rehashing code here */</font>
+void main_rehash(void *d1, void *d2, void *d3, void *d4) {
+  <font color=green>/* rehashing code here */</font>
   ...
 
   return;
@@ -97,10 +95,7 @@ object, the <i>nloops</i> member.  At certain points in the code, those
 counters are decremented.  Once the counter reaches zero, the callback
 function for that schedule object is triggered.  Schedule objects are
 registered and added to an internally maintained list, and removed from
-that list once the callback has triggered. (<i><b>NOTE</b>: the memory
-of unregistered schedules is currently not recovered, so be spare in your
-use of schedules until this is fixed.  One potential fix would be a
-list of recycled schedules, much as there is for timers.</i>)
+that list once the callback has triggered.
 
 <p>
 The <i>nloops</i> counter is decremented by <code>run_schedule()</code>, which
@@ -113,12 +108,13 @@ is invoked at four points in the core:
 </ul>
 
 <p>
-Similar to timers, schedules<b>do not</b> provide fine-grained time resolution, and are not meant for precise work.  In fact, the nature of the loops means
+Similar to timers, schedules <b>do not</b> provide fine-grained time resolution,
+and are not meant for precise work.  In fact, the nature of the loops means
 the time at which a schedule is triggered is very coarse.  Schedules are a 
 mechanism for scheduling something to happen <i>at some point</i> in the future,
 when that activity is not time-critical.  Periodically checking state,
-performing scrubbing or cleanup activities -- these are activities suited
-for scheduling.
+performing scrubbing or cleanup activities, these are activities suited for
+scheduling.
 
 <p>
 <center><a href="../toc.html">Table of Contents</a></center><br>

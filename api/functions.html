@@ -137,7 +137,7 @@ authentication fails.<br>
   static idmap_t *_auth_lookup_id(xaset_t **<i>id_table</i>, idauth_t <i>id</i>)
 </pre>
 <br>
-<font color=blue>Source File:</font>:
+<font color=blue>Source File</font>:
   <a href="../src/modules/mod_unixpw.c.html#_auth_lookup_id">modules/mod_unixpw.c</a><br>
 
 <hr>
@@ -1384,9 +1384,6 @@ the given pointers are all assumed to be strings.
 <a href="#pstrdup"><code>pstrdup()</code></a> will be called on each pointer,
 using <code>permanent_pool</code> as the pool.<br>
 <br>
-<font color=blue>Bugs</font>: <code>config_rec->pool</code> <i>should
-really</i> be used instead.<br>
-<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#add_config_param_str">src/dirtree.c</a><br>
 
@@ -1904,6 +1901,16 @@ the cleartext password belongs to that user.<br>
   <a href="../src/src/auth.c.html#auth_check">src/auth.c</a><br>
 
 <hr>
+<a name="auth_child_init"><b>auth_child_init</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static int auth_child_init(void)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_auth.c.html#auth_init_child">modules/mod_auth.c</a><br>
+
+<hr>
 <a name="auth_endgrent"><b>auth_endgrent</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -2069,20 +2076,10 @@ GID-to-name lookup for the given GID <i>gid</i>.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  int auth_init()
+  static int auth_init(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_auth.c.html#auth_init">modules/mod_auth.c</a><br>
-
-<hr>
-<a name="auth_init_child"><b>auth_init_child</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int auth_init_child()
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_auth.c.html#auth_init_child">modules/mod_auth.c</a><br>
 
 <hr>
 <a name="auth_name_gid"><b>auth_name_gid</b><br>
@@ -2177,10 +2174,13 @@ UID-to-name lookup for the given UID <i>uid</i>.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void block_alarms()
+  void block_alarms(void)
 </pre>
+<font color=blue>Comments</font>: Blocks timers (which operate based on
+<code>SIGALRM</code>) from being run.<br>
+<br>
 <font color=blue>Source File</font>:
-  <a href="../src/src/utils.c.html#block_alarms">src/utils.c</a><br>
+  <a href="../src/src/timers.c.html#block_alarms">src/timers.c</a><br>
 
 <hr>
 <a name="block_signals"><b>block_signals</b><br>
@@ -3209,18 +3209,11 @@ to be treated as a &quot;hidden&quot; file.  Returns <code>TRUE</code> if so,
 <pre>
   int dir_exists(char *<i>path</i>)
 </pre>
+<font color=blue>Comments</font>: Returns <code>TRUE</code> if <i>path</i>
+exists and is a directory, <code>FALSE</code> otherwise.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/support.c.html#dir_exists">src/support.c</a><br>
-
-<hr>
-<a name="dir_get_param"><b>dir_get_param</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int dir_get_param(pool *<i>pp</i>, char *<i>path</i>, char *<i>param</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/dirtree.c.html#dir_get_param">src/dirtree.c</a><br>
 
 <hr>
 <a name="dir_interpolate"><b>dir_interpolate</b><br>
@@ -3247,7 +3240,7 @@ to be treated as a &quot;hidden&quot; file.  Returns <code>TRUE</code> if so,
 strip it off, too.<br>
 <br>
 <font color=blue>Notes</font>: For this function to work correctly, the
-<i>path</i> given <i>must be an absolute path</i>.  This is particularly
+<i>path</i> given <b><i>must be an absolute path</i></b>.  This is particularly
 important when working with paths during anonymous sessions, for in such
 sessions the paths are modified by the <code>chroot()</code>ing of anonymous
 sessions.  As in other places in the core code, it is wise to have logic such
@@ -3545,6 +3538,9 @@ to by <code>FILE</code> pointer <i>fpv</i>.<br>
 <pre>
   int file_exists(char *<i>path</i>)
 </pre>
+<font color=blue>Comments</font>: Returns <code>TRUE</code> if <i>path</i>
+exists, <code>FALSE</code> otherwise.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/support.c.html#file_exists">src/support.c</a><br>
 
@@ -3698,8 +3694,14 @@ have been read.  Otherwise, fill in default values where applicable.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void fork_server(int <i>fd</i>, conn_t *<i>l</i>, int <i>nofork</i>)
+  static void fork_server(int <i>fd</i>, conn_t *<i>l</i>, int <i>nofork</i>)
 </pre>
+<font color=blue>Comments</font>: Forks a child process to handle the session
+for the requesting client, installing signal handlers and preparing the
+child process' space for processing client commands.  If <i>nofork</i> is
+<code>TRUE</code>, does not actually fork; this is used mostly for debugging
+purposes.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/main.c.html#fork_server">src/main.c</a><br>
 
@@ -4331,12 +4333,16 @@ file.<br>
   <a href="../src/src/dirtree.c.html#get_config_cmd">src/dirtree.c</a><br>
 
 <hr>
-<a name="get_context_name"><b>get_section_name</b><br>
+<a name="get_context_name"><b>get_context_name</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
   char *get_context_name(cmd_rec *<i>cmd</i>)
 </pre>
+<font color=blue>Comments</font>: Returns a string describing the context
+in which <i>cmd</i> appears; utilized mostly by configuration directive
+handler functions.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#get_context_name">src/dirtree.c</a><br>
 
@@ -4367,6 +4373,9 @@ file.<br>
 <pre>
   char *get_full_cmd(cmd_rec *<i>cmd</i>)
 </pre>
+<font color=blue>Comments</font>: Returns a string containing the full
+command issued by a client, including command arguments.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#get_full_cmd">src/dirtree.c</a><br>
 
@@ -4409,7 +4418,7 @@ Section 2.9.5, Table 2-5.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  char *get_next_meta(pool *<i>p</i>, cmd_rec *<i>cmd</i>, unsigned char **<i>f</i>)
+  static char *get_next_meta(pool *<i>p</i>, cmd_rec *<i>cmd</i>, unsigned char **<i>f</i>)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_log.c.html#get_next_meta">modules/mod_log.c</a><br>
@@ -4712,7 +4721,7 @@ creating a subpool for the new connection.<br>
 <pre>
   char *inet_fqdn(pool *<i>pool</i>, const char *<i>addr</i>)
 </pre>
-<font color=blue>Comments</font>: Return the FQDN (<b>F</b>ully
+<font color=blue>Comments</font>: Returns the FQDN (<b>F</b>ully
 <b>Q</b>ualified <b>D</b>omain <b>N</b>ame) of an address.<br>
 <br>
 <font color=blue>Source File</font>:
@@ -4935,7 +4944,7 @@ that <code>SIGURG</code> is raised on OOB data.<br>
 <font color=blue>Comments</font>: Set socket-level options on a connection.  If
 file descriptor sets of <i>c</i> are <code>-1</code>, the socket
 <code>snd</code>/<code>rcv</code> buffers will be set according to the
-server information.<br>
+server configuration.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/inet.c.html#inet_setoptions">src/inet.c</a><br>
@@ -4958,7 +4967,7 @@ server information.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void inetd_main()
+  static void inetd_main(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/main.c.html#inetd_main">src/main.c</a><br>
@@ -5065,8 +5074,12 @@ been spawned.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  int init_modules()
+  int init_modules(void)
 </pre>
+<font color=blue>Comments</font>: Called only during server startup, before the
+configuration file is parsed, in order to allow all registered modules time
+to initialize and prepare themselves for file parsing and session handling.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/modules.c.html#init_modules">src/modules.c</a><br>
 

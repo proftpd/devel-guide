@@ -22,29 +22,29 @@
 
 <p>
 <b>ProFTPD's Authentication Process</b><br>
-When an FTP client connects to a ProFTPD server, it needs to authenticate
-itself, as per the FTP protocol.  The clients send a <code>USER</code> command
-followed by a <code>PASS</code> command in most cases.
+When an FTP client connects to a <code>proftpd</code> server, it needs to
+authenticate itself, as per the FTP protocol.  The clients send a
+<code>USER</code> command followed by a <code>PASS</code> command in most cases.
 
 <p>
-Upon receiving a <code>USER</code> command, ProFTPD will first check to see
-if the requested user is allowed to log in, based on any <code>&lt;Limit
-LOGIN&gt;</code> directives.  Then it will check to see if the login is
-allowed by any configured <code>MaxClients</code>,
+Upon receiving a <code>USER</code> command, <code>proftpd</code> will first
+check to see if the requested user is allowed to log in, based on any
+<code>&lt;Limit LOGIN&gt;</code> directives.  Then it will check to see if the
+login is allowed by any configured <code>MaxClients</code>,
 <code>MaxClientsPerHost</code>, and <code>MaxHostsPerUser</code> directives.
 If these directives mean that the client connection cannot be accepted,
 any configured <code>DisplayGoAway</code> message is sent to the client.
 
 <p>
-When ProFTPD receives a <code>PASS</code> command, it will again check
-for configured <code>MaxClients</code>, <code>MaxClientsPerHost</code>, and
-<code>MaxHostsPerUser</code> limits.  The first check, during
-the handling of the <code>USER</code> command, handles
-<code>UserAlias</code>ed usernames; this check handles <i>real</i> usernames.
-The actual work of authenticating the user then takes place (more on this
-below).  If the authentication succeeds, any <code>DisplayLogin</code> and
-<code>AccessGrantMsg</code> messages are sent to the client.  Otherwise,
-any <code>AccessDenyMsg</code> message is sent.
+When <code>proftpd</code> receives a <code>PASS</code> command, it will again
+check for configured <code>MaxClients</code>, <code>MaxClientsPerHost</code>,
+and <code>MaxHostsPerUser</code> limits.  The first check, during the handling
+of the <code>USER</code> command, handles <code>UserAlias</code>ed usernames;
+this check handles <i>real</i> usernames.  The actual work of authenticating
+the user then takes place (more on this below).  If the authentication
+succeeds, any <code>DisplayLogin</code> and <code>AccessGrantMsg</code>
+messages are sent to the client.  Otherwise, any <code>AccessDenyMsg</code>
+message is sent.
 
 <p>
 <b>Authenticating the User</b><br>
@@ -59,7 +59,7 @@ process of authentication is handled by the
 First, this function determines whether the login request is for an
 <code>&lt;Anonymous&gt;</code> server, or for a real user.  Unknown users
 are rejected at this point.  The determination of &quot;known&quot; user
-is done via the <code><a href="../api/functions.html#auth_getpwnam">auth_getpwnam()</a></code> dispatch function, an abstraction of the
+is done via the <a href="../api/functions.html#auth_getpwnam"><code>auth_getpwnam()</code></a> dispatch function, an abstraction of the
 <code>getpwnam(3)</code> function.  Modules that wish to supply their
 own authentication routines will need to provide <b>all</b> of the
 dispatched authentication functions mentioned
@@ -69,6 +69,26 @@ the server, asking each module in turn to authenticate the user until an
 error is encountered or until a module successfully returns the requested
 information.  This design allows multiple authentication schemes to be present
 simultaneously.
+
+<p>
+The
+<a href="../api/functions.html#auth_getgroups"><code>auth_getgroups()</code></a>
+dispatch function is similarly used to request the supplemental group
+membership information, both group names and group IDs, from authentication
+modules.  The list of obtained group IDs, if any, will subsequently be
+passed on to <code>setgroups(2)</code>.  At this point, I would like to
+point out a common error message pertaining to supplemental group
+membership:
+<pre>
+"unable to set groups: Invalid argument"
+</pre>
+This message will occur for one of two reasons: negative IDs for the user,
+or the user is a member of more than the maximum allowable number of groups
+(NGROUPS, NGROUPS_MAX,
+     _SC_NGROUPS_MAX         NGROUPS_MAX                Max simultaneous
+                                                        groups to which
+                                                        one may belong
+)
 
 <p>
 Next, the function will check to see if the requested user is

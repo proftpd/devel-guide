@@ -84,7 +84,7 @@ the <code>TimeoutLogin</code> timer implementation:
 <pre>
 int _login_timeout(CALLBACK_FRAME)
 {
-  <font color=blue>/* Is this the proper behavior when timing out? */</font>
+  <font color=green>/* Is this the proper behavior when timing out? */</font>
   send_response_async(R_421,
                       "Login Timeout (%d seconds): "
                       "closing control connection.",
@@ -93,7 +93,7 @@ int _login_timeout(CALLBACK_FRAME)
   main_exit((void*) LOG_NOTICE, "FTP login timed out, disconnected.",
             (void*) 0, NULL);
  
-  <font color=blue>/* Don't restart the timer */</font> 
+  <font color=green>/* Don't restart the timer */</font> 
   return 0;
 }
 </pre>
@@ -131,13 +131,12 @@ elapsed on the timer (which should be less than or equal to zero), and
 <i>data</i> will be <code>NULL</code>.
 
 <pre>
-int auth_init_child()
-{
-  <font color=blue>/* Start the login timer */</font>
-  if(TimeoutLogin)
-    add_timer(TimeoutLogin,TIMER_LOGIN,&auth_module,_login_timeout);
+static int auth_init_child(void) {
+  <font color=green>/* Start the login timer */</font>
+  if (TimeoutLogin)
+    add_timer(TimeoutLogin, TIMER_LOGIN, &auth_module, login_timer_cb);
    
-  if ((char*)get_param_ptr(main_server->conf,"DisplayConnect",FALSE) != NULL)
+  if (get_param_ptr(main_server->conf, "DisplayConnect", FALSE) != NULL)
     _do_user_counts();
    
   return 0;

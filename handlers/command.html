@@ -79,7 +79,7 @@ As a general rule of thumb,
 handlers should check command syntax and basic applicability of the command,
 check access restrictions, ensure the necessary resources are available,
 <i>etc etc</i>.  When one of these handlers returns
-<a href="../api/macros.html#DECLINED"><code>DECLINED</code></a., the next
+<a href="../api/macros.html#DECLINED"><code>DECLINED</code></a>, the next
 <code>PRE_CMD</code>-type command handler will be called.  However, if it
 returns <a href="../api/macros.html#ERROR"><code>ERROR</code></a>, the
 dispatching to all command handlers will stop completely, with the exception

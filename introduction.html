@@ -20,7 +20,7 @@
 <p>
 <center><a href="toc.html">Table of Contents</a></center><br>
 
-<hr width=60%>
+<hr>
 
 <b>ProFTPD is an FTP server modeled around the Apache HTTP server, with
 a similar configuration file syntax and modular structure.  In light of this
@@ -29,49 +29,19 @@ similarity, I have utilized (<i>ie</i> plagiarized) the
 documentation, as many of the concepts are the same.  Some of the words and
 explanations below are not mine.</b><br>
 
-<hr width=60%>
+<hr>
 
 <p>
 These are some notes on the ProFTPD API and the data structures you
 have to deal with, <em>etc.</em>  They are not yet nearly complete, but
 hopefully, they will help you get your bearings.  Keep in mind that
 the API is still subject to change as we gain experience with it.
-(See the TODO file for what <em>might</em> be coming).  However,
-it will be easy to adapt modules to any changes that are made.
+However, it will be easy to adapt modules to any changes that are made.
+
+<hr width=70%>
 
 <p>
-Here's an outline, to give you some bare idea of what's
-coming up, and in what order:
-
-<ul>
-  <li><a href="#Basics">Basic concepts.</a>
-  <menu>
-    <li><a href="#HMC">Handlers, Modules, and Commands</a>
-    <li><a href="#ModuleTour">A brief tour of a module</a>
-  </menu>
-
-  <li><a href="#Handlers">How handlers work</a>
-  <menu>
-    <li><a href="#CommandTour">A brief tour of the <code>cmd_rec</code></a>
-    <li><a href="#CommandOrigin">Where <code>cmd_rec</code> structures come
-        from</a>
-    <li><a href="#CommandReturn">Handling commands, declining, and returning
-        error codes</a>
-    <li><a href="#ResponseHandlers">Special considerations for response handlers
-        </a>
-    <li><a href="#AuthHandlers">Special considerations for authentication
-        handlers</a>
-    <li><a href="#LogHandlers">Special considerations for logging handlers</a>
-  </menu>
-
-  <li><a href="#Pools">Resource allocation and resource pools</a>
-
-  <li><a href="#Configuration">Configuration directives and the like</a>
-</ul>
-
-<br><hr>
-
-<h3><a name="HMC">Handlers, Modules, and Commands</a></h3>
+<b>Handlers, Modules, and Commands</b><br>
 
 ProFTPD breaks down command handling into a series of simple steps, similar to
 the way the Apache API breaks down request handling.  These are:
@@ -106,8 +76,6 @@ The handlers themselves are functions of one argument (a
 <a href="api/typedefs.html#cmd_rec"><code>cmd_rec</code></a> structure),
 which returns a <code>MODRET</code> (a <a href="api/structs.html#modret_struc">
 <code>modret_struc</code></a> <code>typdef</code>ed to <code>MODRET</code>).
-
-<h3><a name="ModuleTour">A brief tour of a module</a></h3>
 
 <p>
 At this point, we need to explain the structure of a module.  Our
@@ -146,57 +114,52 @@ track them all down and dispose of them.
 With no further ado, the module itself:
 
 <pre>
-<font color=green>/* Declaration of command handler
- */</font>
-MODRET fixup_filenames(cmd_rec *);
+  <font color=green>/* Declaration of command handler
+   */</font>
+  MODRET fixup_filenames(cmd_rec *);
 
-<font color=green>/* Declaration of configuration directive handlers
- */</font>
-MODRET set_lowercase_filenames(cmd_rec *);
-MODRET set_uppercase_filenames(cmd_rec *);
+  <font color=green>/* Declaration of configuration directive handlers
+   */</font>
+  MODRET set_lowercase_filenames(cmd_rec *);
+  MODRET set_uppercase_filenames(cmd_rec *);
 
-<font color=green>/* Define the "configuration handler" table, which links configuration file
- * directives with the appropriate handlers in this module
- */</font>
-static conftable case_conftab[] = {
-  { "DowncaseFileNames",  set_downcase_filenames, NULL },
-  { "UpcaseFilenames", set_upcase_filenames, NULL },
-  { NULL }
-};
+  <font color=green>/* Define the "configuration handler" table, which links configuration file
+   * directives with the appropriate handlers in this module
+   */</font>
+  static conftable case_conftab[] = {
+    { "DowncaseFileNames",  set_downcase_filenames, NULL },
+    { "UpcaseFilenames", set_upcase_filenames, NULL },
+    { NULL }
+  };
 
-<font color=green>/* Define the "command handler" table, which links client-issued commands
- * with the interested handlers in this module
- */</font>
-static cmdtable case_cmdtab[] = {
-  { PRE_CMD, C_RETR, G_NONE, fixup_filenames, TRUE, FALSE },
-  { 0, NULL }
-};
+  <font color=green>/* Define the "command handler" table, which links client-issued commands
+   * with the interested handlers in this module
+   */</font>
+  static cmdtable case_cmdtab[] = {
+    { PRE_CMD, C_RETR, G_NONE, fixup_filenames, TRUE, FALSE },
+    { 0, NULL }
+  };
 
-module case_module = {
+  module case_module = {
 
-  NULL,                   <font color=green>/* pointer to the next module -- ALWAYS NULL */</font>
-  NULL,                   <font color=green>/* pointer to the previous module -- ALWAYS NULL */</font>
-  0x20,                   <font color=green>/* ProFTPD Module API version 2.0 */</font>
-  "case",                 <font color=green>/* the module's name */</font>
-  case_conftab,           <font color=green>/* configuration command handler table */</font>
-  case_cmdtab,            <font color=green>/* command handler table */</font>
-  NULL,                   <font color=green>/* authentication function table */</font>
-  NULL,                   <font color=green>/* initialization function */</font>
-  NULL                    <font color=green>/* "child" initialization function */</font>
-};
+    NULL,                   <font color=green>/* pointer to the next module -- ALWAYS NULL */</font>
+    NULL,                   <font color=green>/* pointer to the previous module -- ALWAYS NULL */</font>
+    0x20,                   <font color=green>/* ProFTPD Module API version 2.0 */</font>
+    "case",                 <font color=green>/* the module's name */</font>
+    case_conftab,           <font color=green>/* configuration command handler table */</font>
+    case_cmdtab,            <font color=green>/* command handler table */</font>
+    NULL,                   <font color=green>/* authentication function table */</font>
+    NULL,                   <font color=green>/* initialization function */</font>
+    NULL                    <font color=green>/* "child" initialization function */</font>
+  };
 </pre>
-<br><br>
 
-<br><hr>
-
-<h2><a name="Handlers">How handlers work</a></h2>
-
+<p>
+<b>How Handlers Work</b><br>
 The sole argument to handlers is a <code>cmd_rec</code> structure.
 This structure describes a particular command which has been made to
 the server, on behalf of a client.  Each connection by a client generates
 multiple <code>cmd_rec</code> structures, starting with the USER command.
-
-<h3><a name="CommandTour">A brief tour of the <code>cmd_rec</code></a></h3>
 
 <p>
 The <code>cmd_rec</code> contains pointers to a resource pool
@@ -214,19 +177,14 @@ which contains per (virtual) server configuration data.
 <a href="api/structs.html#cmd_rec">Here</a> is a declaration of the
 <code>cmd_rec</code> struct.
 
-<h3><a name="CommandOrigin">Where <code>cmd_rec</code> structures come
-  from</a></h3>
-
 <p>
 Most <code>cmd_rec</code> structures are built by when the processing
 engine reads an FTP command from a client, and fills in the fields.  The
 filled-in <code>cmd_rec</code> is then handed off to the command handlers
 that have registered an interest in handling that particular FTP command.
 
-<h3><a name="CommandReturn">Handling commands, declining, and returning error
- codes</a></h3>
-
 <p>
+<b>Command Responses</b><br>
 As discussed above, each handler, when invoked to handle a particular
 <code>cmd_rec</code>, has to return a <code>MODRET</code>,
 usually one generated by some <a href="responses/macros.html">macros</a>, to
@@ -237,13 +195,9 @@ indicate what happened.  That can be one of:
       or may not terminate the phase.
   <li><code>DECLINED</code> -- no erroneous condition exists, but the module
       declines to handle the phase; the server tries to find another.
-  <li><code>ERROR</code>, <code>ERROR_INT</code>, <code>ERROR_MSG</code> -- an
-      error has occurred while processing the command, which aborts its
-      handling.
+  <li><code>ERROR</code> -- an error has occurred while processing the
+      command, which aborts its handling.
 </ul>
-
-<h3><a name="ResponseHandlers">Special considerations for command
- responses</a></h3>
 
 <p>
 There are two main ways to respond to a client command inside a command
@@ -264,11 +218,14 @@ be sent <em>en masse</em> after the command successfully completes (or fails).
 <a href="responses/index.html">Here</a> is more detailed information on
 ProFTPD's response chain mechanisms.
 
-<h3><a name="AuthHandlers">Special considerations for authentication
- handlers</a></h3>
+<p>
+<b>Authentication Handlers</b><br>
+The processing of authentication commands is a little different from the
+other FTP commands.
 
 <p>
-Stuff that should be discussed here:
+<i>
+NOTE: Stuff that should be discussed here:
 
 <ul>
   <li>authentication commands of USER, PASS (RFC2228 AUTH, ADAT)
@@ -276,23 +233,27 @@ Stuff that should be discussed here:
     examples)
   <li>relevant FTP error response codes
 </ul>
-
-<h3><a name="LogHandlers">Special considerations for logging handlers</a></h3>
+</i>
 
 <p>
+<b>Logging Handlers</b><br>
+The logging of commands occurs as part of the handling process, and can be
+done at multiple points in the process.
+
+<p>
+<i>
 Stuff that should be discussed here:
 
 <ul>
   <li>LOG_CMD, LOG_CMD_ERR
   <li>mod_log, mod_xfer, mod_sample's log_cmd()
 </ul>
-<br>
+</i>
 
-<br><hr>
-
-<h2><a name="Pools">Resource allocation and resource pools</a></h2>
+<hr width=70%>
 
 <p>
+<b>Resource Allocation and Resource Pools</b><br>
 One of the problems of writing and designing a server-pool server is
 that of preventing leakage, that is, allocating resources (memory,
 open files, <em>etc.</em>), without subsequently releasing them.  The resource
@@ -332,11 +293,10 @@ We begin here by describing how memory is allocated to pools, and then
 discuss how other resources are tracked by the resource pool
 machinery.
 
-<h3>Allocation of memory in pools</h3>
-
 <p>
+<b>Allocation of memory in pools</b><br>
 Memory is allocated to pools by calling the function
-<code>palloc</code>, which takes two arguments, one being a pointer to a
+<code>palloc()</code>, which takes two arguments, one being a pointer to a
 resource pool structure, and the other being the amount of memory to allocate
 (in <code>int</code>s).  Within handlers for handling commands, the most common
 way of getting a resource pool structure is by looking at the <code>pool</code>
@@ -345,32 +305,32 @@ way of getting a resource pool structure is by looking at the <code>pool</code>
 module code:
 
 <pre>
-MODRET my_handler(cmd_rec *cmd) {
-    struct my_structure *foo;
-    ...
+  MODRET my_handler(cmd_rec *cmd) {
+      struct my_structure *foo;
+      ...
 
-    foo = (foo *) palloc (cmd-&gt;pool, sizeof(my_structure));
-}
+      foo = (foo *) palloc (cmd-&gt;pool, sizeof(my_structure));
+  }
 </pre>
 
 <p>
-Note that <em>there is no <code>pfree</code></em> -- <code>palloc</code>ed
+Note that <em>there is no <code>pfree()</code></em> -- <code>palloc()</code>ed
 memory is freed only when the associated resource pool is cleared.  This means
-that <code>palloc</code> does not have to do as much accounting as
+that <code>palloc()</code> does not have to do as much accounting as
 <code>malloc()</code>; all it does in the typical case is to round up the
 size, bump a pointer, and do a range check.
 
-<h3>Allocating initialized memory</h3>
 
 <p>
+<b>Allocating initialized memory</b><br>
 There are functions which allocate initialized memory, and are
-frequently useful.  The function <code>pcalloc</code> has the same
-interface as <code>palloc</code>, but clears out the memory it
-allocates before it returns it.  The function <code>pstrdup</code>
+frequently useful.  The function <code>pcalloc()</code> has the same
+interface as <code>palloc()</code>, but clears out the memory it
+allocates before it returns it.  The function <code>pstrdup()</code>
 takes a resource pool and a <code>char *</code> as arguments
-(<code>pstrndup</code> takes an additional <code>int</code>), and
+(<code>pstrndup()</code> takes an additional <code>int</code>), and
 allocates memory for a copy of the string the pointer points to,
-returning a pointer to the copy.  Finally <code>pstrcat</code> is a
+returning a pointer to the copy.  Finally <code>pstrcat()</code> is a
 varargs-style function, which takes a pointer to a resource pool, and
 the additional arguments, of which the last one should be <code>NULL</code>.
 It allocates enough memory to fit copies of each of the strings, as a unit;
@@ -389,14 +349,13 @@ For almost everything folks do, <code>cmd-&gt;pool</code> is the pool to use.
 For memory needed just for the scope of the handler function,
 <code>cmd-&gt;tmp_pool</code> is also useful.
 
-<h3><a name="PoolFiles">Tracking open files, etc.</a></h3>
-
-<P>
+<p>
+<b>Tracking open files, etc.</b><br>
 As indicated above, resource pools are also used to track other sorts
 of resources besides memory.  The most common are open files.  The
-routine which is typically used for this is <code>pfopen</code>, which
+routine which is typically used for this is <code>pfopen()</code>, which
 takes a resource pool and two strings as arguments; the strings are
-the same as the typical arguments to <code>fopen</code>, <em>e.g.</em>:<br>
+the same as the typical arguments to <code>fopen()</code>, <em>e.g.</em>:<br>
 
 <pre>
      ...
@@ -409,24 +368,24 @@ the same as the typical arguments to <code>fopen</code>, <em>e.g.</em>:<br>
 </pre>
 
 <p>
-There is also a <code>popenf</code> routine, which parallels the
-lower-level <code>open</code> system call.  Both of these routines
+There is also a <code>popenf()</code> routine, which parallels the
+lower-level <code>open()</code> system call.  Both of these routines
 arrange for the file to be closed when the resource pool in question
 is cleared.
 
 <p>
 Unlike the case for memory, there <em>are</em> functions to close
-files allocated with <code>pfopen</code>, and <code>popenf</code>,
-namely <code>pfclose</code> and <code>pclosef</code>.  (This is
+files allocated with <code>pfopen()</code>, and <code>popenf()</code>,
+namely <code>pfclose()</code> and <code>pclosef()</code>.  (This is
 because, on many systems, the number of files which a single process
 can have open is quite limited).  It is important to use these
-functions to close files allocated with <code>pfopen</code> and
-<code>popenf</code>, since to do otherwise could cause fatal errors on
+functions to close files allocated with <code>pfopen()</code> and
+<code>popenf()</code>, since to do otherwise could cause fatal errors on
 systems such as Linux, which react badly if the same
 <code>FILE *</code> is closed more than once.
 
 <p>
-(Using the <code>close</code> functions is not mandatory, since the
+(Using the <code>close()</code> functions is not mandatory, since the
 file will eventually be closed regardless, but you should consider it
 in cases where your module is opening, or could open, a lot of files).
 
@@ -439,11 +398,10 @@ then releases all the memory for <i>p</i>. <code>destroy_pool(p)</code> calls
 <em>i.e.</em>, <code>clear_pool(p)</code> doesn't delete <i>p</i>, it just
 frees up all the resources and you can start using it again immediately. 
 
-<br><br>
-
-<h2><a name="Configuration">Configuration directives</a></h2>
+<hr width=70%>
 
 <p>
+<b>Configuration Directives</b><br>
 Given configuration directives, we need to be able to figure out what to
 do with them.  In this case, it involves processing the actual
 <code>DowncaseFileNames</code> and <code>UpcaseFileNames</code> directives.
@@ -455,35 +413,35 @@ configuration handler, which looks like this (the <code>UpcaseFileNames</code>
 directive looks basically the same, and won't be shown here):
 
 <pre>
-MODRET set_lowercase_filenames(cmd_rec *cmd) {
+  MODRET set_lowercase_filenames(cmd_rec *cmd) {
 
-  unsigned int bool = 0;
-  config_rec *c = NULL;
+    int bool = -1;
+    config_rec *c = NULL;
 
-  <font color=green>/* make sure the directive was given one, and only one, argument
-   */</font>
-  CHECK_ARGS(cmd, 1);
+    <font color=green>/* make sure the directive was given one, and only one, argument
+     */</font>
+    CHECK_ARGS(cmd, 1);
 
-  <font color=green>/* check the context in which the directive was used, make sure that
-   * it was one of the allowed contexts of "server config", &lt;Anonymous&gt;,
-   * &lt;Limit&gt;, or &lt;VirtualHost&gt;.
-   */</font>
-  CHECK_CONF(cmd, CONF_ROOT|CONF_ANON|CONF_LIMIT|CONF_VIRTUAL);
+    <font color=green>/* check the context in which the directive was used, make sure that
+     * it was one of the allowed contexts of "server config", &lt;Anonymous&gt;,
+     * &lt;Limit&gt;, or &lt;VirtualHost&gt;.
+     */</font>
+    CHECK_CONF(cmd, CONF_ROOT|CONF_ANON|CONF_LIMIT|CONF_VIRTUAL);
 
-  <font color=green>/* get_boolean() couldn't find a valid Boolean value as an argument
-   */</font>
-  if ((bool = get_boolean(cmd, 1)) == -1)
-    CONF_ERROR(cmd, "requires a boolean value");
+    <font color=green>/* get_boolean() couldn't find a valid Boolean value as an argument
+     */</font>
+    if ((bool = get_boolean(cmd, 1)) == -1)
+      CONF_ERROR(cmd, "requires a boolean value");
 
-  c = add_config_param("DowncaseFileNames", 1, (void *) bool);
+    c = add_config_param("DowncaseFileNames", 1, (void *) bool);
 
-  <font color=green>/* merge this configuration directive "down", so that it affects any
-   * contained contexts
-   */</font>
-  c->flags |= CF_MERGEDOWN;
+    <font color=green>/* merge this configuration directive "down", so that it affects any
+     * contained contexts
+     */</font>
+    c->flags |= CF_MERGEDOWN;
 
-  return HANDLED(cmd);
-}
+    return HANDLED(cmd);
+  }
 </pre>
 
 <p>
@@ -517,11 +475,11 @@ The &quot;case&quot; module's configuration table has entries for these
 directives, which look like this (as seen above):
 
 <pre>
-static conftable case_conftab[] = {
-  { "DowncaseFileNames",  set_downcase_filenames, NULL },
-  { "UpcaseFilenames", set_upcase_filenames, NULL },
-  { NULL }
-};
+  static conftable case_conftab[] = {
+    { "DowncaseFileNames",  set_downcase_filenames, NULL },
+    { "UpcaseFilenames", set_upcase_filenames, NULL },
+    { NULL }
+  };
 </pre>
 
 The entries in these tables are:
@@ -534,45 +492,44 @@ The entries in these tables are:
 </ul>
 
 <p>
-Finally, having set this all up, we have to use it.  This is
-ultimately done in the module's handlers, specifically for its
-filename handler, which looks more or less like this:
+Finally, having set this all up, we have to use it.  This is ultimately done
+in the module's handlers, specifically for its filename handler, which looks
+more or less like this:
 
 <pre>
-MODRET fixup_filenames(cmd_rec *cmd) {
+  MODRET fixup_filenames(cmd_rec *cmd) {
 
-  unsigned int index;
-  char *current_filename = NULL, *new_filename = NULL;
-  config_rec *conf_downcase = NULL, *conf_upcase = NULL;
+    unsigned int index;
+    char *current_filename = NULL, *new_filename = NULL;
+    config_rec *conf_downcase = NULL, *conf_upcase = NULL;
 
-  <font color=green>/* check the current configuration context for the configuration
-   * directive boolean value, true or false.  If false, return now
-   */</font>
+    <font color=green>/* check the current configuration context for the configuration
+     * directive boolean value, true or false.  If false, return now
+     */</font>
 
-  conf_downcase = find_config(CURRENT_CONF, CONF_PARAM, "DowncaseFileNames",
-    FALSE);
-  conf_upcase = find_config(CURRENT_CONF, CONF_PARAM, "UpcaseFileNames",
-    FALSE);
+    conf_downcase = find_config(CURRENT_CONF, CONF_PARAM, "DowncaseFileNames",
+      FALSE);
+    conf_upcase = find_config(CURRENT_CONF, CONF_PARAM, "UpcaseFileNames",
+      FALSE);
 
-  if (!conf_downcase && !conf_upcase)
+    if (!conf_downcase && !conf_upcase)
+      return DECLINED(cmd);
+
+    <font color=green>/* get an adjusted requested filename
+     */</font>
+    if (conf_downcase->argv[0] == TRUE)
+      new_filename = (cmd->server->pool, cmd->arg, PR_CASE_DOWN);
+
+    else if (conf_upcase->argv[0] == TRUE)
+      new_filename = (cmd->server->pool, cmd->arg, PR_CASE_UP);
+
+    <font color=green>/* copy the new filename into the command record */</font>
+    sstrcpy(cmd->arg, new_filename, strlen(new_filename));
+
+    <font color=green>/* done -- proceed with the download
+     */</font>
     return DECLINED(cmd);
-
-  <font color=green>/* get an adjusted requested filename
-   */</font>
-  if (conf_downcase->argv[0] == TRUE)
-    new_filename = (cmd->server->pool, cmd->arg, PR_CASE_DOWN);
-
-  else if (conf_upcase->argv[0] == TRUE)
-    new_filename = (cmd->server->pool, cmd->arg, PR_CASE_UP);
-
-  <font color=green>/* copy the new filename into the command record */</font>
-  sstrcpy(cmd->arg, new_filename, strlen(new_filename));
-
-  <font color=green>/* done -- proceed with the download
-   */</font>
-  return DECLINED(cmd);
-}
-
+  }
 </pre>
 
 <p>
@@ -586,8 +543,7 @@ a <code>DECLINE</code>, letting other handlers work on the <code>cmd_rec</code>,
 which now has the adjusted filename.<br>
 <br>
 
-<br><hr>
-
+<hr>
 <p>
 One final important thing to note: this documentation is an attempt to
 explain what the actual code is doing; the only true canonical source for
@@ -598,6 +554,7 @@ should not be held responsible if ProFTPD is not behaving exactly as described
 here.  Instead, s/he should be held responsible for not describing things
 exactly as ProFTPD is behaving.  As always, <em>caveat emptor</em>.<br>
 <br>
+<hr>
 
 <p>
 <center><a href="toc.html">Table of Contents</a></center><br>

@@ -37,62 +37,6 @@
   <a href="../src/include/proftpd.h.html#ASSERT">include/proftpd.h</a><br>
 
 <hr>
-<a name="AUTH_AGEPWD"><b>AUTH_AGEPWD</b></a><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- #define AUTH_AGEPWD -3
-</pre>
-<font color=blue>Comments</font>: Possible return value from an authentication
-module's <code>auth</code> handler indicating that the user's password has
-expired.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/include/modules.h.html#AUTH_AGEPWD">include/modules.h</a><br>
-
-<hr>
-<a name="AUTH_BADPWD"><b>AUTH_BADPWD</b></a><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- #define AUTH_BADPWD -2
-</pre>
-<font color=blue>Comments</font>: Possible return value from an authentication
-module's <code>auth</code> handler indicating that the given password is
-incorrect.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/include/modules.h.html#AUTH_BADPWD">include/modules.h</a><br>
-
-<hr>
-<a name="AUTH_DISABLEDPWD"><b>AUTH_DISABLEPWD</b></a><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- #define AUTH_DISABLEDPWD -4
-</pre>
-<font color=blue>Comments</font>: Possible return value from an authentication
-module's <code>auth</code> handler indicating that the user's account has
-been disabled.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/include/modules.h.html#AUTH_DISABLEPWD">include/modules.h</a><br>
-
-<hr>
-<a name="AUTH_NOPWD"><b>AUTH_NOPWD</b></a><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- #define AUTH_NOPWD -1
-</pre>
-<font color=blue>Comments</font>: Possible return value from an authentication
-module's <code>auth</code> handler indicating that the user has no account on
-the system.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/include/modules.h.html#AUTH_NOPWD">include/modules.h</a><br>
-
-<hr>
 <a name="BLOCK_MINFREE"><b>BLOCK_MINFREE</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -1378,230 +1322,278 @@ size<br>
   <a href="../src/include/proftpd.h.html#FALSE">include/proftpd.h</a><br>
 
 <hr>
-<a name="FSOP_CHDIR"><b>FSOP_CHDIR</b></a><br>
+<a name="FSIO_DIR_CHDIR"><b>FSIO_DIR_CHDIR</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define FSOP_CHDIR (1 << 14)
+ #define FSIO_DIR_CHDIR (1 << 1)
 </pre>
-<font color=blue>Comments</font>: File system operation - <code>chdir</code><br>
+<font color=blue>Comments</font>: FSIO directory operation - <code>chdir(2)</code><br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/include/fs.h.html#FSOP_CHDIR">include/fs.h</a><br>
+  <a href="../src/include/fsio.h.html#FSIO_DIR_CHDIR">include/fsio.h</a><br>
 
 <hr>
-<a name="FSOP_CHMOD"><b>FSOP_CHMOD</b></a><br>
+<a name="FSIO_DIR_CHROOT"><b>FSIO_DIR_CHROOT</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define FSOP_CHMOD (1 << 12)
+ #define FSIO_DIR_CHROOT (1 << 0)
 </pre>
-<font color=blue>Comments</font>: File system operation - <code>chmod</code><br>
+<font color=blue>Comments</font>: FSIO directory operation - <code>chroot(2)</code><br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/include/fs.h.html#FSOP_CHMOD">include/fs.h</a><br>
+  <a href="../src/include/fsio.h.html#FSIO_DIR_CHROOT">include/fsio.h</a><br>
 
 <hr>
-<a name="FSOP_CHOWN"><b>FSOP_CHOWN</b></a><br>
+<a name="FSIO_DIR_CLOSEDIR"><b>FSIO_DIR_CLOSEDIR</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define FSOP_CHOWN (1 << 13)
+ #define FSIO_DIR_CLOSEDIR (1 << 3)
 </pre>
-<font color=blue>Comments</font>: File system operation - <code>chown</code><br>
+<font color=blue>Comments</font>: FSIO directory operation - <code>closedir(3)</code><br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/include/fs.h.html#FSOP_CHOWN">include/fs.h</a><br>
+  <a href="../src/include/fsio.h.html#FSIO_DIR_CLOSEDIR">include/fsio.h</a><br>
 
 <hr>
-<a name="FSOP_CLOSE"><b>FSOP_CLOSE</b></a><br>
+<a name="FSIO_DIR_MKDIR"><b>FSIO_DIR_MKDIR</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define FSOP_CLOSE (1 << 6)
+ #define FSIO_DIR_MKDIR (1 << 5)
 </pre>
-<font color=blue>Comments</font>: File system operation - <code>close</code><br>
+<font color=blue>Comments</font>: FSIO directory operation - <code>mkdir(2)</code><br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/include/fs.h.html#FSOP_CLOSE">include/fs.h</a><br>
+  <a href="../src/include/fsio.h.html#FSIO_DIR_MKDIR">include/fsio.h</a><br>
 
 <hr>
-<a name="FSOP_CLOSEDIR"><b>FSOP_CLOSEDIR</b></a><br>
+<a name="FSIO_DIR_OPENDIR"><b>FSIO_DIR_OPENDIR</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define FSOP_CLOSEDIR (1 << 16)
+ #define FSIO_DIR_OPENDIR (1 << 2)
 </pre>
-<font color=blue>Comments</font>: File system operation - <code>closedir</code><br>
+<font color=blue>Comments</font>: FSIO directory operation - <code>opendir(3)</code><br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/include/fs.h.html#FSOP_CLOSEDIR">include/fs.h</a><br>
+  <a href="../src/include/fsio.h.html#FSIO_DIR_OPENDIR">include/fsio.h</a><br>
 
 <hr>
-<a name="FSOP_CREAT"><b>FSOP_CREAT</b></a><br>
+<a name="FSIO_DIR_READDIR"><b>FSIO_DIR_READDIR</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define FSOP_CREAT (1 << 5)
+ #define FSIO_DIR_READDIR (1 << 4)
 </pre>
-<font color=blue>Comments</font>: File system operation - <code>creat</code><br>
+<font color=blue>Comments</font>: FSIO directory operation - <code>readdir(3)</code><br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/include/fs.h.html#FSOP_CREAT">include/fs.h</a><br>
+  <a href="../src/include/fsio.h.html#FSIO_DIR_READDIR">include/fsio.h</a><br>
 
 <hr>
-<a name="FSOP_FILEMASK"><b>FSOP_FILEMASK</b></a><br>
+<a name="FSIO_DIR_RMDIR"><b>FSIO_DIR_RMDIR</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define FSOP_FILEMASK (FSOP_OPEN|FSOP_READ|FSOP_WRITE|FSOP_CLOSE|FSOP_CREAT)
+ #define FSIO_DIR_RMDIR (1 << 6)
 </pre>
+<font color=blue>Comments</font>: FSIO directory operation - <code>rmdir(2)</code><br>
+<br>
 <font color=blue>Source File</font>:
-  <a href="../src/include/fs.h.html#FSOP_FILEMASK">include/fs.h</a><br>
+  <a href="../src/include/fsio.h.html#FSIO_DIR_RMDIR">include/fsio.h</a><br>
 
 <hr>
-<a name="FSOP_LINK"><b>FSOP_LINK</b></a><br>
+<a name="FSIO_FILE_CHMOD"><b>FSIO_FILE_CHMOD</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define FSOP_LINK (1 << 9)
+ #define FSIO_FILE_CHMOD (1 << 13)
 </pre>
-<font color=blue>Comments</font>: File system operation - <code>link</code><br>
+<font color=blue>Comments</font>: FSIO file operation - <code>chmod(2)</code><br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/include/fs.h.html#FSOP_LINK">include/fs.h</a><br>
+  <a href="../src/include/fsio.h.html#FSIO_FILE_CHMOD">include/fsio.h</a><br>
 
 <hr>
-<a name="FSOP_LSTAT"><b>FSOP_LSTAT</b></a><br>
+<a name="FSIO_FILE_CHOWN"><b>FSIO_FILE_CHOWN</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define FSOP_LSTAT (1 << 1)
+ #define FSIO_FILE_CHOWN (1 << 14)
 </pre>
-<font color=blue>Comments</font>: File system operation - <code>lstat</code><br>
+<font color=blue>Comments</font>: FSIO file operation - <code>chown(2)</code><br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/include/fs.h.html#FSOP_LSTAT">include/fs.h</a><br>
+  <a href="../src/include/fsio.h.html#FSIO_FILE_CHOWN">include/fsio.h</a><br>
 
 <hr>
-<a name="FSOP_OPEN"><b>FSOP_OPEN</b></a><br>
+<a name="FSIO_FILE_CLOSE"><b>FSIO_FILE_CLOSE</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define FSOP_OPEN (1 << 4)
+ #define FSIO_FILE_CLOSE (1 << 6)
 </pre>
-<font color=blue>Comments</font>: File system operation - <code>open</code><br>
+<font color=blue>Comments</font>: FSIO file operation - <code>close(2)</code><br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/include/fs.h.html#FSOP_OPEN">include/fs.h</a><br>
+  <a href="../src/include/fsio.h.html#FSIO_FILE_CLOSE">include/fsio.h</a><br>
 
 <hr>
-<a name="FSOP_OPENDIR"><b>FSOP_OPENDIR</b></a><br>
+<a name="FSIO_FILE_COMMON"><b>FSIO_FILE_COMMON</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define FSOP_OPENDIR (1 << 15)
+ #define FSIO_FILE_COMMON (FSIO_FILE_OPEN|FSIO_FILE_READ|FSIO_FILE_WRITE|FSIO_FILE_CLOSE|FSIO_FILE_CREAT)
 </pre>
-<font color=blue>Comments</font>: File system operation - <code>opendir</code><br>
-<br>
 <font color=blue>Source File</font>:
-  <a href="../src/include/fs.h.html#FSOP_OPENDIR">include/fs.h</a><br>
+  <a href="../src/include/fsio.h.html#FSIO_FILE_COMMON">include/fsio.h</a><br>
 
 <hr>
-<a name="FSOP_READ"><b>FSOP_READ</b></a><br>
+<a name="FSIO_FILE_CREAT"><b>FSIO_FILE_CREAT</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define FSOP_READ (1 << 7)
+ #define FSIO_FILE_CREAT (1 << 5)
 </pre>
-<font color=blue>Comments</font>: File system operation - <code>read</code><br>
+<font color=blue>Comments</font>: FSIO file operation - <code>creat(2)</code><br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/include/fs.h.html#FSOP_READ">include/fs.h</a><br>
+  <a href="../src/include/fsio.h.html#FSIO_FILE_CREAT">include/fsio.h</a><br>
 
 <hr>
-<a name="FSOP_READDIR"><b>FSOP_READDIR</b></a><br>
+<a name="FSIO_FILE_LINK"><b>FSIO_FILE_LINK</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define FSOP_READDIR (1 << 17)
+ #define FSIO_FILE_LINK (1 << 9)
 </pre>
-<font color=blue>Comments</font>: File system operation - <code>readdir</code><br>
+<font color=blue>Comments</font>: FSIO file operation - <code>link(2)</code><br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/include/fs.h.html#FSOP_READDIR">include/fs.h</a><br>
+  <a href="../src/include/fsio.h.html#FSIO_FILE_LINK">include/fsio.h</a><br>
 
 <hr>
-<a name="FSOP_READLINK"><b>FSOP_READLINK</b></a><br>
+<a name="FSIO_FILE_LSTAT"><b>FSIO_FILE_LSTAT</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define FSOP_READLINK (1 << 11)
+ #define FSIO_FILE_LSTAT (1 << 1)
 </pre>
-<font color=blue>Comments</font>: File system operation - <code>readlink</code><br>
+<font color=blue>Comments</font>: FSIO file operation - <code>lstat(2)</code><br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/include/fs.h.html#FSOP_READLINK">include/fs.h</a><br>
+  <a href="../src/include/fsio.h.html#FSIO_FILE_LSTAT">include/fsio.h</a><br>
 
 <hr>
-<a name="FSOP_RENAME"><b>FSOP_RENAME</b></a><br>
+<a name="FSIO_FILE_OPEN"><b>FSIO_FILE_OPEN</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define FSOP_RENAME (1 << 2)
+ #define FSIO_FILE_OPEN (1 << 4)
 </pre>
-<font color=blue>Comments</font>: File system operation - <code>rename</code><br>
+<font color=blue>Comments</font>: FSIO file operation - <code>open(2)</code><br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/include/fs.h.html#FSOP_RENAME">include/fs.h</a><br>
+  <a href="../src/include/fsio.h.html#FSIO_FILE_OPEN">include/fsio.h</a><br>
 
 <hr>
-<a name="FSOP_STAT"><b>FSOP_STAT</b></a><br>
+<a name="FSIO_FILE_READ"><b>FSIO_FILE_READ</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define FSOP_STAT (1 << 0)
+ #define FSIO_FILE_READ (1 << 7)
 </pre>
-<font color=blue>Comments</font>: File system operation - <code>stat</code><br>
+<font color=blue>Comments</font>: FSIO file operation - <code>read(2)</code><br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/include/fs.h.html#FSOP_STAT">include/fs.h</a><br>
+  <a href="../src/include/fsio.h.html#FSIO_FILE_READ">include/fsio.h</a><br>
 
 <hr>
-<a name="FSOP_SYMLINK"><b>FSOP_SYMLINK</b></a><br>
+<a name="FSIO_FILE_READLINK"><b>FSIO_FILE_READLINK</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define FSOP_SYMLINK (1 << 10)
+ #define FSIO_FILE_READLINK (1 << 11)
 </pre>
-<font color=blue>Comments</font>: File system operation - <code>symlink</code><br>
+<font color=blue>Comments</font>: FSIO file operation - <code>readlink(2)</code><br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/include/fs.h.html#FSOP_SYMLINK">include/fs.h</a><br>
+  <a href="../src/include/fsio.h.html#FSIO_FILE_READLINK">include/fsio.h</a><br>
 
 <hr>
-<a name="FSOP_UNLINK"><b>FSOP_UNLINK</b></a><br>
+<a name="FSIO_FILE_RENAME"><b>FSIO_FILE_RENAME</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define FSOP_UNLINK (1 << 3)
+ #define FSIO_FILE_RENAME (1 << 2)
 </pre>
-<font color=blue>Comments</font>: File system operation - <code>unlink</code><br>
+<font color=blue>Comments</font>: FSIO file operation - <code>rename(2)</code><br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/include/fs.h.html#FSOP_UNLINK">include/fs.h</a><br>
+  <a href="../src/include/fsio.h.html#FSIO_FILE_RENAME">include/fsio.h</a><br>
 
 <hr>
-<a name="FSOP_WRITE"><b>FSOP_WRITE</b></a><br>
+<a name="FSIO_FILE_STAT"><b>FSIO_FILE_STAT</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define FSOP_WRITE (1 << 8)
+ #define FSIO_FILE_STAT (1 << 0)
 </pre>
-<font color=blue>Comments</font>: File system operation - <code>write</code><br>
+<font color=blue>Comments</font>: FSIO file operation - <code>stat(2)</code><br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/include/fs.h.html#FSOP_WRITE">include/fs.h</a><br>
+  <a href="../src/include/fsio.h.html#FSIO_FILE_STAT">include/fsio.h</a><br>
+
+<hr>
+<a name="FSIO_FILE_SYMLINK"><b>FSIO_FILE_SYMLINK</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ #define FSIO_FILE_SYMLINK (1 << 10)
+</pre>
+<font color=blue>Comments</font>: FSIO file operation - <code>symlink(2)</code><br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/include/fsio.h.html#FSIO_FILE_SYMLINK">include/fsio.h</a><br>
+
+<hr>
+<a name="FSIO_FILE_TRUNC"><b>FSIO_FILE_TRUNC</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ #define FSIO_FILE_TRUNC (1 << 12)
+</pre>
+<font color=blue>Comments</font>: FSIO file operation - <code>truncate(2)</code><br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/include/fsio.h.html#FSIO_FILE_TRUNC">include/fsio.h</a><br>
+
+<hr>
+<a name="FSIO_FILE_UNLINK"><b>FSIO_FILE_UNLINK</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ #define FSIO_FILE_UNLINK (1 << 3)
+</pre>
+<font color=blue>Comments</font>: FSIO file operation - <code>unlink(2)</code><br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/include/fsio.h.html#FSIO_FILE_UNLINK">include/fsio.h</a><br>
+
+<hr>
+<a name="FSIO_FILE_WRITE"><b>FSIO_FILE_WRITE</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ #define FSIO_FILE_WRITE (1 << 8)
+</pre>
+<font color=blue>Comments</font>: FSIO file operation - <code>write(2)</code><br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/include/fsio.h.html#FSIO_FILE_WRITE">include/fsio.h</a><br>
 
 <hr>
 <a name="FTPUSERS_PATH"><b>FTPUSERS_PATH</b></a><br>
@@ -2542,6 +2534,62 @@ in the <code>passwd(5)</code> format.<br>
   <a href="../src/include/version.h.html#PROFTPD_VERSION_TEXT">include/version.h</a><br>
 
 <hr>
+<a name="PR_AUTH_AGEPWD"><b>PR_AUTH_AGEPWD</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ #define PR_AUTH_AGEPWD -3
+</pre>
+<font color=blue>Comments</font>: Possible return value from an authentication
+module's <code>auth</code> handler indicating that the user's password has
+expired.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/include/modules.h.html#PR_AUTH_AGEPWD">include/modules.h</a><br>
+
+<hr>
+<a name="PR_AUTH_BADPWD"><b>PR_AUTH_BADPWD</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ #define PR_AUTH_BADPWD -2
+</pre>
+<font color=blue>Comments</font>: Possible return value from an authentication
+module's <code>auth</code> handler indicating that the given password is
+incorrect.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/include/modules.h.html#PR_AUTH_BADPWD">include/modules.h</a><br>
+
+<hr>
+<a name="PR_AUTH_DISABLEDPWD"><b>PR_AUTH_DISABLEPWD</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ #define PR_AUTH_DISABLEDPWD -4
+</pre>
+<font color=blue>Comments</font>: Possible return value from an authentication
+module's <code>auth</code> handler indicating that the user's account has
+been disabled.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/include/modules.h.html#PR_AUTH_DISABLEPWD">include/modules.h</a><br>
+
+<hr>
+<a name="PR_AUTH_NOPWD"><b>PR_AUTH_NOPWD</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ #define PR_AUTH_NOPWD -1
+</pre>
+<font color=blue>Comments</font>: Possible return value from an authentication
+module's <code>auth</code> handler indicating that the user has no account on
+the system.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/include/modules.h.html#PR_AUTH_NOPWD">include/modules.h</a><br>
+
+<hr>
 <a name="PR_BYTES_BAD_FORMAT"><b>PR_BYTES_BAD_FORMAT</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -3140,6 +3188,18 @@ successful<br>
   <a href="../src/include/ftp.h.html#R_335">include/ftp.h</a><br>
 
 <hr>
+<a name="R_336"><b>R_336</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ #define R_336 "336"
+</pre>
+<font color=blue>Comments</font>: Username OK, need password; presenting challenge<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/include/ftp.h.html#R_336">include/ftp.h</a><br>
+
+<hr>
 <a name="R_350"><b>R_350</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -3448,6 +3508,42 @@ allowed<br>
   <a href="../src/include/ftp.h.html#R_554">include/ftp.h</a><br>
 
 <hr>
+<a name="R_631"><b>R_631</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ #define R_631 "631"
+</pre>
+<font color=blue>Comments</font>: Integrity protected response (RFC 2228)<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/include/ftp.h.html#R_631">include/ftp.h</a><br>
+
+<hr>
+<a name="R_632"><b>R_632</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ #define R_632 "632"
+</pre>
+<font color=blue>Comments</font>: Privacy protected response (RFC 2228)<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/include/ftp.h.html#R_632">include/ftp.h</a><br>
+
+<hr>
+<a name="R_633"><b>R_633</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ #define R_633 "633"
+</pre>
+<font color=blue>Comments</font>: Confidentiality protected response (RFC 2228)<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/include/ftp.h.html#R_633">include/ftp.h</a><br>
+
+<hr>
 <a name="R_DUP"><b>R_DUP</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -3640,45 +3736,6 @@ given<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/include/proftpd.h.html#STOR_HIDDEN">include/proftpd.h</a><br>
-
-<hr>
-<a name="SYM_AUTH"><b>SYM_AUTH</b></a><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- #define SYM_AUTH 3
-</pre>
-<font color=blue>Comments</font>: symbol used to mark modules that
-provide authentication function pointers.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/modules.c.html#SYM_AUTH">src/modules.c</a><br>
-
-<hr>
-<a name="SYM_CMD"><b>SYM_CMD</b></a><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- #define SYM_CMD 2
-</pre>
-<font color=blue>Comments</font>: symbol used to mark modules that
-provide command handlers.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/modules.c.html#SYM_CMD">src/modules.c</a><br>
-
-<hr>
-<a name="SYM_CONF"><b>SYM_CONF</b></a>,br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- #define SYM_CONF 1
-</pre>
-<font color=blue>Comments</font>: symbol used to mark modules that
-provide configuration directive handlers.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/modules.c.html#SYM_CONF">src/modules.c</a><br>
 
 <hr>
 <a name="TIMER_IDLE"><b>TIMER_IDLE</b></a><br>

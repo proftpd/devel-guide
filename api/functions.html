@@ -8350,6 +8350,22 @@ children by the master daemon.<br>
 <pre>
   char *sreplace(pool *<i>p</i>, char *<i>s</i>, ...)
 </pre>
+<font color=blue>Comments</font>: Provides string replacement, substituting a
+given substring in <i>s</i> with the provided replacement.  After the <i>s</i>
+argument, function arguments should be in <i>substr, replacement</i> pairs.
+For example, given a string <code>&quot;Hello, %u&quot;</code>, this function
+is used to replace the <code>&quot;%u&quot;</code> with the current user
+like so:
+<pre>
+  newstr = sreplace(p, oldstr, "%u", session.user, NULL);
+</pre>
+Multiple such <i>substr, replacement</i> pairs can be given in the same call.
+<br>
+<br>
+<font color=blue>Notes</font>: As with many varargs functions, it is
+<b>imperative</b> that the last argument to this function be <code>NULL</code>.
+You have been warned.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/support.c.html#sreplace">src/support.c</a><br>
 
@@ -8360,6 +8376,10 @@ children by the master daemon.<br>
 <pre>
   char *sstrcat(char *<i>dest</i>, const char *<i>src</i>, size_t <i>n</i>)
 </pre>
+<font color=blue>Comments</font>: This function provides a &quot;safe&quot;
+version of <code>strcat()</code>, saving room for a <code>\0</code> at the
+end of <i>dest</i> and refusing to concatenate more than <i>n</i> bytes.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/support.c.html#sstrcat">src/support.c</a><br>
 
@@ -8370,6 +8390,10 @@ children by the master daemon.<br>
 <pre>
   char *sstrncpy(char *<i>dest</i>, const char *<i>src</i>, size_t <i>n</i>)
 </pre>
+<font color=blue>Comments</font>: This function provides a &quot;safe&quot;
+version of <code>strncpy()</code>, saving room for a <code>\0</code> at the
+end of <i>dest</i> and refusing to copy more than <i>n</i> bytes.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/support.c.html#sstrncpy">src/support.c</a><br>
 

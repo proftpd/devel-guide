@@ -24,9 +24,9 @@
 <b>Bindings API Functions</b><br>
 
 <pre>
-  int pr_ipbind_open(server_rec *<i>server</i>, p_in_addr_t *<i>addr</i>, conn_t <i>listen_conn</i>, unsigned char <i>isdefault</i>,
+  int pr_ipbind_open(p_in_addr_t *<i>addr</i>, unsigned int <i>port</i>, conn_t <i>listen_conn</i>, unsigned char <i>isdefault</i>,
     unsigned char <i>islocalhost</i>);
-  int pr_ipbind_close(p_in_addr_t *<i>addr</i>, unsigned int <i>port</i>);
+  int pr_ipbind_close(p_in_addr_t *<i>addr</i>, unsigned int <i>port</i>, unsigned char <i>close_namebinds</i>);
   int pr_ipbind_add_binds(server_rec *<i>server</i>);
   server_rec *pr_ipbind_get_server(p_in_addr_t *<i>addr</i>, unsigned int <i>port</i>);
   pr_ipbind_t *pr_find_ipbind(p_in_addr_t *<i>addr</i>, unsigned int <i>port</i>);
@@ -53,7 +53,9 @@ The <code>pr_ipbind_close()</code> function closes all bindings associated with
 the given IP address/port combination.  The bindings are then marked as
 inactive so that future lookups via <code>pr_find_ipbind()</code> skips these
 bindings.  Returns <code>0</code> on success, <code>-1</code> on failure
-(<i>e.g.</i> there were no bindings for that address/port found).
+(<i>e.g.</i> there were no bindings for that address/port found).  As a special
+case, a NULL <i>addr</i> can be passed to this function, which causes
+<b>all</b> bindings to be closed.
 
 <p>
 The <code>pr_ipbind_add_binds()</code> function searches through <i>server</i>'s

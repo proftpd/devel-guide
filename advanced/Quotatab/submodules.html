@@ -80,7 +80,7 @@ These backend routines are listed here:
 
   <li><b>rlock</b><br>
     This routine is used to obtain read locks on both limit and tally
-    tables.  Such locks are used to insure that data does not become
+    tables.  Such locks are used to insure that data do not become
     corrupted by other processes seeking to change the tables at the
     same time.<br>
   </li>
@@ -101,7 +101,7 @@ These backend routines are listed here:
 
 <p>
 The key function that a submodule uses to indicate its existence, and its
-willingness to handle a new table format to <code>mod_quotatab</code>, is
+willingness to handle a new table format, to <code>mod_quotatab</code> is
 the <code>quotatab_register()</code> function:
 <pre>
 int quotatab_register(const char *<i>srctype</i>,
@@ -175,9 +175,9 @@ static int exampletab_rlock(<a href="structures.html#quota_table_t">quota_table_
 static int exampletab_unlock(<a href="structures.html#quota_table_t">quota_table_t</a> *exampletab) {
   int res = 0;
 
-  /* Release a lock, either read- or write-lock, on the given table.  Return
+  <font color=green>/* Release a lock, either read- or write-lock, on the given table.  Return
    * 0 if successful, -1 otherwise (and set errno appropriately).
-   */
+   */</font>
 
   return res;
 }

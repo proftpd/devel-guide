@@ -10,7 +10,7 @@
 
 <hr><br>
 <center>
-<img src="../images/proftpd.png">
+<img src="../images/proftpd.png" border=0>
 <br><br>
 <h3><b>ProFTPD Developer's Guide: API Functions</b></h3>
 <i><b>ProFTPD Version 1.2</b></i><br>
@@ -3079,8 +3079,9 @@ its name says.<br>
 </pre>
 <font color=blue>Comments</font>:  Takes a directory <i>path</i> and returns
 its corresponding <i>absolute</i> path, which is based on the root
-directory, not on a <code>chroot</code>ed directory.  <code>~username</code>
-references are appropriately expanded.<br>
+directory, not on a <code>chroot</code>ed directory.  If <i>interpolate</i>
+is <code>TRUE</code>, <code>~username</code> references will be interpolated
+appropriately.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/support.c.html#dir_abs_path">src/support.c</a><br>
@@ -5949,7 +5950,9 @@ return value from the entire function; if <code><i>and</i> == 0</code>, an
 <font color=blue>Comments</font>:  This function allocates an
 <a href="typedefs.html#array_header"><code>array_header</code></a> from the
 given <code>pool</code> <i>p</i>, initializing it to have <i>nelts</i>
-number of elements, each of <i>elt_size</i> size.<br>
+number of elements, each of <i>elt_size</i> size.  If <i>nelts</i> is less than
+<code>1</code>, it will automatically be set to <code>1</code>, so that
+the <code>array_header</code> has at least one allocated slot.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/pool.c.html#make_array">src/pool.c</a><br>

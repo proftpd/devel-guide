@@ -37,8 +37,6 @@
   int pr_ctrls_recv_request(pr_ctrls_cl_t *<i>cl</i>);
   int pr_ctrls_recv_response(pool *<i>resp_pool</i>, int <i>ctrls_sockfd</i>, int *<i>status</i>, char ***<i>respargv</i>); 
   int pr_ctrls_send_msg(int <i>sockfd</i>, int <i>msgstatus</i>, unsigned int <i>msgargc</i>, char **<i>msgargv</i>);
-  pr_ctrls_t *pr_find_ctrls(module *<i>module</i>, const char *<i>action</i>);
-  pr_ctrls_t *pr_find_next_ctrls(module *<i>module</i>);
   void pr_block_ctrls(void);
   void pr_unblock_ctrls(void);
   int pr_check_ctrls(void);
@@ -148,21 +146,6 @@ and responses.  It sends <i>msgargc</i> number of strings, found in
 <i>msgargv</i>, to the socket <i>sockfd</i>.  For requests, <i>msgstatus</i>
 is largely ignored; for responses, it contains the return value of the control
 handlers that handled the request.
-
-<p>
-The <code>pr_ctrls_find_ctrls()</code> function returns a pointer to a
-<code>pr_ctrls_t</code> object whose action matches the given <i>action</i>.
-<code>NULL</code> will be returned if no matching registered
-<code>pr_ctrls_t</code> are found.  Note that <i>module</i> may be
-<code>ANY_MODULE</code>.  To find the next matching controls object, use
-<code>pr_ctrls_find_next_ctrls()</code> function; it should <b>only</b> be
-used after a call to <code>pr_ctrls_find_ctrls()</code>, and will return
-<code>NULL</code> with <code>errno</code> set to <code>EINVAL</code> if used
-improperly.  A <i>module</i> pointer given to
-<code>pr_ctrls_find_next_ctrls()</code>, if different from the one used in
-the prior <code>pr_ctrls_find_ctrls()</code> call, will have the effect of
-resetting the search indices, as if <code>pr_ctrls_find_ctrls()</code> itself
-had been called with the new <i>module</i> and the used <i>action</i>.
 
 <p>
 The <code>pr_block_ctrls()</code> function blocks control handlers from

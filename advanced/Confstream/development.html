@@ -73,6 +73,19 @@ static char *filestream_writestr(confstream_rec *stream, char *buf,
    */</font>
   return NULL;
 }
+
+static int filestream_rlock(confstream_rec *stream, struct flock *lock) {
+  return fcntl(fileno((FILE *) stream->data), F_SETLK, lock);
+}
+
+static int filestream_wlock(confstream_rec *stream, struct flock *lock) {
+  return fcntl(fileno((FILE *) stream->data), F_SETLK, lock);
+}
+
+static int filestream_unlock(confstream_rec *stream, struct flock *lock) {
+  return fcntl(fileno((FILE *) stream->data), F_SETLK, lock);
+}
+
 static int filestream_iserror(confstream_rec *stream) {
   return ferror((FILE *) stream->data);
 }
@@ -86,8 +99,12 @@ int init_confstream(void) {
 
   filestream->open = filestream_open;
   filestream->close = filestream_close;
+  filestream->seek = filestream_seek;
   filestream->readstr = filestream_readstr;
   filestream->writestr = filestream_writestr;
+  filestream->rlock = filestream_rlock;
+  filestream->wlock = filestream_wlock;
+  filestream->unlock = filestream_unlock;
   filestream->iserror = filestream_iserror;
   ...
 }

@@ -60,6 +60,9 @@ struct pr_confstream_struc {
   int (*seek)(confstream_rec *, off_t, int);
   char *(*readstr)(confstream_rec *, char *, size_t);
   char *(*writestr)(confstream_rec *, char *, size_t);
+  int (*rlock)(confstream_rec *, struct flock *);
+  int (*wlock)(confstream_rec *, struct flock *);
+  int (*unlock)(confstream_rec *, struct flock *);
   int (*iserror)(confstream_rec *);
 
 };

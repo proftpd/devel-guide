@@ -92,6 +92,9 @@ described below.
   int confstream_seek(off_t <i>offset</i>, int <i>whence</i>);
   char *confstream_readstr(char *<i>buf</i>, size_t <i>buflen</i>);
   char *confstream_writestr(char *<i>buf</i>, size_t <i>buflen</i>);
+  int confstream_rlock(struct flock *<i>lock</i>);
+  int confstream_wlock(struct flock *<i>lock</i>);
+  int confstream_unlock(struct flock *<i>lock</i>);
   int confstream_iserror(void);
   const char *confstream_gettype(void);
   char *confstream_getsource(void);
@@ -137,6 +140,25 @@ The <code>confstream_writestr()</code> function calls on the current confstream
 object to write the given buffer of configuration information to the stream.
 It will return the given buffer if successful, or <code>NULL</code> if an
 error occurred, such as the confstream not being open.
+
+<p>
+The <code>confstream_rlock()</code> function calls on the current confstream
+object to obtain a reader lock on the portion of the stream designated by
+<i>lock</i>.  It will return <code>0</code> if the lock was successfully
+obtained, or <code>-1</code> if unsuccessful (<code>errno</code> should be
+set an appropriate value in this case).
+
+<p>
+The <code>confstream_wlock()</code> function calls on the current confstream
+object to obtain a writer lock on the portion of the stream indicated by
+<i>lock</i>.  It will return <code>0</code> if the lock was successfully
+obtained, <code>-1</code> if not (with <code>errno</code> set appropriately).
+
+<p>
+The <code>confstream_unlock()</code> function calls on the current confstream
+object to release any locks on the portion of the stream indicated by
+<i>lock</i>.  If successful, this function returns <code>0</code>, else it
+sets <code>errno</code> and returns <code>-1</code>.
 
 <p>
 The <code>confstream_iserror()</code> function calls on the current confstream

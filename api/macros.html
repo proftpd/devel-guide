@@ -135,36 +135,36 @@ the system.<br>
 <hr>
 <a name="CF_DEFER"><b>CF_DEFER</b></a><br>
 <br>
-<font color=blue>Comments</font>: Defer hashing until authentication<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CF_DEFER (1 << 2)
 </pre>
+<font color=blue>Comments</font>: Defer hashing until authentication<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/dirtree.h.html#CF_DEFER">include/dirtree.h</a><br>
 
 <hr>
 <a name="CF_DYNAMIC"><b>CF_DYNAMIC</b></a><br>
 <br>
-<font color=blue>Comments</font>: Dynamically added entry<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CF_DYNAMIC (1 << 1)
 </pre>
+<font color=blue>Comments</font>: Dynamically added entry<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/dirtree.h.html#CF_DYNAMIC">include/dirtree.h</a><br>
 
 <hr>
 <a name="CF_MERGEDOWN"><b>CF_MERGEDOWN</b></a><br>
 <br>
-<font color=blue>Comments</font>: Merge configuration option &quot;down&quot;<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CF_MERGEDOWN (1 << 0)
 </pre>
+<font color=blue>Comments</font>: Merge configuration option &quot;down&quot;<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/dirtree.h.html#CF_MERGEDOWN">include/dirtree.h</a><br>
 
@@ -207,11 +207,6 @@ the system.<br>
 <hr>
 <a name="CHECK_CONF"><b>CHECK_CONF</b></a><br>
 <br>
-<font color=blue>Comments</font>: This macro checks the given
-<code>cmd_rec</code>'s configuration context against an <code>OR</code>'d list
-of allowable contexts, and returns a configuration error if the directive is
-occurring in an illegal context.<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CHECK_CONF(x, p) if (!check_conf((x), (p))) \
@@ -220,6 +215,11 @@ occurring in an illegal context.<br>
            get_section_name((x)), \
            " section.", NULL))
 </pre>
+<font color=blue>Comments</font>: This macro checks the given
+<code>cmd_rec</code>'s configuration context against an <code>OR</code>'d list
+of allowable contexts, and returns a configuration error if the directive is
+occurring in an illegal context.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/dirtree.h.html#CHECK_CONF">include/dirtree.h</a><br>
 
@@ -297,51 +297,51 @@ occurring in an illegal context.<br>
 <hr>
 <a name="CL_AUTH"><b>CL_AUTH</b></a><br>
 <br>
-<font color=blue>Comments</font>: <code>USER</code>, <code>PASS</code><br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CL_AUTH (1 << 0)
 </pre>
+<font color=blue>Comments</font>: <code>USER</code>, <code>PASS</code><br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/modules.h.html#CL_AUTH">include/modules.h</a><br>
 
 <hr>
 <a name="CL_DIRS"><b>CL_DIRS</b></a><br>
 <br>
-<font color=blue>Comments</font>: Directory commands (<code>LIST</code>,
-	<code>NLST</code>, <code>CWD</code>, etc)<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CL_DIRS (1 << 2)
 </pre>
+<font color=blue>Comments</font>: Directory commands (<code>LIST</code>,
+<code>NLST</code>, <code>CWD</code>, <i>etc</i>)<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/modules.h.html#CL_DIRS">include/modules.h</a><br>
 
 <hr>
 <a name="CL_INFO"><b>CL_INFO</b></a><br>
 <br>
-<font color=blue>Comments</font>: Informational commands (<code>PWD</code>,
-	<code>SYST</code>, etc)<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CL_INFO (1 << 1)
 </pre>
+<font color=blue>Comments</font>: Informational commands (<code>PWD</code>,
+<code>SYST</code>, <i>etc</i>)<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/modules.h.html#CL_INFO">include/modules.h</a><br>
 
 <hr>
 <a name="CL_MISC"><b>CL_MISC</b></a><br>
 <br>
-<font color=blue>Comments</font>: Miscellaneous commands (<code>RNFR</code>,
-	<code>RNTO</code>, <code>SITE</code>, etc)<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CL_MISC (1 << 5)
 </pre>
+<font color=blue>Comments</font>: Miscellaneous commands (<code>RNFR</code>,
+<code>RNTO</code>, <code>SITE</code>, <i>etc</i>)<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/modules.h.html#CL_MISC">include/modules.h</a><br>
 
@@ -358,25 +358,25 @@ occurring in an illegal context.<br>
 <hr>
 <a name="CL_READ"><b>CL_READ</b></a><br>
 <br>
-<font color=blue>Comments</font>: File reading commands (<code>RETR</code>)<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CL_READ (1 << 3)
 </pre>
+<font color=blue>Comments</font>: File reading commands (<code>RETR</code>)<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/modules.h.html#CL_READ">include/modules.h</a><br>
 
 <hr>
 <a name="CL_WRITE"><b>CL_WRITE</b></a><br>
 <br>
-<font color=blue>Comments</font>: Writing commands (<code>STOR</code>,
-	<code>MKD</code>, etc)<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CL_WRITE (1 << 4)
 </pre>
+<font color=blue>Comments</font>: Writing commands (<code>STOR</code>,
+<code>MKD</code>, <i>etc</i>)<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/modules.h.html#CL_WRITE">include/modules.h</a><br>
 
@@ -392,120 +392,120 @@ occurring in an illegal context.<br>
 <hr>
 <a name="CM_ACCEPT"><b>CM_ACCEPT</b></a><br>
 <br>
-<font color=blue>Comments</font>: Connection mode - accepting<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CM_ACCEPT 3
 </pre>
+<font color=blue>Comments</font>: Connection mode: accepting<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/inet.h.html#CM_ACCEPT">include/inet.h</a><br>
 
 <hr>
 <a name="CM_CLOSED"><b>CM_CLOSED</b></a><br>
 <br>
-<font color=blue>Comments</font>: Connection mode - closed<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CM_CLOSED 5
 </pre>
+<font color=blue>Comments</font>: Connection mode: closed<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/inet.h.html#CM_CLOSED">include/inet.h</a><br>
 
 <hr>
 <a name="CM_CONNECT"><b>CM_CONNECT</b></a><br>
 <br>
-<font color=blue>Comments</font>: Connection mode - connected<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CM_CONNECT 4
 </pre>
+<font color=blue>Comments</font>: Connection mode: connected<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/inet.h.html#CM_CONNECT">include/inet.h</a><br>
 
 <hr>
 <a name="CM_ERROR"><b>CM_ERROR</b></a><br>
 <br>
-<font color=blue>Comments</font>: Connection mode - error<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CM_ERROR 6
 </pre>
+<font color=blue>Comments</font>: Connection mode: error<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/inet.h.html#CM_ERROR">include/inet.h</a><br>
 
 <hr>
 <a name="CM_LISTEN"><b>CM_LISTEN</b></a><br>
 <br>
-<font color=blue>Comments</font>: Connection mode - listening<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CM_LISTEN 1
 </pre>
+<font color=blue>Comments</font>: Connection mode: listening<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/inet.h.html#CM_LISTEN">include/inet.h</a><br>
 
 <hr>
 <a name="CM_NONE"><b>CM_NONE</b></a><br>
 <br>
-<font color=blue>Comments</font>: Connection mode - no connections<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CM_NONE 0
 </pre>
+<font color=blue>Comments</font>: Connection mode: no connections<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/inet.h.html#CM_NONE">include/inet.h</a><br>
 
 <hr>
 <a name="CM_OPEN"><b>CM_OPEN</b></a><br>
 <br>
-<font color=blue>Comments</font>: Connection mode - open<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CM_OPEN 2
 </pre>
+<font color=blue>Comments</font>: Connection mode: open<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/inet.h.html#CM_OPEN">include/inet.h</a><br>
 
 <hr>
 <a name="CONF_ANON"><b>CONF_ANON</b></a><br>
 <br>
-<font color=blue>Comments</font>: Anonymous FTP configuration<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CONF_ANON (1 << 2)
 </pre>
+<font color=blue>Comments</font>: Anonymous FTP configuration<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/dirtree.h.html#CONF_ANON">include/dirtree.h</a><br>
 
 <hr>
 <a name="CONF_DIR"><b>CONF_DIR</b></a><br>
 <br>
-<font color=blue>Comments</font>: Per-directory configuration<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CONF_DIR (1 << 1)
 </pre>
+<font color=blue>Comments</font>: Per-directory configuration<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/dirtree.h.html#CONF_DIR">include/dirtree.h</a><br>
 
 <hr>
 <a name="CONF_DYNDIR"><b>CONF_DYNDIR</b></a><br>
 <br>
-<font color=blue>Comments</font>: <code>.ftpaccess</code> file configuration<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CONF_DYNDIR (1 << 5)
 </pre>
+<font color=blue>Comments</font>: <code>.ftpaccess</code> file configuration<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/dirtree.h.html#CONF_DYNDIR">include/dirtree.h</a><br>
 
@@ -524,73 +524,73 @@ occurring in an illegal context.<br>
 <hr>
 <a name="CONF_GLOBAL"><b>CONF_GLOBAL</b></a><br>
 <br>
-<font color=blue>Comments</font>: &quot;Global&quot; context (applies
-	to the main server and <b>all</b> virtual servers)<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CONF_GLOBAL (1 << 6)
 </pre>
+<font color=blue>Comments</font>: &quot;Global&quot; context (applies to the
+main server and <b>all</b> virtual servers)<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/dirtree.h.html#CONF_GLOBAL">include/dirtree.h</a><br>
 
 <hr>
 <a name="CONF_LIMIT"><b>CONF_LIMIT</b></a><br>
 <br>
-<font color=blue>Comments</font>: Command limiting configuration<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CONF_LIMIT (1 << 3)
 </pre>
+<font color=blue>Comments</font>: Command limiting configuration<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/dirtree.h.html#CONF_LIMIT">include/dirtree.h</a><br>
 
 <hr>
 <a name="CONF_PARAM"><b>CONF_PARAM</b></a><br>
 <br>
-<font color=blue>Comments</font>: Configuration/argument records<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CONF_PARAM (1 << 15)
 </pre>
+<font color=blue>Comments</font>: Configuration/argument records<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/dirtree.h.html#CONF_PARAM">include/dirtree.h</a><br>
 
 <hr>
 <a name="CONF_ROOT"><b>CONF_ROOT</b></a><br>
 <br>
-<font color=blue>Comments</font>: &quot;main&quot; server configuration<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CONF_ROOT (1 << 0)
 </pre>
+<font color=blue>Comments</font>: &quot;main&quot; server configuration<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/dirtree.h.html#CONF_ROOT">include/dirtree.h</a><br>
 
 <hr>
 <a name="CONF_USERDATA"><b>CONF_USERDATA</b></a><br>
 <br>
-<font color=blue>Comments</font>: Runtime user data/configuration<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CONF_USERDATA (1 << 14)
 </pre>
+<font color=blue>Comments</font>: Runtime user data/configuration<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/dirtree.h.html#CONF_USERDATA">include/dirtree.h</a><br>
 
 <hr>
 <a name="CONF_VIRTUAL"><b>CONF_VIRTUAL</b></a><br>
 <br>
-<font color=blue>Comments</font>: Virtual server configuration<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CONF_VIRTUAL (1 << 4)
 </pre>
+<font color=blue>Comments</font>: Virtual server configuration<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/dirtree.h.html#CONF_VIRTUAL">include/dirtree.h</a><br>
 
@@ -619,500 +619,501 @@ occurring in an illegal context.<br>
 <hr>
 <a name="C_ABOR"><b>C_ABOR</b></a><br>
 <br>
-<font color=blue>Comments</font>: Abort current operation<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_ABOR "ABOR"
 </pre>
+<font color=blue>Comments</font>: Abort current operation<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_ABOR">include/ftp.h</a><br>
 
 <hr>
 <a name="C_ACCT"><b>C_ACCT</b></a><br>
 <br>
-<font color=blue>Comments</font>: Specify an account (not implemented)<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_ACCT "ACCT"
 </pre>
+<font color=blue>Comments</font>: Specify an account (not implemented)<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_ACCT">include/ftp.h</a><br>
 
 <hr>
 <a name="C_ALLO"><b>C_ALLO</b></a><br>
 <br>
-<font color=blue>Comments</font>: Allocate storage space (not used)<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_ALLO "ALLO"
 </pre>
+<font color=blue>Comments</font>: Allocate storage space (not used)<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_ALLO">include/ftp.h</a><br>
 
 <hr>
 <a name="C_ANY"><b>C_ANY</b></a><br>
 <br>
-<font color=blue>Comments</font>: Special &quot;wildcard&quot; matching command<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_ANY "*"
 </pre>
+<font color=blue>Comments</font>: Special &quot;wildcard&quot; matching command<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_ANY">include/ftp.h</a><br>
 
 <hr>
 <a name="C_APPE"><b>C_APPE</b></a><br>
 <br>
-<font color=blue>Comments</font>: Append to the end of a file<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_APPE "APPE"
 </pre>
+<font color=blue>Comments</font>: Append to the end of a file<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_APPE">include/ftp.h</a><br>
 
 <hr>
 <a name="C_CDUP"><b>C_CDUP</b></a><br>
 <br>
-<font color=blue>Comments</font>: Change <code>CWD</code> up one level<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_CDUP "CDUP"
 </pre>
+<font color=blue>Comments</font>: Change <code>CWD</code> up one level<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_CDUP">include/ftp.h</a><br>
 
 <hr>
 <a name="C_CWD"><b>C_CWD</b></a><br>
 <br>
-<font color=blue>Comments</font>: Change working directory<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_CWD "CWD"
 </pre>
+<font color=blue>Comments</font>: Change working directory<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_CWD">include/ftp.h</a><br>
 
 <hr>
 <a name="C_DELE"><b>C_DELE</b></a><br>
 <br>
-<font color=blue>Comments</font>: Delete a file<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_DELE "DELE"
 </pre>
+<font color=blue>Comments</font>: Delete a file<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_DELE">include/ftp.h</a><br>
 
 <hr>
 <a name="C_HELP"><b>C_HELP</b></a><br>
 <br>
-<font color=blue>Comments</font>: Help<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_HELP "HELP"
 </pre>
+<font color=blue>Comments</font>: Help<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_HELP">include/ftp.h</a><br>
 
 <hr>
 <a name="C_LIST"><b>C_LIST</b></a><br>
 <br>
-<font color=blue>Comments</font>: Return contents of <code>PWD</code> or
-specified dir<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_LIST "LIST"
 </pre>
+<font color=blue>Comments</font>: Return contents of <code>PWD</code> or
+specified dir<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_LIST">include/ftp.h</a><br>
 
 <hr>
 <a name="C_MDTM"><b>C_MDTM</b></a><br>
 <br>
-<font color=blue>Comments</font>: Modification time, <b>NOT</b> in RFC959<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_MDTM "MDTM"
 </pre>
+<font color=blue>Comments</font>: Modification time, <b>NOT</b> in RFC959<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_MDTM">include/ftp.h</a><br>
 
 <hr>
 <a name="C_MKD"><b>C_MKD</b></a><br>
 <br>
-<font color=blue>Comments</font>: Create a directory<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_MKD "MKD"
 </pre>
+<font color=blue>Comments</font>: Create a directory<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_MKD">include/ftp.h</a><br>
 
 <hr>
 <a name="C_MODE"><b>C_MODE</b></a><br>
 <br>
-<font color=blue>Comments</font>: Transfer mode (<code>S</code> = Stream,
-<code>B</code> = Block, <code>C</code> = Compressed (not supported)<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_MODE "MODE"
 </pre>
+<font color=blue>Comments</font>: Transfer mode (<code>S</code> = Stream,
+<code>B</code> = Block, <code>C</code> = Compressed (not supported)<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_MODE">include/ftp.h</a><br>
 
 <hr>
 <a name="C_NLST"><b>C_NLST</b></a><br>
 <br>
-<font color=blue>Comments</font>: As list, but returns names only<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_NLST "NLST"
 </pre>
+<font color=blue>Comments</font>: As <code>LIST</code>, but returns names
+only<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_NLST">include/ftp.h</a><br>
 
 <hr>
 <a name="C_NOOP"><b>C_NOOP</b></a><br>
 <br>
-<font color=blue>Comments</font>: Returns <code>200</code> and does nothing<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_NOOP "NOOP"
 </pre>
+<font color=blue>Comments</font>: Returns <code>200</code> and does nothing<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_NOOP">include/ftp.h</a><br>
 
 <hr>
 <a name="C_PASS"><b>C_PASS</b></a><br>
 <br>
-<font color=blue>Comments</font>: Specify a password<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_PASS "PASS"
 </pre>
+<font color=blue>Comments</font>: Specify a password<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_PASS">include/ftp.h</a><br>
 
 <hr>
 <a name="C_PASV"><b>C_PASV</b></a><br>
 <br>
-<font color=blue>Comments</font>: Next transfer data connection is from client
-to server<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_PASV "PASV"
 </pre>
+<font color=blue>Comments</font>: Next transfer data connection is from client
+to server<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_PASV">include/ftp.h</a><br>
 
 <hr>
 <a name="C_PORT"><b>C_PORT</b></a><br>
 <br>
-<font color=blue>Comments</font>: Specify user address/port for data connection
-(<code>PORT h1,h2,h3,h4,p1,p2</code>)<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_PORT "PORT"
 </pre>
+<font color=blue>Comments</font>: Specify user address/port for data connection
+(<code>PORT h1,h2,h3,h4,p1,p2</code>)<br>
+<br>
 <font color=blue>Source File</font>: include/ftp.h
 
 <hr>
 <a name="C_PWD"><b>C_PWD</b></a><br>
 <br>
-<font color=blue>Comments</font>: Return current working directory<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_PWD "PWD"
 </pre>
+<font color=blue>Comments</font>: Return current working directory<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_PWD">include/ftp.h</a><br>
 
 <hr>
 <a name="C_QUIT"><b>C_QUIT</b></a><br>
 <br>
-<font color=blue>Comments</font>: Close control connection and logout (if no
-transfer pending)<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_QUIT "QUIT"
 </pre>
+<font color=blue>Comments</font>: Close control connection and logout (if no
+transfer pending)<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_QUIT">include/ftp.h</a><br>
 
 <hr>
 <a name="C_REIN"><b>C_REIN</b></a><br>
 <br>
-<font color=blue>Comments</font>: Reinitialize account information (not
-supported)<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_REIN "REIN"
 </pre>
+<font color=blue>Comments</font>: Reinitialize account information (not
+supported)<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_REIN">include/ftp.h</a><br>
 
 <hr>
 <a name="C_REST"><b>C_REST</b></a><br>
 <br>
-<font color=blue>Comments</font>: Restart a transfer (<code>REST</code> marker)<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_REST "REST"
 </pre>
+<font color=blue>Comments</font>: Restart a transfer (<code>REST</code> marker)<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_REST">include/ftp.h</a><br>
 
 <hr>
 <a name="C_RETR"><b>C_RETR</b></a><br>
 <br>
-<font color=blue>Comments</font>: Retrieve a file (<code>RETR</code> name)<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_RETR "RETR"
 </pre>
+<font color=blue>Comments</font>: Retrieve a file (<code>RETR</code> name)<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_RETR">include/ftp.h</a><br>
 
 <hr>
 <a name="C_RMD"><b>C_RMD</b></a><br>
 <br>
-<font color=blue>Comments</font>: Remove a directory<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_RMD "RMD"
 </pre>
+<font color=blue>Comments</font>: Remove a directory<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_RMD">include/ftp.h</a><br>
 
 <hr>
 <a name="C_RNFR"><b>C_RNFR</b></a><br>
 <br>
-<font color=blue>Comments</font>: Rename from (<code>RNFR</code> filename)<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_RNFR "RNFR"
 </pre>
+<font color=blue>Comments</font>: Rename from (<code>RNFR</code> filename)<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_RNFR">include/ftp.h</a><br>
 
 <hr>
 <a name="C_RNTO"><b>C_RNTO</b></a><br>
 <br>
-<font color=blue>Comments</font>: Rename to (<code>RNTO</code> filename)<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_RNTO "RNTO"
 </pre>
+<font color=blue>Comments</font>: Rename to (<code>RNTO</code> filename)<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_RNTO">include/ftp.h</a><br>
 
 <hr>
 <a name="C_SITE"><b>C_SITE</b></a><br>
 <br>
-<font color=blue>Comments</font>: Site-specific command<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_SITE "SITE"
 </pre>
+<font color=blue>Comments</font>: Site-specific command<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_SITE">include/ftp.h</a><br>
 
 <hr>
 <a name="C_SIZE"><b>C_SIZE</b></a><br>
 <br>
-<font color=blue>Comments</font>: Return the number of octets in a file<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_SIZE "SIZE"
 </pre>
+<font color=blue>Comments</font>: Return the number of octets in a file<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_SIZE">include/ftp.h</a><br>
 
 <hr>
 <a name="C_SMNT"><b>C_SMNT</b></a><br>
 <br>
-<font color=blue>Comments</font>: Mount different file system data structure
-(not implemented)<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_SMNT "SMNT"
 </pre>
+<font color=blue>Comments</font>: Mount different file system data structure
+(not implemented)<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_SMNT">include/ftp.h</a><br>
 
 <hr>
 <a name="C_STAT"><b>C_STAT</b></a><br>
 <br>
-<font color=blue>Comments</font>: Status<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_STAT "STAT"
 </pre>
+<font color=blue>Comments</font>: Status<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_STAT">include/ftp.h</a><br>
 
 <hr>
 <a name="C_STOR"><b>C_STOR</b></a><br>
 <br>
-<font color=blue>Comments</font>: Store a file (<code>STOR</code> filename)<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_STOR "STOR"
 </pre>
+<font color=blue>Comments</font>: Store a file (<code>STOR</code> filename)<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_STOR">include/ftp.h</a><br>
 
 <hr>
 <a name="C_STOU"><b>C_STOU</b></a><br>
 <br>
-<font color=blue>Comments</font>: Store as unique filename<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_STOU "STOU"
 </pre>
+<font color=blue>Comments</font>: Store as unique filename<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_STOU">include/ftp.h</a><br>
 
 <hr>
 <a name="C_STRU"><b>C_STRU</b></a><br>
 <br>
-<font color=blue>Comments</font>: File structure (not implemented)<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_STRU "STRU"
 </pre>
+<font color=blue>Comments</font>: File structure (not implemented)<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_STRU">include/ftp.h</a><br>
 
 <hr>
 <a name="C_SYST"><b>C_SYST</b></a><br>
 <br>
-<font color=blue>Comments</font>: Type of OS (Unix Type: <code>L8</code>)<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_SYST "SYST"
 </pre>
+<font color=blue>Comments</font>: Type of OS (Unix Type: <code>L8</code>)<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_SYST">include/ftp.h</a><br>
 
 <hr>
 <a name="C_TYPE"><b>C_TYPE</b></a><br>
 <br>
-<font color=blue>Comments</font>: <code>A</code> = ASCII, <code>E</code> =
-EBCDIC, <code>I</code> = Image, <code>L</code>(<i>byte size</i>) = local byte
-size<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_TYPE "TYPE"
 </pre>
+<font color=blue>Comments</font>: <code>A</code> = ASCII, <code>E</code> =
+EBCDIC, <code>I</code> = Image, <code>L</code>(<i>byte size</i>) = local byte
+size<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_TYPE">include/ftp.h</a><br>
 
 <hr>
 <a name="C_USER"><b>C_USER</b></a><br>
 <br>
-<font color=blue>Comments</font>: Specify a username<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_USER "USER"
 </pre>
+<font color=blue>Comments</font>: Specify a username<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_USER">include/ftp.h</a><br>
 
 <hr>
 <a name="C_XCUP"><b>C_XCUP</b></a><br>
 <br>
-<font color=blue>Comments</font>: Change <code>CWD</code> up one level<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_XCUP "XCUP"
 </pre>
+<font color=blue>Comments</font>: Change <code>CWD</code> up one level<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_XCUP">include/ftp.h</a><br>
 
 <hr>
 <a name="C_XCWD"><b>C_XCWD</b></a><br>
 <br>
-<font color=blue>Comments</font>: Change working directory<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_XCWD "XCWD"
 </pre>
+<font color=blue>Comments</font>: Change working directory<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_XCWD">include/ftp.h</a><br>
 
 <hr>
 <a name="C_XMKD"><b>C_XMKD</b></a><br>
 <br>
-<font color=blue>Comments</font>: Create a directory<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_XMKD "XMKD"
 </pre>
+<font color=blue>Comments</font>: Create a directory<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_XMKD">include/ftp.h</a><br>
 
 <hr>
 <a name="C_XPWD"><b>C_XPWD</b></a><br>
 <br>
-<font color=blue>Comments</font>: Return current working directory<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_XPWD "XPWD"
 </pre>
+<font color=blue>Comments</font>: Return current working directory<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_XPWD">include/ftp.h</a><br>
 
 <hr>
 <a name="C_XRMD"><b>C_XRMD</b></a><br>
 <br>
-<font color=blue>Comments</font>: Remove a directory<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define C_XRMD "XRMD"
 </pre>
+<font color=blue>Comments</font>: Remove a directory<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#C_XRMD">include/ftp.h</a><br>
 
@@ -1188,8 +1189,6 @@ size<br>
 
 <hr>
 <a name="DECLINED"><b>DECLINED</b></a><br>
-<br>
-<font color=blue>Comments</font>:
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1271,72 +1270,72 @@ size<br>
 <hr>
 <a name="FSOP_CHDIR"><b>FSOP_CHDIR</b></a><br>
 <br>
-<font color=blue>Comments</font>: File system operation - <code>chdir</code><br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_CHDIR (1 << 14)
 </pre>
+<font color=blue>Comments</font>: File system operation - <code>chdir</code><br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/fs.h.html#FSOP_CHDIR">include/fs.h</a><br>
 
 <hr>
 <a name="FSOP_CHMOD"><b>FSOP_CHMOD</b></a><br>
 <br>
-<font color=blue>Comments</font>: File system operation - <code>chmod</code><br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_CHMOD (1 << 12)
 </pre>
+<font color=blue>Comments</font>: File system operation - <code>chmod</code><br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/fs.h.html#FSOP_CHMOD">include/fs.h</a><br>
 
 <hr>
 <a name="FSOP_CHOWN"><b>FSOP_CHOWN</b></a><br>
 <br>
-<font color=blue>Comments</font>: File system operation - <code>chown</code><br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_CHOWN (1 << 13)
 </pre>
+<font color=blue>Comments</font>: File system operation - <code>chown</code><br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/fs.h.html#FSOP_CHOWN">include/fs.h</a><br>
 
 <hr>
 <a name="FSOP_CLOSE"><b>FSOP_CLOSE</b></a><br>
 <br>
-<font color=blue>Comments</font>: File system operation - <code>close</code><br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_CLOSE (1 << 6)
 </pre>
+<font color=blue>Comments</font>: File system operation - <code>close</code><br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/fs.h.html#FSOP_CLOSE">include/fs.h</a><br>
 
 <hr>
 <a name="FSOP_CLOSEDIR"><b>FSOP_CLOSEDIR</b></a><br>
 <br>
-<font color=blue>Comments</font>: File system operation - <code>closedir</code><br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_CLOSEDIR (1 << 16)
 </pre>
+<font color=blue>Comments</font>: File system operation - <code>closedir</code><br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/fs.h.html#FSOP_CLOSEDIR">include/fs.h</a><br>
 
 <hr>
 <a name="FSOP_CREAT"><b>FSOP_CREAT</b></a><br>
 <br>
-<font color=blue>Comments</font>: File system operation - <code>creat</code><br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_CREAT (1 << 5)
 </pre>
+<font color=blue>Comments</font>: File system operation - <code>creat</code><br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/fs.h.html#FSOP_CREAT">include/fs.h</a><br>
 
@@ -1353,144 +1352,144 @@ size<br>
 <hr>
 <a name="FSOP_LINK"><b>FSOP_LINK</b></a><br>
 <br>
-<font color=blue>Comments</font>: File system operation - <code>link</code><br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_LINK (1 << 9)
 </pre>
+<font color=blue>Comments</font>: File system operation - <code>link</code><br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/fs.h.html#FSOP_LINK">include/fs.h</a><br>
 
 <hr>
 <a name="FSOP_LSTAT"><b>FSOP_LSTAT</b></a><br>
 <br>
-<font color=blue>Comments</font>: File system operation - <code>lstat</code><br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_LSTAT (1 << 1)
 </pre>
+<font color=blue>Comments</font>: File system operation - <code>lstat</code><br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/fs.h.html#FSOP_LSTAT">include/fs.h</a><br>
 
 <hr>
 <a name="FSOP_OPEN"><b>FSOP_OPEN</b></a><br>
 <br>
-<font color=blue>Comments</font>: File system operation - <code>open</code><br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_OPEN (1 << 4)
 </pre>
+<font color=blue>Comments</font>: File system operation - <code>open</code><br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/fs.h.html#FSOP_OPEN">include/fs.h</a><br>
 
 <hr>
 <a name="FSOP_OPENDIR"><b>FSOP_OPENDIR</b></a><br>
 <br>
-<font color=blue>Comments</font>: File system operation - <code>opendir</code><br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_OPENDIR (1 << 15)
 </pre>
+<font color=blue>Comments</font>: File system operation - <code>opendir</code><br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/fs.h.html#FSOP_OPENDIR">include/fs.h</a><br>
 
 <hr>
 <a name="FSOP_READ"><b>FSOP_READ</b></a><br>
 <br>
-<font color=blue>Comments</font>: File system operation - <code>read</code><br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_READ (1 << 7)
 </pre>
+<font color=blue>Comments</font>: File system operation - <code>read</code><br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/fs.h.html#FSOP_READ">include/fs.h</a><br>
 
 <hr>
 <a name="FSOP_READDIR"><b>FSOP_READDIR</b></a><br>
 <br>
-<font color=blue>Comments</font>: File system operation - <code>readdir</code><br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_READDIR (1 << 17)
 </pre>
+<font color=blue>Comments</font>: File system operation - <code>readdir</code><br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/fs.h.html#FSOP_READDIR">include/fs.h</a><br>
 
 <hr>
 <a name="FSOP_READLINK"><b>FSOP_READLINK</b></a><br>
 <br>
-<font color=blue>Comments</font>: File system operation - <code>readlink</code><br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_READLINK (1 << 11)
 </pre>
+<font color=blue>Comments</font>: File system operation - <code>readlink</code><br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/fs.h.html#FSOP_READLINK">include/fs.h</a><br>
 
 <hr>
 <a name="FSOP_RENAME"><b>FSOP_RENAME</b></a><br>
 <br>
-<font color=blue>Comments</font>: File system operation - <code>rename</code><br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_RENAME (1 << 2)
 </pre>
+<font color=blue>Comments</font>: File system operation - <code>rename</code><br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/fs.h.html#FSOP_RENAME">include/fs.h</a><br>
 
 <hr>
 <a name="FSOP_STAT"><b>FSOP_STAT</b></a><br>
 <br>
-<font color=blue>Comments</font>: File system operation - <code>stat</code><br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_STAT (1 << 0)
 </pre>
+<font color=blue>Comments</font>: File system operation - <code>stat</code><br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/fs.h.html#FSOP_STAT">include/fs.h</a><br>
 
 <hr>
 <a name="FSOP_SYMLINK"><b>FSOP_SYMLINK</b></a><br>
 <br>
-<font color=blue>Comments</font>: File system operation - <code>symlink</code><br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_SYMLINK (1 << 10)
 </pre>
+<font color=blue>Comments</font>: File system operation - <code>symlink</code><br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/fs.h.html#FSOP_SYMLINK">include/fs.h</a><br>
 
 <hr>
 <a name="FSOP_UNLINK"><b>FSOP_UNLINK</b></a><br>
 <br>
-<font color=blue>Comments</font>: File system operation - <code>unlink</code><br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_UNLINK (1 << 3)
 </pre>
+<font color=blue>Comments</font>: File system operation - <code>unlink</code><br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/fs.h.html#FSOP_UNLINK">include/fs.h</a><br>
 
 <hr>
 <a name="FSOP_WRITE"><b>FSOP_WRITE</b></a><br>
 <br>
-<font color=blue>Comments</font>: File system operation - <code>write</code><br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_WRITE (1 << 8)
 </pre>
+<font color=blue>Comments</font>: File system operation - <code>write</code><br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/fs.h.html#FSOP_WRITE">include/fs.h</a><br>
 
@@ -1507,64 +1506,64 @@ size<br>
 <hr>
 <a name="GROUP"><b>GROUP</b></a><br>
 <br>
-<font color=blue>Comments</font>: Defines an alternate group membership
-file, in the <code>group(5)</code> format.<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define GROUP grpfname
 </pre>
+<font color=blue>Comments</font>: Defines an alternate group membership
+file, in the <code>group(5)</code> format.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_unixpw.c.html#GROUP">modules/mod_unixpw.c</a><br>
 
 <hr>
 <a name="G_DIRS"><b>G_DIRS</b></a><br>
 <br>
-<font color=blue>Comments</font>: &quot;directory&quot; command group:
-<code>LIST</code>, <code>NLST</code><br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define G_DIRS "DIRS"
 </pre>
+<font color=blue>Comments</font>: &quot;directory&quot; command group:
+<code>LIST</code>, <code>NLST</code><br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#G_DIRS">include/ftp.h</a><br>
 
 <hr>
 <a name="G_NONE"><b>G_NONE</b></a><br>
 <br>
-<font color=blue>Comments</font>: Command group for non-specific commands<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define G_NONE NULL
 </pre>
+<font color=blue>Comments</font>: Command group for non-specific commands<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#G_NONE">include/ftp.h</a><br>
 
 <hr>
 <a name="G_READ"><b>G_READ</b></a><br>
 <br>
-<font color=blue>Comments</font>: &quot;read&quot; command group:
-<code>RETR</code>, etc<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define G_READ "READ"
 </pre>
+<font color=blue>Comments</font>: &quot;read&quot; command group:
+<code>RETR</code>, etc<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#G_READ">include/ftp.h</a><br>
 
 <hr>
 <a name="G_WRITE"><b>G_WRITE</b></a><br>
 <br>
-<font color=blue>Comments</font>: &quot;write&quot; command group:
-<code>STOR</code>, <code>STOU</code>, etc<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define G_WRITE "WRITE"
 </pre>
+<font color=blue>Comments</font>: &quot;write&quot; command group:
+<code>STOR</code>, <code>STOU</code>, etc<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#G_WRITE">include/ftp.h</a><br>
 
@@ -1621,54 +1620,58 @@ file, in the <code>group(5)</code> format.<br>
 <hr>
 <a name="IOR_CLOSED"><b>IOR_CLOSED</b></a><br>
 <br>
-<font color=blue>Comments</font>: File is closed<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define IOR_CLOSED (1 << 1)
 </pre>
+<font color=blue>Comments</font>: File is closed<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/io.h.html#IOR_CLOSED">include/io.h</a><br>
 
 <hr>
 <a name="IOR_ERROR"><b>IOR_ERROR</b></a><br>
 <br>
-<font color=blue>Comments</font>: Request resulted in error<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define IOR_ERROR (1 << 2)
 </pre>
+<font color=blue>Comments</font>: Request resulted in error<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/io.h.html#IOR_ERROR">include/io.h</a><br>
 
 <hr>
 <a name="IOR_REMOVE"><b>IOR_REMOVE</b></a><br>
 <br>
-<font color=blue>Comments</font>: Request scheduled for removal<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define IOR_REMOVE (1 << 0)
 </pre>
+<font color=blue>Comments</font>: Request scheduled for removal<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/io.h.html#IOR_REMOVE">include/io.h</a><br>
 
 <hr>
 <a name="IOR_REMOVE_FILE"><b>IOR_REMOVE_FILE</b></a><br>
 <br>
-<font color=blue>Comments</font>: Destroy associated file<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define IOR_REMOVE_FILE (1 << 3)
 </pre>
+<font color=blue>Comments</font>: Destroy associated file<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/io.h.html#IOR_REMOVE_FILE">include/io.h</a><br>
 
 <hr>
 <a name="IO_ABORT"><b>IO_ABORT</b></a><br>
 <br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ #define IO_ABORT (1 << 3)
+</pre>
 <font color=blue>Comments</font>: Temporary internal flag used to indicate
 that I/O on an <a href="structs.html#IO_File"><code>IOFILE</code></a> has been
 aborted and should return <code>-2</code> at the next possible instant.  In
@@ -1676,51 +1679,47 @@ combination with <a href="#IO_INTR"><code>IO_INTR</code></a> and interruptible
 syscalls, this should be near instantly.  This flag cannot be tested for it
 is cleared immediately after being detected.<br>
 <br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- #define IO_ABORT (1 << 3)
-</pre>
 <font color=blue>Source File</font>:
   <a href="../src/include/io.h.html#IO_ABORT">include/io.h</a><br>
 
 <hr>
 <a name="IO_INTR"><b>IO_INTR</b></a><br>
 <br>
-<font color=blue>Comments</font>: Indicates that <code>io_</code>* functions
-are allowed to be interrupted by <code>EINTR</code>, and return
-<code>-2</code>.<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define IO_INTR (1 << 1)
 </pre>
+<font color=blue>Comments</font>: Indicates that <code>io_</code>* functions
+are allowed to be interrupted by <code>EINTR</code>, and return
+<code>-2</code>.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/io.h.html#IO_INTR">include/io.h</a><br>
 
 <hr>
 <a name="IO_NONBLOCK"><b>IO_NONBLOCK</b></a><br>
 <br>
-<font color=blue>Comments</font>: No longer used?!?<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define IO_NONBLOCK (1 << 0)
 </pre>
+<font color=blue>Comments</font>: No longer used?!?<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/io.h.html#IO_NONBLOCK">include/io.h</a><br>
 
 <hr>
 <a name="IO_NORESTART"><b>IO_NORESTART</b></a><br>
 <br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ #define IO_NORESTART (1 << 2)
+</pre>
 <font color=blue>Comments</font>: Indicates that <code>io_</code>* functions
 should not automagically restart if <code>read()</code> or <code>write()</code>
 should return <code>EWOULDBLOCK</code>/<code>EAGAIN</code>. The default is
 to restart.<br>
 <br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- #define IO_NORESTART (1 << 2)
-</pre>
 <font color=blue>Source File</font>:
   <a href="../src/include/io.h.html#IO_NORESTART">include/io.h</a><br>
 
@@ -2258,24 +2257,24 @@ to restart.<br>
 <hr>
 <a name="OP_COMMAND"><b>OP_COMMAND</b></a><br>
 <br>
-<font color=blue>Comments</font>: Command operation<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define OP_COMMAND 2
 </pre>
+<font color=blue>Comments</font>: Command operation<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/dirtree.h.html#OP_COMMAND">include/dirtree.h</a><br>
 
 <hr>
 <a name="OP_HIDE"><b>OP_HIDE</b></a><br>
 <br>
-<font color=blue>Comments</font>: Op for hiding dirs/files<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define OP_HIDE 1
 </pre>
+<font color=blue>Comments</font>: Op for hiding dirs/files<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/dirtree.h.html#OP_HIDE">include/dirtree.h</a><br>
 
@@ -2302,13 +2301,13 @@ to restart.<br>
 <hr>
 <a name="PASSWD"><b>PASSWD</b></a><br>
 <br>
-<font color=blue>Comments</font>: Defines an alternate user/account file,
-in the <code>passwd(5)</code> format.<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define PASSWD pwdfname
 </pre>
+<font color=blue>Comments</font>: Defines an alternate user/account file,
+in the <code>passwd(5)</code> format.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_unixpw.c.html#PASSWD">modules/mod_unixpw.c</a><br>
 
@@ -2496,611 +2495,610 @@ in the <code>passwd(5)</code> format.<br>
   #define PR_BYTES_BAD_UNITS	-1
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#PR_BYTES_BAD_UNITS">modules/mod_core.c</a><b>
-
+  <a href="../src/modules/mod_core.c.html#PR_BYTES_BAD_UNITS">modules/mod_core.c</a><br>
 
 <hr>
 <a name="PR_LOG_ALERT"><b>PR_LOG_ALERT</b></a><br>
-<br>
-<font color=blue>Comments</font>: Action must be taken immediately<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define PR_LOG_ALERT 1
 </pre>
+<font color=blue>Comments</font>: Action must be taken immediately<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/log.h.html#PR_LOG_ALERT">include/log.h</a><br>
 
 <hr>
 <a name="PR_LOG_CRIT"><b>PR_LOG_CRIT</b></a><br>
 <br>
-<font color=blue>Comments</font>: Critical conditions<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define PR_LOG_CRIT 2
 </pre>
+<font color=blue>Comments</font>: Critical conditions<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/log.h.html#PR_LOG_CRIT">include/log.h</a><br>
 
 <hr>
 <a name="PR_LOG_DEBUG"><b>PR_LOG_DEBUG</b></a><br>
 <br>
-<font color=blue>Comments</font>: Debug-level messages<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define PR_LOG_DEBUG LOG_DEBUG
 </pre>
+<font color=blue>Comments</font>: Debug-level messages<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/log.h.html#PR_LOG_DEBUG">include/log.h</a><br>
 
 <hr>
 <a name="PR_LOG_EMERG"><b>PR_LOG_EMERG</b></a><br>
 <br>
-<font color=blue>Comments</font>: System is unusable<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define PR_LOG_EMERG 0
 </pre>
+<font color=blue>Comments</font>: System is unusable<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/log.h.html#PR_LOG_EMERG">include/log.h</a><br>
 
 <hr>
 <a name="PR_LOG_ERR"><b>PR_LOG_ERR</b></a><br>
 <br>
-<font color=blue>Comments</font>: Error conditions<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define PR_LOG_ERR 3
 </pre>
+<font color=blue>Comments</font>: Error conditions<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/log.h.html#PR_LOG_ERR">include/log.h</a><br>
 
 <hr>
 <a name="PR_LOG_INFO"><b>PR_LOG_INFO</b></a><br>
 <br>
-<font color=blue>Comments</font>: Informational conditions<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define PR_LOG_INFO 6
 </pre>
+<font color=blue>Comments</font>: Informational conditions<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/log.h.html#PR_LOG_INFO">include/log.h</a><br>
 
 <hr>
 <a name="PR_LOG_LEVELMASK"><b>PR_LOG_LEVELMASK</b></a><br>
 <br>
-<font color=blue>Comments</font>: Mask off the level value<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define PR_LOG_LEVELMASK LOG_PRIMASK
 </pre>
+<font color=blue>Comments</font>: Mask off the level value<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/log.h.html#PR_LOG_LEVELMASK">include/log.h</a><br>
 
 <hr>
 <a name="PR_LOG_NOTICE"><b>PR_LOG_NOTICE</b></a><br>
 <br>
-<font color=blue>Comments</font>: Normal but significant conditions<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define PR_LOG_NOTICE 5
 </pre>
+<font color=blue>Comments</font>: Normal but significant conditions<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/log.h.html#PR_LOG_NOTICE">include/log.h</a><br>
 
 <hr>
 <a name="PR_LOG_WARNING"><b>PR_LOG_WARNING</b></a><br>
 <br>
-<font color=blue>Comments</font>: Warning conditions<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define PR_LOG_WARNING 4
 </pre>
+<font color=blue>Comments</font>: Warning conditions<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/log.h.html#PR_LOG_WARNING">include/log.h</a><br>
 
 <hr>
 <a name="R_110"><b>R_110</b></a><br>
 <br>
-<font color=blue>Comments</font>: Restart marker replay (<code>MARK <i>yyyy</i>
- = <i>mmmm</i></code>)<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_110 "110"
 </pre>
+<font color=blue>Comments</font>: Restart marker replay (<code>MARK <i>yyyy</i>
+ = <i>mmmm</i></code>)<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_110">include/ftp.h</a><br>
 
 <hr>
 <a name="R_120"><b>R_120</b></a><br>
 <br>
-<font color=blue>Comments</font>: Service ready in <i>nnn</i> minutes<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_120 "120"
 </pre>
+<font color=blue>Comments</font>: Service ready in <i>nnn</i> minutes<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_120">include/ftp.h</a><br>
 
 <hr>
 <a name="R_125"><b>R_125</b></a><br>
 <br>
-<font color=blue>Comments</font>: Data connection already open; starting<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_125 "125"
 </pre>
+<font color=blue>Comments</font>: Data connection already open; starting<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_125">include/ftp.h</a><br>
 
 <hr>
 <a name="R_150"><b>R_150</b></a><br>
 <br>
-<font color=blue>Comments</font>: File status OK; opening data connection<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_150 "150"
 </pre>
+<font color=blue>Comments</font>: File status OK; opening data connection<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_150">include/ftp.h</a><br>
 
 <hr>
 <a name="R_200"><b>R_200</b></a><br>
 <br>
-<font color=blue>Comments</font>: Generic command OK<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_200 "200"
 </pre>
+<font color=blue>Comments</font>: Generic command OK<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_200">include/ftp.h</a><br>
 
 <hr>
 <a name="R_202"><b>R_202</b></a><br>
 <br>
-<font color=blue>Comments</font>: Command not implemented, superfluous at this
-site<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_202 "202"
 </pre>
+<font color=blue>Comments</font>: Command not implemented, superfluous at this
+site<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_202">include/ftp.h</a><br>
 
 <hr>
 <a name="R_211"><b>R_211</b></a><br>
 <br>
-<font color=blue>Comments</font>: System status or system help reply<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_211 "211"
 </pre>
+<font color=blue>Comments</font>: System status or system help reply<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_211">include/ftp.h</a><br>
 
 <hr>
 <a name="R_212"><b>R_212</b></a><br>
 <br>
-<font color=blue>Comments</font>: Directory status<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_212 "212"
 </pre>
+<font color=blue>Comments</font>: Directory status<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_212">include/ftp.h</a><br>
 
 <hr>
 <a name="R_213"><b>R_213</b></a><br>
 <br>
-<font color=blue>Comments</font>: File status<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_213 "213"
 </pre>
+<font color=blue>Comments</font>: File status<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_213">include/ftp.h</a><br>
 
 <hr>
 <a name="R_214"><b>R_214</b></a><br>
 <br>
-<font color=blue>Comments</font>: Help message (how to use server or
-non-standard command)<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_214 "214"
 </pre>
+<font color=blue>Comments</font>: Help message (how to use server or
+non-standard command)<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_214">include/ftp.h</a><br>
 
 <hr>
 <a name="R_215"><b>R_215</b></a><br>
 <br>
-<font color=blue>Comments</font>: <i>name</i> system type, where <i>name</i> is
-the official system name<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_215 "215"
 </pre>
+<font color=blue>Comments</font>: <i>name</i> system type, where <i>name</i> is
+the official system name<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_215">include/ftp.h</a><br>
 
 <hr>
 <a name="R_220"><b>R_220</b></a><br>
 <br>
-<font color=blue>Comments</font>: Service ready for new user<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_220 "220"
 </pre>
+<font color=blue>Comments</font>: Service ready for new user<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_220">include/ftp.h</a><br>
 
 <hr>
 <a name="R_221"><b>R_221</b></a><br>
 <br>
-<font color=blue>Comments</font>: Service closing control connection, as per
-normal<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_221 "221"
 </pre>
+<font color=blue>Comments</font>: Service closing control connection, as per
+normal<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_221">include/ftp.h</a><br>
 
 <hr>
 <a name="R_225"><b>R_225</b></a><br>
 <br>
-<font color=blue>Comments</font>: Data connection open; no transfer in
-progress<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_225 "225"
 </pre>
+<font color=blue>Comments</font>: Data connection open; no transfer in
+progress<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_225">include/ftp.h</a><br>
 
 <hr>
 <a name="R_226"><b>R_226</b></a><br>
 <br>
-<font color=blue>Comments</font>: Closing data connection; file transfer/abort
-successful<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_226 "226"
 </pre>
+<font color=blue>Comments</font>: Closing data connection; file transfer/abort
+successful<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_226">include/ftp.h</a><br>
 
 <hr>
 <a name="R_227"><b>R_227</b></a><br>
 <br>
-<font color=blue>Comments</font>: Entering passive mode
-(i<code>h1,h2,h3,h4,p1,p2</code>)<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_227 "227"
 </pre>
+<font color=blue>Comments</font>: Entering passive mode
+(i<code>h1,h2,h3,h4,p1,p2</code>)<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_227">include/ftp.h</a><br>
 
 <hr>
 <a name="R_230"><b>R_230</b></a><br>
 <br>
-<font color=blue>Comments</font>: User logged in, proceed<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_230 "230"
 </pre>
+<font color=blue>Comments</font>: User logged in, proceed<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_230">include/ftp.h</a><br>
 
 <hr>
 <a name="R_250"><b>R_250</b></a><br>
 <br>
-<font color=blue>Comments</font>: Requested file action OK, completed<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_250 "250"
 </pre>
+<font color=blue>Comments</font>: Requested file action OK, completed<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_250">include/ftp.h</a><br>
 
 <hr>
 <a name="R_257"><b>R_257</b></a><br>
 <br>
-<font color=blue>Comments</font>: <i>pathname</i> created<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_257 "257"
 </pre>
+<font color=blue>Comments</font>: <i>pathname</i> created<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_257">include/ftp.h</a><br>
 
 <hr>
 <a name="R_331"><b>R_331</b></a><br>
 <br>
-<font color=blue>Comments</font>: User name OK, need password<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_331 "331"
 </pre>
+<font color=blue>Comments</font>: User name OK, need password<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_331">include/ftp.h</a><br>
 
 <hr>
 <a name="R_332"><b>R_332</b></a><br>
 <br>
-<font color=blue>Comments</font>: Need account for login<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_332 "332"
 </pre>
+<font color=blue>Comments</font>: Need account for login<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_332">include/ftp.h</a><br>
 
 <hr>
 <a name="R_350"><b>R_350</b></a><br>
 <br>
-<font color=blue>Comments</font>: Requested file action pending further
-information<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_350 "350"
 </pre>
+<font color=blue>Comments</font>: Requested file action pending further
+information<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_350">include/ftp.h</a><br>
 
 <hr>
 <a name="R_421"><b>R_421</b></a><br>
 <br>
-<font color=blue>Comments</font>: Service not available, closing control
-connection; service is about to be shutdown<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_421 "421"
 </pre>
+<font color=blue>Comments</font>: Service not available, closing control
+connection; service is about to be shutdown<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_421">include/ftp.h</a><br>
 
 <hr>
 <a name="R_425"><b>R_425</b></a><br>
 <br>
-<font color=blue>Comments</font>: Unable to open data connection<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_425 "425"
 </pre>
+<font color=blue>Comments</font>: Unable to open data connection<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_425">include/ftp.h</a><br>
 
 <hr>
 <a name="R_426"><b>R_426</b></a><br>
 <br>
-<font color=blue>Comments</font>: Connection closed; transfer aborted<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_426 "426"
 </pre>
+<font color=blue>Comments</font>: Connection closed; transfer aborted<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_426">include/ftp.h</a><br>
 
 <hr>
 <a name="R_450"><b>R_450</b></a><br>
 <br>
-<font color=blue>Comments</font>: Requested file action not taken (file
-unavailable; busy)<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_450 "450"
 </pre>
+<font color=blue>Comments</font>: Requested file action not taken (file
+unavailable; busy)<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_450">include/ftp.h</a><br>
 
 <hr>
 <a name="R_451"><b>R_451</b></a><br>
 <br>
-<font color=blue>Comments</font>: Requested action aborted; local error in
-processing<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_451 "451"
 </pre>
+<font color=blue>Comments</font>: Requested action aborted; local error in
+processing<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_451">include/ftp.h</a><br>
 
 <hr>
 <a name="R_452"><b>R_452</b></a><br>
 <br>
-<font color=blue>Comments</font>: Requested action not taken; insufficient
-storage space<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_452 "452"
 </pre>
+<font color=blue>Comments</font>: Requested action not taken; insufficient
+storage space<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_452">include/ftp.h</a><br>
 
 <hr>
 <a name="R_500"><b>R_500</b></a><br>
 <br>
-<font color=blue>Comments</font>: Syntax error, command unrecognized<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_500 "500"
 </pre>
+<font color=blue>Comments</font>: Syntax error, command unrecognized<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_500">include/ftp.h</a><br>
 
 <hr>
 <a name="R_501"><b>R_501</b></a><br>
 <br>
-<font color=blue>Comments</font>: Syntax error in parameters or arguments<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_501 "501"
 </pre>
+<font color=blue>Comments</font>: Syntax error in parameters or arguments<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_501">include/ftp.h</a><br>
 
 <hr>
 <a name="R_502"><b>R_502</b></a><br>
 <br>
-<font color=blue>Comments</font>: Command not implemented<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_502 "502"
 </pre>
+<font color=blue>Comments</font>: Command not implemented<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_502">include/ftp.h</a><br>
 
 <hr>
 <a name="R_503"><b>R_503</b></a><br>
 <br>
-<font color=blue>Comments</font>: Bad sequence of commands<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_503 "503"
 </pre>
+<font color=blue>Comments</font>: Bad sequence of commands<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_503">include/ftp.h</a><br>
 
 <hr>
 <a name="R_504"><b>R_504</b></a><br>
 <br>
-<font color=blue>Comments</font>: Command not implemented for that parameter<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_504 "504"
 </pre>
+<font color=blue>Comments</font>: Command not implemented for that parameter<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_504">include/ftp.h</a><br>
 
 <hr>
 <a name="R_530"><b>R_530</b></a><br>
 <br>
-<font color=blue>Comments</font>: Not logged in<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_530 "530"
 </pre>
+<font color=blue>Comments</font>: Not logged in<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_530">include/ftp.h</a><br>
 
 <hr>
 <a name="R_532"><b>R_532</b></a><br>
 <br>
-<font color=blue>Comments</font>: Need acount for storing files<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_532 "532"
 </pre>
+<font color=blue>Comments</font>: Need acount for storing files<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_532">include/ftp.h</a><br>
 
 <hr>
 <a name="R_550"><b>R_550</b></a><br>
 <br>
-<font color=blue>Comments</font>: Requested action not taken; no access, etc<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_550 "550"
 </pre>
+<font color=blue>Comments</font>: Requested action not taken; no access, etc<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_550">include/ftp.h</a><br>
 
 <hr>
 <a name="R_551"><b>R_551</b></a><br>
 <br>
-<font color=blue>Comments</font>: Requested action not taken; page type
-unknown<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_551 "551"
 </pre>
+<font color=blue>Comments</font>: Requested action not taken; page type
+unknown<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_551">include/ftp.h</a><br>
 
 <hr>
 <a name="R_552"><b>R_552</b></a><br>
 <br>
-<font color=blue>Comments</font>: Requested file action aborted; exceeding
-storage allocation<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_552 "552"
 </pre>
+<font color=blue>Comments</font>: Requested file action aborted; exceeding
+storage allocation<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_552">include/ftp.h</a><br>
 
 <hr>
 <a name="R_553"><b>R_553</b></a><br>
 <br>
-<font color=blue>Comments</font>: Requested action not taken; filename not
-allowed<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_553 "553"
 </pre>
+<font color=blue>Comments</font>: Requested action not taken; filename not
+allowed<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_553">include/ftp.h</a><br>
 
 <hr>
 <a name="R_DUP"><b>R_DUP</b></a><br>
 <br>
-<font color=blue>Comments</font>: Duplicate last numeric in multiline
-response<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define R_DUP NULL
 </pre>
+<font color=blue>Comments</font>: Duplicate last numeric in multiline
+response<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/ftp.h.html#R_DUP">include/ftp.h</a><br>
 
@@ -3127,12 +3125,12 @@ response<br>
 <hr>
 <a name="SF_ABORT"><b>SF_ABORT</b></a><br>
 <br>
-<font color=blue>Comments</font>: Abort in progress<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define SF_ABORT (1 << 1)
 </pre>
+<font color=blue>Comments</font>: Session flag: abort in progress<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/proftpd.h.html#SF_ABORT">include/proftpd.h</a><br>
 
@@ -3150,84 +3148,88 @@ response<br>
 <hr>
 <a name="SF_ANON"><b>SF_ANON</b></a><br>
 <br>
-<font color=blue>Comments</font>: Anonymous (<i>chroot</i>) login<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define SF_ANON (1 << 5)
 </pre>
+<font color=blue>Comments</font>: Session flag: anonymous (<i>chroot</i>)
+login<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/proftpd.h.html#SF_ANON">include/proftpd.h</a><br>
 
 <hr>
 <a name="SF_ASCII"><b>SF_ASCII</b></a><br>
 <br>
-<font color=blue>Comments</font>: ASCII mode transfer<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define SF_ASCII (1 << 3)
 </pre>
+<font color=blue>Comments</font>: Session flag: ASCII mode transfer<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/proftpd.h.html#SF_ASCII">include/proftpd.h</a><br>
 
 <hr>
 <a name="SF_ASCII_OVERRIDE"><b>SF_ASCII_OVERRIDE</b></a><br>
 <br>
-<font color=blue>Comments</font>: ASCII override this transfer only<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define SF_ASCII_OVERRIDE (1 << 4)
 </pre>
+<font color=blue>Comments</font>: Session flag: ASCII override this transfer
+only<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/proftpd.h.html#SF_ASCII_OVERRIDE">include/proftpd.h</a><br>
 
 <hr>
 <a name="SF_PASSIVE"><b>SF_PASSIVE</b></a><br>
 <br>
-<font color=blue>Comments</font>: Data connection is in passive mode<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define SF_PASSIVE (1 << 0)
 </pre>
+<font color=blue>Comments</font>: Session flag: data connection is in passive
+mode<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/proftpd.h.html#SF_PASSIVE">include/proftpd.h</a><br>
 
 <hr>
 <a name="SF_PORT"><b>SF_PORT</b></a><br>
 <br>
-<font color=blue>Comments</font>: <code>PORT</code> command given<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define SF_PORT (1 << 7)
 </pre>
+<font color=blue>Comments</font>: Session flag: <code>PORT</code> command
+given<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/proftpd.h.html#SF_PORT">include/proftpd.h</a><br>
 
 <hr>
 <a name="SF_POST_ABORT"><b>SF_POST_ABORT</b></a><br>
 <br>
-<font color=blue>Comments</font>: After abort has occurred<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define SF_POST_ABORT (1 << 6)
 </pre>
+<font color=blue>Comments</font>: Session flag: after abort has occurred<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/proftpd.h.html#SF_POST_ABORT">include/proftpd.h</a><br>
 
 <hr>
 <a name="SF_XFER"><b>SF_XFER</b></a><br>
 <br>
-<font color=blue>Comments</font>: Transfer in progress<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define SF_XFER (1 << 2)
 </pre>
+<font color=blue>Comments</font>: Session flag: transfer in progress<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/proftpd.h.html#SF_XFER">include/proftpd.h</a><br>
 
@@ -3284,39 +3286,39 @@ response<br>
 <hr>
 <a name="SYM_AUTH"><b>SYM_AUTH</b></a><br>
 <br>
-<font color=blue>Comments</font>: symbol used to mark modules that
-provide authentication function pointers.<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define SYM_AUTH 3
 </pre>
+<font color=blue>Comments</font>: symbol used to mark modules that
+provide authentication function pointers.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/modules.c.html#SYM_AUTH">src/modules.c</a><br>
 
 <hr>
 <a name="SYM_CMD"><b>SYM_CMD</b></a><br>
 <br>
-<font color=blue>Comments</font>: symbol used to mark modules that
-provide command handlers.<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define SYM_CMD 2
 </pre>
+<font color=blue>Comments</font>: symbol used to mark modules that
+provide command handlers.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/modules.c.html#SYM_CMD">src/modules.c</a><br>
 
 <hr>
 <a name="SYM_CONF"><b>SYM_CONF</b></a>,br>
 <br>
-<font color=blue>Comments</font>: symbol used to mark modules that
-provide configuration directive handlers.<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define SYM_CONF 1
 </pre>
+<font color=blue>Comments</font>: symbol used to mark modules that
+provide configuration directive handlers.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/modules.c.html#SYM_CONF">src/modules.c</a><br>
 
@@ -3494,14 +3496,14 @@ provide configuration directive handlers.<br>
 <hr>
 <a name="VALID_SHELL_PATH"><b>VALID_SHELL_PATH</b></a><br>
 <br>
-<font color=blue>Comments</font>: Defines the path of a file listing valid
-shells for user accounts.  This file must be in <code>shells(5)</code>
-format.<br>
-<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define VALID_SHELL_PATH "/etc/shells"
 </pre>
+<font color=blue>Comments</font>: Defines the path of a file listing valid
+shells for user accounts.  This file must be in <code>shells(5)</code>
+format.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/include/default_paths.h.html#VALID_SHELL_PATH">include/default_paths.h</a><br>
 

@@ -305,12 +305,12 @@ configuration handler <i>should</i> look more like this:
 
     <font color=blue>/* Rather than casting the Boolean variable, an int, into the space of a void pointer,
      * as is done in the previous example (and thus eliciting a compiler warning),
-     * allocate the space for the int manually, from the config_rec's own pool.
+     * allocate the space for the Boolean manually, from the config_rec's own pool.
      */</font>
-    c->argv[0] = pcalloc(c->pool, sizeof(int));
+    c->argv[0] = pcalloc(c->pool, sizeof(unsigned char));
 
     <font color=blue>/* Now store the Boolean parameter. */</font>
-    *((int *) c->argv[0]) = bool;
+    *((unsigned char *) c->argv[0]) = bool;
 
     <font color=blue>/* This directive has been successfully handled. */</font>
     return HANDLED(cmd);

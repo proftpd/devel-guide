@@ -414,6 +414,16 @@ connecting user against a list of valid system shells, usually contained in
 <hr>
 <a name="_exists"><b>_exists</b><br>
 <br>
+<font color=blue>Comments</font>:  This function simply checks for the
+existence of the given <i>path</i>, as modified by the <i>dirp</i> argument.<br>
+<br>
+If <code>dirp == 1</code>, returns <code>FALSE</code> unless <i>path</i> is
+an existing directory.  If <code>dirp == 0</code>, returns <code>FALSE</code>
+unless <i>path</i> is an existing <b>non</b>-directory.  If
+<code>dirp == -1</code>, returns <code>FALSE</code> unless <i>path</i> exists;
+the caller in this case does not care whether <i>path</i> is a file or
+a directory.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  static int _exists(char *path, int dirp)
@@ -1584,6 +1594,13 @@ the FTP command processing results in an error.<br>
 <hr>
 <a name="addl_bindings"><b>addl_bindings</b><br>
 <br>
+<font color=blue>Comments</font>:  On startup, once the configuration file has
+been parsed, this function is called.  It loops through the given server
+<i>s</i>'s configuration records, and for each <code>Bind</code> directive
+found, it will create an additional
+<a href="typedefs.html#binding_t><code>binding_t</code></a> for that
+server's IP address and port.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  void addl_bindings(server_rec *s)
@@ -1754,6 +1771,10 @@ concatenated <code>array_header</code>s.<br>
 <hr>
 <a name="auth_name_gid"><b>auth_name_gid</b><br>
 <br>
+<font color=blue>Comments</font>: This function does a name-to-GID lookup
+for the given group <i>name</i>.  <b><i>NOTE:</i></b> the caller of this
+function must take due caution when handling the returned <code>gid_t</code>,
+and treat a <code>gid_t</code> of <code>-1</code> properly.<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  gid_t auth_name_gid(pool *p, const char *name)
@@ -1763,6 +1784,11 @@ concatenated <code>array_header</code>s.<br>
 
 <hr>
 <a name="auth_name_uid"><b>auth_name_uid</b><br>
+<br>
+<font color=blue>Comments</font>: This function does a name-to-UID lookup
+for the given user <i>name</i>.  <b><i>NOTE:</i></b> the caller of this function
+must take due caution when handling the returned <code>uid_t</code>, and
+treat a <code>uid_t</code> of <code>-1</code> properly.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1945,6 +1971,12 @@ from the configuration records.<br>
 
 <hr>
 <a name="check_shutmsg"><b>check_shutmsg</b><br>
+<br>
+<font color=blue>Comments</font>:  Checks for the existence of
+<a href="macros.html#SHUTMSG_PATH"><code>SHUTMSG_PATH</code></a>, the
+shutdown message file.  <i>deny</i> and <i>disc</i> are filled with the
+times at which to deny new connections and to disconnect existing ones,
+respectively.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -3437,6 +3469,15 @@ needed, then returns the resolved path, if any.<br>
 <hr>
 <a name="fs_lookup_dir"><b>fs_lookup_dir</b><br>
 <br>
+<font color=blue>Comments</font>:  This function is called whenever any
+sort of directory operation, to be performed on a directory or file, is
+needed.  A &quot;closest&quot; match algorithm is used.  If the lookup
+fails or is not &quot;close enough&quot; (<i>i.e.</i> the final target does
+not exactly match an existing <code>fsdir_t</code>), we can look for
+matchable targets and call <code>file_hit</code>, then rescan the
+<code>fsdir_t</code> list.  The rescan is performed in case any modules
+registered <code>fs</code> handlers during the hit.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  fsdir_t *fs_lookup_dir(const char *path, int op)
@@ -3446,6 +3487,13 @@ needed, then returns the resolved path, if any.<br>
 
 <hr>
 <a name="fs_lookup_file"><b>fs_lookup_file</b><br>
+<br>
+<font color=blue>Comments</font>:  This functions performs a similar function
+to <a href="#fs_lookup_dir"><code>fs_lookup_dir()</code></a>, however, as
+it performs a <i>file</i> lookup, as opposed to a <i>directory</i> lookup,
+the target is the subdirectory containing the actual target <i>path</i>.
+A basic optimization - if the path contains no slashes,
+<a href="#fs_cwd"><code>fs_cwd()</code></a is returned - is used.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -3838,6 +3886,16 @@ file.<br>
 <hr>
 <a name="get_name_max"><b>get_name_max</b><br>
 <br>
+<font color=blue>Comments</font>:  Get the maximum size of a file name,
+specifically of the pathname component.  If a directory file descriptor,
+<i>ie</i> the <code>dir_fd</code> <code>DIR</code> structure element, is
+not available, then the second argument should be <code>0</code>.<br>
+<br>
+<i>Note</i>: a POSIX compliant system typically should <b>not</b> define
+<code>NAME_MAX</code>, since the value almost certainly varies across
+different file system types.  Refer to POSIX 1003.1a, Section 2.9.5,
+Table 2-5.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  get_name_max(char *dirname, int dir_fd)
@@ -3924,6 +3982,11 @@ Returns <code>NULL</code> if the parameter <i>name</i> is not found.<br>
 
 <hr>
 <a name="get_token"><b>get_token</b><br>
+<br>
+<font color=blue>Comments</font>:  This function tokenizes the string <i>s</i>,
+incrementing the pointer to <i>s</i> to the next non-separator <i>sep</i>
+in the string, and returning a token.  If the source string <i>s</i> is empty
+or <code>NULL</code>, the next token returned will be <code>NULL</code>.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -4484,6 +4547,10 @@ long uptimes.<br>
 <hr>
 <a name="io_abort"><b>io_abort</b><br>
 <br>
+<font color=blue>Comments</font>:  This function sets the
+<a href="macros.html#IO_ABORT"><code>IO_ABORT</code></a> flag on the given
+<a href="structs.html#IO_File"><code>IOBUF</code></a> <i>f</i>.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  void io_abort(IOFILE *f)
@@ -4612,6 +4679,10 @@ if the send queue is full and the socket hasa been closed.<br>
 
 <hr>
 <a name="io_set_errno"><b>io_set_errno</b><br>
+<br>
+<font color=blue>Comments</font>:  This is an accessor function which
+sets the <code>xerrno</code> member of the given
+<a href="structs#IO_File"><code>IOBUF</code></a> <i>f</i>.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -5689,6 +5760,11 @@ explanation incomplete</i><br>
 <hr>
 <a name="pdircat"><b>pdircat</b><br>
 <br>
+<font color=blue>Comments</font>:  Using the given <code>pool</code> <i>p</i>
+for memory, this function will concatenate the given <code>char *</code>
+arguments into a string, each element separated by a directory separator
+character (<i>e.g.</i> <code>/</code>), to create a path.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  char *pdircat(pool *p, ...)
@@ -6207,6 +6283,12 @@ is usually called after a connection has been made to a server.<br>
 <hr>
 <a name="safe_token"><b>safe_token</b><br>
 <br>
+<font color=blue>Comments</font>:  This function tokenizes a string <i>s</i>,
+returning the next token in the string, and incrementing the <i>s</i>
+pointer to the next non-whitespace character in the string.  It is
+&quot;safe&quot; because it never returns <code>NULL</code>, only an empty
+string if no token remains in the source string.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  char *safe_token(char **s)
@@ -6227,6 +6309,10 @@ is usually called after a connection has been made to a server.<br>
 
 <hr>
 <a name="schedulep"><b>schedulep</b><br>
+<br>
+<font color=blue>Comments</font>:  Returns <code>TRUE</code> if there is
+a scheduled function waiting, <code>FALSE</code> otherwise.  This function
+should probably be given a more descriptive name.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -8003,7 +8089,7 @@ Last Updated: <i>$Date$</i><br>
 <br><hr>
 
 <font size=2><b><i>
-&copy; Copyright 2000 TJ Saunders<br>
+&copy; Copyright 2000,2001 TJ Saunders<br>
  All Rights Reserved<br>
 </i></b></font>
 

@@ -51,8 +51,8 @@ destroyed.
 <p>
 The response chain method uses the following functions:
 <ul>
-  <li><a href="../api/functions.html#add_response"><code>add_response()</code></a>
-  <li><a href="../api/functions.html#add_response_err"><code>add_response_err()</code></a>
+  <li><a href="../api/functions.html#pr_response_add"><code>pr_response_add()</code></a>
+  <li><a href="../api/functions.html#pr_response_add_err"><code>pr_response_add_err()</code></a>
 </ul>
 
 <p>
@@ -70,21 +70,25 @@ of a multiline response started by another handler.
 
 <p>
 For example, if the following
-<a href="../api/functions.html#add_response"><code>add_response()</code></a>
+<a href="../api/functions.html#pr_response_add"><code>pr_response_add()</code></a>
 calls were made from different modules:<br>
 <br>
 <b>module A</b>:<br>
-<code>add_response(R_200, "Command successfully completed");</code><br>
+<code>
+pr_response_add(R_200, "Command successfully completed");
+</code><br>
 
 <br>
 <b>module B</b>:<br>
 <code>
-add_response(R_DUP, "Statistics for command '%s': none", cmd->argv[0]);
+pr_response_add(R_DUP, "Statistics for command '%s': none", cmd->argv[0]);
 </code><br>
 
 <br>
 <b>module C</b>:<br>
-<code>add_response(R_DUP, "XFOO post_cmd handler ran");</code><br>
+<code>
+pr_response_add(R_DUP, "XFOO post_cmd handler ran");
+</code><br>
 
 <p>
 The final output sent to the client, assuming the command was successfully
@@ -100,9 +104,9 @@ See <a href="../src/include/ftp.h.html#R_110">include/ftp.h</a> for the full
 listing of response numerics.
 
 <p>
-Responses to the client should be added using <code>add_response()</code>
+Responses to the client should be added using <code>pr_response_add()</code>
 when the handler is going to return <code>HANDLED</code> or
-<code>DECLINED</code>; <code>add_response_err()</code> should be used if
+<code>DECLINED</code>; <code>pr_response_add_err()</code> should be used if
 the handler is going to return <code>ERROR</code>.  At least one response
 in the chain, either &quot;normal&quot; or error chain, should be present
 in order to return an RFC-compliant response code to the client.  This
@@ -125,11 +129,11 @@ engine.
 <p>
 The direct response method utilizes the following functions:
 <ul>
-  <li><a href="../api/functions.html#send_response"><code>send_response()</code></a>,
-  <li><a href="../api/functions.html#send_response_async"><code>send_response_async()</code></a>,
-  <li><a href="../api/functions.html#send_response_ml"><code>send_response_ml()</code></a>
-  <li><a href="../api/functions.html#send_response_ml_end"><code>send_response_ml_end()</code></a>
-  <li><a href="../api/functions.html#send_response_ml_start"><code>send_response_ml_start()</code></a>
+  <li><a href="../api/functions.html#pr_response_send"><code>pr_response_send()</code></a>,
+  <li><a href="../api/functions.html#pr_response_send_async"><code>pr_response_send_async()</code></a>,
+  <li><a href="../api/functions.html#pr_response_send_ml"><code>pr_response_send_ml()</code></a>
+  <li><a href="../api/functions.html#pr_response_send_ml_end"><code>pr_response_send_ml_end()</code></a>
+  <li><a href="../api/functions.html#pr_response_send_ml_start"><code>pr_response_send_ml_start()</code></a>
 </ul>
 
 <p>
@@ -188,7 +192,7 @@ Last Updated: <i>$Date$</i><br>
 <br><hr>
 
 <font size=2><b><i>
-&copy; Copyright 2000-2002 TJ Saunders<br>
+&copy; Copyright 2000-2003 TJ Saunders<br>
  All Rights Reserved<br>
 </i></b></font>
 

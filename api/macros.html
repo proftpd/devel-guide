@@ -27,16 +27,6 @@
   <a href="../src/include/modules.h.html#ANY_MODULE">include/modules.h</a><br>
 
 <hr>
-<a name="ARBITRARY_MAX"><b>ARBITRARY_MAX</b></a><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- #define ARBITRARY_MAX 128
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/contrib/mod_sqlpw.c.html#ARBITRARY_MAX">contrib/mod_sqlpw.c</a><br>
-
-<hr>
 <a name="ASSERT"><b>ASSERT</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -167,8 +157,7 @@
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define CHECK_ARGS(x, n) if((x)->argc-1 < n) \
-           CONF_ERROR(x,"missing arguments")
+ #define CHECK_ARGS(x, n) if ((x)->argc-1 < n) CONF_ERROR(x, "missing arguments")
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/include/dirtree.h.html#CHECK_ARGS">include/dirtree.h</a><br>
@@ -178,7 +167,7 @@
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define CHECK_CMD_ARGS(x, n) if((x)->argc != (n)) { \
+ #define CHECK_CMD_ARGS(x, n) if ((x)->argc != (n)) { \
            add_response_err(R_501, "Invalid number of arguments."); \
            return ERROR((x)); \
          }
@@ -202,13 +191,18 @@
 <hr>
 <a name="CHECK_CONF"><b>CHECK_CONF</b></a><br>
 <br>
+<font color=blue>Comments</font>: This macro checks the given
+<code>cmd_rec</code>'s configuration context against an <code>OR</code>'d list
+of allowable contexts, and returns a configuration error if the directive is
+occurring in an illegal context.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define CHECK_CONF(x,p) if(!check_conf((x),(p))) \
+ #define CHECK_CONF(x, p) if (!check_conf((x), (p))) \
            CONF_ERROR((x), \
-           pstrcat((x)->tmp_pool,"directive not allowed in ", \
+           pstrcat((x)->tmp_pool, "directive not allowed in ", \
            get_section_name((x)), \
-           " section.",NULL))
+           " section.", NULL))
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/include/dirtree.h.html#CHECK_CONF">include/dirtree.h</a><br>
@@ -239,7 +233,7 @@
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CHECK_VARARGS(x, n, m) if((x)->argc - 1 < n || \
-         (x)->argc - 1 > m) CONF_ERROR(x,"missing arguments")
+         (x)->argc - 1 > m) CONF_ERROR(x, "missing arguments")
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/include/dirtree.h.html#CHECK_VARARGS">include/dirtree.h</a><br>
@@ -249,7 +243,7 @@
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define CHOP(s) strip_end((s),"\r\n")
+ #define CHOP(s) strip_end((s), "\r\n")
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/include/support.h.html#CHOP">include/support.h</a><br>
@@ -505,8 +499,8 @@
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define CONF_ERROR(x, s) return \
-         ERROR_MSG((x),NULL,pstrcat((x)->tmp_pool, \
-         (x)->argv[0],": ",(s),NULL));
+           ERROR_MSG((x), NULL, pstrcat((x)->tmp_pool, \
+           (x)->argv[0], ": ", (s), NULL));
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/include/dirtree.h.html#CONF_ERROR">include/dirtree.h</a><br>
@@ -599,9 +593,9 @@
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define CURRENT_CONF (session.dir_config ?  session.dir_config->subset \
-         : (session.anon_config ? session.anon_config->subset \
-         : main_server->conf))
+ #define CURRENT_CONF (session.dir_config ? session.dir_config->subset \
+           : (session.anon_config ? session.anon_config->subset \
+           : main_server->conf))
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/include/dirtree.h.html#CURRENT_CONF">include/dirtree.h</a><br>
@@ -1223,7 +1217,7 @@ size<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define ERROR_INT(cmd,n) mod_create_error((cmd),(n))
+ #define ERROR_INT(cmd, n) mod_create_error((cmd), (n))
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/include/modules.h.html#ERROR_INT">include/modules.h</a><br>
@@ -1233,8 +1227,7 @@ size<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define ERROR_MSG(cmd,n,m) mod_create_ret((cmd),\
-         1,(n),(m))
+ #define ERROR_MSG(cmd, n, m) mod_create_ret((cmd), 1, (n), (m))
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/include/modules.h.html#ERROR_MSG">include/modules.h</a><br>
@@ -1262,6 +1255,8 @@ size<br>
 <hr>
 <a name="FSOP_CHDIR"><b>FSOP_CHDIR</b></a><br>
 <br>
+<font color=blue>Comments</font>: File system operation - <code>chdir</code><br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_CHDIR (1 << 14)
@@ -1271,6 +1266,8 @@ size<br>
 
 <hr>
 <a name="FSOP_CHMOD"><b>FSOP_CHMOD</b></a><br>
+<br>
+<font color=blue>Comments</font>: File system operation - <code>chmod</code><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1282,6 +1279,8 @@ size<br>
 <hr>
 <a name="FSOP_CHOWN"><b>FSOP_CHOWN</b></a><br>
 <br>
+<font color=blue>Comments</font>: File system operation - <code>chown</code><br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_CHOWN (1 << 13)
@@ -1291,6 +1290,8 @@ size<br>
 
 <hr>
 <a name="FSOP_CLOSE"><b>FSOP_CLOSE</b></a><br>
+<br>
+<font color=blue>Comments</font>: File system operation - <code>close</code><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1302,6 +1303,8 @@ size<br>
 <hr>
 <a name="FSOP_CLOSEDIR"><b>FSOP_CLOSEDIR</b></a><br>
 <br>
+<font color=blue>Comments</font>: File system operation - <code>closedir</code><br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_CLOSEDIR (1 << 16)
@@ -1311,6 +1314,8 @@ size<br>
 
 <hr>
 <a name="FSOP_CREAT"><b>FSOP_CREAT</b></a><br>
+<br>
+<font color=blue>Comments</font>: File system operation - <code>creat</code><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1324,14 +1329,15 @@ size<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define FSOP_FILEMASK (FSOP_OPEN|FSOP_READ|FSOP_WRITE|FSOP_CLOSE|\
-         FSOP_CREAT)
+ #define FSOP_FILEMASK (FSOP_OPEN|FSOP_READ|FSOP_WRITE|FSOP_CLOSE|FSOP_CREAT)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/include/fs.h.html#FSOP_FILEMASK">include/fs.h</a><br>
 
 <hr>
 <a name="FSOP_LINK"><b>FSOP_LINK</b></a><br>
+<br>
+<font color=blue>Comments</font>: File system operation - <code>link</code><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1343,6 +1349,8 @@ size<br>
 <hr>
 <a name="FSOP_LSTAT"><b>FSOP_LSTAT</b></a><br>
 <br>
+<font color=blue>Comments</font>: File system operation - <code>lstat</code><br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_LSTAT (1 << 1)
@@ -1352,6 +1360,8 @@ size<br>
 
 <hr>
 <a name="FSOP_OPEN"><b>FSOP_OPEN</b></a><br>
+<br>
+<font color=blue>Comments</font>: File system operation - <code>open</code><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1363,6 +1373,8 @@ size<br>
 <hr>
 <a name="FSOP_OPENDIR"><b>FSOP_OPENDIR</b></a><br>
 <br>
+<font color=blue>Comments</font>: File system operation - <code>opendir</code><br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_OPENDIR (1 << 15)
@@ -1372,6 +1384,8 @@ size<br>
 
 <hr>
 <a name="FSOP_READ"><b>FSOP_READ</b></a><br>
+<br>
+<font color=blue>Comments</font>: File system operation - <code>read</code><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1383,6 +1397,8 @@ size<br>
 <hr>
 <a name="FSOP_READDIR"><b>FSOP_READDIR</b></a><br>
 <br>
+<font color=blue>Comments</font>: File system operation - <code>readdir</code><br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_READDIR (1 << 17)
@@ -1392,6 +1408,8 @@ size<br>
 
 <hr>
 <a name="FSOP_READLINK"><b>FSOP_READLINK</b></a><br>
+<br>
+<font color=blue>Comments</font>: File system operation - <code>readlink</code><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1403,6 +1421,8 @@ size<br>
 <hr>
 <a name="FSOP_RENAME"><b>FSOP_RENAME</b></a><br>
 <br>
+<font color=blue>Comments</font>: File system operation - <code>rename</code><br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_RENAME (1 << 2)
@@ -1412,6 +1432,8 @@ size<br>
 
 <hr>
 <a name="FSOP_STAT"><b>FSOP_STAT</b></a><br>
+<br>
+<font color=blue>Comments</font>: File system operation - <code>stat</code><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1423,6 +1445,8 @@ size<br>
 <hr>
 <a name="FSOP_SYMLINK"><b>FSOP_SYMLINK</b></a><br>
 <br>
+<font color=blue>Comments</font>: File system operation - <code>symlink</code><br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_SYMLINK (1 << 10)
@@ -1433,6 +1457,8 @@ size<br>
 <hr>
 <a name="FSOP_UNLINK"><b>FSOP_UNLINK</b></a><br>
 <br>
+<font color=blue>Comments</font>: File system operation - <code>unlink</code><br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define FSOP_UNLINK (1 << 3)
@@ -1442,6 +1468,8 @@ size<br>
 
 <hr>
 <a name="FSOP_WRITE"><b>FSOP_WRITE</b></a><br>
+<br>
+<font color=blue>Comments</font>: File system operation - <code>write</code><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1499,6 +1527,8 @@ file, in the <code>group(5)</code> format.<br>
 <hr>
 <a name="G_NONE"><b>G_NONE</b></a><br>
 <br>
+<font color=blue>Comments</font>: Command group for non-specific commands<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  #define G_NONE NULL
@@ -1523,7 +1553,7 @@ file, in the <code>group(5)</code> format.<br>
 <a name="G_WRITE"><b>G_WRITE</b></a><br>
 <br>
 <font color=blue>Comments</font>: &quot;write&quot; command group:
-<code>WRITE</code>, etc<br>
+<code>STOR</code>, <code>STOU</code>, etc<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1537,7 +1567,7 @@ file, in the <code>group(5)</code> format.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define HANDLED(cmd) mod_create_ret((cmd),0,NULL,NULL)
+ #define HANDLED(cmd) mod_create_ret((cmd), 0, NULL, NULL)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/include/modules.h.html#HANDLED">include/modules.h</a><br>
@@ -1597,7 +1627,7 @@ file, in the <code>group(5)</code> format.<br>
 <hr>
 <a name="IOR_ERROR"><b>IOR_ERROR</b></a><br>
 <br>
-<font color=blue>Comments</font>: Requested resulted in error<br>
+<font color=blue>Comments</font>: Request resulted in error<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1634,11 +1664,11 @@ file, in the <code>group(5)</code> format.<br>
 <a name="IO_ABORT"><b>IO_ABORT</b></a><br>
 <br>
 <font color=blue>Comments</font>: Temporary internal flag used to indicate
-that I/O on an <code>IOFILE</code> has been aborted and should return
-<code>-2</code> at the next possible instant.  In combination with
-<code>IO_INTR</code> and interruptible syscalls, this should be near
-instantly.  This flag cannot be tested for it is cleared immediately after
-being detected.<br>
+that I/O on an <a href="structs.html#IO_File"><code>IOFILE</code></a> has been
+aborted and should return <code>-2</code> at the next possible instant.  In
+combination with <a href="#IO_INTR"><code>IO_INTR</code></a> and interruptible
+syscalls, this should be near instantly.  This flag cannot be tested for it
+is cleared immediately after being detected.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1650,7 +1680,7 @@ being detected.<br>
 <hr>
 <a name="IO_INTR"><b>IO_INTR</b></a><br>
 <br>
-<font color=blue>Comments</font>: Indicated that <code>io_</code>* functions
+<font color=blue>Comments</font>: Indicates that <code>io_</code>* functions
 are allowed to be interrupted by <code>EINTR</code>, and return
 <code>-2</code>.<br>
 <br>
@@ -1676,7 +1706,7 @@ are allowed to be interrupted by <code>EINTR</code>, and return
 <hr>
 <a name="IO_NONRESTART"><b>IO_NORESTART</b></a><br>
 <br>
-<font color=blue>Comments</font>: Indicates that <code>io_</code>* funcations
+<font color=blue>Comments</font>: Indicates that <code>io_</code>* functions
 should not automagically restart if <code>read()</code> or <code>write()</code>
 should return <code>EWOULDBLOCK</code>/<code>EAGAIN</code>. The default is
 to restart.<br>
@@ -1813,7 +1843,7 @@ to restart.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define MAP_GID(x) (fakegroup ? fakegroup : auth_gid_name(cmd->tmp_pool,(x)))
+ #define MAP_GID(x) (fakegroup ? fakegroup : auth_gid_name(cmd->tmp_pool, (x)))
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_ls.c.html#MAP_GID">modules/mod_ls.c</a><br>
@@ -1823,7 +1853,7 @@ to restart.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- #define MAP_UID(x) (fakeuser ? fakeuser : auth_uid_name(cmd->tmp_pool,(x)))
+ #define MAP_UID(x) (fakeuser ? fakeuser : auth_uid_name(cmd->tmp_pool, (x)))
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_ls.c.html#MAP_UID">modules/mod_ls.c</a><br>
@@ -3516,7 +3546,7 @@ Last Updated: <i>$Date$</i><br>
 <br><hr>
 
 <font size=2><b><i>
-&copy; Copyright 2000 TJ Saunders<br>
+&copy; Copyright 2000,2001 TJ Saunders<br>
  All Rights Reserved<br>
 </i></b></font>
 

@@ -100,8 +100,16 @@ See <a href="../src/include/ftp.h.html#R_110">include/ftp.h</a> for the full
 listing of response numerics.
 
 <p>
-<i>insert notes on when to use <code>add_response()</code> and when to use
-<code>add_response_err()</code></i>
+Responses to the client should be added using <code>add_response()</code>
+when the handler is going to return <code>HANDLED</code> or
+<code>DECLINED</code>; <code>add_response_err()</code> should be used if
+the handler is going to return <code>ERROR</code>.  At least one response
+in the chain, either &quot;normal&quot; or error chain, should be present
+in order to return an RFC-compliant response code to the client.  This
+is important; returning the wrong code for a command, or no code at all,
+can hang the client.  Note also that responses may be added to both
+chains simultaneously, however only one chain of response will be flushed
+back to the client.
 
 <p>
 <b>Direct Response</b><br>

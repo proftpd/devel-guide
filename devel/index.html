@@ -24,33 +24,21 @@
 <b>Module Development</b><br>
 As with any software development, there are certain things to watch out for
 when building a module.  There are also other things to consider as part of
-the development process, such as configure scripts and documentation.
+the development process, such as <code>configure</code> scripts and
+documentation.
 
 <p>
 If you are developing a module for wider distribution with <code>proftpd</code>,
-please keep in mind the overall design philosophy: no use of the
-<code>exec*e(2)</code> or <code>system(2)</code> system calls.  Helper
+please keep in mind the overall design philosophy: no use of
+<code>system(2)</code> or the <code>exec</code> family of system calls.  Helper
 applications to accompany the module are acceptable; the server (and modules)
 should simply not invoke any code outside of its control.
-Here are some recommended <a href="secure-programming.html">sources</a> for
-further reading on secure programming.
 
 <p>
-Also, always respect the normal filesystem permissions.  <code>proftpd</code>
-has always honored the normal Unix permissions, and may provide access
-controls <i>in addition to</i> those of the filesystem, but <b>do not</b>
-override them.  This only leads to trouble.
-
-<p>
-<b>Security</b><br>
-Always, <b><i>always</i></b>, <b>ALWAYS</b> check, verify, and sanitize user
-input, be it from configuration files such as <code>.ftpaccess</code>, from
-the configuration directive arguments for your modules, from any FTP commands
-you've created, etc etc.  If you're going to open and write a file with
-root privileges, check to see if the file exists first.  If it does, check
-whether it is a symlink, has data, whatever.  <b>Do not</b> blindly write to a
-file name, unless you are absolutely certain of the conditions of the directory
-and file to which you are writing.
+Also, respect the normal filesystem permissions.  <code>proftpd</code> has
+always honored the normal Unix permissions, and may provide access controls
+<i>in addition to</i> those of the filesystem, but <b>do not</b> override
+them.  This only leads to trouble.
 
 <p>
 <b>Documentation</b><br>
@@ -63,6 +51,25 @@ the ProFTPD community.
 <p>
 Patches without descriptions of what they are fixing, <i>and why</i>, force developers to read the code of the patch in order to decipher the purpose; the
 author of the patch has the best insight into the patch's purpose.
+
+<p>
+<b>Common tasks</b><br>
+As you develop your module, you will find that there are some routines and
+operations needed that will have inevitably been done before, either in
+other modules, or in the core code itself.  These pages describe some of the
+common tasks you can expect to encounter, and how they can be done:
+<ul>
+  <li>using <a href="third-party-libraries.html">third-party libraries</a>
+      in your module
+  <li>detecting <a href="session-credentials.html">session credentials</a>
+      (<i>i.e.</i> user, groups, class)
+  <li>adding module-specific <a href="site-commands.html">SITE</a> commands
+  <li>module <a href="module-logging.html">logging</a>
+  <li><a href="chroot-workarounds.html">working</a> around the
+      <code>chroot()</code> function
+</ul>
+Here are some other <a href="tips.html">tips</a> to keep in mind as you work
+on your module.
 
 <p>
 <b>Licensing</b><br>
@@ -84,25 +91,20 @@ any governmental laws or restrictions on the cryptographic code in use,
 in its licensing and distribution.
 
 <p>
-<b>Common tasks</b><br>
-As you develop your module, you will find that there are some routines and
-operations needed that will have inevitably been done before, either in
-other modules, or in the core code itself.  These pages describe some of the
-common tasks you can expect to encounter, and how they can be done:
-<ul>
-  <li>module <a href="module-logging.html">logging</a>
-  <li>detecting <a href="session-credentials.html">session credentials</a>
-      (<i>i.e.</i> user, groups, class)
-  <li>adding module-specific <a href="site-commands.html">SITE</a> commands
-  <li><a href="chroot-workarounds.html">working</a> around the
-      <code>chroot()</code> function
-  <li>using <a href="third-party-libraries.html">third-party libraries</a>
-      in your module
-</ul>
+<b>Security</b><br>
+Always, <b><i>always</i></b>, <b>ALWAYS</b> check, verify, and sanitize user
+input, be it from configuration files such as <code>.ftpaccess</code>, from
+the configuration directive arguments for your modules, from any FTP commands
+you've created, etc etc.  If you're going to open and write a file with
+root privileges, check to see if the file exists first.  If it does, check
+whether it is a symlink, has data, whatever.  <b>Do not</b> blindly write to a
+file name, unless you are absolutely certain of the conditions of the directory
+and file to which you are writing.
 
 <p>
-Here are some other <a href="tips.html">tips</a> to keep in mind as you work
-on your module.
+<b>Secure Practices</b><br>
+Here are some recommended <a href="secure-programming.html">sources</a> for
+further reading on secure programming and practices to keep in mind.
 
 <p>
 <center><a href="../toc.html">Table of Contents</a></center><br>

@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>ProFTPD Developer's Guide: API - Typedefs</title>
+<title>ProFTPD Developer's Guide: API Typedefs</title>
 </head>
 
 <body bgcolor=white>
@@ -12,7 +12,7 @@
 <center>
 <img src="../images/proftpd.png">
 <br><br>
-<h3><b>ProFTPD Developer's Guide: API - Typedefs</b></h3>
+<h3><b>ProFTPD Developer's Guide: API Typedefs</b></h3>
 <i><b>ProFTPD Version 1.2</b></i><br>
 </center>
 
@@ -271,7 +271,7 @@
    <font color=green>/* hack to speed up symbol hashing in modules.c */</font>
    int symtable_index;
 
-   <font color=green>/* private data for passing/retaining between handlers */</font>
+   <font color=green>/* private data for passing/retaining among handlers */</font>
    privdata_t *private;
 
    <font color=green>/* internal use */</font>
@@ -299,7 +299,7 @@
 
    modret_t *(*handler)(cmd_rec *);
 
-   <font color=green>/* is authentication required? */</font>
+   <font color=green>/* is authentication required before this command may be used? */</font>
    int requires_auth;
 
    <font color=green>/* is allowed to be issued during transfers? */</font>
@@ -775,7 +775,7 @@
    <font color=green>/* username/groupname after login */</font>
    char *user, *group;
 
-   <font color=green>/* UID/GID after login, befure the UID/GID fields
+   <font color=green>/* UID/GID after login, before the UID/GID fields
     * above are changed
     */</font>
    uid_t login_uid;
@@ -830,7 +830,7 @@
      <font color=green>/* as used in transfer */</font>
      char *path;
 
-     <font color=green>/* as used in hidden stor */</font>
+     <font color=green>/* as used in hidden stores */</font>
      char *path_hidden;
 
      char *bufstart, *buf;

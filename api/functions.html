@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>ProFTPD Developer's Guide: API - Functions</title>
+<title>ProFTPD Developer's Guide: API Functions</title>
 </head>
 
 <body bgcolor=white>
@@ -12,7 +12,7 @@
 <center>
 <img src="../images/proftpd.png">
 <br><br>
-<h3><b>ProFTPD Developer's Guide: API - Functions</b></h3>
+<h3><b>ProFTPD Developer's Guide: API Functions</b></h3>
 <i><b>ProFTPD Version 1.2</b></i><br>
 </center>
 
@@ -6300,6 +6300,11 @@ explicit match; <code>-1</code> if it is an explicit mismatch (<i>i.e.</i>
 <pre>
   int pclosef(pool *<i>p</i>, int <i>fd</i>)
 </pre>
+<font color=blue>Comments</font>:<br>
+<br>
+<font color=blue>See Also</font>:
+<a href="#popenf"><code>popenf()</code></a><br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/pool.c.html#pclosef">src/pool.c</a><br>
 
@@ -6318,9 +6323,11 @@ character (<i>e.g.</i> <code>/</code>), to create a path.<br>
 <font color=blue>Notes:</font> The argument list <i>must</i> end with a
 <code>NULL</code>.  You have been warned.<br>
 <br>
+<font color=blue>See Also</font>:
+<a href="#pstrcat"><code>pstrcat()</code></a><br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/pool.c.html#pdircat">src/pool.c</a><br>
-
 <hr>
 <a name="percent_complete"><b>percent_complete</b><br>
 <br>

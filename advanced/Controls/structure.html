@@ -10,7 +10,7 @@
 
 <hr><br>
 <center>
-<img src="../../images/proftpd.png">
+<img src="../../images/proftpd.png" border=0>
 <br><br>
 <h3><b>ProFTPD Developer's Guide: Controls API Structures</b></h3>
 <i><b>ProFTPD Version 1.2</b></i><br>
@@ -30,71 +30,71 @@ The code definining the structures of these objects is in
 <a href="../../src/include/ctrls.h.html">include/ctrls.h</a>, but is
 included here for your reading pleasure:
 <pre>
-<font color=blue>/* Controls handler object */</font>
+<font color=green>/* Controls handler object */</font>
 typedef struct ctrls_obj {
   struct ctrls_obj *ctrls_next, *ctrls_prev;
 
-  <font color=blue>/* object ID */</font>
+  <font color=green>/* object ID */</font>
   unsigned int ctrls_id;
 
-  <font color=blue>/* registering module */</font>
+  <font color=green>/* registering module */</font>
   module *ctrls_module;
 
-  <font color=blue>/* requesting client */</font>
+  <font color=green>/* requesting client */</font>
   pr_ctrls_cl_t *ctrls_cl;
 
-  <font color=blue>/* control &quot;action&quot; */</font>
+  <font color=green>/* control &quot;action&quot; */</font>
   const char *ctrls_action;
 
-  <font color=blue>/* control trigger time; if zero, will trigger immediately */</font>
+  <font color=green>/* control trigger time; if zero, will trigger immediately */</font>
   time_t ctrls_when;
 
-  <font color=blue>/* temporary pool for control handler use */</font>
+  <font color=green>/* temporary pool for control handler use */</font>
   pool *ctrls_tmp_pool;
 
-  <font color=blue>/* control handler callback */</font>
+  <font color=green>/* control handler callback */</font>
   int (*ctrls_cb)(struct ctrls_ob *, int, char **);
 
-  <font color=blue>/* control handler callback arguments */</font>
+  <font color=green>/* control handler callback arguments */</font>
   array_header *ctrls_cb_args;
 
-  <font color=blue>/* control handler callback return value; used to determine when to clear this object
+  <font color=green>/* control handler callback return value; used to determine when to clear this object
     * from the requested handler list
     */</font>
   int ctrls_cb_retval;
 
-  <font color=blue>/* control handler callback responses */</font>
+  <font color=green>/* control handler callback responses */</font>
   array_header *ctrls_cb_resps;
 
-  <font color=blue>/* for possibly passing arbitrary data among control handlers */</font>
+  <font color=green>/* for possibly passing arbitrary data among control handlers */</font>
   void *ctrls_data;
 
-  <font color=blue>/* for internal use only */</font>
+  <font color=green>/* for internal use only */</font>
   unsigned long ctrls_flags;
 
 } pr_ctrls_t;
 
-<font color=blue>/* Controls client object */</font>
+<font color=green>/* Controls client object */</font>
 typedef struct cl_obj {
   struct cl_obj *cl_next, *cl_prev;
 
-  <font color=blue>/* pool for this object's use */</font>
+  <font color=green>/* pool for this object's use */</font>
   pool *cl_pool;
 
-  <font color=blue>/* client socket file descriptor */</font>
+  <font color=green>/* client socket file descriptor */</font>
   int cl_fd;
 
-  <font color=blue>/* credentials of the connecting client */</font>
+  <font color=green>/* credentials of the connecting client */</font>
   uid_t cl_uid;
   const char *cl_user;
   gid_t cl_gid;
   const char *cl_group;
   pid_t cl_pid;
 
-  <font color=blue>/* for internal use only */</font>
+  <font color=green>/* for internal use only */</font>
   unsigned long cl_flags;
 
-  <font color=blue>/* pointers to all controls matching client request */</font>
+  <font color=green>/* pointers to all controls matching client request */</font>
   array_header *cl_ctrls;
 
 } pr_ctrls_cl_t;
@@ -111,7 +111,7 @@ Last Updated: <i>$Date$</i><br>
 <br><hr>
 
 <font size=2><b><i>
-&copy; Copyright 2000,2001 TJ Saunders<br>
+&copy; Copyright 2000-2002 TJ Saunders<br>
  All Rights Reserved<br>
 </i></b></font>
 

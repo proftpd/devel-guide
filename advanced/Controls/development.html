@@ -10,7 +10,7 @@
 
 <hr><br>
 <center>
-<img src="../../images/proftpd.png">
+<img src="../../images/proftpd.png" border=0>
 <br><br>
 <h3><b>ProFTPD Developer's Guide: Developing Custom Controls</b></h3>
 <i><b>ProFTPD Version 1.2</b></i><br>
@@ -26,6 +26,12 @@ object, even if just an error message.  Failure to do is an error, and the
 client will not read the response, or the handler's return value, properly.
 
 <p>
+Some control handlers, if they are going to be long-lived (relatively) and
+complexe, might do better fork()ing before doing their thing, rather
+than holding up the main daemon process (in which context the handlers
+normally run).
+
+<p>
 When defining your own custom controls,
 
 <p>
@@ -39,6 +45,9 @@ When defining your own custom controls,
  * possible.
 
 <p>
+New config_rec flags of CF_GCTRL, CF_SCTRL
+
+<p>
 <center><a href="../../toc.html">Table of Contents</a></center><br>
 
 <hr><br>
@@ -49,7 +58,7 @@ Last Updated: <i>$Date$</i><br>
 <br><hr>
 
 <font size=2><b><i>
-&copy; Copyright 2000,2001 TJ Saunders<br>
+&copy; Copyright 2000-2002 TJ Saunders<br>
  All Rights Reserved<br>
 </i></b></font>
 

@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>ProFTPD Developer's Guide: Implementing Custom Confstream Functions
+<title>ProFTPD Developer's Guide: Developing Custom Confstreams
 </title>
 </head>
 
@@ -13,7 +13,7 @@
 <center>
 <img src="../../images/proftpd.png">
 <br><br>
-<h3><b>ProFTPD Developer's Guide: Implementing Custom Confstream Functions</b></h3>
+<h3><b>ProFTPD Developer's Guide: Developing Custom Confstreams</b></h3>
 <i><b>ProFTPD Version 1.2</b></i><br>
 </center>
 <hr><br>
@@ -22,10 +22,167 @@
 <center><a href="../../toc.html">Table of Contents</a></center><br>
 
 <p>
+<b>Tutorial</b><br>
+An excellent example for using the Confstream functions can be found in
+<a href="../../api/functions.html#build_dyn_config"><code>build_dyn_config()</code></a>, the function that parses <code>.ftpaccess</code> files.  This
+function does many things, but for us the interesting bit at the moment is
+its use of confstreams to parse the files:
+<pre>
+  <font color=green>/* make sure the default file configuration stream is in effect, and
+   * configured for this .ftpaccess file.  Make sure to preserve
+   * the current confstream, to be restored later.
+   */</font>
+  filestream = get_confstream(p, "file");
+
+  <font color=green>/* even if filestream is NULL, this will set the default confstream,
+   * which is for handling files anyway.
+   */</font>
+  old_confstream = set_confstream(filestream);
+
+  <font color=green>/* prepare the current confstream (filestream) for reading from
+   * the necessary source (the .ftpaccess file in question)
+   */</font>
+  confstream_setsource(dynpath);
+
+  init_parser(p, d);
+  d->config_type = CONF_DYNDIR;
+
+  <font color=green>/* as .ftpaccess files are read during the operation of the process,
+   * don't choke on configuration errors in a .ftpaccess file, merely
+   * log warnings about them.
+   */</font>
+  if (parse_confstream(PR_PARSE_WARN) != -1) {
+    log_debug(DEBUG5, "dynamic configuration added/updated for %s",
+      fullpath);
+
+  } else {
+    log_pri(LOG_NOTICE, "notice: unable to read %s configuration '%s': "
+      "%s", confstream_gettype(), confstream_getsource(), strerror(errno));
+  }
+
+  d->config_type = CONF_DIR;
+  free_parser();
+
+  set_confstream(old_confstream);
+
+  <font color=green>/* can dispose of filestream now */</font>
+  if (filestream != NULL) {
+    destroy_pool(filestream->pool);
+    filestream = NULL;
+  }
+</pre>
+
+<p>
+This sequence of function calls is almost exactly what a developer would use
+in order to parse custom configuration streams; indeed, a
+<code>.ftpaccess</code> file may be thought of as a custom configuration stream
+that just happens to be supported by the core code.  The procedure seen
+here is typical:
+<ul>
+  <li>a confstream of the desired type is instantiated<br>
+      <code>new_stream = get_confstream(<i>type</i>);</code><br>
+  </li>
+  <br>
+
+  <li>the needed confstream is set for use, preserving the original stream<br>
+      <code>old_stream = confstream_set(new_stream);</code><br>
+  </li>
+  <br>
+
+  <li>the parser is initialized if necesary<br>
+      <code>init_parser();</code><br>
+  </li>
+  <br>
+
+  <li>the configuration stream is parsed<br>
+      <code>parse_confstream();</code><br>
+  </li>
+  <br>
+
+  <li>the parser is freed if necessary<br>
+      <code>free_parser();</code><br>
+  </li>
+  <br>
+
+  <li>the confstream is reset to its original state<br>
+      <code>confstream_set(old_stream);</code><br>
+  </li>
+  <br>
+
+  <li>the obtained configuration stream is freed<br>
+      <code>destroy_pool(new_stream);</code>
+  </li>
+  <br>
+</ul>
+
+The previous confstream is caught before parsing, and restored after parsing,
+as an act of politeness.  Given that other module authors may leave the
+confstream layer in a specific condition deliberately or accidentally, it is
+recommended that your code clean up nicely after itself.
+
+<p>
+The initialization of the parser may or may not be necessary, depending to
+the conditions and dictates of your design.  For example, the
+<code>Include</code> directive
+<a href="../../api/functions.html#add_include">handler</a> is used to
+parse other configuration streams (the configured <code>Include</code> files)
+in the midst of parsing <code>proftpd.conf</code>; the directive handler
+explicitly <i>does not touch</i> the parser, needing to maintain the parser's
+state, as it is when the directive handler is called, to provide proper context
+for the <code>Include</code>d stream.  
+
+<p>
+Notice the <code>PR_PARSE_WARN</code> argument to
+<code>parse_confstream()</code> that <code>build_dyn_config()</code> uses?
+This argument instructs the parser to issue warnings upon encountering unknown
+or misconfigured directives.  The other acceptable value is
+<code>PR_PARSE_FATAL</code>, which tells the parser to halt the program when
+encountering bad directives.  Parsing of custom configuration streams should
+almost always use <code>PR_PARSE_WARN</code>, for the only times it is
+useful and desirable to halt the daemon when parsing is at startup time, or
+when rehashing the main configuration stream because of a <code>SIGHUP</code>.
+
+<p>
+Notes: mergedown() and CF_DYNAMIC?
+
+<p>
+<b>Notes</b><br>
 When defining your own custom implementations of the Confstream functions,
-<b><i>PLEASE</i></b> use the POSIX errrors possible from the syscall/library
-versions.  Use <code>errno</code>.  This will make error-reporting by the
-core code, and other modules, <i>much</i> cleaner.
+<b><i>PLEASE</i></b> use the POSIX errror values, and set <code>errno</code>
+appropriately.  This will make error-reporting by the core code, and other
+modules, <i>much</i> cleaner.
+
+<p>
+Always make sure your confstream is open, by calling
+<code>confstream_open()</code>, before attempting to read or write to that
+stream via <code>confstream_readstr()</code> or
+<code>confstream_writestr()</code>.  It is an error to attempt to manipulate
+an unopened stream.  Calling <code>confstream_open()</code> on a confstream
+that is already opened will return successful without invoking the
+open callback.  Similarly with calling <code>confstream_close()</code> on
+a closed confstream.
+
+<p>
+Always make sure the parser is prepared to parse your configuration stream.
+It is an error to call <code>init_parser()</code> once the parser has been
+initialized, and an error to call <code>free_parser()</code> once the parser
+has been freed.  If uncertain about the state of the parser, check the
+return value of <code>init_parser()</code> like so:
+<pre>
+  if (init_parser(pool, c) < 0) {
+    free_parser();
+    init_parser(pool, c); 
+  }
+</pre>
+
+<p>
+For logging and debugging messages, the core code reports configuration errors
+like so:
+<pre>
+  log_pri(LOG_ERR, "error: %s configuration '%s', line %u: %s",
+    confstream_gettype(), confstream_getsource(), confstream_getlineno(),
+    strerror(errno));
+</pre>
 
 <p>
 <center><a href="../../toc.html">Table of Contents</a></center><br>

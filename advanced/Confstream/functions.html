@@ -33,7 +33,8 @@
 
 <p>
 The <code>create_confstream()</code> function instantiates a
-<code>confstream_rec</code> with the given <i>type</i>.  This
+<code>confstream_rec</code> with the given <i>type</i>, allocating a
+subpool from the given <i>pool</i> for this object.  This
 <code>confstream_rec *</code> will have its callback pointers initialized to
 <code>NULL</code>; the caller will need to set the callback pointers to their
 custom functions before passed the <code>confstream_rec *</code> to
@@ -54,7 +55,7 @@ its <i>source</i> and <i>data</i> fields set to <code>NULL</code>, and
 <i>lineno</i> set to zero.
 
 <p>
-the <code>set_confstream()</code> function sets the current configuration
+The <code>set_confstream()</code> function sets the current configuration
 stream object for use whenever the core parser is invoked.  The previous
 confstream is returned, or <code>NULL</code> if there was an error with
 the given <i>stream</i>, such as having <code>NULL</code> callbacks.  If

@@ -112,6 +112,10 @@ connecting user against a list of valid system shells, usually contained in
 <hr>
 <a name="_auth_group"><b>_auth_group</b><br>
 <br>
+<font color=blue>Comments</font>: This function handles groups-based
+authentication (rarely used), and is only checked if user-based password
+authentication fails.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  static config_rec *_auth_group(pool *p, char *user, char **group,
@@ -1733,6 +1737,14 @@ concatenated <code>array_header</code>s.<br>
 <hr>
 <a name="auth_authenticate"><b>auth_authenticate</b><br>
 <br>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>auth()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to provide a
+higher-level &quot;yes or no&quot; answer of whether a the given
+user <i>name</i> is successfully authenticated by the given cleartext
+password <i>pw</i>.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  int auth_authenticate(pool *p, const char *name, const char *pw)
@@ -1742,6 +1754,15 @@ concatenated <code>array_header</code>s.<br>
 
 <hr>
 <a name="auth_check"><b>auth_check</b><br>
+<br>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>check()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to, given the
+hashed password <i>cpw</i>, the username <i>name</i>, and the cleartext password
+<i>pw</i>, and using whatever method the module developer desires, determine
+whether the hashed password is sufficient and proper for that user, if the
+the cleartext password belongs to that user.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1753,6 +1774,12 @@ concatenated <code>array_header</code>s.<br>
 <hr>
 <a name="auth_endgrent"><b>auth_endgrent</b><br>
 <br>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>endgrent()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to provide a
+custom implementation of the <code>endgrent(3)</code> libc function.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  void auth_endgrent(pool *p)
@@ -1762,6 +1789,12 @@ concatenated <code>array_header</code>s.<br>
 
 <hr>
 <a name="auth_endpwent"><b>auth_endpwent</b><br>
+<br>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>endpwent()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to provide a
+custom implementation of the <code>endpwent(3)</code> libc function.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1773,6 +1806,12 @@ concatenated <code>array_header</code>s.<br>
 <hr>
 <a name="auth_getgrent"><b>auth_getgrent</b><br>
 <br>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>getgrent()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to provide a
+custom implementation of the <code>getgrent(3)</code> libc function.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  struct group *auth_getgrent(pool *p)
@@ -1782,6 +1821,12 @@ concatenated <code>array_header</code>s.<br>
 
 <hr>
 <a name="auth_getgrgid"><b>auth_getgrgid</b><br>
+<br>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>getgrgid()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to provide a
+custom implementation of the <code>getgrgid(3)</code> libc function.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1793,6 +1838,12 @@ concatenated <code>array_header</code>s.<br>
 <hr>
 <a name="auth_getgrnam"><b>auth_getgrnam</b><br>
 <br>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>getgrnam()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to provide a
+custom implementation of the <code>getgrnam(3)</code> libc function.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  struct group *auth_getgrnam(pool *p, const char *name)
@@ -1802,6 +1853,12 @@ concatenated <code>array_header</code>s.<br>
 
 <hr>
 <a name="auth_getpwent"><b>auth_getpwent</b><br>
+<br>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>getpwent()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to provide a 
+custom implementation of the <code>getpwent(3)</code> libc function.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1813,6 +1870,12 @@ concatenated <code>array_header</code>s.<br>
 <hr>
 <a name="auth_getpwnam"><b>auth_getpwnam</b><br>
 <br>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>getpwnam()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to provide a
+custom implementation of the <code>getpwnam(3)</code> libc function.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  struct passwd *auth_getpwnam(pool *p, const char *name)
@@ -1823,6 +1886,12 @@ concatenated <code>array_header</code>s.<br>
 <hr>
 <a name="auth_getpwuid"><b>auth_getpwuid</b><br>
 <br>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>getpwuid()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to provide a
+custom implementation of the <code>getpwuid(3)</code> libc function.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  struct passwd *auth_getpwuid(pool *p, uid_t uid)
@@ -1832,6 +1901,12 @@ concatenated <code>array_header</code>s.<br>
 
 <hr>
 <a name="auth_gid_name"><b>auth_gid_name</b><br>
+<br>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>gid_name()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to do a
+GID-to-name lookup for the given GID <i>gid</i>.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1863,10 +1938,15 @@ concatenated <code>array_header</code>s.<br>
 <hr>
 <a name="auth_name_gid"><b>auth_name_gid</b><br>
 <br>
-<font color=blue>Comments</font>: This function does a name-to-GID lookup
-for the given group <i>name</i>.  <b><i>NOTE:</i></b> the caller of this
-function must take due caution when handling the returned <code>gid_t</code>,
-and treat a <code>gid_t</code> of <code>-1</code> properly.<br>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>name_gid()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to do a
+name-to-GID lookup for the given group <i>name</i>. <b><i>NOTE:</i></b> the
+caller of this function must take due caution when handling the returned
+<code>gid_t</code>, and treat a <code>gid_t</code> of <code>-1</code>
+properly.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  gid_t auth_name_gid(pool *p, const char *name)
@@ -1877,10 +1957,14 @@ and treat a <code>gid_t</code> of <code>-1</code> properly.<br>
 <hr>
 <a name="auth_name_uid"><b>auth_name_uid</b><br>
 <br>
-<font color=blue>Comments</font>: This function does a name-to-UID lookup
-for the given user <i>name</i>.  <b><i>NOTE:</i></b> the caller of this function
-must take due caution when handling the returned <code>uid_t</code>, and
-treat a <code>uid_t</code> of <code>-1</code> properly.<br>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>name_uid()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to do a
+name-to-UID lookup for the given user <i>name</i>. <b><i>NOTE:</i></b> the
+caller of this function must take due caution when handling the returned
+<code>uid_t</code>, and treat a <code>uid_t</code> of <code>-1</code>
+properly.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1892,6 +1976,12 @@ treat a <code>uid_t</code> of <code>-1</code> properly.<br>
 <hr>
 <a name="auth_setgrent"><b>auth_setgrent</b><br>
 <br>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>setgrent()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to provide a
+custom implementation of the <code>setgrent(3)</code> libc function.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  void auth_setgrent(pool *p)
@@ -1902,6 +1992,12 @@ treat a <code>uid_t</code> of <code>-1</code> properly.<br>
 <hr>
 <a name="auth_setpwent"><b>auth_setpwent</b><br>
 <br>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>setpwent()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to provide a
+custom implementation of the <code>setpwent(3)</code> libc function.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  void auth_setpwent(pool *p)
@@ -1911,6 +2007,12 @@ treat a <code>uid_t</code> of <code>-1</code> properly.<br>
 
 <hr>
 <a name="auth_uid_name"><b>auth_uid_name</b><br>
+<br>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>uid_name()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to do a
+UID-to-name lookup for the given UID <i>uid</i>.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>

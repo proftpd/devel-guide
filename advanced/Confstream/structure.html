@@ -42,8 +42,8 @@ struct pr_confstream_struc {
   <font color=green>/* descriptive string for this type of configuration stream (eg "file", "sql", etc) */</font>
   const char *type;
  
-  <font color=green>/* name for this particular instance.  For example, file confstreams place the file name to be read here. */</font>
-  char *name;
+  <font color=green>/* source for this particular instance.  For example, file confstreams place the file name to be read here. */</font>
+  char *source;
 
   <font color=green>/* line number of the configuration stream */</font>
   unsigned int lineno;
@@ -57,8 +57,8 @@ struct pr_confstream_struc {
   <font color=green>/* Confstream callbacks */</font>
   int (*open)(confstream_rec *);
   int (*close)(confstream_rec *);
-  char *(*getstr)(confstream_rec *, char *, size_t);
-  char *(*setstr)(confstream_rec *, char *, size_t);
+  char *(*readstr)(confstream_rec *, char *, size_t);
+  char *(*writestr)(confstream_rec *, char *, size_t);
   int (*iserror)(confstream_rec *);
 
 };

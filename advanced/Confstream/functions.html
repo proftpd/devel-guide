@@ -25,7 +25,7 @@
 
 <pre>
   confstream_rec *create_confstream(pool *<i>pool</i>, const char *<i>type</i>);
-  confstream_rec *get_confstream(const char *<i>type</i>);
+  confstream_rec *get_confstream(pool *parent_pool, const char *<i>type</i>);
   confstream_rec *set_confstream(confstream_rec *<i>stream</i>); 
   int insert_confstream(confstream_rec *<i>stream</i>);
   int remove_confstream(const char *<i>type</i>);
@@ -47,7 +47,11 @@ The <code>get_confstream()</code> function is the <code>confstream_rec</code>
 lookup/retrieval function, searching the layer's list for the
 <code>confstream_rec</code> matching the requested <i>type</i>.  If no such
 matching <code>confstream_rec</code> was found, <code>NULL</code> will be
-returned.
+returned.  Otherwise, this function will create a duplicate of the matching
+confstream object, allocating the duplicate from the given <i>parent_pool</i>,
+and setting the same <i>type</i> and callback fields.  The duplicate will have
+its <i>source</i> and <i>data</i> fields set to <code>NULL</code>, and
+<i>lineno</i> set to zero.
 
 <p>
 the <code>set_confstream()</code> function sets the current configuration
@@ -84,12 +88,12 @@ described below.
 <pre>
   int confstream_open(void);
   int confstream_close(void);
-  char *confstream_getstr(char *<i>buf</i>, size_t <i>buflen</i>);
-  char *confstream_setstr(char *<i>buf</i>, size_t <i>buflen</i>);
+  char *confstream_readstr(char *<i>buf</i>, size_t <i>buflen</i>);
+  char *confstream_writestr(char *<i>buf</i>, size_t <i>buflen</i>);
   int confstream_iserror(void);
   const char *confstream_gettype(void);
-  char *confstream_getname(void);
-  void confstream_setname(const char *<i>name</i>);
+  char *confstream_getsource(void);
+  void confstream_setsource(const char *<i>source</i>);
   unsigned int confstream_getlineno(void);
 </pre>
 
@@ -102,11 +106,10 @@ confstream will be set to zero if successful.
 <p>
 The <code>confstream_close()</code> function calls on the current confstream
 object to close the configuration streamm.  It returns <code>0</code> on
-success, <code>-1</code> on error.  <code>lineno</code> of the current
-confstream will be set to zero if successful.
+success, <code>-1</code> on error.
 
 <p>
-The <code>confstream_getstr()</code> function calls on the current confstream
+The <code>confstream_readstr()</code> function calls on the current confstream
 object to retrieve the next line of configuration information from the stream.
 The retrieved line must be a string that looks similar to a line of text
 from the <i>proftpd.conf</i> configuration file.  Similar to
@@ -116,19 +119,19 @@ terminating <code>'\0'</code> will be stored after the last character in the
 buffer.  Leading and trailing whitespace will be trimmed.  Commented and
 blank lines will be skipped.  Escaped newlines will be handled appropiately,
 as line continuations.  This function will return <code>NULL</code> when no
-more data is available from the stream, or if an error occurs.  Otherwise,
-the retrieved line is returned.
+more data is available from the stream, or if an error occurs such as the
+confstream not being open.  Otherwise, the retrieved line is returned.
 
 <p>
-The <code>confstream_setstr()</code> function calls on the current confstream
+The <code>confstream_writestr()</code> function calls on the current confstream
 object to write the given buffer of configuration information to the stream.
 It will return the given buffer if successful, or <code>NULL</code> if an
-error occurred.
+error occurred, such as the confstream not being open.
 
 <p>
 The <code>confstream_iserror()</code> function calls on the current confstream
 object to check for error conditions.  For example, if
-<code>confstream_getstr()</code> returns <code>NULL</code>, this function
+<code>confstream_readstr()</code> returns <code>NULL</code>, this function
 should be called to determine if an error occurred, or if it was simply the
 end of the stream.  Patterned after <code>ferror(3)</code>, it returns non-zero
 if an error occurred, <code>0</code> if end of stream.  If an error <i>did</i>
@@ -140,12 +143,12 @@ of the current confstream object.  <code>NULL</code> is returned if there
 is not a configuration stream currently set.
 
 <p>
-The <code>confstream_getname()</code> function returns the <i>name</i> field
+The <code>confstream_getsource()</code> function returns the <i>source</i> field
 of the current confstream object.  <code>NULL</code> is returned if there
 is not a configuration stream currently set.
 
 <p>
-The <code>confstream_setname()</code> function sets the <i>name</i> field of
+The <code>confstream_setsource()</code> function sets the <i>source</i> field of
 the current confstream object by making a duplicate of the given string
 from the confstream object's <i>pool</i>.  If there is no configuration stream
 set, this function does nothing.  <b>Note:</b> misuse of this function will

@@ -87,6 +87,11 @@ directive was found, or else <code>NULL</code>.<br>
 <hr>
 <a name="_auth_check_ftpusers"><b>_auth_check_ftpusers</b><br>
 <br>
+<font color=blue>Comments</font>:  Check the given <i>user</i> against a list
+of prohibited users, usually contained in <code>/etc/ftpusers</code>, a file
+used by <code>wu-ftpd</code> servers.  This check can be skipped by using the
+<code>UseFtpUsers</code> configuration directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  static int _auth_check_ftpusers(xaset_t *s, const char *user)
@@ -610,6 +615,11 @@ This function returns the index at which <i>sym</i> was inserted.<br>
 <hr>
 <a name="_ident_timeout"><b>_ident_timeout</b><br>
 <br>
+<font color=blue>Comments</font>: Timer callback function which aborts an
+ident (RFC 1413) lookup.  The timer length is set to 10 seconds, and is
+tunable via the <code>TUNABLE_TIMEOUTIDENT</code> macro, defined in
+<a href="../src/include/options.h.html#TUNABLE_TIMEOUTIDENT">include/options.h</a>.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  static int _ident_timeout(CALLBACK_FRAME)
@@ -619,6 +629,10 @@ This function returns the index at which <i>sym</i> was inserted.<br>
 
 <hr>
 <a name="_idle_timeout"><b>_idle_timeout</b><br>
+<br>
+<font color=blue>Comments</font>:  Timer callback function which disconnects
+an idle session.  The timer length is configurable via the
+<code>TimeoutIdle</code> configuration directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -659,6 +673,11 @@ This function returns the index at which <i>sym</i> was inserted.<br>
 
 <hr>
 <a name="_login_timeout"><b>_login_timeout</b><br>
+<br>
+<font color=blue>Comments</font>:  Timer callback function which disconnects
+the control connection if the timer has elapsed before the client has
+successfully authenticated.  The timer length is configurable via the
+<code>TimeoutLogin</code> configuration directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -739,6 +758,10 @@ This function returns the index at which <i>sym</i> was inserted.<br>
 
 <hr>
 <a name="_pid_exists"><b>_pid_exists</b><br>
+<br>
+<font color=blue>Comments</font>:  This function checks to see that the given
+<i>pid</i> is valid, meaning that it belongs to an active process.  Returns
+<code>1</code> if there is a such a process, <code>0</code> otherwise.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -832,7 +855,7 @@ order.<br>
 <a name="_reparent_all"><b>_reparent_all</b><br>
 <br>
 <font color=blue>Comments</font>: Move all the members (<i>i.e.</i> a
-&quot;branchquot;) of the given configuration <i>set</i> to a different
+&quot;branch&quot;) of the given configuration <i>set</i> to a different
 configuration set, <i>newparent</i>.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -1069,6 +1092,18 @@ symlink).  This recursing function catches symlink loops via the
 <hr>
 <a name="access_check"><b>access_check</b><br>
 <br>
+<font color=blue>Comments</font>:  This function performs access checks much
+like <code>access(2)</code>, except that the process's <b>effective</b>
+user ID and group ID are used (<code>access(2)</code> uses the <b>real</b>
+user ID and group ID).  As with <code>access(2)</code>, <i>mode</i> is a mask
+consisting of one or more of <code>R_OK</code>, <code>W_OK</code>,
+<code>X_OK</code> and <code>F_OK</code>.  <code>R_OK</code>, <code>W_OK</code>,
+and <code>X_OK</code> request checking whether the <i>path</i> exists and has
+read, write, and execute permissions, respectively.  <code>F_OK</code> requests
+merely checking for the existence of <i>path</i>.  <code>0</code> is returned
+if acccess is granted, <code>-1</code> if denied, with <code>errno</code>
+set appropriately.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  int access_check(char *path, int mode)
@@ -1215,6 +1250,11 @@ the parsing of configuration files.<br>
 <hr>
 <a name="add_config_param"><b>add_config_param</b><br>
 <br>
+<font color=blue>Comments</font>:  Adds a <code>config_rec</code> to the
+server's set with name <i>name</i>.  The added <code>config_rec</code> will
+have <i>num</i> arguments, <code>void *</code> pointers to data.  The given
+number of pointers <i>num</i> must follow.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  config_rec *add_config_param(const char *name, int num, ...)
@@ -1235,6 +1275,13 @@ the parsing of configuration files.<br>
 
 <hr>
 <a name="add_config_param_str"><b>add_config_param_str</b><br>
+<br>
+<font color=blue>Comments</font>:  Similar to
+<a href="#add_config_param"><code>add_config_param()</code></a>, except that
+the given pointers are all assumed to be strings.
+<a href="#pstrdup"><code>pstrdup()</code></a> will be called on each pointer,
+using <code>permanent_pool</code> as the pool (<b>NOTE</b>:
+<code>config_rec->pool</code> <i>should really</i> be used instead).<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1338,7 +1385,12 @@ name <i>name</i>.<br>
 <hr>
 <a name="add_exit_handler"><b>add_exit_handler</b><br>
 <br>
-<font color=blue>Declaration</font>:<br>
+<font color=blue>Declaration</font>:  Register a function <i>f</i> to be
+run when the server exits normally, and the
+<a href="#run_exit_handlers"><code>run_exit_handlers()</code></a> function is
+called, which happens in
+<a href="#end_login_noexit"><code>end_login_noexit()</code></a>.<br>
+<br>
 <pre>
  void add_exit_handler(void (*f)())
 </pre>
@@ -1596,6 +1648,12 @@ the FTP command processing results in an error.<br>
 
 <hr>
 <a name="add_timer"><b>add_timer</b><br>
+<br>
+<font color=blue>Comments</font>:  Create and activate a new timer with an
+intervaal <i>seconds</i>, a timer ID number of <i>timerno</i>, and a callback
+of <i>cb</i>.  Note that if a <i>timerno</i> of -1 is given, a
+&quot;dynamic&quot; timer ID number will be assigned.  The <i>timerno</i>
+of the timer is returned.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -2057,7 +2115,7 @@ files are considered to be placed within a <code>&lt;Directory&gt;</code>;
 within the <code>.ftpaccess</code> file itself, all configuration directives
 are considered to be in a dynamic context
 (<a href="macros.html#CONF_DYNDIR"><code>CONF_DYNDIR</code></a> to be
-specific).  <code>.ftpaccess</code> files that have been updated are rehashed;
+specific).  <code>.ftpaccess</code> files that have been updated are reparsed;
 files that once contained directives, but are now empty or deleted are removed
 from the configuration records.<br>
 <br>
@@ -6127,6 +6185,9 @@ character (<i>e.g.</i> <code>/</code>), to create a path.<br>
 <hr>
 <a name="pstrcat"><b>pstrcat</b><br>
 <br>
+<font color=blue>Comments</font>:  The argument list <i>must</i> end with a
+<code>NULL</code>.  You have been warned.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  char *pstrcat(pool *p, ...)
@@ -6399,6 +6460,12 @@ elements are pushed onto them.  Pushed elements appear at the <i>end</i> of the
 <hr>
 <a name="register_rehash"><b>register_rehash</b><br>
 <br>
+<font color=blue>Comments</font>:  Registers a function <i>fp</i> to be run
+when the server receives a <code>SIGHUP</code>, which causes it to
+&quot;rehash&quot; the configuration file.  The function <i>fp</i> will be
+called before the configuration file is rehashed, and will be passed the
+given <i>data</i> pointer.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  void register_rehash(void *data, void (*fp)(void*))
@@ -6419,6 +6486,13 @@ elements are pushed onto them.  Pushed elements appear at the <i>end</i> of the
 <hr>
 <a name="remove_timer"><b>remove_timer</b><br>
 <br>
+<font color=blue>Comments</font>:  Removes an active timer from play. The
+timer must have the <i>timerno</i> given, and be registered by module
+<i>mod</i>.  If found, the <i>timerno</i> is returned, otherwise 0 is returned.
+As a special case, the macro <code>ANY_MODULE</code> may be used for the
+<i>mod</i> argument, in which case a timer with the given <i>timerno</i> will
+be removed, regardless of the registering module.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  int remove_timer(int timerno, module *mod)
@@ -6428,6 +6502,13 @@ elements are pushed onto them.  Pushed elements appear at the <i>end</i> of the
 
 <hr>
 <a name="reset_timer"><b>reset_timer</b><br>
+<br>
+<font color=blue>Comments</font>:  Resets the time on an active timer. The
+timer must have the <i>timerno</i> given, and be registered by module
+<i>mod</i>.  If found, the <i>timerno</i> is returned, otherwise 0 is returned.
+As a special case, the macro <code>ANY_MODULE</code> may be used for the
+<i>mod</i> argument, in which case a timer with the given <i>timerno</i> will
+be removed, regardless of the registering module.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>

@@ -1,0 +1,111 @@
+<!-- $Id$ -->
+<!-- $Source$ -->
+
+<html>
+<head>
+<title>ProFTPD Developer's Guide: Internals - Authenticating users</title>
+</head>
+
+<body bgcolor=white>
+
+<hr><br>
+<center>
+<img src="../images/proftpd.png">
+<br><br>
+<h3><b>ProFTPD Developer's Guide: Internals - Authenticating users</b></h3>
+<i><b>ProFTPD Version 1.2.0</b></i><br>
+</center>
+<hr><br>
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+<p>
+<b>ProFTPD's Authentication Process</b><br>
+When a FTP client connects to a ProFTPD server, it needs to authenticate itself,
+as per the FTP protocol.  The clients send a <code>USER</code> command followed
+by a <code>PASS</code> command in most cases.
+
+<p>
+Upon receiving a <code>USER</code> command, ProFTPD will first check to see
+if the requested user is allowed to log in, based on any <code>&lt;Limit
+LOGIN&gt;</code> directives.  Then it will check to see if the login is
+allowed by any configured <code>MaxClients</code>,
+<code>MaxClientsPerHost</code>, and <code>MaxHostsPerUser</code> directives.
+
+<p>
+When ProFTPD receives a <code>PASS</code> command, it will again check
+for configured <code>MaxClients</code>, <code>MaxClientsPerHost</code>, and
+<code>MaxHostsPerUser</code> limits.  The first check, during
+the handling of the <code>USER</code> command, handles
+<code>UserAlias</code>ed usernames; this check handles <i>real</i> usernames.
+The actual work of authenticating the user then takes place (more on this
+below).  If the authentication succeeds, any <code>DisplayLogin</code> and
+<code>AccessGrantMsg</code> messages are sent to the client.
+
+<p>
+<b>Authenticating the User</b><br>
+This process is handled by the
+<code><a href="../src/modules/mod_auth.c.html#_setup_environment">_setup_environment()</a></code> function, and involves quite a bit.
+
+<p>
+First, this function determines whether the login request is for an
+<code>&lt;Anonymous&gt;</code> server, or for a real user.  Unknown users
+are rejected at this point.  The determination of &quot;known&quot; user
+is done via the <code><a href="../api/functions.html#auth_getpwnam">auth_getpwnam()</a></code> dispatch function, an abstraction of the
+<code>getpwnam(3)</code> function.  Modules which wish to supply their
+own authentication routines will need to provide <b>all</b> of the
+dispatched authentication functions mentioned
+<a href="../handlers/authentication.html">here</a>.
+
+<p>
+Next, the function will check to see if the requested user is
+<code>root</code>; logging in as <code>root</code> requires that the
+<code>RootLogin</code> directive be explicitly set, as this is a very
+bad idea.  If the requested user is a member of an <code>AnonymousGroup</code>
+group, then <code>&lt;Limit&gt;</code>ed logins are again checked for the
+user.
+
+<p>
+At this point, the given password is checked.  If any <code>UserPassword</code>
+directives are set, then the configured password will be checked using
+<code><a href="../api/functions.html#auth_check">auth_check()</a></code> abstracted authentication handler.  If not, then the
+<code><a href="../api/functions.html#auth_authenticate">auth_authenticate()</a></code> handler will be called.  Should user authentication fail, then
+groups-based authentication, using the given password as a group password
+and/or any <code>GroupPassword</code> configuration directives, will be
+attempted.
+
+<p>
+If the requested user has succeeded up to this point, the default directory
+in which to place the user, either their home directory or any applicable
+<code>DefaultChdir</code> directives, is retrieved.  This path is checked
+for any applicable <code>&lt;Limit&gt;</code> directives.  Next, after
+logging a <code>wtmp</code> or <code>utmp</code> log (unless configured
+not to), this function will check and apply any <code>DefaultRoot</code>
+configuration directives as needed.
+
+<p>
+At this point, unless authentication has failed at any point earlier,
+the authentication process is done.  Any <code>.ftpaccess</code> files
+are parsed, the default transfer mode is set (configurable via the
+<code>DefaultTransferMode</code> directive), and scoreboard files updated.
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+<hr><br>
+
+Author: <i>$Author$</i><br>
+Last Updated: <i>$Date$</i><br>
+
+<br><hr>
+
+<font size=2><b><i>
+&copy; Copyright 2000,2001 TJ Saunders<br>
+ All Rights Reserved<br>
+</i></b></font>
+
+<hr><br>
+
+</body>
+</html>

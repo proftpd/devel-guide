@@ -41,7 +41,7 @@ not be interrupted by most signals (<code>SIGKILL</code> being an obvious
 exception).  Please keep this in mind when developing your module; feel
 free to call <code>pr_signals_handle()</code> often, especially if a
 system or library call has been interrupted by a signal (<i>i.e.</i> the call
-returns -1, and <code>errno</i> is <code>EINTR</code>, or when writing long
+returns -1, and <code>errno</code> is <code>EINTR</code>, or when writing long
 loops or recursive functions.  Here's an example that can be seen often
 in the core code:
 <pre>

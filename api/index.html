@@ -37,6 +37,7 @@
   <li><a href="functions.html#_auth_check_ftpusers">_auth_check_ftpusers</a>
   <li><a href="functions.html#_auth_check_shell">_auth_check_shell</a>
   <li><a href="functions.html#_auth_group">_auth_group</a>
+  <li><a href="functions.html#_auth_lookup_id">_auth_lookup_id</a>
   <li><a href="functions.html#_auth_resolve_user">_auth_resolve_user</a>
   <li><a href="functions.html#_auth_shutdown">_auth_shutdown</a>
   <li><a href="functions.html#_block_signals">_block_signals</a>
@@ -44,14 +45,20 @@
   <li><a href="functions.html#_chdir">_chdir</a>
   <li><a href="functions.html#_check_group_access">_check_group_access</a>
   <li><a href="functions.html#_check_ip_access">_check_ip_access</a>
+  <li><a href="functions.html#_check_ip_negative">_check_ip_negative</a>
+  <li><a href="functions.html#_check_ip_positive">_check_ip_positive</a>
   <li><a href="functions.html#_check_limit">_check_limit</a>
+  <li><a href="functions.html#_check_limits">_check_limits</a>
   <li><a href="functions.html#_check_limit_allow">_check_limit_allow</a>
   <li><a href="functions.html#_check_limit_deny">_check_limit_deny</a>
   <li><a href="functions.html#_check_user_access">_check_user_access</a>
   <li><a href="functions.html#_compare_file_mtime">_compare_file_mtime</a>
   <li><a href="functions.html#_compare_file_mtime_reversed">_compare_file_mtime_reversed</a>
+  <li><a href="functions.html#_compare_gid">_compare_gid</a>
+  <li><a href="functions.html#_compare_id">_compare_id</a>
   <li><a href="functions.html#_compare_sym">_compare_sym</a>
   <li><a href="functions.html#_compare_timer">_compare_timer</a>
+  <li><a href="functions.html#_compare_uid">_compare_uid</a>
   <li><a href="functions.html#_conn_cleanup">_conn_cleanup</a>
   <li><a href="functions.html#_copy_global_to_all">_copy_global_to_all</a>
   <li><a href="functions.html#_copy_recur">_copy_recur</a>
@@ -64,8 +71,10 @@
   <li><a href="functions.html#_dispatch_auth">_dispatch_auth</a>
   <li><a href="functions.html#_do_auth">_do_auth</a>
   <li><a href="functions.html#_do_user_counts">_do_user_counts</a>
+  <li><a href="functions.html#_dup_low_fd">_dup_low_fd</a>
   <li><a href="functions.html#_exists">_exists</a>
   <li><a href="functions.html#_find_best_dir">_find_best_dir</a>
+  <li><a href="functions.html#_find_ls_limit">_find_ls_limit</a>
   <li><a href="functions.html#_get_default_chdir">_get_default_chdir</a>
   <li><a href="functions.html#_get_default_root">_get_default_root</a>
   <li><a href="functions.html#_get_full_cmd">_get_full_cmd</a>
@@ -118,10 +127,12 @@
   <li><a href="functions.html#_stor_done">_stor_done</a>
   <li><a href="functions.html#_strmatch">_strmatch</a>
   <li><a href="functions.html#_symlink">_symlink</a>
-  <li><a href="functions.html#_translate_ascii">_translate_ascii</a>
   <li><a href="functions.html#_transmit_data">_transmit_data</a>
   <li><a href="functions.html#_transmit_normal">_transmit_normal</a>
   <li><a href="functions.html#_transmit_sendfile">_transmit_sendfile</a>
+  <li><a href="functions.html#_xfer_exit">_xfer_exit</a>
+  <li><a href="functions.html#_xlate_ascii_read">_xlate_ascii_read</a>
+  <li><a href="functions.html#_xlate_ascii_write">_xlate_ascii_write</a>
   <li><a href="functions.html#accept_binding">accept_binding</a>
   <li><a href="functions.html#access_check">access_check</a>
   <li><a href="functions.html#add_allow">add_allow</a>
@@ -147,23 +158,20 @@
   <li><a href="functions.html#add_directory">add_directory</a>
   <li><a href="functions.html#add_exit_handler">add_exit_handler</a>
   <li><a href="functions.html#add_extendedlog">add_extendedlog</a>
-  <li><a href="functions.html#add_foobardirective">add_foobardirective</a>
   <li><a href="functions.html#add_global">add_global</a>
   <li><a href="functions.html#add_groupowner">add_groupowner</a>
   <li><a href="functions.html#add_grouppassword">add_grouppassword</a>
   <li><a href="functions.html#add_hidegroup">add_hidegroup</a>
-  <li><a href="functions.html#add_hidenoaccess">add_hidenoaccess</a>
   <li><a href="functions.html#add_hideuser">add_hideuser</a>
   <li><a href="functions.html#add_hostname">add_hostname</a>
   <li><a href="functions.html#add_include">add_include</a>
   <li><a href="functions.html#add_limit">add_limit</a>
   <li><a href="functions.html#add_logformat">add_logformat</a>
+  <li><a href="functions.html#add_masqueradeaddress">add_masqueradeaddress</a>
   <li><a href="functions.html#add_meta">add_meta</a>
   <li><a href="functions.html#add_order">add_order</a>
-  <li><a href="functions.html#add_pattern_response">add_pattern_response</a>
   <li><a href="functions.html#add_ratebool">add_ratebool</a>
   <li><a href="functions.html#add_ratenum">add_ratenum</a>
-  <li><a href="functions.html#add_readme_response">add_readme_response</a>
   <li><a href="functions.html#add_response">add_response</a>
   <li><a href="functions.html#add_response_err">add_response_err</a>
   <li><a href="functions.html#add_timer">add_timer</a>
@@ -216,6 +224,7 @@
   <li><a href="functions.html#cmd_acct">cmd_acct</a>
   <li><a href="functions.html#cmd_allo">cmd_allo</a>
   <li><a href="functions.html#cmd_cdup">cmd_cdup</a>
+  <li><a href="functions.html#cmd_cwd">cmd_cwd</a>
   <li><a href="functions.html#cmd_dele">cmd_dele</a>
   <li><a href="functions.html#cmd_help">cmd_help</a>
   <li><a href="functions.html#cmd_list">cmd_list</a>
@@ -236,6 +245,7 @@
   <li><a href="functions.html#cmd_rmd">cmd_rmd</a>
   <li><a href="functions.html#cmd_rnfr">cmd_rnfr</a>
   <li><a href="functions.html#cmd_rnto">cmd_rnto</a>
+  <li><a href="functions.html#cmd_site">cmd_site</a>
   <li><a href="functions.html#cmd_size">cmd_size</a>
   <li><a href="functions.html#cmd_smnt">cmd_smnt</a>
   <li><a href="functions.html#cmd_stat">cmd_stat</a>
@@ -245,7 +255,6 @@
   <li><a href="functions.html#cmd_syst">cmd_syst</a>
   <li><a href="functions.html#cmd_type">cmd_type</a>
   <li><a href="functions.html#cmd_user">cmd_user</a>
-  <li><a href="functions.html#cmd_xfoo">cmd_xfoo</a>
   <li><a href="functions.html#cmp">cmp</a>
   <li><a href="functions.html#copy_array">copy_array</a>
   <li><a href="functions.html#copy_array_hdr">copy_array_hdr</a>
@@ -271,6 +280,7 @@
   <li><a href="functions.html#dir_check">dir_check</a>
   <li><a href="functions.html#dir_check_canon">dir_check_canon</a>
   <li><a href="functions.html#dir_check_full">dir_check_full</a>
+  <li><a href="functions.html#dir_check_hidden">dir_check_hidden</a>
   <li><a href="functions.html#dir_check_limits">dir_check_limits</a>
   <li><a href="functions.html#dir_check_op">dir_check_op</a>
   <li><a href="functions.html#dir_check_op_mode">dir_check_op_mode</a>
@@ -373,6 +383,7 @@
   <li><a href="functions.html#genericlist">genericlist</a>
   <li><a href="functions.html#get_boolean">get_boolean</a>
   <li><a href="functions.html#get_class">get_class</a>
+  <li><a href="functions.html#get_command_class">get_command_class</a>
   <li><a href="functions.html#get_config_cmd">get_config_cmd</a>
   <li><a href="functions.html#get_extendedlogs">get_extendedlogs</a>
   <li><a href="functions.html#get_fs_size">get_fs_size</a>
@@ -381,6 +392,7 @@
   <li><a href="functions.html#get_ident">get_ident</a>
   <li><a href="functions.html#get_name_max">get_name_max</a>
   <li><a href="functions.html#get_next_meta">get_next_meta</a>
+  <li><a href="functions.html#get_num_bytes">get_num_bytes</a>
   <li><a href="functions.html#get_param_int">get_param_int</a>
   <li><a href="functions.html#get_param_int_next">get_param_int_next</a>
   <li><a href="functions.html#get_param_ptr">get_param_ptr</a>
@@ -400,6 +412,7 @@
   <li><a href="functions.html#inet_connect_nowait">inet_connect_nowait</a>
   <li><a href="functions.html#inet_copy_connection">inet_copy_connection</a>
   <li><a href="functions.html#inet_create_connection">inet_create_connection</a>
+  <li><a href="functions.html#inet_create_connection_portrange">inet_create_connection_portrange</a>
   <li><a href="functions.html#inet_fqdn">inet_fqdn</a>
   <li><a href="functions.html#inet_get_conn_info">inet_get_conn_info</a>
   <li><a href="functions.html#inet_getaddr">inet_getaddr</a>
@@ -410,6 +423,7 @@
   <li><a href="functions.html#inet_listen">inet_listen</a>
   <li><a href="functions.html#inet_openrw">inet_openrw</a>
   <li><a href="functions.html#inet_resetlisten">inet_resetlisten</a>
+  <li><a href="functions.html#inet_resolve_ip">inet_resolve_ip</a>
   <li><a href="functions.html#inet_reverse_dns">inet_reverse_dns</a>
   <li><a href="functions.html#inet_set_proto_options">inet_set_proto_options</a>
   <li><a href="functions.html#inet_setasync">inet_setasync</a>
@@ -465,11 +479,11 @@
   <li><a href="functions.html#log_close_run">log_close_run</a>
   <li><a href="functions.html#log_close_xfer">log_close_xfer</a>
   <li><a href="functions.html#log_closesyslog">log_closesyslog</a>
-  <li><a href="functions.html#log_cmd">log_cmd</a>
   <li><a href="functions.html#log_command">log_command</a>
   <li><a href="functions.html#log_debug">log_debug</a>
   <li><a href="functions.html#log_discard">log_discard</a>
   <li><a href="functions.html#log_init">log_init</a>
+  <li><a href="functions.html#log_open_checkpath">log_open_checkpath</a>
   <li><a href="functions.html#log_open_run">log_open_run</a>
   <li><a href="functions.html#log_open_xfer">log_open_xfer</a>
   <li><a href="functions.html#log_opensyslog">log_opensyslog</a>
@@ -505,6 +519,7 @@
   <li><a href="functions.html#make_sub_pool">make_sub_pool</a>
   <li><a href="functions.html#malloc_block">malloc_block</a>
   <li><a href="functions.html#match_ip">match_ip</a>
+  <li><a href="functions.html#modpam_exit">modpam_exit</a>
   <li><a href="functions.html#mod_create_data">mod_create_data</a>
   <li><a href="functions.html#mod_create_error">mod_create_error</a>
   <li><a href="functions.html#mod_create_ret">mod_create_ret</a>
@@ -531,6 +546,8 @@
   <li><a href="functions.html#p_setgrent">p_setgrent</a>
   <li><a href="functions.html#p_setpwent">p_setpwent</a>
   <li><a href="functions.html#palloc">palloc</a>
+  <li><a href="functions.html#pam_auth">pam_auth</a>
+  <li><a href="functions.html#pam_exchange">pam_exchange</a>
   <li><a href="functions.html#parse_config_file">parse_config_file</a>
   <li><a href="functions.html#parse_group_expression">parse_group_expression</a>
   <li><a href="functions.html#parse_user_expression">parse_user_expression</a>
@@ -545,10 +562,11 @@
   <li><a href="functions.html#pool_release_free_block_list">pool_release_free_block_list</a>
   <li><a href="functions.html#pop_cwd">pop_cwd</a>
   <li><a href="functions.html#popenf">popenf</a>
-  <li><a href="functions.html#post_cmd_nlst">post_cmd_nlst</a>
   <li><a href="functions.html#pre_cmd_appe">pre_cmd_appe</a>
+  <li><a href="functions.html#pre_cmd_pass">pre_cmd_pass</a>
   <li><a href="functions.html#pre_cmd_retr">pre_cmd_retr</a>
   <li><a href="functions.html#pre_cmd_stor">pre_cmd_stor</a>
+  <li><a href="functions.html#pre_cmd_user">pre_cmd_user</a>
   <li><a href="functions.html#preparse_arg">preparse_arg</a>
   <li><a href="functions.html#pstrcat">pstrcat</a>
   <li><a href="functions.html#pstrdup">pstrdup</a>
@@ -572,7 +590,7 @@
   <li><a href="functions.html#pw_setpwent">pw_setpwent</a>
   <li><a href="functions.html#pw_uid_name">pw_uid_name</a>
   <li><a href="functions.html#quote_dir">quote_dir</a>
-  <li><a href="functions.html#readme_add_entry">readme_add_entry</a>
+  <li><a href="functions.html#regex_filters">regex_filters</a>
   <li><a href="functions.html#register_cleanup">register_cleanup</a>
   <li><a href="functions.html#register_rehash">register_rehash</a>
   <li><a href="functions.html#remove_config">remove_config</a>
@@ -586,8 +604,10 @@
   <li><a href="functions.html#run_exit_handlers">run_exit_handlers</a>
   <li><a href="functions.html#run_schedule">run_schedule</a>
   <li><a href="functions.html#safe_token">safe_token</a>
+  <li><a href="functions.html#scan_config_file">scan_config_file</a>
   <li><a href="functions.html#schedule">schedule</a>
   <li><a href="functions.html#schedulep">schedulep</a>
+  <li><a href="functions.html#semaphore_fds">semaphore_fds</a>
   <li><a href="functions.html#send_response">send_response</a>
   <li><a href="functions.html#send_response_async">send_response_async</a>
   <li><a href="functions.html#send_response_list">send_response_list</a>
@@ -597,11 +617,13 @@
   <li><a href="functions.html#send_response_raw">send_response_raw</a>
   <li><a href="functions.html#sendline">sendline</a>
   <li><a href="functions.html#server_loop">server_loop</a>
+  
   <li><a href="functions.html#set_accessgrantmsg">set_accessgrantmsg</a>
   <li><a href="functions.html#set_allowall">set_allowall</a>
   <li><a href="functions.html#set_allowchmod">set_allowchmod</a>
   <li><a href="functions.html#set_allowfilter">set_allowfilter</a>
   <li><a href="functions.html#set_allowforeignaddress">set_allowforeignaddress</a>
+  <li><a href="functions.html#set_allowlogsymlinks">set_allowlogsymlinks</a>
   <li><a href="functions.html#set_allowoverwrite">set_allowoverwrite</a>
   <li><a href="functions.html#set_allowretrieverestart">set_allowretrieverestart</a>
   <li><a href="functions.html#set_allowstorerestart">set_allowstorerestart</a>
@@ -631,6 +653,7 @@
   <li><a href="functions.html#set_group">set_group</a>
   <li><a href="functions.html#set_groups">set_groups</a>
   <li><a href="functions.html#set_hiddenstor">set_hiddenstor</a>
+  <li><a href="functions.html#set_hidenoaccess">set_hidenoaccess</a>
   <li><a href="functions.html#set_identlookups">set_identlookups</a>
   <li><a href="functions.html#set_ignorehidden">set_ignorehidden</a>
   <li><a href="functions.html#set_loginpasswordprompt">set_loginpasswordprompt</a>
@@ -641,6 +664,9 @@
   <li><a href="functions.html#set_maxinstances">set_maxinstances</a>
   <li><a href="functions.html#set_maxloginattempts">set_maxloginattempts</a>
   <li><a href="functions.html#set_multilinerfc2228">set_multilinerfc2228</a>
+  <li><a href="functions.html#set_pam">set_pam</a>
+  <li><a href="functions.html#set_pamauthoritative">set_pamauthoritative</a>
+  <li><a href="functions.html#set_pamconfig">set_pamconfig</a>
   <li><a href="functions.html#set_passiveports">set_passiveports</a>
   <li><a href="functions.html#set_pathallowfilter">set_pathallowfilter</a>
   <li><a href="functions.html#set_pathdenyfilter">set_pathdenyfilter</a>
@@ -649,6 +675,9 @@
   <li><a href="functions.html#set_proc_title">set_proc_title</a>
   <li><a href="functions.html#set_regex">set_regex</a>
   <li><a href="functions.html#set_requirevalidshell">set_requirevalidshell</a>
+  <li><a href="functions.html#set_rlimitcpu">set_rlimitcpu</a>
+  <li><a href="functions.html#set_rlimitmemory">set_rlimitmemory</a>
+  <li><a href="functions.html#set_rlimitopenfiles">set_rlimitopenfiles</a>
   <li><a href="functions.html#set_rlimits">set_rlimits</a>
   <li><a href="functions.html#set_rootlogin">set_rootlogin</a>
   <li><a href="functions.html#set_scoreboardpath">set_scoreboardpath</a>
@@ -678,7 +707,6 @@
   <li><a href="functions.html#set_user">set_user</a>
   <li><a href="functions.html#set_usereversedns">set_usereversedns</a>
   <li><a href="functions.html#set_wtmplog">set_wtmplog</a>
-  <li><a href="functions.html#show_readme">show_readme</a>
   <li><a href="functions.html#show_usage">show_usage</a>
   <li><a href="functions.html#shutdown_exit">shutdown_exit</a>
   <li><a href="functions.html#sig_abort">sig_abort</a>
@@ -873,7 +901,6 @@
   <li><a href="macros.html#FSOP_UNLINK">FSOP_UNLINK</a>
   <li><a href="macros.html#FSOP_WRITE">FSOP_WRITE</a>
   <li><a href="macros.html#FTPUSERS_PATH">FTPUSERS_PATH</a>
-  <li><a href="macros.html#GETGROUPS_T">GETGROUPS_T</a>
   <li><a href="macros.html#GROUP">GROUP</a>
   <li><a href="macros.html#G_DIRS">G_DIRS</a>
   <li><a href="macros.html#G_NONE">G_NONE</a>
@@ -891,7 +918,7 @@
   <li><a href="macros.html#IO_ABORT">IO_ABORT</a>
   <li><a href="macros.html#IO_INTR">IO_INTR</a>
   <li><a href="macros.html#IO_NONBLOCK">IO_NONBLOCK</a>
-  <li><a href="macros.html#IO_NONRESTART">IO_NORESTART</a>
+  <li><a href="macros.html#IO_NORESTART">IO_NORESTART</a>
   <li><a href="macros.html#IO_READ">IO_READ</a>
   <li><a href="macros.html#IO_WRITE">IO_WRITE</a>
   <li><a href="macros.html#LARGE">LARGE</a>
@@ -964,6 +991,8 @@
   <li><a href="macros.html#PRIVS_SETUP">PRIVS_SETUP</a>
   <li><a href="macros.html#PRIVS_USER">PRIVS_USER</a>
   <li><a href="macros.html#PROFTPD_PATHS_H">PROFTPD_PATHS_H</a>
+  <li><a href="macros.html#PR_BYTES_BAD_FORMAT">PR_BYTES_BAD_FORMAT</a>
+  <li><a href="macros.html#PR_BYTES_BAD_UNITS">PR_BYTES_BAD_UNITS</a>
   <li><a href="macros.html#PR_LOG_ALERT">PR_LOG_ALERT</a>
   <li><a href="macros.html#PR_LOG_CRIT">PR_LOG_CRIT</a>
   <li><a href="macros.html#PR_LOG_DEBUG">PR_LOG_DEBUG</a>
@@ -1035,9 +1064,10 @@
   <li><a href="macros.html#TIMER_IDLE">TIMER_IDLE</a>
   <li><a href="macros.html#TIMER_LOGIN">TIMER_LOGIN</a>
   <li><a href="macros.html#TIMER_NOXFER">TIMER_NOXFER</a>
-  <li><a href="macros.html#TIMER_INSTALLED">TIMER_STALLED</a>
+  <li><a href="macros.html#TIMER_STALLED">TIMER_STALLED</a>
   <li><a href="macros.html#TOPLEVEL_CONF">TOPLEVEL_CONF</a>
   <li><a href="macros.html#TRUE">TRUE</a>
+  <li><a href="macros.html#TUNABLE_BUFFER_SIZE">TUNABLE_BUFFER_SIZE</a>
   <li><a href="macros.html#TUNABLE_DEFAULT_BACKLOG">TUNABLE_DEFAULT_BACKLOG</a>
   <li><a href="macros.html#TUNABLE_DEFAULT_RWIN">TUNABLE_DEFAULT_RWIN</a>
   <li><a href="macros.html#TUNABLE_DEFAULT_SWIN">TUNABLE_DEFAULT_SWIN</a>
@@ -1097,7 +1127,6 @@
   <li><a href="typedefs.html#ULONG">ULONG</a>
   <li><a href="typedefs.html#XASET_COMPARE">XASET_COMPARE</a>
   <li><a href="typedefs.html#XASET_MCOPY">XASET_MCOPY</a>
-  <li><a href="typedefs.html#_exithandler">_exithandler</a>
   <li><a href="typedefs.html#array_header">array_header</a>
   <li><a href="typedefs.html#authtable">authtable</a>
   <li><a href="typedefs.html#binding_t">binding_t</a>

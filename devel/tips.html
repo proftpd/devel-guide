@@ -27,6 +27,10 @@
     <li>Command handlers that handle every command except some...
     <li>proper log_{pri,auth,debug}() calls -- at least _three_ parameters
         to prevent format string attacks!
+    <li>preventing mergedown bugs: in general, if directive is allowed in
+        <code>CONF_ANON</code>, <code>CONF_DIR</code>, or
+        <code>CONF_DYNDIR</code> contexts, the <code>CF_MERGEDOWN</code>
+        flag should be set.
 <p>
 <b>Tips and Tricks</b><br>
 These are some recommendations and things to keep in mind when programming

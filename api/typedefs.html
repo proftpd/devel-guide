@@ -774,16 +774,17 @@
    <font color=green>/* currently running UID, original (ie startup)
     * UID, and current GID
     */</font>
-   int uid, ouid, gid;
+   uid_t uid, ouid;
+   gid_t gid;
 
    array_header *gids;
    array_header *groups;
 
    <font color=green>/* saved file UID */</font>
-   int fsuid;
+   uid_t fsuid;
 
    <font color=green>/* saved file GID */</font>
-   int fsgid;
+   gid_t fsgid;
 
    <font color=green>/* username/groupname after login */</font>
    char *user, *group;
@@ -791,7 +792,8 @@
    <font color=green>/* UID/GID after login, befure the UID/GID fields
     * above are changed
     */</font>
-   int login_uid, login_gid;
+   uid_t login_uid;
+   gid_t login_gid;
 
    <font color=green>/* session class */</font>
    class_t *class;

@@ -628,16 +628,6 @@ the modules' symbol tables.<br>
   <a href="../src/src/inet.c.html#_inet_pool_cleanup">src/inet.c</a><br>
 
 <hr>
-<a name="_init_groups"><b>_init_groups</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static int _init_groups(pool *p, gid_t addl_group)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_auth.c.html#_init_groups">modules/mod_auth.c</a><br>
-
-<hr>
 <a name="_internal_abort"><b>_internal_abort</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -1969,17 +1959,6 @@ from the configuration records.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#build_dyn_config">src/dirtree.c</a><br>
-
-<hr>
-<a name="build_group_arrays"><b>build_group_arrays</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static void build_group_arrays(pool *p, struct passwd *pw, char *name,
-    array_header **gids, array_header **groups)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_auth.c.html#build_group_arrays">modules/mod_auth.c</a><br>
 
 <hr>
 <a name="bytes_in_block_list"><b>bytes_in_block_list</b><br>
@@ -3975,6 +3954,17 @@ file.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#get_full_cmd">src/dirtree.c</a><br>
+
+<hr>
+<a name="get_groups"><b>get_groups</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ int *get_groups(pool *p, const char *name, array_header **group_ids,
+   array_header **group_names)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/auth.c.html#get_groups">src/auth.c</a><br>
 
 <hr>
 <a name="get_ident"><b>get_ident</b><br>
@@ -6962,6 +6952,16 @@ FTP protocol response with the given <i>numeric</i>.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_core.c.html#set_group">modules/mod_core.c</a><br>
+
+<hr>
+<a name="set_groups"><b>set_groups</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ int set_groups(pool *p, gid_t primary_gid, array_header *suppl_gids)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/auth.c.html#set_groups">src/auth.c</a><br>
 
 <hr>
 <a name="set_hiddenstor"><b>set_hiddenstor</b><br>

@@ -207,6 +207,11 @@ authentication fails.<br>
 <pre>
  static int _check_limit(config_rec *<i>c</i>)
 </pre>
+<font color=blue>Comments</font>:  Checks <code>&lt;Limit&gt;</code> ACLs.
+Returns <code>1</code> if the operation is explicitly allowed, <code>0</code>
+if implicitly allowed, <code>-1</code> if implicitly denied, and <code>-2</code>
+if explicitly denied.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#_check_limit">src/dirtree.c</a><br>
 
@@ -2921,6 +2926,11 @@ file is displayed without trouble.<br>
 <pre>
  RETSIGTYPE data_urgent(int <i>sig</i>)
 </pre>
+<font color=blue>Comments</font>:  Signal handler for the <code>SIGURG</code>
+signal, to be raised if OOB data is received on the control connection while
+a data transfer is in progress.  This handler sets the <code>SF_ABORT</code>
+session flag and aborts the current transfer.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/data.c.html#data_urgent">src/data.c</a><br>
 
@@ -2931,6 +2941,15 @@ file is displayed without trouble.<br>
 <pre>
  int data_xfer(char *<i>cl_buf</i>, int <i>cl_size</i>)
 </pre>
+<font color=blue>Comments</font>:  This function actually performs the work
+of transferring data on the data connection.  ASCII translation is performed
+if necessary.  The direction of the transfer, set when the data connection
+was opened, determines whether the client buffer <i>cl_buf</i> is read from
+or written to.<br>
+<br>
+Returns <code>0</code> if successful, or if reading and the data connection
+closes; <code>-1</code> on error.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/data.c.html#data_xfer">src/data.c</a><br>
 

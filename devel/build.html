@@ -1,0 +1,97 @@
+<!-- $Id$ -->
+<!-- $Source$ -->
+
+<html>
+<head> 
+<title>ProFTPD Developer's Guide: Building A Module</title>
+</head>
+
+<body bgcolor=white>
+
+<hr><br>
+<center>
+<img src="../images/proftpd.png" border=0>
+<br><br>
+<h3><b>ProFTPD Developer's Guide: Building A Module</b></h3>
+<i><b>ProFTPD Version 1.2</b></i><br>
+</center>
+<hr><br>
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+<p>
+<b>The <code>contrib/</code> Area</b><br>
+All third-party (<i>i.e.</i> non-core) modules live under the
+<code>contrib/</code> directory of the ProFTPD source tree.  In order
+to have your module built when compiling <code>proftpd</code>, simply
+place your module source file, <i>e.g.</i> <code><i>name</i>.c</code>,
+into the <code>contrib/</code> directory, and then make sure that
+<code><i>name</i></code> is in your <code>configure</code> script
+<code>--with-modules</code> parameter.  The <code>configure</code> script
+does the rest.
+
+<p>
+It is possible to split your module source into a header and a source file.
+For most modules, this is not necessary, but if the module provides its
+own API, like <code>mod_sql</code> or <code>mod_quotatab</code>, then
+having separate header file is a good design decision.  The
+<code>configure</code> will automatically handle a header file of the same
+name as the module, for example <code><i>name</i>.c</code> and
+<code><i>name</i>.h</code>.
+
+<p>
+The <code>configure</code> script does its work by creating symlinks from
+the module source files into the <code>src/</code> and <code>include/</code>
+directories, and listing the object file names in the proper targets in
+the top-level Makefile.
+
+<p>
+<b>Third-Party Libraries</b><br>
+Sometimes your module may require additional libraries.  The
+<code>mod_ldap</code>, <code>mod_sql_mysql</code>,
+<code>mod_sql_postgres</code>, and <code>mod_tls</code> modules are examples.
+These modules indicate to the build system the additional third-party
+libraries by including the following line near the top of the file,
+in a comment:
+<pre>
+  $Libraries: <i>flags</i>$
+</pre>
+For example, <code>mod_ldap</code> requires that the linker use the
+<code>libldap</code> and <code>liblber</code> libraries, so its line looks like:
+<pre>
+  /*
+   * $Libraries: -lldap -llber$ 
+   */
+</pre>
+
+<p>
+<b>Additional Configuration</b><br>
+In rare cases, your module itself may require <code>autoconf</code> support
+by having its own <code>configure</code> script.  At this time, ProFTPD's
+build system does not automatically support per-module build scripts, although
+such support is indeed planned.  If you need this, you will need to
+document that your module users run your module <code>configure</code> script
+by hand before copying the generated source files into the <code>contrib/</code>
+directory.
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+<hr><br>
+
+Author: <i>$Author$</i><br>
+Last Updated: <i>$Date$</i><br>
+
+<br><hr>
+
+<font size=2><b><i>
+&copy; Copyright 2004 TJ Saunders<br>
+ All Rights Reserved<br>
+</i></b></font>
+
+<hr><br>
+
+</body>
+</html>
+

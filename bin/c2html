@@ -88,7 +88,7 @@ my $default_color = "blue";
 # retrieve the keywords hash that pertains to the current source file(s)
 my $keywords = get_keywords( language => $language );
 
-my $tags_file = "tags";
+my $tags_file = "TAGS";
 if (defined($opts{'t'})) {
 	$tags_file = $opts{'t'};
 }
@@ -1346,7 +1346,7 @@ usage: $program [-T] [-d <output-directory>] [-h] [-l <log-file>] [-n] [-r]
  -s -- specify a list of directories, surrounded by quotes, to skip when
        recursing
  -t -- specify an alternate tags file
-       (default is a file called "tags" in the current directory)
+       (default is a file called "TAGS" in the current directory)
  -v -- verbose messages while processing
 
 If no files are specified on the command line, the program will use the
@@ -1355,7 +1355,7 @@ current directory to find files on which to operate.
 
 To generate a tags file, use the ctags(1) program, like thus:
 
-ctags -R -x --sort=no > tags
+ctags -R -x --sort=no > TAGS
 
 Using a ctags file, $program can usually be run like thus:
 

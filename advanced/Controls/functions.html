@@ -32,6 +32,7 @@
   int pr_ctrls_connect(void);
   int pr_ctrls_copy_args(pr_ctrls_t *<i>src_ctrl</i>, pr_ctrls_t *<i>dest_ctrl</i>);
   int pr_ctrls_copy_resps(pr_ctrls_t *<i>src_ctrl</i>, pr_ctrls_t *<i>dest_ctrl</i>);
+  int pr_ctrls_flush_response(pr_ctrls_t *<i>ctrl</i>);
   int pr_ctrls_recv_request(pr_ctrls_cl_t *<i>cl</i>);
   int pr_ctrls_recv_response(pool *<i>resp_pool</i>, int ctrls_sockfd, int *<i>status</i>, char ***<i>respargv</i>); 
   int pr_ctrls_send_msg(int <i>sockfd</i>, int <i>msgstatus</i>, unsigned int <i>msgargc</i>, char **<i>msgargv</i>);
@@ -46,58 +47,135 @@
 </pre>
 
 <p>
-<code>pr_ctrls_add()</code> function
+The <code>pr_ctrls_add()</code> function will be used by modules to register
+custom control handlers with the Controls layer.  The registration consists
+of a pointer to the registering module <i>module</i>, the <i>action</i> by
+which clients can request this control to be run, and a callback function
+pointer to the control's handler.  The control handler must return an
+integer status value (preferably conforming to the norm of <code>0</code>
+indicating success, <code>-1</code> indicating an error), and must take
+three arguments: a pointer to the registered <code>pr_ctrls_t</code> object,
+and integer number of request strings, and an array of the indicated number
+of request strings (similar to the <code>argc, argv</code> of most programs'
+<code>main()</code> function).  This function will return the ID of the
+registered <code>pr_ctrls_t</code> control object is successful, or
+<code>-1</code> if an error occurred during registration.
 
 <p>
-<code>pr_ctrls_del()</code> function
+The <code>pr_ctrls_del()</code> function unregisters any registered
+control handlers that match the given <i>module</i> and <i>action</i>
+arguments.  <i>module</i> may be <code>ANY_MODULE</code>, meaning that
+control handlers from all modules should be searched.  <i>action</i> may not
+be <code>NULL</code>, else this function will return <code>-1</code> with
+<code>errno</code> set to <code>EINVAL</code>.  If no matching control
+handlers were found, a <code>-1</code> will be returned with <code>errno</code>
+set to <code>EPERM</code>.  A return value of <code>0</code> means the
+requested controls were successfully unregistered from the Controls layer.
 
 <p>
-<code>pr_ctrls_add_arg()</code> function
+The <code>pr_ctrls_add_arg()</code> function is a utility function used to
+add the given <i>ctrls_arg</i> string to the control object's handler argument
+array.  It will return <code>0</code> on success, <code>-1</code> on failure.
+Most module code should not need to use this function.
 
 <p>
 The <code>pr_ctrls_add_response()</code> function is used by control handlers
 to add a text response string to the object that will eventually be returned
-to the requesting client.
+to the requesting client.  This function will return <code>0</code> if the
+response was succesfully added, or <code>-1</code> if there was a problem.
 
 <p>
-<code>pr_ctrls_connect()</code> function
+The <code>pr_ctrls_connect()</code> function is to be used by client programs
+that wish to make control requests; this includes <code>ftpdctl</code> and
+any core or module routines wishing to submit programmatic requests.  It
+connects to the well-defined Unix domain socket and returns the opened
+socket descriptor for use by the client, or <code>-1</code> if there was an
+error, with <code>errno</code> set appropriately.
 
 <p>
-<code>pr_ctrls_copy_args()</code> function
+The <code>pr_ctrls_copy_args()</code> function is a utility function used
+to duplicate <i>src_ctrl</i>'s handler argument array and place that duplicate
+in <i>dest_ctrl</i>.  Control handlers should not need to use this function.
 
 <p>
-<code>pr_ctrls_copy_resps()</code> function
+The <code>pr_ctrls_copy_resps()</code> function is a utility function used
+to make a duplicate of <i>src_ctrl</i>'s handler response array for
+<i>dest_ctrl</i>.  Control handlers should not need to use this function.
 
 <p>
-<code>pr_ctrls_recv_request()</code> function
+The <code>pr_ctrls_flush_response()</code> function flushes any responses
+of the given <i>ctrl</i> out to the client.  Note that this function
+should be used <b>rarely</b>, and only when the control handler <b>will not</b>
+be returning normally. (as when exiting the process).  If <i>ctrl</i> is
+<code>NULL</code>, it will return <code>-1</code> with <code>errno</code> set
+to <code>EINVAL</code>; an <code>errno</code> of <code>EPERM</code> means
+that the function was unable to flush the response to the client. A value of
+<code>0</code> is returned if the flush was successful.
 
 <p>
-<code>pr_ctrls_recv_response()</code> function
+The <code>pr_ctrls_recv_request()</code> function reads in a client's control
+request.  It will return <code>-1</code> with <code>errno</code> set to
+<code>EOF</code> if there was nothing to be read from the client socket;
+<code>errno</code> may have other values as appropriate for
+<code>read(2)</code> errors.  A value of <code>0</code> will be returned if
+the request was successfully read.
 
 <p>
-<code>pr_ctrls_send_msg()</code> function
+The <code>pr_ctrls_recv_response()</code> function reads the control handler
+response from the given socket <i>ctrls_sockfd</i>, allocating memory for
+the strings from <i>resp_pool</i>.  The return value of the control handler
+will be stored in <i>status</i>, and the array of response strings in
+<i>respargv</i>, if not <code>NULL</code>.  <i>respargv</i> may indeed be
+<code>NULL</code>, as when the client does not really care about the
+responses and simply wants the status, or to know that the response was
+successfully received.  This functions returns the number of responses
+received, or <code>-1</code> with <code>errno</code> set properly if there
+was an error.
 
 <p>
-<code>pr_ctrls_find_ctrls()</code> function
-<code>pr_ctrls_find_next_ctrls()</code> function
+The <code>pr_ctrls_send_msg()</code> function
 
 <p>
-<code>pr_block_ctrls()</code> function
+The <code>pr_ctrls_find_ctrls()</code> function returns a pointer to a
+<code>pr_ctrls_t</code> object whose action matches the given <i>action</i>.
+<code>NULL</code> will be returned if no matching registered
+<code>pr_ctrls_t</code> are found.  Note that <i>module</i> may be
+<code>ANY_MODULE</code>.  To find the next matching controls object, use
+<code>pr_ctrls_find_next_ctrls()</code> function; it should <b>only</b> be
+used after a call to <code>pr_ctrls_find_ctrls()</code>, and will return
+<code>NULL</code> with <code>errno</code> set to <code>EINVAL</code> if used
+improperly.  A <i>module</i> pointer given to
+<code>pr_ctrls_find_next_ctrls()</code>, if different from the one used in
+the prior <code>pr_ctrls_find_ctrls()</code> call, will have the effect of
+resetting the search indices, as if <code>pr_ctrls_find_ctrls()</code> itself
+had been called with the new <i>module</i> and the used <i>action</i>.
 
 <p>
-<code>pr_unblock_ctrls()</code> function
+The <code>pr_block_ctrls()</code> function blocks control handlers from
+being run.  This is usually done with the control handler list is being
+modified, and should not be used.
 
 <p>
-<code>pr_check_ctrls()</code> function
+The <code>pr_unblock_ctrls()</code> function restores the control handler
+list to useable status, signalling that the state of the list is once more
+stable.
 
 <p>
-<code>pr_run_ctrls()</code> function
+The <code>pr_check_ctrls()</code> function
 
 <p>
-<code>pr_clear_ctrls()</code> function
+The <code>pr_run_ctrls()</code> function iterates through the list of
+registered <code>pr_ctrls_t</code> objects and invokes the callback
+handler functions of any that match the given <i>module</i> and <i>action</i>
+arguments.  Returns <code>0</code> if successful, or <code>-1</code> if there
+was a problem (as when controls are blocked).  Modules and control handlers
+should <b>not</b> need to make use of this function.
 
 <p>
-<code>pr_init_ctrls()</code> function
+The <code>pr_clear_ctrls()</code> function
+
+<p>
+The <code>pr_init_ctrls()</code> function initializes the Controls layer.
 
 <p>
 <center><a href="../../toc.html">Table of Contents</a></center><br>

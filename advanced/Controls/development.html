@@ -21,7 +21,22 @@
 <center><a href="../../toc.html">Table of Contents</a></center><br>
 
 <p>
+A controls handler <b>must</b> add at least one response to the control
+object, even if just an error message.  Failure to do is an error, and the
+client will not read the response, or the handler's return value, properly.
+
+<p>
 When defining your own custom controls,
+
+<p>
+/* As the shutdown time is not "now", use a timer; waiting for
+ * ControlsInterval may not be best.  If this is the case, though, then
+ * what use is ctrls_when?  (Note: document the possible use of the
+ * ctrls_when field by controls to configure _when_ a control args
+ * will be processed; this setting to be done at the start of some
+ * custom controls handler.) If using a timer, though, be sure to
+ * store the timer ID, so that rescinding the shutdown request is
+ * possible.
 
 <p>
 <center><a href="../../toc.html">Table of Contents</a></center><br>

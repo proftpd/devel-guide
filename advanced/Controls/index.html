@@ -20,7 +20,15 @@
 <center><a href="../../toc.html">Table of Contents</a></center><br>
 
 <p>
-The Controls API provides a way to 
+The Controls API provides a way to talk to the running server and request
+that module-defined server-side actions be performed, such as requesting a
+list of currently supported configuration directives, or banning a certain user
+or host from connecting to the server.  This is done by registering custom
+control handlers that are keyed using an <i>action</i>, a specific command
+requested by a client, such as &quot;restart&quot; or &quot;ban&quot;.  The
+communication between controls clients and the running server is done via
+a Unix domain socket, with the server side of the socket being implemented
+by <code>mod_ftpdctl</code>.
 
 <p>
 A developer wishing to make use of the capabilities of controls should read the

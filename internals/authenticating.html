@@ -53,10 +53,15 @@ First, this function determines whether the login request is for an
 <code>&lt;Anonymous&gt;</code> server, or for a real user.  Unknown users
 are rejected at this point.  The determination of &quot;known&quot; user
 is done via the <code><a href="../api/functions.html#auth_getpwnam">auth_getpwnam()</a></code> dispatch function, an abstraction of the
-<code>getpwnam(3)</code> function.  Modules which wish to supply their
+<code>getpwnam(3)</code> function.  Modules that wish to supply their
 own authentication routines will need to provide <b>all</b> of the
 dispatched authentication functions mentioned
-<a href="../handlers/authentication.html">here</a>.
+<a href="../handlers/authentication.html">here</a>.  This dispatch function
+&quot;cascades&quot; through each of the registered authentication modules of
+the server, asking each module in turn to authenticate the user until an
+error is encountered or until a module successfully returns the requested
+information.  This design allows multiple authentication schemes to be present
+simultaneously.
 
 <p>
 Next, the function will check to see if the requested user is
@@ -89,6 +94,16 @@ At this point, unless authentication has failed at any point earlier,
 the authentication process is done.  Any <code>.ftpaccess</code> files
 are parsed, the default transfer mode is set (configurable via the
 <code>DefaultTransferMode</code> directive), and scoreboard files updated.
+
+<p>
+Authentication is a complex process, and may fail at several points: if
+an authentication module encounters an error while authenticating, if
+the login is not for a valid user or is not a valid <code>UserAlias</code>,
+if the login is denied by an applicable <code>&lt;Limit LOGIN&gt;</code>,
+if the password given was incorrect or expired, if the account used
+is disabled, if the user's account includes an invalid shell, if the login
+name is listed in a <code>/etc/ftpusers</code> file and the server is
+configured to honour that file, <i>etc</i>.
 
 <p>
 <center><a href="../toc.html">Table of Contents</a></center><br>

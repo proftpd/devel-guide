@@ -31,8 +31,8 @@ The main functions to use when dealing with timers are defined in
   int add_timer(int <i>seconds</i>, int <i>timerno</i>, module *<i>mod</i>, callback_t <i>cb</i>);
   int remove_timer(int <i>timerno</i>, module *<i>mod</i>);
   int reset_timer(int <i>timerno</i>, module *<i>mod</i>);
-  void block_alarms();
-  void unblock_alarms();
+  void pr_alarms_block(void);
+  void pr_alarms_unblock(void);
 </pre>
 
 <p>
@@ -60,10 +60,10 @@ If a matching timer is found, that timer's <i>timerno</i> is returned,
 otherwise 0 is returned.
 
 <p>
-The <code>block_alarms()</code> function is used to prevent timers from firing.
-Timers that would have fired while blocked are noted, and will be fired once
-alarms are unblocked.  This is to be used in critical sections of code which
-cannot stand interruption.
+The <code>pr_alarms_block()</code> function is used to prevent timers from
+firing.  Timers that would have fired while blocked are noted, and will be
+fired once alarms are unblocked.  This is to be used in critical sections of
+code which cannot stand interruption.
 <p>
 As it notes in the comments in
 <a href="../src/src/timers.c.html"><code>timers.c</code></a>, the blocking of
@@ -72,7 +72,7 @@ signal handling, portability, detection of the number of blocked alarms, and
 to allow for nested <code>block</code>/<code>unblock</code> calls.
 
 <p>
-The <code>unblock_alarms()</code> function allows alarms to once again be
+The <code>pr_alarms_unblock()</code> function allows alarms to once again be
 delivered.  Any pending alarms that should have been delivered while alarms
 were blocked are handled.
 
@@ -82,16 +82,14 @@ This excerpt from
 <a href="../src/modules/mod_auth.c.html"><code>mod_auth.c</code></a> shows
 the <code>TimeoutLogin</code> timer implementation:
 <pre>
-int _login_timeout(CALLBACK_FRAME)
-{
+int login_timeout_cb(CALLBACK_FRAME) {
   <font color=green>/* Is this the proper behavior when timing out? */</font>
-  send_response_async(R_421,
+  pr_response_send_async(R_421,
                       "Login Timeout (%d seconds): "
                       "closing control connection.",
                       TimeoutLogin);
   
-  main_exit((void*) LOG_NOTICE, "FTP login timed out, disconnected.",
-            (void*) 0, NULL);
+  session_exit(PR_LOG_NOTICE, "FTP login timed out, disconnected.", 0, NULL);
  
   <font color=green>/* Don't restart the timer */</font> 
   return 0;
@@ -149,6 +147,7 @@ callback function, and starts the timer running.  Once the child process has
 forked and <code>mod_auth</code>'s child initialization function called, the
 client has until the timer expires to successfully authenticate.
 
+<p>
 When adding a timer, watch out for these predefined timer number/IDs:
 <pre>
   #define TIMER_LOGIN               1

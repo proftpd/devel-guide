@@ -154,10 +154,10 @@ Defined <code>authtable</code> handler names are:
       <code>auth</code> handler return, in case of a failed authentication
       check, a value indicating the cause of the failure.  The required
       values are defined by the following macros:
-      <a href="../api/macros.html#AUTH_AGEPWD"><code>AUTH_AGEPWD</code></a>,
-      <a href="../api/macros.html#AUTH_BADPWD"><code>AUTH_BADPWD</code></a>,
-      <a href="../api/macros.html#AUTH_DISABLEDPWD"><code>AUTH_DISABLEDPWD</code></a>, and
-      <a href="../api/macros.html#AUTH_NOPWD"><code>AUTH_NOPWD</code></a>.
+      <a href="../api/macros.html#PR_AUTH_AGEPWD"><code>PR_AUTH_AGEPWD</code></a>,
+      <a href="../api/macros.html#PR_AUTH_BADPWD"><code>PR_AUTH_BADPWD</code></a>,
+      <a href="../api/macros.html#PR_AUTH_DISABLEDPWD"><code>PR_AUTH_DISABLEDPWD</code></a>, and
+      <a href="../api/macros.html#PR_AUTH_NOPWD"><code>PR_AUTH_NOPWD</code></a>.
       <br><br>
   </li>
   <br>
@@ -277,8 +277,8 @@ handlers:
       should use the
       <code><a href="../api/macros.html#ERROR_INT">ERROR_INT</a></code> macro
       to return a numeric error code, such as one of the
-      <code>AUTH_</code>* macros in
-      <a href="../src/include/modules.h.html#AUTH_NOPWD">
+      <code>PR_AUTH_</code>* macros in
+      <a href="../src/include/modules.h.html#PR_AUTH_NOPWD">
       include/modules.h</a>, indicating the reason for failure.<br>
   </li>
   <br>

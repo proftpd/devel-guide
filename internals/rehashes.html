@@ -1,0 +1,63 @@
+<!-- $Id$ -->
+<!-- $Source$ -->
+
+<html>
+<head>
+<title>ProFTPD Developer's Guide: Rehash Handlers</title>
+</head>
+
+<body bgcolor=white>
+
+<hr><br>
+<center>
+<img src="../images/proftpd.png" border=0>
+<br><br>
+<h3><b>ProFTPD Developer's Guide: Rehash Handlers</b></h3>
+<i><b>ProFTPD Version 1.2</b></i><br>
+</center>
+<hr><br>
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+<p>
+<b>Rehash Handlers</b><br>
+There are some tasks that should be done every time the daemon is restarted,
+as when it receives a <code>SIGHUP</code>, tasks such as destroying and
+re-allocating a module-specific <code>pool</code>, or &quot;bouncing&quot;
+any open file descriptors (<i>e.g.</i> for log files) by closing and reopening
+them, etc.  This process of restarting the daemon is called <i>rehashing</i>
+in the code.  A module can have arbitrary code executed as part of the rehashing
+process by registering a callback function using the following registration
+function:
+<pre>
+  <a href="../src/src/support.c.html#pr_rehash_register_handler"><code>pr_rehash_register_handler(void *<i>arg</i>, void (*<i>cb</i>)(void *))</code></a>
+</pre>
+Keep in mind that these callback functions are executed within the daemon
+process space, and are executed in the <i>inverse</i> order of their
+registration, prior to the re-parsing of the configuration file.
+
+<p>
+<b><i>Do not</i></b> re-register rehash handlers; register them only once,
+during module initialization.  Otherwise, you will bloat up the memory usage of
+the daemon process, every time it is restarted.
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+<hr><br>
+
+Author: <i>$Author$</i><br>
+Last Updated: <i>$Date$</i><br>
+
+<br><hr>
+
+<font size=2><b><i>
+&copy; Copyright 2000-2003 TJ Saunders<br>
+ All Rights Reserved<br>
+</i></b></font>
+
+<hr><br>
+
+</body>
+</html>

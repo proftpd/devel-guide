@@ -1,0 +1,178 @@
+<!-- $Id$ -->
+<!-- $Source$ -->
+
+<html>
+<head>
+<title>ProFTPD Developer's Guide: Confstream API Functions</title>
+</head>
+
+<body bgcolor=white>
+
+<hr><br>
+<center>
+<img src="../../images/proftpd.png">
+<br><br>
+<h3><b>ProFTPD Developer's Guide: Confstream API Functions</b></h3>
+<i><b>ProFTPD Version 1.2</b></i><br>
+</center>
+<hr><br>
+
+<p>
+<center><a href="../../toc.html">Table of Contents</a></center><br>
+
+<p>
+<b>Confstream API Functions</b><br>
+
+<pre>
+  confstream_rec *create_confstream(pool *<i>pool</i>, const char *<i>type</i>);
+  confstream_rec *get_confstream(const char *<i>type</i>);
+  confstream_rec *set_confstream(confstream_rec *<i>stream</i>); 
+  int insert_confstream(confstream_rec *<i>stream</i>);
+  int remove_confstream(const char *<i>type</i>);
+</pre>
+
+<p>
+The <code>create_confstream()</code> function instantiates a
+<code>confstream_rec</code> with the given <i>type</i>.  This
+<code>confstream_rec *</code> will have its callback pointers initialized to
+<code>NULL</code>; the caller will need to set the callback pointers to their
+custom functions before passed the <code>confstream_rec *</code> to
+<code>set_confstream()</code>.  The <i>type</i> argument is simply a short
+string describing the type of stream being instantiated, <i>eg</i>
+&quot;file&quot;, &quot;sql&quot;, &quot;ldap&quot;, etc.  <code>NULL</code>
+will be returned if there was an error allocating memory for this object.
+
+<p>
+The <code>get_confstream()</code> function is the <code>confstream_rec</code>
+lookup/retrieval function, searching the layer's list for the
+<code>confstream_rec</code> matching the requested <i>type</i>.  If no such
+matching <code>confstream_rec</code> was found, <code>NULL</code> will be
+returned.
+
+<p>
+the <code>set_confstream()</code> function sets the current configuration
+stream object for use whenever the core parser is invoked.  The previous
+confstream is returned, or <code>NULL</code> if there was an error with
+the given <i>stream</i>, such as having <code>NULL</code> callbacks.  If
+<code>set_confstream(NULL)</code> is used, the default configuration stream,
+of type "file", will be set.
+
+<p>
+The <code>insert_confstream()</code> function inserts the given
+<code>confstream_rec *</code> into a list of confstreams mainted by the
+Confstream layer.  If a confstream of the same type as that of the given
+confstream is in the list, the new confstream is ignored.  This function will
+return <code>0</code> upon successful insertion of the pointer into the list,
+<code>-1</code> otherwise (<i>eg</i> the given pointer was <code>NULL</code>,
+or if a confstream of the same type was already present in the list.
+
+<p>
+Finally, the <code>remove_confstream()</code> function does just that - it
+searches the Confstream layer's list for <code>confstream_rec</code>s whose
+types match, removes then from the list, and destroys them.  It returns
+<code>0</code> upon removing any matching <code>confstream_rec</code>s,
+<code>-1</code> if there was no matching <code>confstream_rec</code> in the
+list or if the given <i>type</i> was <code>NULL</code>.
+
+<p>
+<b>Confstream Access Functions</b><br>
+The Confstream access functions, the functions the present the unified front to
+the core code (and to any modules who care to use the Confstream layer), are
+described below.
+
+<p>
+<pre>
+  int confstream_open(void);
+  int confstream_close(void);
+  char *confstream_getstr(char *<i>buf</i>, size_t <i>buflen</i>);
+  char *confstream_setstr(char *<i>buf</i>, size_t <i>buflen</i>);
+  int confstream_iserror(void);
+  const char *confstream_gettype(void);
+  char *confstream_getname(void);
+  void confstream_setname(const char *<i>name</i>);
+  unsigned int confstream_getlineno(void);
+</pre>
+
+<p>
+The <code>confstream_open()</code> function calls on the current confstream
+object to open the configuration stream.  It returns <code>0</code> on
+success, <code>-1</code> on error.  <code>lineno</code> of the current
+confstream will be set to zero if successful.
+
+<p>
+The <code>confstream_close()</code> function calls on the current confstream
+object to close the configuration streamm.  It returns <code>0</code> on
+success, <code>-1</code> on error.  <code>lineno</code> of the current
+confstream will be set to zero if successful.
+
+<p>
+The <code>confstream_getstr()</code> function calls on the current confstream
+object to retrieve the next line of configuration information from the stream.
+The retrieved line must be a string that looks similar to a line of text
+from the <i>proftpd.conf</i> configuration file.  Similar to
+<code>fgets(3)</code>, this function reads in at most one less than
+<i>buflen</i> characters from the configuration stream into <i>buf</i>.  A
+terminating <code>'\0'</code> will be stored after the last character in the
+buffer.  Leading and trailing whitespace will be trimmed.  Commented and
+blank lines will be skipped.  Escaped newlines will be handled appropiately,
+as line continuations.  This function will return <code>NULL</code> when no
+more data is available from the stream, or if an error occurs.  Otherwise,
+the retrieved line is returned.
+
+<p>
+The <code>confstream_setstr()</code> function calls on the current confstream
+object to write the given buffer of configuration information to the stream.
+It will return the given buffer if successful, or <code>NULL</code> if an
+error occurred.
+
+<p>
+The <code>confstream_iserror()</code> function calls on the current confstream
+object to check for error conditions.  For example, if
+<code>confstream_getstr()</code> returns <code>NULL</code>, this function
+should be called to determine if an error occurred, or if it was simply the
+end of the stream.  Patterned after <code>ferror(3)</code>, it returns non-zero
+if an error occurred, <code>0</code> if end of stream.  If an error <i>did</i>
+occur, <code>errno</code> <i>should</i> hold the relevant error code.
+
+<p>
+The <code>confstream_gettype()</code> function returns the <i>type</i> field
+of the current confstream object.  <code>NULL</code> is returned if there
+is not a configuration stream currently set.
+
+<p>
+The <code>confstream_getname()</code> function returns the <i>name</i> field
+of the current confstream object.  <code>NULL</code> is returned if there
+is not a configuration stream currently set.
+
+<p>
+The <code>confstream_setname()</code> function sets the <i>name</i> field of
+the current confstream object by making a duplicate of the given string
+from the confstream object's <i>pool</i>.  If there is no configuration stream
+set, this function does nothing.  <b>Note:</b> misuse of this function will
+result in increased memory usage by the confstream object, until it is
+destroyed and its pool released.
+
+<p>
+The <code>confstream_getlineno()</code> function returns the <i>lineno</i>
+field of the current confstream object.  It will return <code>0</code> if
+there is no configuration stream set.
+
+<p>
+<center><a href="../../toc.html">Table of Contents</a></center><br>
+
+<hr><br>
+
+Author: <i>$Author$</i><br>
+Last Updated: <i>$Date$</i><br>
+
+<br><hr>
+
+<font size=2><b><i>
+&copy; Copyright 2000,2001 TJ Saunders<br>
+ All Rights Reserved<br>
+</i></b></font>
+
+<hr><br>
+
+</body>
+</html>

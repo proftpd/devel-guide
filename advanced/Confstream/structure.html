@@ -1,0 +1,99 @@
+<!-- $Id$ -->
+<!-- $Source$ -->
+
+<html>
+<head>
+<title>ProFTPD Developer's Guide: Confstream API Structures</title>
+</head>
+
+<body bgcolor=white>
+
+<hr><br>
+<center>
+<img src="../../images/proftpd.png">
+<br><br>
+<h3><b>ProFTPD Developer's Guide: Confstream API Structures</b></h3>
+<i><b>ProFTPD Version 1.2</b></i><br>
+</center>
+<hr><br>
+
+<p>
+<center><a href="../../toc.html">Table of Contents</a></center><br>
+
+<p>
+<b>Confstream API Structures</b><br>
+At the core of it, the Confstream API uses and manipulates a structure called a
+<code>confstream_rec</code> which has callback function pointers to the actual
+functions to be used.  The Confstream access functions invoke the callback
+functions of the <code>confstream_rec</code> currently in use.  Simple.
+
+<p>
+The code definining the structure of an <code>confstream_rec</code> is in
+<a href="../../src/include/confstream.h.html">include/confstream.h</a>, but is
+included here for your reading pleasure:
+<pre>
+
+<font color=green>/* Modular confstream object */</font>
+struct pr_confstream_struc {
+
+  <font color=green>/* memory pool for this object */</font>
+  pool *pool;
+
+  <font color=green>/* descriptive string for this type of configuration stream (eg "file", "sql", etc) */</font>
+  const char *type;
+ 
+  <font color=green>/* name for this particular instance.  For example, file confstreams place the file name to be read here. */</font>
+  char *name;
+
+  <font color=green>/* line number of the configuration stream */</font>
+  unsigned int lineno;
+
+  <font color=green>/* internal flag */</font>
+  unsigned int status;
+
+  <font color=green>/* configuration stream-specific data */</font>
+  void *data;
+
+  <font color=green>/* Confstream callbacks */</font>
+  int (*open)(confstream_rec *);
+  int (*close)(confstream_rec *);
+  char *(*getstr)(confstream_rec *, char *, size_t);
+  char *(*setstr)(confstream_rec *, char *, size_t);
+  int (*iserror)(confstream_rec *);
+
+};
+</pre>
+
+<p>
+The most noteworthy point of this structure is the <code>data</code>
+field.  This is where modules can sotre and pass around data specific
+to that module or stream, <i>eg</i> database handles, connection information,
+cached data, ACLs, ciphers, etc.
+
+<p>
+Also note that, when instantiated, a subpool is allocated from the given
+parent pool, and it is from this subpool (stored as
+<code>confstream_rec->pool</code>) that the object is actually allocated.
+Therefore, to destroy a <code>confstream_rec</code>, one needs merely to call
+<a href="../../api/functions.html#destroy_pool"><code>destroy_pool()</code></a>
+on the <code>confstream_rec</code>'s pool.
+
+<p>
+<center><a href="../../toc.html">Table of Contents</a></center><br>
+
+<hr><br>
+
+Author: <i>$Author$</i><br>
+Last Updated: <i>$Date$</i><br>
+
+<br><hr>
+
+<font size=2><b><i>
+&copy; Copyright 2000,2001 TJ Saunders<br>
+ All Rights Reserved<br>
+</i></b></font>
+
+<hr><br>
+
+</body>
+</html>

@@ -23,28 +23,36 @@
 <p>
 <b>Command Handlers</b><br>
 ProFTPD defines different phases, or <i>types</i>, to the handling of a
-client-issued command.  There are currently five such command <i>types</i>:
+client-issued command.  There are currently six such command <i>types</i>:
 <code>PRE_CMD</code>, <code>CMD</code>, <code>POST_CMD</code>,
-<code>LOG_CMD</code>, and <code>LOG_CMD_ERR</code>.  When ProFTPD receives a
-command from a client, it enters a cascading command delivery process:
+<code>POST_CMD_ERR</code>, <code>LOG_CMD</code>, and <code>LOG_CMD_ERR</code>.
+When ProFTPD receives a command from a client, it enters a cascading command
+delivery process:
 <ol>
   <li>Call any <a href="#PreCommandHandler"><code>PRE_CMD</code></a> type
-      handlers which match the special <code>*</code> command
+      handlers that match the special <code>*</code> command
       <a href="../src/include/ftp.h.html#C_ANY">wildcard</a>
   <li>Call any <a href="#PreCommandHandler"><code>PRE_CMD</code></a> type
-      handlers which match the command.
+      handlers that match the command.
   <li>Call any <a href="#CommandHandler"><code>CMD</code></a> type handlers
-      which match the special <code>*</code> command
+      that match the special <code>*</code> command
       <a href="../src/include/ftp.h.html#C_ANY">wildcard</a>
   <li>Call any <a href="#CommandHandler"><code>CMD</code></a> type handlers
-      which match the command.
+      that match the command.
   <li>Call any <a href="#PostCommandHandler"><code>POST_CMD</code></a> type
-      handlers which match the special <code>*</code> command
+      handlers that match the special <code>*</code> command
       <a href="../src/include/ftp.h.html#C_ANY">wildcard</a> if the
       <code>CMD</code> handler(s) succeeded.
   <li>Call any <a href="#PostCommandHandler"><code>POST_CMD</code></a> type
-      handlers which match the command if the <code>CMD</code> handler(s)
+      handlers that match the command if the <code>CMD</code> handler(s)
       succeeded.
+  <li>Call any <a href="#PostCommandErrHandler"><code>POST_CMD_ERR</code></a>
+      type handlers that match the special <code>*</code> command
+      <a href="../srcd/include/ftp.h.html#C_ANY">wildcard</a> if the
+      <code>PRE_CMD</code> or <code>CMD</code> handler(s) failed.
+  <li>Call any <a href="#PostCommandErrHandler"><code>POST_CMD_ERR</code></a>
+      type handlers which match the command if the <code>PRE_CMD</code> or
+      <code>CMD</code> handler(s) failed.
   <li>Call any <a href="#LogCommandHandler"><code>LOG_CMD</code></a> type
       handlers which match the special <code>*</code> command
       <a href="../src/include/ftp.h.html#C_ANY">wildcard</a> if the
@@ -166,6 +174,27 @@ MODRET post_cmd_stor(cmd_rec *cmd) {
 </pre>
 
 <p>
+<a name="PostCommandErrHandler"></a>
+<b>Post-Command Error Handlers</b><br>
+<code>POST_CMD_ERR</code> type handlers handle any reporting and logging
+of error conditions that may occur during the processing of a
+<code>PRE_CMD</code> or <code>CMD</code> handler.  One thing that distinguishes
+a <code>POST_CMD_ERR</code> handler from a <code>LOG_CMD_ERR</code> handler
+is that any error responses added during a <code>POST_CMD_ERR</code> handle,
+using <code>add_response_err()</code>, will be seen by the client when the
+error response chain is flushed; similar responses added by a
+<code>LOG_CMD_ERR</code> handler are not seen by the client.
+
+<p>
+<b>Example <code>POST_CMD_ERR</code> Handler</b><br>
+<pre>
+MODRET post_stor_err(cmd_rec *cmd) {
+  add_response_err(R_DUP, "%s failed: try harder next time!", cmd->argv[0]);
+  return DECLINED(cmd);
+}
+</pre>
+
+<p>
 <a name="LogCommandHandler"></a>
 <b>Log Command Handlers</b><br>
 <code>LOG_CMD</code> type handlers handle logging of successful commands.
@@ -176,10 +205,8 @@ they have been processed, and only if those commands were <i>successful</i>.
 <b>Example <code>LOG_CMD</code> Handler</b><br>
 <pre>
 MODRET log_cmd(cmd_rec *cmd) {
-
   log_debug(DEBUG0, "SUCCESSFUL: command '%s', arguments '%s'",
     cmd->argv[0], cmd->arg);
-
   return DECLINED(cmd);
 }
 </pre>

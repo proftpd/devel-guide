@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>ProFTPD Developer's Guide: FS API Functions</title>
+<title>ProFTPD Developer's Guide: FSIO API Functions</title>
 </head>
 
 <body bgcolor=white>
@@ -12,7 +12,7 @@
 <center>
 <img src="../../images/proftpd.png" border=0>
 <br><br>
-<h3><b>ProFTPD Developer's Guide: FS API Functions</b></h3>
+<h3><b>ProFTPD Developer's Guide: FSIO API Functions</b></h3>
 <i><b>ProFTPD Version 1.2</b></i><br>
 </center>
 <hr><br>
@@ -21,7 +21,7 @@
 <center><a href="../../toc.html">Table of Contents</a></center><br>
 
 <p>
-<b>FS API Functions</b><br>
+<b>FSIO API Functions</b><br>
 
 <pre>
   pr_fs_t *pr_register_fs(pool *<i>pool</i>, const char *<i>name</i>, const char *<i>path</i>);
@@ -32,14 +32,14 @@
 </pre>
 
 <p>
-The <code>pr_register_fs()</code> function is the one that FS modules should
+The <code>pr_register_fs()</code> function is the one that FSIO modules should
 use primarily, for it handles the creation and registration of an
 <code>pr_fs_t</code> in one shot.  The <code>pr_fs_t *</code> returned allows
 the caller to store that pointer for other, module-specific, purposes.  The
 <i>name</i> argument is merely a descriptive label for the created
 <code>pr_fs_t</code>.  The <i>path</i> argument declares where the created
 <code>pr_fs_t</code> is to be registered in the filesystem, and is specific
-only to the created <code>pr_fs_t</code>; an FS module may call
+only to the created <code>pr_fs_t</code>; an FSIO module may call
 <code>pr_register_fs()</code> multiple times for multiple paths.  Functionally,
 <code>pr_register_fs()</code> is equivalent to calling
 <code>pr_create_fs()</code> and <code>pr_insert_fs()</code>.
@@ -47,8 +47,8 @@ only to the created <code>pr_fs_t</code>; an FS module may call
 <p>
 The <code>pr_fs_t *</code> returned by both <code>pr_register_fs()</code> and
 <code>pr_create_fs()</code> has all of its function pointers initialized
-to the system defaults.  To put the FS module's custom versions into effect,
-merely overwrite the appropriate function pointer.  Note that the FS access
+to the system defaults.  To put the FSIO module's custom versions into effect,
+merely overwrite the appropriate function pointer.  Note that the FSIO access
 functions will check for <code>NULL</code> function pointers and return
 <code>EPERM</code> if need be, meaning that a given filesystem operation can
 easily be disabled by setting its <code>pr_fs_t</code> function pointer to
@@ -63,7 +63,7 @@ for multiple paths.
 <p>
 The <code>pr_insert_fs()</code> function inserts the given
 <code>pr_fs_t *</code> into a mapping of <code>pr_fs_t</code>s maintained by
-the FS layer.  This mapping is sorted and searched according to the given
+the FSIO layer.  This mapping is sorted and searched according to the given
 <i>path</i>; it is <b>highly recommended</b> that the <code>path</code> field
 of a created <code>pr_fs_t</code> be left alone.  If the given <i>path</i>
 argument ends in a trailing slash, then that path will be treated a little
@@ -73,17 +73,17 @@ Deferred-resolution paths, <i>e.g.</i> relative paths, and &quot;~&quot; and
 are allowed.  They will be resolved into full paths at login time, after
 successful authentication by the user.  This function will return
 <code>TRUE</code> upon successful insertion of the pointer into the map,
-<code>FALSE</code> otherwise.  At this point, the FS layer does not handle
-layering of FS modules, multiple modules that register identical paths; this
+<code>FALSE</code> otherwise.  At this point, the FSIO layer does not handle
+layering of FSIO modules, multiple modules that register identical paths; this
 function returns <code>FALSE</code> if there is already an <code>pr_fs_t</code>
 in the map for handling the requested <i>path</i>.
 
 <p>
-The <code>get_fs()</code> function serves as the <code>pr_fs_t</code>
+The <code>pr_get_fs()</code> function serves as the <code>pr_fs_t</code>
 lookup/retrieval function, searching for the <code>pr_fs_t</code> that should
 handle the given <i>path</i>.  If the returned <code>pr_fs_t *</code> is
 an <b>exact</b> match for the given <i>path</i>, meaning that there was an
-<code>pr_fs_t</i> in the FS layer's map whose <i>path</i> member matches
+<code>pr_fs_t</code> in the FSIO layer's map whose <i>path</i> member matches
 the given <i>path</i> exactly, then <code>*exact</code> will have a
 <code>TRUE</code> when <code>get_fs()</code> returns.  Otherwise,
 <code>*exact</code> will be <code>FALSE</code>, meaning that the returned
@@ -99,7 +99,7 @@ When searching for an <code>pr_fs_t</code> to handle <i>path</i>,
 <i>path</i> and looking for more path-specific <code>pr_fs_t</code>s.  It
 keeps tracks of <code>pr_fs_t</code>s for directories, as opposed to specific
 files, and distinguishes between them by looking for a trailing slash.  For
-example, if there was only two <code>pr_fs_t</code>s in the FS map, the root
+example, if there was only two <code>pr_fs_t</code>s in the FSIO map, the root
 <code>pr_fs_t</code> and one registered to handle
 <pre>
   /path/to/dir

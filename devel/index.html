@@ -21,7 +21,7 @@
 <center><a href="../toc.html">Table of Contents</a></center><br>
 
 <p>
-<b>Development</b><br>
+<b>Module Development</b><br>
 As with any software development, there are certain things to watch out for
 when building a module.  There are also other things to consider as part of
 the development process, such as configure scripts and documentation.
@@ -30,9 +30,15 @@ the development process, such as configure scripts and documentation.
 <b>Common tasks</b><br>
 As you develop your module, you will find that there are some routines and
 operations needed that will have inevitably been done before, either in
-other modules, or in the core code itself.  This page describes some of these
-<a href="tasks.html">common tasks</a> you can expect to counter, and how
-they can be done.
+other modules, or in the core code itself.  These pages describe some of the
+common tasks you can expect to counter, and how they can be done:
+<ul>
+  <li><a href="session-credentials.html">detecting</a> session credentials
+      (<i>i.e.</i> user, groups, class)
+  <li><a href="chroot-workarounds.html">working</a> around the
+      <code>chroot()</code> function
+  <li><a href="logging.html">logging</a>
+</ul>
 
 <p>
 Here are some other <a href="tips.html">tips</a> to keep in mind as you work
@@ -51,11 +57,11 @@ restrictions on the code you are writing.
 Always, <i>always</i>, <b><i>always</i></b> check, verify, and sanitize user
 input, be it from configuration files such as <code>.ftpaccess</code>, from
 the configuration directive arguments for your modules, from any FTP commands
-you've created, etc etc.  If you're going to open and write a file while running with
-root privileges, check to see if the file exists first.  If it does, check whether it is
-a symlink, has data, whatever.  Just do not blindly write to a file name, unless you
-are absolutely certain of the conditions of the directory and file to which you are
-writing.
+you've created, etc etc.  If you're going to open and write a file while
+running with root privileges, check to see if the file exists first.  If it
+does, check whether it is a symlink, has data, whatever.  Just do not blindly
+write to a file name, unless you are absolutely certain of the conditions of
+the directory and file to which you are writing.
 
 <p>
 Overall ProFTPD philosophy: no <code>exec*e()</code>, no <code>system()</code>,
@@ -111,7 +117,7 @@ Last Updated: <i>$Date$</i><br>
 <br><hr>
 
 <font size=2><b><i>
-&copy; Copyright 2000,2001 TJ Saunders<br>
+&copy; Copyright 2000-2002 TJ Saunders<br>
  All Rights Reserved<br>
 </i></b></font>
 

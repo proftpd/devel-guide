@@ -34,13 +34,13 @@
   int pr_ctrls_copy_resps(pr_ctrls_t *<i>src_ctrl</i>, pr_ctrls_t *<i>dest_ctrl</i>);
   int pr_ctrls_flush_response(pr_ctrls_t *<i>ctrl</i>);
   int pr_ctrls_recv_request(pr_ctrls_cl_t *<i>cl</i>);
-  int pr_ctrls_recv_response(pool *<i>resp_pool</i>, int ctrls_sockfd, int *<i>status</i>, char ***<i>respargv</i>); 
+  int pr_ctrls_recv_response(pool *<i>resp_pool</i>, int <i>ctrls_sockfd</i>, int *<i>status</i>, char ***<i>respargv</i>); 
   int pr_ctrls_send_msg(int <i>sockfd</i>, int <i>msgstatus</i>, unsigned int <i>msgargc</i>, char **<i>msgargv</i>);
   pr_ctrls_t *pr_find_ctrls(module *<i>module</i>, const char *<i>action</i>);
   pr_ctrls_t *pr_find_next_ctrls(module *<i>module</i>);
-  void pr_block_ctrls();
-  void pr_unblock_ctrls();
-  int pr_check_ctrls();
+  void pr_block_ctrls(void);
+  void pr_unblock_ctrls(void);
+  int pr_check_ctrls(void);
   int pr_run_ctrls(module *<i>module</i>, const char *<i>action</i>);
   void pr_clear_ctrls();
   void pr_init_ctrls();

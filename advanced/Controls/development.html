@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>ProFTPD Developer's Guide: Developing Custom Controls</title>
+<title>ProFTPD Developer's Guide: Writing Control Actions</title>
 </head>
 
 <body bgcolor=white>
@@ -12,7 +12,7 @@
 <center>
 <img src="../../images/proftpd.png" border=0>
 <br><br>
-<h3><b>ProFTPD Developer's Guide: Developing Custom Controls</b></h3>
+<h3><b>ProFTPD Developer's Guide: Writing Control Actions</b></h3>
 <i><b>ProFTPD Version 1.2</b></i><br>
 </center>
 <hr><br>
@@ -21,31 +21,139 @@
 <center><a href="../../toc.html">Table of Contents</a></center><br>
 
 <p>
-A controls handler <b>must</b> add at least one response to the control
-object, even if just an error message.  Failure to do is an error, and the
-client will not read the response, or the handler's return value, properly.
+Writing a custom action for the <code>ftpdctl</code> program adds to the
+capabilities of the daemon and enhancing the ability of the administrator
+to fine-tune the daemon while it is running.  The following example module
+implements a &quot;hello&quot; action, and shows how to support action options.
 
 <p>
-Some control handlers, if they are going to be long-lived (relatively) and
-complexe, might do better fork()ing before doing their thing, rather
-than holding up the main daemon process (in which context the handlers
-normally run).
+The key function that a module uses to indicate to the daemon that it
+supports a custom <code>ftpdctl</code> action is:
+<pre>
+int pr_ctrls_add(module *<i>module</i>, const char *<i>action</i>, int (*<i>ctrls_cb</i>)(<a href="structures.html#pr_ctrls_t"><code>pr_ctrls_t</code></a> *, int, char **));
+</pre>
+This function registers the <i>action</i> with the Controls layer, using the
+given <i>action</i> string as the retrieval key for the <i>ctrls_cb</i>
+callback handler function.
 
 <p>
-When defining your own custom controls,
+Example <code>mod_ctrls_hello</code> module code:
+<pre>
+#include "mod_ctrls.h"
+
+module ctrls_hello_module;
+
+static int hello_handle_hello(pr_ctrls_t *ctrl, int reqargc,
+    char **reqargv) {
+  int c = 0, res = 0;
+
+  <font color=green>/* Always be sure to add at least one response to the given ctrl.  Failure
+   * to do so causes the Controls layer to complain.
+   */</font>
+  pr_ctrls_add_response(ctrl, "Hello, %s!", ctrl->ctrls_cl->cl_user);
+
+  <font color=green>/* Parse any shutdown options.  Note that this use of getopt() requires
+   * that we be clever.  First, the setting of optind (above), which causes
+   * getopt() to think that it is being called for the first time, when
+   * in fact it will have already been called by main().  Second, the
+   * working around of a rather restrictive assumption made by getopt():
+   * that it will be used only on the argc, argv passed to main(), and
+   * not any other argc, argv (as here).  Using that assumption, getopt
+   * starts its parsing with the second element of argv (index 1), thinking
+   * that argv[0] is the program name.  We lie to getopt with the addition
+   * of one to reqargc and subtraction of one from reqargv, fooling getopt
+   * into processing the provided argv correctly.  Just remember to
+   * similarly adjust getopt's results (namely, the value of optind).
+   */</font>
+
+  <font color=green>/* Reset getopt */</font>
+  optind = 0;
+
+  while ((c = getopt(reqargc + 1, reqargv - 1, "t")) != -1) {
+    switch (c) {
+      case 't':
+        <font color=green>/* Add the current time to the response. */</font>
+        char buf[80] = {'\0'};
+        time_t now = time(NULL);
+        struct tm t = localtime(&now);
+
+        strftime(buf, sizeof(buf), "%b %d %H:%M:%S", t);
+        buf[sizeof(buf)-1] = '\0';
+
+        pr_ctrls_add_response(ctrl, "The time is now: %s", buf);
+        break;
+
+      case '?':
+        pr_ctrls_add_response(ctrl, "unknown option: %c", c);
+        return -1;
+
+      default:
+    }
+  }
+
+  <font color=green>/* Adjust optind to reflect the tweaks to reqargc, reqargv earlier. */</font>
+  optind--;
+
+  return res;
+}
+
+static int hello_init(void) {
+
+  if (pr_ctrls_add(&ctrls_hello_module, "hello", hello_handle_hello) < 0)
+    log_pri(LOG_INFO, "error registering 'hello' control: %s",
+      strerror(errno));
+
+  return 0;
+}
+
+module ctrl_hello_module = {
+  NULL, NULL,
+
+  <font color=green>/* Module API version 2.0 */</font>
+  0x20,
+
+  <font color=green>/* Module name */</font>
+  "ctrls_hello",
+
+  <font color=green>/* Module configuration handler table */</font>
+  NULL,
+
+  <font color=green>/* Module command handler table */</font>
+  NULL,
+
+  <font color=green>/* Module authentication handler table */</font>
+  NULL,
+
+  <font color=green>/* Module initialization function */</font>
+  hello_init,
+
+  <font color=green>/* Module child initialization function */</font>
+  NULL
+};
+</pre>
+
+Copy this code into a source file and build it into your <code>proftpd</code>.
+Once you have started the daemon, you should be able to invoke your new
+control by using <code>ftpdctl</code>:
+<pre>
+  ftpdctl hello -t
+</pre>
+to see a response similar to this one:
+<pre>
+  ftpdctl: Hello, tj!
+  ftpdctl: The time is now: Jul 14 22:38:48
+</pre>
 
 <p>
-/* As the shutdown time is not "now", use a timer; waiting for
- * ControlsInterval may not be best.  If this is the case, though, then
- * what use is ctrls_when?  (Note: document the possible use of the
- * ctrls_when field by controls to configure _when_ a control args
- * will be processed; this setting to be done at the start of some
- * custom controls handler.) If using a timer, though, be sure to
- * store the timer ID, so that rescinding the shutdown request is
- * possible.
-
-<p>
-New config_rec flags of CF_GCTRL, CF_SCTRL
+Take great care in the abilities you provide to <code>proftpd</code> users
+via controls.  The action callback function runs within the context of
+the daemon, which means it can affect everything.  A badly coded handler
+that goes into an infinite loop will cause the daemon to hang, unable
+even to handle new connections.  If the functionality your control provides
+is sensitive, and not meant for everyone, consider using control access
+lists.  The <code>mod_ctrls_common</code> module uses such lists to restrict
+access to its &quot;restart&quot; and &quot;shutdown&quot; actions; see
+its code for the usage of access lists.
 
 <p>
 <center><a href="../../toc.html">Table of Contents</a></center><br>

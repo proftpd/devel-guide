@@ -317,36 +317,6 @@ if explicitly denied.<br>
   <a href="../src/src/inet.c.html#_create_inet_pool">src/inet.c</a><br>
 
 <hr>
-<a name="_data_active_open"><b>_data_active_open</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int _data_active_open(char *<i>reason</i>, unsigned long <i>size</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/data.c.html#_data_active_open">src/data.c</a><br>
-
-<hr>
-<a name="_data_new_xfer"><b>_data_new_xfer</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static void _data_new_xfer(char *<i>filename</i>, int <i>direction</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/data.c.html#_data_new_xfer">src/data.c</a><br>
-
-<hr>
-<a name="_data_pasv_open"><b>_data_pasv_open</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int _data_pasv_open(char *<i>reason</i>, unsigned long <i>size</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/data.c.html#_data_pasv_open">src/data.c</a><br>
-
-<hr>
 <a name="_dir_check_op"><b>_dir_check_op</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -502,85 +472,6 @@ place to which to move a
   <a href="../src/modules/mod_unixpw.c.html#_get_pw_info">modules/mod_unixpw.c</a><br>
 
 <hr>
-<a name="_hash_find"><b>_hash_find</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static struct symbol_hash *_hash_find(int <i>index</i>, char *<i>name</i>, int <i>type</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/modules.c.html#_hash_find">src/modules.c</a><br>
-
-<hr>
-<a name="_hash_find_next"><b>_hash_find_next</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static struct symbol_hash *_hash_find_next(int <i>index</i>, char *<i>name</i>, int <i>type</i>, void *<i>last</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/modules.c.html#_hash_find_next">src/modules.c</a><br>
-
-<hr>
-<a name="_hash_index"><b>_hash_index</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int _hash_index(char *<i>name</i>)
-</pre>
-<font color=blue>Comments</font>: Hash function for generating indices for
-the modules' symbol tables.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/modules.c.html#_hash_index">src/modules.c</a><br>
-
-<hr>
-<a name="_hash_insert"><b>_hash_insert</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int _hash_insert(struct symbol_hash *<i>sym</i>)
-</pre>
-<font color=blue>Comments</font>: Inserts the given <i>sym</i> into the
-<code>xaset_t</code> symtable array, which is static to modules.c.  The
-<code><a href="#_compare_sym">_compare_sym()</a></code> function is used
-as the comparison function for the items in the symtable <code>xaset</code>.
-This function returns the index at which <i>sym</i> was inserted.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/modules.c.html#_hash_insert">src/modules.c</a><br>
-
-<hr>
-<a name="_hash_insert_auth"><b>_hash_insert_auth</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int _hash_insert_auth(authtable *<i>auth</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/modules.c.html#_hash_insert_auth">src/modules.c</a><br>
-
-<hr>
-<a name="_hash_insert_cmd"><b>_hash_insert_cmd</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int _hash_insert_cmd(cmdtable *<i>cmd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/modules.c.html#_hash_insert_cmd">src/modules.c</a><br>
-
-<hr>
-<a name="_hash_insert_conf"><b>_hash_insert_conf</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int _hash_insert_conf(conftable *<i>conf</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/modules.c.html#_hash_insert_conf">src/modules.c</a><br>
-
-<hr>
 <a name="_internal_abort"><b>_internal_abort</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -712,26 +603,6 @@ configuration set, <i>newparent</i>.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#_reparent_all">src/dirtree.c</a><br>
-
-<hr>
-<a name="_scan_fsdir"><b>_scan_fsdir</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static fsdir_t *_scan_fsdir(const char *<i>path</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#_scan_fsdir">src/fs.c</a><br>
-
-<hr>
-<a name="_scan_fsmatch"><b>_scan_fsmatch</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static fsmatch_t *_scan_fsmatch(const char *<i>path</i>, int <i>op</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#_scan_fsmatch">src/fs.c</a><br>
 
 <hr>
 <a name="_set_oobinline"><b>_set_oobinline</b><br>
@@ -1185,22 +1056,6 @@ name <i>name</i>.<br>
   <a href="../src/modules/mod_core.c.html#add_directory">modules/mod_core.c</a><br>
 
 <hr>
-<a name="add_exit_handler"><b>add_exit_handler</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void add_exit_handler(void (*<i>f</i>)())
-</pre>
-<font color=blue>Comments</font>:  Register a function <i>f</i> to be run
-when the server exits normally, and the
-<a href="#run_exit_handlers"><code>run_exit_handlers()</code></a> function is
-called, which happens in
-<a href="#end_login_noexit"><code>end_login_noexit()</code></a>.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/support.c.html#add_exit_handler">src/support.c</a><br>
-
-<hr>
 <a name="add_extendedlog"><b>add_extendedlog</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -1376,34 +1231,6 @@ called, which happens in
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_xfer.c.html#add_ratenum">modules/mod_xfer.c</a><br>
-
-<hr>
-<a name="add_response"><b>add_response</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void add_response(const char *<i>numeric</i>, const char *<i>fmt</i>, ...)
-</pre>
-<font color=blue>Comments</font>:  Add the given <i>numeric</i> and
-formatted message to the end of the success response chain, to be sent to
-the client if the FTP command completes successfully.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/main.c.html#add_response">src/main.c</a><br>
-
-<hr>
-<a name="add_response_err"><b>add_response_err</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void add_response_err(const char *<i>numeric</i>, const char *<i>fmt</i>, ...)
-</pre>
-<font color=blue>Comments</font>:  Add the given <i>numeric</i> and
-formatted message to the error response chain, to be sent to the client if
-the FTP command processing results in an error.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/main.c.html#add_response_err">src/main.c</a><br>
 
 <hr>
 <a name="add_timer"><b>add_timer</b><br>
@@ -2004,30 +1831,6 @@ FTP command.<br>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_auth.c.html#auth_user">modules/mod_auth.c</a><br>
 
-
-<hr>
-<a name="block_alarms"><b>block_alarms</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void block_alarms(void)
-</pre>
-<font color=blue>Comments</font>: Blocks timers (which operate based on
-<code>SIGALRM</code>) from being run.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/timers.c.html#block_alarms">src/timers.c</a><br>
-
-<hr>
-<a name="block_signals"><b>block_signals</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void block_signals(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/support.c.html#block_signals">src/support.c</a><br>
-
 <hr>
 <a name="build_dyn_config"><b>build_dyn_config</b><br>
 <br>
@@ -2168,6 +1971,16 @@ chained <code>union block_hdr</code>s point to <code>union block_hdr</code>
   <a href="../src/src/main.c.html#cmd_loop">src/main.c</a><br>
 
 <hr>
+<a name="cmp"><b>cmp</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static int cmp(const void *<i>a</i>, const void *<i>b</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_ls.c.html#cmp">modules/mod_ls.c</a><br>
+
+<hr>
 <a name="conn_cleanup_cb"><b>conn_cleanup_cb</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -2176,6 +1989,50 @@ chained <code>union block_hdr</code>s point to <code>union block_hdr</code>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/inet.c.html#conn_cleanup_cb">src/inet.c</a><br>
+
+<hr>
+<a name="copy_array"><b>copy_array</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  array_header *copy_array(pool *<i>p</i>, const array_header *<i>arr</i>)
+</pre>
+<font color=blue>Comments</font>: Returns a pointer to an
+<code>array_header</code> that is a copy of <i>arr</i>, using resources from
+<code>pool</code> <i>p</i>.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/pool.c.html#copy_array">src/pool.c</a><br>
+
+<hr>
+<a name="copy_array_hdr"><b>copy_array_hdr</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  array_header *copy_array_hdr(pool *<i>p</i>, const array_header *<i>arr</i>)
+</pre>
+<font color=blue>Comments</font>: Returns a pointer to an
+<code>array_header</code> which contains duplicate pointers to the original
+elements of <code>array_header</code> <i>arr</i>, using the resources of
+<code>pool</code> <i>p</i>.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/pool.c.html#copy_array_hdr">src/pool.c</a><br>
+
+<hr>
+<a name="copy_array_str"><b>copy_array_str</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  array_header *copy_array_str(pool *<i>p</i>, const array_header *<i>arr</i>)
+</pre>
+<font color=blue>Comments</font>: Returns a pointer to an
+<code>array_header</code> which contains duplicate elements (<i>i.e.</i>
+strings) of the original elements of <code>array_header</code> <i>arr</i>,
+allocated from the resources of <code>pool</code> <i>p</i>.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/pool.c.html#copy_array_str">src/pool.c</a><br>
 
 <hr>
 <a name="core_cdup"><b>core_cdup</b><br>
@@ -2237,6 +2094,24 @@ FTP command.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_core.c.html#core_dele">modules/mod_core.c</a><br>
+
+<hr>
+<a name="core_display_file"><b>core_display_file</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int core_display_file(const char *<i>numeric</i>, const char *<i>fn</i>, const char *<i>fs</i>)
+</pre>
+<font color=blue>Comments</font>: Displays the file <i>fn</i>, which lives on
+the filesystem <i>fs</i>, via the given response <i>numeric</i>.  The file is
+displayed in normal RFC959 multiline mode, unless <code>MultilineRFC2228</code>
+is set.<br>
+<br>
+This function returns <code>-1</code> on error, or <code>0</code> if the
+file is displayed without trouble.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_core.c.html#core_display_file">modules/mod_core.c</a><br>
 
 <hr>
 <a name="core_help"><b>core_help</b><br>
@@ -2348,11 +2223,22 @@ FTP command.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-static pr_netio_stream_t *core_netio_reopen_cb(pr_netio_stream_t *<i>nstrm</i>, int <i>fd</i>, int <i>mode</i>)
+  static pr_netio_stream_t *core_netio_reopen_cb(pr_netio_stream_t *<i>nstrm</i>, int <i>fd</i>, int <i>mode</i>)
 </pre>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/netio.c.html#core_netio_reopen_cb">src/netio.c</a><br>
+
+<hr>
+<a name="core_netio_shutdown_cb"><b>core_netio_shutdown_cb</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static int core_netio_shutdown_cb(pr_netio_stream_t *<i>nstrm</i>, int <i>how</i>)
+</pre>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#core_netio_shutdown_cb">src/netio.c</a><br>
 
 <hr>
 <a name="core_netio_write_cb"><b>core_netio_write_cb</b><br>
@@ -2506,86 +2392,24 @@ FTP command.<br>
   <a href="../src/modules/mod_core.c.html#core_syst">modules/mod_core.c</a><br>
 
 <hr>
-<a name="cmp"><b>cmp</b><br>
+<a name="create_home"><b>create_home</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static int cmp(const void *<i>a</i>, const void *<i>b</i>)
+  int create_home(pool *<i>p</i>, const char *<i>home</i>, const char *<i>user</i>, uid_t <i>uid</i>, gid_t <i>gid</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_ls.c.html#cmp">modules/mod_ls.c</a><br>
+  <a href="../src/src/mkhome.c.html#create_home">src/mkhome.c</a><br>
 
 <hr>
-<a name="copy_array"><b>copy_array</b><br>
+<a name="daemon_loop"><b>daemon_loop</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  array_header *copy_array(pool *<i>p</i>, const array_header *<i>arr</i>)
-</pre>
-<font color=blue>Comments</font>: Returns a pointer to an
-<code>array_header</code> that is a copy of <i>arr</i>, using resources from
-<code>pool</code> <i>p</i>.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/pool.c.html#copy_array">src/pool.c</a><br>
-
-<hr>
-<a name="copy_array_hdr"><b>copy_array_hdr</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  array_header *copy_array_hdr(pool *<i>p</i>, const array_header *<i>arr</i>)
-</pre>
-<font color=blue>Comments</font>: Returns a pointer to an
-<code>array_header</code> which contains duplicate pointers to the original
-elements of <code>array_header</code> <i>arr</i>, using the resources of
-<code>pool</code> <i>p</i>.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/pool.c.html#copy_array_hdr">src/pool.c</a><br>
-
-<hr>
-<a name="copy_array_str"><b>copy_array_str</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  array_header *copy_array_str(pool *<i>p</i>, const array_header *<i>arr</i>)
-</pre>
-<font color=blue>Comments</font>: Returns a pointer to an
-<code>array_header</code> which contains duplicate elements (<i>i.e.</i>
-strings) of the original elements of <code>array_header</code> <i>arr</i>,
-allocated from the resources of <code>pool</code> <i>p</i>.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/pool.c.html#copy_array_str">src/pool.c</a><br>
-
-<hr>
-<a name="core_chmod"><b>core_chmod</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int core_chmod(cmd_rec *<i>cmd</i>, char *<i>dir</i>, mode_t <i>mode</i>)
+  void daemon_loop(void)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#core_chmod">modules/mod_core.c</a><br>
-
-<hr>
-<a name="core_display_file"><b>core_display_file</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int core_display_file(const char *<i>numeric</i>, const char *<i>fn</i>, const char *<i>fs</i>)
-</pre>
-<font color=blue>Comments</font>: Displays the file <i>fn</i>, which lives on
-the filesystem <i>fs</i>, via the given response <i>numeric</i>.  The file is
-displayed in normal RFC959 multiline mode, unless <code>MultilineRFC2228</code>
-is set.<br>
-<br>
-This function returns <code>-1</code> on error, or <code>0</code> if the
-file is displayed without trouble.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#core_display_file">modules/mod_core.c</a><br>
+  <a href="../src/src/main.c.html#daemon_loop">src/main.c</a><br>
 
 <hr>
 <a name="daemonize"><b>daemonize</b><br>
@@ -2606,6 +2430,16 @@ file is displayed without trouble.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/data.c.html#data_abort">src/data.c</a><br>
+
+<hr>
+<a name="data_active_open"><b>data_active_open</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static int data_active_open(char *<i>reason</i>, unsigned long <i>size</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/data.c.html#data_active_open">src/data.c</a><br>
 
 <hr>
 <a name="data_cleanup"><b>data_cleanup</b><br>
@@ -2638,6 +2472,16 @@ file is displayed without trouble.<br>
   <a href="../src/src/data.c.html#data_init">src/data.c</a><br>
 
 <hr>
+<a name="data_new_xfer"><b>data_new_xfer</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static void data_new_xfer(char *<i>filename</i>, int <i>direction</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/data.c.html#data_new_xfer">src/data.c</a><br>
+
+<hr>
 <a name="data_open"><b>data_open</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -2646,6 +2490,16 @@ file is displayed without trouble.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/data.c.html#data_open">src/data.c</a><br>
+
+<hr>
+<a name="data_pasv_open"><b>data_pasv_open</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static int data_pasv_open(char *<i>reason</i>, unsigned long <i>size</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/data.c.html#data_pasv_open">src/data.c</a><br>
 
 <hr>
 <a name="data_reset"><b>data_reset</b><br>
@@ -2932,7 +2786,7 @@ as this <i>before</i> calling <code>dir_match_path()</code>:
   char *dir_realpath(pool *<i>p</i>, const char *<i>path</i>)
 </pre>
 <font color=blue>Comments</font>:  This function is needed to properly
-dereference symlinks, for <a href="#fs_getcwd"><code>fs_getcwd()</code></a>
+dereference symlinks, for <a href="#pr_fs_getcwd"><code>pr_fs_getcwd()</code></a>
 may not work if permissions cause problems somewhere up the tree.<br>
 <br>
 <font color=blue>Source File</font>:
@@ -3432,231 +3286,11 @@ Alarms <b>must</b> be blocked before calling this function.<br>
   <a href="../src/src/dirtree.c.html#free_dyn_stacks">src/dirtree.c</a><br>
 
 <hr>
-<a name="fs_chdir"><b>fs_chdir</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_chdir(const char *<i>path</i>, int <i>hidesymlink</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_chdir">src/fs.c</a><br>
-
-<hr>
-<a name="fs_chdir_canon"><b>fs_chdir_canon</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_chdir_canon(const char *<i>path</i>, int <i>hidesymlink</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_chdir_canon">src/fs.c</a><br>
-
-<hr>
-<a name="fs_chmod"><b>fs_chmod</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_chmod(const char *<i>name</i>, mode_t <i>mode</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_chmod">src/fs.c</a><br>
-
-<hr>
-<a name="fs_chmod_canon"><b>fs_chmod_canon</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_chmod_canon(const char *<i>name</i>, mode_t <i>mode</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_chmod_canon">src/fs.c</a><br>
-
-<hr>
-<a name="fs_chown"><b>fs_chown</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_chown(const char *<i>name</i>, uid_t <i>uid</i>, gid_t <i>gid</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_chown">src/fs.c</a><br>
-
-<hr>
-<a name="fs_chown_canon"><b>fs_chown_canon</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_chown_canon(const char *<i>name</i>, uid_t <i>uid</i>, gid_t <i>gid</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_chown_canon">src/fs.c</a><br>
-
-<hr>
-<a name="fs_clean_path"><b>fs_clean_path</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void fs_clean_path(const char *<i>path</i>, char *<i>buf</i>, int <i>maxlen</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_clean_path">src/fs.c</a><br>
-
-<hr>
-<a name="fs_close"><b>fs_close</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_close(fsdir_t *<i>f</i>, int <i>fd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_close">src/fs.c</a><br>
-
-<hr>
-<a name="fs_closedir"><b>fs_closedir</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_closedir(void *<i>d</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_closedir">src/fs.c</a><br>
-
-<hr>
-<a name="fs_creat"><b>fs_creat</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  fsdir_t *fs_creat(const char *<i>name</i>, mode_t <i>mode</i>, int *<i>fd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_creat">src/fs.c</a><br>
-
-<hr>
-<a name="fs_creat_canon"><b>fs_creat_canon</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  fsdir_t *fs_creat_canon(const char *<i>name</i>, mode_t <i>mode</i>, int *<i>fd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_creat_canon">src/fs.c</a><br>
-
-<hr>
-<a name="fs_dircat"><b>fs_dircat</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void fs_dircat(char *<i>buf</i>, int <i>len</i>, const char *<i>dir1</i>, const char *<i>dir2</i>)
-</pre>
-<font color=blue>Comments</font>:  Concatenates <i>dir1</i> and <i>dir2</i>,
-and places the results in <i>buf</i>, where <i>len</i> indicates the size
-of <i>buf</i>.  If the concatenated path would be longer than
-<code>MAXPATHLEN</code>, then <i>buf</i> will default to &quot;/&quot;.<br>
-<br>
-<font color=blue>Notes</font>: This function uses <code>strdup()</code> and
-<code>free()</code>, rather than <code>pool</code>s, for memory, thus breaking
-the general rule of using <code>pool</code>s.  This is done intentionally in
-this function for performance reasons, as this function is highly utilized.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_dircat">src/fs.c</a><br>
-
-<hr>
-<a name="fs_getcwd"><b>fs_getcwd</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  const char *fs_getcwd(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_getcwd">src/fs.c</a><br>
-
-<hr>
-<a name="fs_gets"><b>fs_gets</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  char *fs_gets(char *<i>buf</i>, size_t <i>size</i>, fsdir_t *<i>f</i>, int <i>fd</i>)
-</pre>
-<font color=blue>Comments</font>:  This function is not truly a virtual
-filesystem function.  However, it is included here for simplicity.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_gets">src/fs.c</a><br>
-
-<hr>
-<a name="fs_getvwd"><b>fs_getvwd</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  const char *fs_getvwd(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_getvwd">src/fs.c</a><br>
-
-<hr>
-<a name="fs_glob"><b>fs_glob</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_glob(const char *<i>pattern</i>, int <i>flags</i>, int (*<i>errfunc</i>)(const char *, int), glob_t *<i>pglob</i>)
-</pre>
-<font color=blue>Comments</font>: <code>fs_glob</code> is just a wrapper for
-<code>glob</code>, setting the various <code>gl_</code> callbacks to our
-FS functions<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_glob">src/fs.c</a><br>
-
-<hr>
-<a name="fs_globfree"><b>fs_globfree</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void fs_globfree(glob_t *<i>pglob</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_globfree">src/fs.c</a><br>
-
-<hr>
-<a name="fs_interpolate"><b>fs_interpolate</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_interpolate(const char *<i>path</i>, char *<i>buf</i>, int <i>maxlen</i>)
-</pre>
-<font color=blue>Comments</font>:  This function performs any tilde expansion
-needed, then returns the resolved path, if any.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_interpolate">src/fs.c</a><br>
-
-<hr>
-<a name="fs_link"><b>fs_link</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_link(const char *<i>lfrom</i>, const char *<i>lto</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_link">src/fs.c</a><br>
-
-<hr>
-<a name="fs_link_canon"><b>fs_link_canon</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_link_canon(const char *<i>lfrom</i>, const char *<i>lto</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_link_canon">src/fs.c</a><br>
-
-<hr>
 <a name="fs_lookup_dir"><b>fs_lookup_dir</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  fsdir_t *fs_lookup_dir(const char *<i>path</i>, int <i>op</i>)
+  static pr_fh_t *fs_lookup_dir(const char *<i>path</i>, int <i>op</i>)
 </pre>
 <font color=blue>Comments</font>:  This function is called whenever any
 sort of directory operation, to be performed on a directory or file, is
@@ -3668,284 +3302,34 @@ matchable targets and call <code>file_hit</code>, then rescan the
 registered FS handlers during the hit.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_lookup_dir">src/fs.c</a><br>
+  <a href="../src/src/fsio.c.html#fs_lookup_dir">src/fsio.c</a><br>
 
 <hr>
 <a name="fs_lookup_file"><b>fs_lookup_file</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  fsdir_t *fs_lookup_file(const char *<i>path</i>, char **<i>deref</i>, int <i>op</i>)
+  static pr_fh_t *fs_lookup_file(const char *<i>path</i>, char **<i>deref</i>, int <i>op</i>)
 </pre>
 <font color=blue>Comments</font>:  This functions performs a similar function
 to <a href="#fs_lookup_dir"><code>fs_lookup_dir()</code></a>, however, as
 it performs a <i>file</i> lookup, as opposed to a <i>directory</i> lookup,
 the target is the subdirectory containing the actual target <i>path</i>.
 A basic optimization - if the path contains no slashes,
-<a href="#fs_cwd"><code>fs_cwd()</code></a> is returned - is used.<br>
+<a href="#pr_fs_cwd"><code>pr_fs_cwd()</code></a> - is used.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_lookup_file">src/fs.c</a><br>
+  <a href="../src/src/fsio.c.html#fs_lookup_file">src/fsio.c</a><br>
 
 <hr>
 <a name="fs_lookup_file_canon"><b>fs_lookup_file_canon</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  fsdir_t *fs_lookup_file_canon(const char *<i>path</i>, char **<i>deref</i>, int <i>op</i>)
+  static pr_fh_t *fs_lookup_file_canon(const char *<i>path</i>, char **<i>deref</i>, int <i>op</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_lookup_file_canon">src/fs.c</a><br>
-
-<hr>
-<a name="fs_lseek"><b>fs_lseek</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  off_t fs_lseek(fsdir_t *<i>f</i>, int <i>fd</i>, off_t <i>offset</i>, int <i>whence</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_lseek">src/fs.c</a><br>
-
-<hr>
-<a name="fs_lstat"><b>fs_lstat</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_lstat(const char *<i>path</i>, struct stat *<i>sbuf</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_lstat">src/fs.c</a><br>
-
-<hr>
-<a name="fs_lstat_canon"><b>fs_lstat_canon</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_lstat_canon(const char *<i>path</i>, struct stat *<i>sbuf</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_lstat_canon">src/fs.c</a><br>
-
-<hr>
-<a name="fs_open"><b>fs_open</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  fsdir_t *fs_open(const char *<i>name</i>, int <i>flags</i>, int *<i>fd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_open">src/fs.c</a><br>
-
-<hr>
-<a name="fs_open_canon"><b>fs_open_canon</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  fsdir_t *fs_open_canon(const char *<i>name</i>, int <i>flags</i>, int *<i>fd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_open_canon">src/fs.c</a><br>
-
-<hr>
-<a name="fs_opendir"><b>fs_opendir</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void *fs_opendir(const char *<i>path</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_opendir">src/fs.c</a><br>
-
-<hr>
-<a name="fs_read"><b>fs_read</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_read(fsdir_t *<i>f</i>, int <i>fd</i>, char *<i>buf</i>, size_t <i>size</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_read">src/fs.c</a><br>
-
-<hr>
-<a name="fs_readdir"><b>fs_readdir</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  struct dirent *fs_readdir(void *<i>d</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_readdir">src/fs.c</a><br>
-
-<hr>
-<a name="fs_readlink"><b>fs_readlink</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_readlink(const char *<i>path</i>, char *<i>buf</i>, int <i>maxlen</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_readlink">src/fs.c</a><br>
-
-<hr>
-<a name="fs_readlink_canon"><b>fs_readlink_canon</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_readlink_canon(const char *<i>path</i>, char *<i>buf</i>, int <i>maxlen</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_readlink_canon">src/fs.c</a><br>
-
-<hr>
-<a name="fs_register"><b>fs_register</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  fsdir_t *fs_register(char *<i>name</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_register">src/fs.c</a><br>
-
-<hr>
-<a name="fs_register_match"><b>fs_register_match</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  fsmatch_t *fs_register_match(char *<i>name</i>, int <i>opmask</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_register_match">src/fs.c</a><br>
-
-<hr>
-<a name="fs_rename"><b>fs_rename</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_rename(const char *<i>rfrom</i>, const char *<i>rto</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_rename">src/fs.c</a><br>
-
-<hr>
-<a name="fs_rename_canon"><b>fs_rename_canon</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_rename_canon(const char *<i>rfrom</i>, const char *<i>rto</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_rename_canon">src/fs.c</a><br>
-
-<hr>
-<a name="fs_resolve_partial"><b>fs_resolve_partial</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_resolve_partial(const char *<i>path</i>, char *<i>buf</i>, int <i>maxlen</i>, int <i>op</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_resolve_partial">src/fs.c</a><br>
-
-<hr>
-<a name="fs_resolve_path"><b>fs_resolve_path</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_resolve_path(const char *<i>path</i>, char *<i>buf</i>, int <i>maxlen</i>, int <i>op</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_resolve_path">src/fs.c</a><br>
-
-<hr>
-<a name="fs_setcwd"><b>fs_setcwd</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void fs_setcwd(const char *<i>dir</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_setcwd">src/fs.c</a><br>
-
-<hr>
-<a name="fs_stat"><b>fs_stat</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_stat(const char *<i>path</i>, struct stat *<i>sbuf</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_stat">src/fs.c</a><br>
-
-<hr>
-<a name="fs_stat_canon"><b>fs_stat_canon</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_stat_canon(const char *<i>path</i>, struct stat *<i>sbuf</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_stat_canon">src/fs.c</a><br>
-
-<hr>
-<a name="fs_symlink"><b>fs_symlink</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_symlink(const char *<i>lfrom</i>, const char *<i>lto</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_symlink">src/fs.c</a><br>
-
-<hr>
-<a name="fs_symlink_canon"><b>fs_symlink_canon</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_symlink_canon(const char *<i>lfrom</i>, const char *<i>lto</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_symlink_canon">src/fs.c</a><br>
-
-<hr>
-<a name="fs_unlink"><b>fs_unlink</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_unlink(const char *<i>name</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_unlink">src/fs.c</a><br>
-
-<hr>
-<a name="fs_unlink_canon"><b>fs_unlink_canon</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_unlink_canon(const char *<i>name</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_unlink_canon">src/fs.c</a><br>
-
-<hr>
-<a name="fs_virtual_path"><b>fs_virtual_path</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void fs_virtual_path(const char *<i>path</i>, char *<i>buf</i>, int <i>maxlen</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_virtual_path">src/fs.c</a><br>
-
-<hr>
-<a name="fs_write"><b>fs_write</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int fs_write(fsdir_t *<i>f</i>, int <i>fd</i>, const char *<i>buf</i>, size_t <i>size</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_write">src/fs.c</a><br>
+  <a href="../src/src/fsio.c.html#fs_lookup_file_canon">src/fsio.c</a><br>
 
 <hr>
 <a name="genericlist"><b>genericlist</b><br>
@@ -4040,16 +3424,6 @@ handler functions.<br>
   <a href="../src/modules/mod_log.c.html#get_extendedlogs">modules/mod_log.c</a><br>
 
 <hr>
-<a name="get_fs_size"><b>get_fs_size</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  unsigned long get_fs_size(char *<i>s</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/support.c.html#get_fs_size">src/support.c</a><br>
-
-<hr>
 <a name="get_full_cmd"><b>get_full_cmd</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -4061,20 +3435,6 @@ command issued by a client, including command arguments.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#get_full_cmd">src/dirtree.c</a><br>
-
-<hr>
-<a name="get_ident"><b>get_ident</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  char *get_ident(pool *<i>p</i>, conn_t *<i>c</i>)
-</pre>
-<font color=blue>Comments</font>:  Returns the identity of the remote user,
-as determined by the RFC 1413 ident protocol.  Returns
-<code>&quot;UNKNOWN&quot;</code> if the lookup timeouts or fails.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/ident.c.html#get_ident">src/ident.c</a><br>
 
 <hr>
 <a name="get_name_max"><b>get_name_max</b><br>
@@ -4221,26 +3581,6 @@ pointer is advanced as the word is consumed from the string.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#get_word">src/dirtree.c</a><br>
-
-<hr>
-<a name="group_expression"><b>group_expression</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int group_expression(char **<i>expr</i>)
-</pre>
-<font color=blue>Comments</font>:  Evaluates the given expression <i>expr</i>
-as a group <code>AND</code> expression, which means that <i>all</i> group
-memberships must be valid for the expression to be true.  Returns
-<code>TRUE</code> if the current connected user matches the group expression,
-<code>FALSE</code> otherwise.<br>
-<br>
-<font color=blue>Bugs</font>: This function assumes use of
-<code>session.groups</code>.  Better would be to evaluate <i>expr</i> against
-a caller-provided array of group names.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/dirtree.c.html#group_expression">src/dirtree.c</a><br>
 
 <hr>
 <a name="handle_alarm"><b>handle_alarm</b><br>
@@ -5420,36 +4760,6 @@ explicit match; <code>-1</code> if it is an explicit mismatch (<i>i.e.</i>
   <a href="../src/src/modules.c.html#mod_create_ret">src/modules.c</a><br>
 
 <hr>
-<a name="mod_find_auth_symbol"><b>mod_find_auth_symbol</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  authtable *mod_find_auth_symbol(char *<i>name</i>, int *<i>idx_cache</i>, authtable *<i>last</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/modules.c.html#mod_find_auth_symbol">src/modules.c</a><br>
-
-<hr>
-<a name="mod_find_cmd_symbol"><b>mod_find_cmd_symbol</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  cmdtable *mod_find_cmd_symbol(char *<i>name</i>, int *<i>idx_cache</i>, cmdtable *<i>last</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/modules.c.html#mod_find_cmd_symbol">src/modules.c</a><br>
-
-<hr>
-<a name="mod_find_conf_symbol"><b>mod_find_conf_symbol</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  conftable *mod_find_conf_symbol(char *<i>name</i>, int *<i>idx_cache</i>, conftable *<i>last</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/modules.c.html#mod_find_conf_symbol">src/modules.c</a><br>
-
-<hr>
 <a name="mod_privdata_alloc"><b>mod_privdata_alloc</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -5694,26 +5004,6 @@ from <i>nstrm</i>'s <code>pool</code>, and assign it to <i>nstrm</i>.<br>
   <a href="../src/src/dirtree.c.html#parse_config_file">src/dirtree.c</a><br>
 
 <hr>
-<a name="parse_group_expression"><b>parse_group_expression</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  array_header *parse_group_expression(pool *<i>p</i>, int *<i>argc</i>, char **<i>argv</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/dirtree.c.html#parse_group_expression">src/dirtree.c</a><br>
-
-<hr>
-<a name="parse_user_expression"><b>parse_user_expression</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  array_header *parse_user_expression(pool *<i>p</i>, int *<i>argc</i>, char **<i>argv</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/dirtree.c.html#parse_user_expression">src/dirtree.c</a><br>
-
-<hr>
 <a name="passwd_dup"><b>passwd_dup</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -5840,6 +5130,29 @@ character (<i>e.g.</i> <code>/</code>), to create a path.<br>
   <a href="../src/modules/mod_log.c.html#preparse_arg">modules/mod_log.c</a><br>
 
 <hr>
+<a name="pr_alarms_block"><b>pr_alarms_block</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_alarms_block(void)
+</pre>
+<font color=blue>Comments</font>: Blocks timers (which operate based on
+<code>SIGALRM</code>) from being run.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/timers.c.html#pr_alarms_block">src/timers.c</a><br>
+
+<hr>
+<a name="pr_alarms_unblock"><b>pr_alarms_unblock</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_alarms_unblock(void)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/timers.c.html#pr_alarms_unblock">src/timers.c</a><br>
+
+<hr>
 <a name="pr_alloc_netio"><b>pr_alloc_netio</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -5851,6 +5164,630 @@ allocating a subpool from <i>parent_pool</i> for the new object.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/netio.c.html#pr_alloc_netio">src/netio.c</a><br>
+
+<hr>
+<a name="pr_class_and_expression"><b>pr_class_and_expression</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  unsigned char pr_class_and_expression(char **<i>expr</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/dirtree.c.html#pr_class_and_expression">src/dirtree.c</a><br>
+
+<hr>
+<a name="pr_class_or_expression"><b>pr_class_or_expression</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  unsigned char pr_class_or_expression(char **<i>expr</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/dirtree.c.html#pr_class_or_expression">src/dirtree.c</a><br>
+
+<hr>
+<a name="pr_exit_register_handler"><b>pr_exit_register_handler</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_exit_register_handler(void (*<i>f</i>)())
+</pre>
+<font color=blue>Comments</font>:  Register a function <i>f</i> to be run
+when the server exits normally, and the
+<a href="#run_exit_handlers"><code>run_exit_handlers()</code></a> function is
+called, which happens in
+<a href="#end_login_noexit"><code>end_login_noexit()</code></a>.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/support.c.html#pr_exit_register_handler">src/support.c</a><br>
+
+<hr>
+<a name="pr_fs_clean_path"><b>pr_fs_clean_path</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_fs_clean_path(const char *<i>path</i>, char *<i>buf</i>, int <i>maxlen</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#fs_clean_path">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fs_clear_cache"><b>pr_fs_clear_cache</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_fs_clear_cache(void)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fs_clear_cache">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fs_dircat"><b>pr_fs_dircat</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_fs_dircat(char *<i>buf</i>, int <i>len</i>, const char *<i>dir1</i>, const char *<i>dir2</i>)
+</pre>
+<font color=blue>Comments</font>:  Concatenates <i>dir1</i> and <i>dir2</i>,
+and places the results in <i>buf</i>, where <i>len</i> indicates the size
+of <i>buf</i>.  If the concatenated path would be longer than
+<code>MAXPATHLEN</code>, then <i>buf</i> will default to &quot;/&quot;.<br>
+<br>
+<font color=blue>Notes</font>: This function uses <code>strdup()</code> and
+<code>free()</code>, rather than <code>pool</code>s, for memory, thus breaking
+the general rule of using <code>pool</code>s.  This is done intentionally in
+this function for performance reasons, as this function is highly utilized.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fs_dircat">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fs_getcwd"><b>pr_fs_getcwd</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  const char *pr_fs_getcwd(void)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fs_getcwd">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fs_getsize"><br>pr_fs_getsize</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  off_t pr_fs_getsize(char *<i>path</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fs_getsize">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fs_getvwd"><b>pr_fs_getvwd</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  const char *pr_fs_getvwd(void)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fs_getvwd">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fs_glob"><b>pr_fs_glob</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fs_glob(const char *<i>pattern</i>, int <i>flags</i>, int (*<i>errfunc</i>)(const char *, int), glob_t *<i>pglob</i>)
+</pre>
+<font color=blue>Comments</font>: <code>pr_fs_glob</code> is just a wrapper for
+<code>glob</code>, setting the various <code>gl_</code> callbacks to our FSIO
+functions.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#fs_glob">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fs_globfree"><b>pr_fs_globfree</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_fs_globfree(glob_t *<i>pglob</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fs_globfree">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fs_interpolate"><b>pr_fs_interpolate</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fs_interpolate(const char *<i>path</i>, char *<i>buf</i>, int <i>maxlen</i>)
+</pre>
+<font color=blue>Comments</font>:  This function performs any tilde expansion
+needed, then returns the resolved path, if any.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fs_interpolate">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fs_resolve_partial"><b>pr_fs_resolve_partial</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fs_resolve_partial(const char *<i>path</i>, char *<i>buf</i>, int <i>maxlen</i>, int <i>op</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fs_resolve_partial">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fs_resolve_path"><b>pr_fs_resolve_path</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fs_resolve_path(const char *<i>path</i>, char *<i>buf</i>, int <i>maxlen</i>, int <i>op</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fs_resolve_path">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fs_setcwd"><b>pr_fs_setcwd</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_fs_setcwd(const char *<i>dir</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fs_setcwd">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fs_virtual_path"><b>pr_fs_virtual_path</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_fs_virtual_path(const char *<i>path</i>, char *<i>buf</i>, int <i>maxlen</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fs_virtual_path">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_chdir"><b>pr_fsio_chdir</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_chdir(const char *<i>path</i>, int <i>hidesymlink</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_chdir">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_chdir_canon"><b>pr_fsio_chdir_canon</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_chdir_canon(const char *<i>path</i>, int <i>hidesymlink</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_chdir_canon">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_chmod"><b>pr_fsio_chmod</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_chmod(const char *<i>name</i>, mode_t <i>mode</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_chmod">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_chmod_canon"><b>pr_fsio_chmod_canon</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_chmod_canon(const char *<i>name</i>, mode_t <i>mode</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_chmod_canon">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_chown"><b>pr_fsio_chown</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_chown(const char *<i>name</i>, uid_t <i>uid</i>, gid_t <i>gid</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_chown">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_chown_canon"><b>pr_fsio_chown_canon</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_chown_canon(const char *<i>name</i>, uid_t <i>uid</i>, gid_t <i>gid</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#fs_chown_canon">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_chroot"><b>pr_fsio_chroot</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_chroot(const char *<i>path</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_chroot">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_close"><b>pr_fsio_close</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_close(pr_fh_t *<i>fh</i>, int <i>fd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_close">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_closedir"><b>pr_fsio_closedir</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_closedir(void *<i>d</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_closedir">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_creat"><b>pr_fsio_creat</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  pr_fh_t *pr_fsio_creat(const char *<i>name</i>, mode_t <i>mode</i>, int *<i>fd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_creat">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_creat_canon"><b>pr_fsio_creat_canon</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  pr_fh_t *pr_fsio_creat_canon(const char *<i>name</i>, mode_t <i>mode</i>, int *<i>fd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_creat_canon">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_getline"><b>pr_fsio_getline</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  char *pr_fsio_getline(char *<i>buf</i>, int buflen, pr_fh_t *<i>fh</i>, unsigned int *<i>lineno</i>)
+</pre>
+<br>
+<font color=blue>Comments</font>: This function is an <code>fgets(3)</code> with
+backslash-newline line continuation handling.  The extra <i>lineno</i> argument
+is needed, at the moment, to properly track which line of the file is being
+read in, so that errors can be reported with the correct line numbers.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_getline">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_gets"><b>pr_fsio_gets</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  char *pr_fsio_gets(char *<i>buf</i>, size_t <i>size</i>, pr_fh_t *<i>fh</i>, int <i>fd</i>)
+</pre>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_gets">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_link"><b>pr_fsio_link</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_link(const char *<i>lfrom</i>, const char *<i>lto</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_link">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_link_canon"><b>pr_fsio_link_canon</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_link_canon(const char *<i>lfrom</i>, const char *<i>lto</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_link_canon">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_lseek"><b>pr_fsio_lseek</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  off_t pr_fsio_lseek(pr_fh_t *<i>fh</i>, int <i>fd</i>, off_t <i>offset</i>, int <i>whence</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_lseek">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_lstat"><b>pr_fsio_lstat</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_lstat(const char *<i>path</i>, struct stat *<i>sbuf</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_lstat">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_lstat_canon"><b>pr_fsio_lstat_canon</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_lstat_canon(const char *<i>path</i>, struct stat *<i>sbuf</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_lstat_canon">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_mkdir"><b>pr_fsio_mkdir</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_mkdir(const char *<i>path</i>, mode_t <i>mode</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_mkdir">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_open"><b>pr_fsio_open</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  pr_fh_t *pr_fsio_open(const char *<i>name</i>, int <i>flags</i>, int *<i>fd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_open">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_open_canon"><b>pr_fsio_open_canon</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  pr_fh_t *pr_fsio_open_canon(const char *<i>name</i>, int <i>flags</i>, int *<i>fd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_open_canon">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_opendir"><b>pr_fsio_opendir</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void *pr_fsio_opendir(const char *<i>path</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_opendir">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_puts"><b>pr_fsio_puts</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_puts(const char *<i>buf</i>, pr_fh_t *<i>fh</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_puts">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_read"><b>pr_fsio_read</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_read(pr_fh_t *<i>f</i>, int <i>fd</i>, char *<i>buf</i>, size_t <i>size</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_read">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_readdir"><b>pr_fsio_readdir</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  struct dirent *pr_fsio_readdir(void *<i>d</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_readdir">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_readlink"><b>pr_fsio_readlink</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_readlink(const char *<i>path</i>, char *<i>buf</i>, int <i>maxlen</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_readlink">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_readlink_canon"><b>pr_fsio_readlink_canon</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_readlink_canon(const char *<i>path</i>, char *<i>buf</i>, int <i>maxlen</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_readlink_canon">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_rename"><b>pr_fsio_rename</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_rename(const char *<i>rfrom</i>, const char *<i>rto</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_rename">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_rename_canon"><b>pr_fsio_rename_canon</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_rename_canon(const char *<i>rfrom</i>, const char *<i>rto</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_rename_canon">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_rmdir"><b>pr_fsio_rmdir</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_rmdir(const char *<i>path</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_rmdir">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_stat"><b>pr_fsio_stat</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_stat(const char *<i>path</i>, struct stat *<i>sbuf</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_stat">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_stat_canon"><b>pr_fsio_stat_canon</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_stat_canon(const char *<i>path</i>, struct stat *<i>sbuf</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_stat_canon">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_symlink"><b>pr_fsio_symlink</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_symlink(const char *<i>lfrom</i>, const char *<i>lto</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_symlink">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_symlink_canon"><b>pr_fsio_symlink_canon</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_symlink_canon(const char *<i>lfrom</i>, const char *<i>lto</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_symlink_canon">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_truncate"><b>pr_fsio_truncate</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_truncate(const char *<i>path</i>, off_t <i>len</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_truncate">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_truncate_canon"><b>pr_fsio_truncate_canon</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_truncate_canon(const char *<i>path</i>, off_t <i>len</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_truncate_canon">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_unlink"><b>pr_fsio_unlink</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_unlink(const char *<i>name</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_unlink">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_unlink_canon"><b>pr_fsio_unlink_canon</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_unlink_canon(const char *<i>name</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_unlink_canon">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_fsio_write"><b>pr_fsio_write</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_fsio_write(pr_fh_t *<i>f</i>, int <i>fd</i>, const char *<i>buf</i>, size_t <i>size</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_fsio_write">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_group_and_expression"><b>pr_group_and_expression</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  unsigned char pr_group_and_expression(char **<i>expr</i>)
+</pre>
+<font color=blue>Comments</font>:  Evaluates the given expression <i>expr</i>
+as a group <code>AND</code> expression, which means that <i>all</i> group
+memberships must be valid for the expression to be true.  Returns
+<code>TRUE</code> if the current connected user matches the group expression,
+<code>FALSE</code> otherwise.<br>
+<br>
+<font color=blue>Bugs</font>: This function assumes use of
+<code>session.groups</code>.  Better would be to evaluate <i>expr</i> against
+a caller-provided array of group names.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/dirtree.c.html#pr_group_and_expression">src/dirtree.c</a><br>
+
+<hr>
+<a name="pr_group_or_expression"><b>pr_group_or_expression</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  unsigned char pr_group_or_expression(char **<i>expr</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/dirtree.c.html#pr_group_or_expression">src/dirtree.c</a><br>
+
+<hr>
+<a name="pr_ident_lookup"><b>pr_ident_lookup</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  char *pr_ident_lookup(pool *<i>p</i>, conn_t *<i>c</i>)
+</pre>
+<font color=blue>Comments</font>:  Returns the identity of the remote user, as
+determined by the RFC 1413 ident protocol.  Returns
+<code>&quot;UNKNOWN&quot;</code> if the lookup timeouts or fails.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/ident.c.html#pr_ident_lookup">src/ident.c</a><br>
 
 <hr>
 <a name="pr_init_netio"><b>pr_init_netio</b><br>
@@ -6042,6 +5979,16 @@ flag for <i>nstrm</i>, and configures the <code>select()</code> timeout used in
   <a href="../src/src/netio.c.html#pr_netio_set_poll_interval">src/netio.c</a><br>
 
 <hr>
+<a name="pr_netio_shutdown"><b>pr_netio_shutdown</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_netio_shutdown(pr_netio_stream_t *<i>nstrm</i>, int <i>how</i>)
+</pre>
+<font color=blue>Source File:</font>
+  <a href="../src/src/netio.c.html#pr_netio_shutdown">src/netio.c</a><br>
+
+<hr>
 <a name="pr_netio_telnet_gets"><b>pr_netio_telnet_gets</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -6087,6 +6034,296 @@ the number of bytes written is returned.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/netio.c.html#pr_netio_write_async">src/netio.c</a><br>
+
+<hr>
+<a name="pr_parse_expression"><b>pr_parse_expression</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  array_header *pr_parse_expression(pool *<i>p</i>, int *<i>argc</i>, char **<i>argv</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/dirtree.c.html#pr_parse_expression">src/dirtree.c</a><br>
+
+<hr>
+<a name="pr_regexp_alloc"><b>pr_regexp_alloc</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  regex_t *pr_regexp_alloc(void)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/regexp.c.html#pr_regexp_alloc">src/regexp.c</a><br>
+
+<hr>
+<a name="pr_regexp_free"><b>pr_regexp_free</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_regexp_free(regex_t *<i>regex</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/regexp.c.html#pr_regexp_free">src/regexp.c</a><br>
+
+<hr>
+<a name="pr_register_fs"><b>pr_register_fs</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  pr_fs_t *pr_register_fs(pool *<i>pool</i>, const char *<i>name</i>, const char *<i>path</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_register_fs">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_register_fs_match"><b>pr_register_fs_match</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  pr_fs_match_t *pr_register_fs_match(pool *<i>pool</i>, sont char *<i>name</i>, const char *<i>pattern</i>, int <i>opmask</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fsio.c.html#pr_register_fs_match">src/fsio.c</a><br>
+
+<hr>
+<a name="pr_rehash_register_handler"><b>pr_rehash_register_handler</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_rehash_register_handler(void *<i>data</i>, void (*<i>fp</i>)(void *))
+</pre>
+<font color=blue>Comments</font>:  Registers a function <i>fp</i> to be run
+when the server receives a <code>SIGHUP</code>, which causes it to
+&quot;rehash&quot; the configuration file.  The function <i>fp</i> will be
+called before the configuration file is rehashed, and will be passed the
+given <i>data</i> pointer.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/main.c.html#pr_rehash_register_handler">src/main.c</a><br>
+
+<hr>
+<a name="pr_response_add"><b>pr_response_add</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_response_add(const char *<i>numeric</i>, const char *<i>fmt</i>, ...)
+</pre>
+<font color=blue>Comments</font>:  Add the given <i>numeric</i> and formatted
+message to the end of the success response chain, to be sent to the client if
+the FTP command completes successfully.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/response.c.html#pr_response_add">src/response.c</a><br>
+
+<hr>
+<a name="pr_response_add_err"><b>pr_response_add_err</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_response_add_err(const char *<i>numeric</i>, const char *<i>fmt</i>, ...)
+</pre>
+<font color=blue>Comments</font>:  Add the given <i>numeric</i> and formatted
+message to the error response chain, to be sent to the client if the FTP
+command processing results in an error.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/response.c.html#pr_response_add_err">src/response.c</a><br>
+
+<hr>
+<a name="pr_response_flush"><b>pr_response_flush</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_response_flush(pr_response_t **<i>head</i>)
+</pre>
+<font color=blue>Comments</font>: Flushes the response chain <i>head</i> out to
+the connected client.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/response.c.html#pr_response_flush">src/response.c</a><br>
+
+<hr>
+<a name="pr_response_register_handler"><b>pr_response_register_handler</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_response_register_handler(char *(*<i>handler_cb</i>)(pool *, const char *, ...))
+</pre>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/response.c.html#pr_response_register_handler">src/response.c</a><br>
+
+<hr>
+<a name="pr_response_send"><b>pr_response_send</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_response_send(const char *<i>resp_numeric</i>, const char *<i>fmt</i>, ...)
+</pre>
+<font color=blue>Comments</font>: This function will immediately send the
+given message, accompanied by the specific <i>numeric</i>, to the connected
+client.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/response.c.html#pr_response_send">src/response.c</a><br>
+
+<hr>
+<a name="pr_response_send_async"><b>pr_response_send_async</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_response_send_async(const char *<i>resp_numeric</i>, const char *<i>fmt</i>, ...)
+</pre>
+<font color=blue>Comments</font>:  This function will send an asynchronous
+message to the client, with the given <i>numeric</i>; it is suitable for use
+inside of signal handlers.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/response.c.html#pr_response_send_async">src/response.c</a><br>
+
+<hr>
+<a name="pr_response_send_ml"><b>pr_response_send_ml</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_response_send_ml(const char *<i>fmt</i>, ...)
+</pre>
+<font color=blue>Comments</font>:  This function continues a previous multiline
+response, using the specified <i>numeric</i>, started by a
+<a href="#pr_response_send_ml_start"><code>pr_response_send_ml_start()</code></a> call.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/response.c.html#pr_response_send_ml">src/response.c</a><br>
+
+<hr>
+<a name="pr_response_send_ml_end"><b>pr_response_send_ml_end</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_response_send_ml_end(const char *<i>fmt</i>, ...)
+</pre>
+<font color=blue>Comments</font>:  This function completes a multiline
+response.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/response.c.html#pr_response_send_ml_end">src/response.c</a><br>
+
+<hr>
+<a name="pr_response_send_ml_start"><b>pr_response_send_ml_start</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_response_send_ml_start(const char *<i>resp_numeric</i>, const char *<i>fmt</i>, ...)
+</pre>
+<font color=blue>Comments</font>:  This function begins a multiline FTP
+protocol response with the given <i>numeric</i>.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/response.c.html#pr_response_send_ml_start">src/response.c</a><br>
+
+<hr>
+<a name="pr_response_send_raw"><b>pr_response_send_raw</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_response_send_raw(const char *<i>fmt</i>, ...)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/response.c.html#pr_response_send_raw">src/response.c</a><br>
+
+<hr>
+<a name="pr_signals_block"><b>pr_signals_block</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_signals_block(void)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/support.c.html#pr_signals_unblock">src/support.c</a><br>
+
+<hr>
+<a name="pr_signals_handle"><b>pr_signals_handle</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_signals_handle(void)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/main.c.html#pr_signals_handle">src/main.c</a><br>
+
+<hr>
+<a name="pr_signals_unblock"><b>pr_signals_unblock</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_signals_unblock(void)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/support.c.html#pr_signals_unblock">src/support.c</a><br>
+
+<hr>
+<a name="pr_stash_add_symbol"><b>pr_stash_add_symbol</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_stash_add_symbol(pr_stash_type_t <i>sym_type</i>, void *<i>data</i>)
+</pre>
+<font color=blue>Comments</font>: Inserts the given <i>data</i> of symbol
+type <i>sym_type</i> into the stash.  This function returns the index at which
+<i>data</i> was inserted.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/modules.c.html#pr_stash_add_symbol">src/modules.c</a><br>
+
+<hr>
+<a name="pr_stash_get_symbol"><b>pr_stash_get_symbol</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void *pr_stash_get_symbol(pr_stash_type_t <i>sym_type</i>, const char *<i>name</i>, void *<i>prev</i>, int *<i>idx_cache</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/modules.c.html#pr_stash_get_symbol">src/modules.c</a><br>
+
+<hr>
+<a name="pr_stash_remove_symbol"><b>pr_stash_remove_symbol</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_stash_remove_symbol(pr_stash_type_t <i>sym_type</i>, const char *<i>sym_name</i>, module *<i>sym_module</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/modules.c.html#pr_stash_remove_symbol">src/modules.c</a><br>
+
+<hr>
+<a name="pr_user_and_expression"><b>pr_user_and_expression</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  unsigned char pr_user_and_expression(char **<i>expr</i>)
+</pre>
+<font color=blue>Comments</font>:  Evaluates the given expression <i>expr</i>
+as a user <code>AND</code> expression, which means that <i>all</i> user
+conditions must match for the current connected user for the expression to be
+true.  Returns <code>TRUE</code> if the expression evaluates thus for the
+current user, <code>FALSE</code> otherwise.<br>
+<br>
+<font color=blue>Bugs</font>: This function assumes use of
+<code>session.user</code>.  Better would be to evaluate <i>expr</i> against
+a caller-provided user name.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/dirtree.c.html#pr_user_and_expression">src/dirtree.c</a><br>
+
+<hr>
+<a name="pr_user_or_expression"><b>pr_user_or_expression</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  unsigned char pr_user_or_expression(char **<i>expr</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/dirtree.c.html#pr_user_or_expression">src/dirtree.c</a><br>
 
 <hr>
 <a name="pstrcat"><b>pstrcat</b><br>
@@ -6391,22 +6628,6 @@ quotes must be duplicated.<br>
   <a href="../src/src/pool.c.html#register_file_cleanups">src/pool.c</a><br>
 
 <hr>
-<a name="register_rehash"><b>register_rehash</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void register_rehash(void *<i>data</i>, void (*<i>fp</i>)(void *))
-</pre>
-<font color=blue>Comments</font>:  Registers a function <i>fp</i> to be run
-when the server receives a <code>SIGHUP</code>, which causes it to
-&quot;rehash&quot; the configuration file.  The function <i>fp</i> will be
-called before the configuration file is rehashed, and will be passed the
-given <i>data</i> pointer.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/main.c.html#register_rehash">src/main.c</a><br>
-
-<hr>
 <a name="remove_config"><b>remove_config</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -6580,98 +6801,6 @@ set for selection.<br>
   <a href="../src/src/main.c.html#semaphore_fds">src/main.c</a><br>
 
 <hr>
-<a name="send_response"><b>send_response</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void send_response(const char *<i>resp_numeric</i>, const char *<i>fmt</i>, ...)
-</pre>
-<font color=blue>Comments</font>: This function will immediately send
-the given message, accompanied by the specific <i>numeric</i>, to the
-connected client.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/main.c.html#send_response">src/main.c</a><br>
-
-<hr>
-<a name="send_response_async"><b>send_response_async</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void send_response_async(const char *<i>resp_numeric</i>, const char *<i>fmt</i>, ...)
-</pre>
-<font color=blue>Comments</font>:  This function will send an
-asynchronous message to the client, with the given <i>numeric</i>; it is
-suitable for use inside of signal handlers.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/main.c.html#send_response_async">src/main.c</a><br>
-
-<hr>
-<a name="send_response_list"><b>send_response_list</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static void send_response_list(response_t **<i>head</i>)
-</pre>
-<font color=blue>Comments</font>: Flushes the response chain <i>head</i> out to
-the connected client.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/main.c.html#send_response_list">src/main.c</a><br>
-
-<hr>
-<a name="send_response_ml"><b>send_response_ml</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void send_response_ml(const char *<i>fmt</i>, ...)
-</pre>
-<font color=blue>Comments</font>:  This function continues a previous
-multiline response, using the specified <i>numeric</i>, started by a
-<a href="#send_response_ml_start"><code>send_response_ml_start()</code></a>
-call.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/main.c.html#send_response_ml">src/main.c</a><br>
-
-<hr>
-<a name="send_response_ml_end"><b>send_response_ml_end</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void send_response_ml_end(const char *<i>fmt</i>, ...)
-</pre>
-<font color=blue>Comments</font>:  This function completes a multiline
-response.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/main.c.html#send_response_ml_end">src/main.c</a><br>
-
-<hr>
-<a name="send_response_ml_start"><b>send_response_ml_start</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void send_response_ml_start(const char *<i>resp_numeric</i>, const char *<i>fmt</i>, ...)
-</pre>
-<font color=blue>Comments</font>:  This function begins a multiline
-FTP protocol response with the given <i>numeric</i>.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/main.c.html#send_response_ml_start">src/main.c</a><br>
-
-<hr>
-<a name="send_response_raw"><b>send_response_raw</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void send_response_raw(const char *<i>fmt</i>, ...)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/main.c.html#send_response_raw">src/main.c</a><br>
-
-<hr>
 <a name="sendline"><b>sendline</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -6690,16 +6819,6 @@ FTP protocol response with the given <i>numeric</i>.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/main.c.html#serv_conn_cleanup_cb">src/main.c</a><br>
-
-<hr>
-<a name="server_loop"><b>server_loop</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void server_loop(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/main.c.html#server_loop">src/main.c</a><br>
 
 <hr>
 <a name="set_accessdenymsg"><b>set_accessdenymsg</b><br>
@@ -8608,26 +8727,6 @@ end of <i>dest</i> and refusing to copy more than <i>n</i> bytes.<br>
   <a href="../src/src/timers.c.html#timer_sleep">src/timers.c</a><br>
 
 <hr>
-<a name="unblock_alarms"><b>unblock_alarms</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void unblock_alarms(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/utils.c.html#unblock_alarms">src/utils.c</a><br>
-
-<hr>
-<a name="unblock_signals"><b>unblock_signals</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void unblock_signals(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/support.c.html#unblock_signals">src/support.c</a><br>
-
-<hr>
 <a name="unixpw_init"><b>unixpw_init</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -8646,26 +8745,6 @@ end of <i>dest</i> and refusing to copy more than <i>n</i> bytes.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_unixpw.c.html#unixpw_sess_init">modules/mod_unixpw.c</a><br>
-
-<hr>
-<a name="user_expression"><b>user_expression</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int user_expression(char **<i>expr</i>)
-</pre>
-<font color=blue>Comments</font>:  Evaluates the given expression <i>expr</i>
-as a user <code>AND</code> expression, which means that <i>all</i> user
-conditions must match for the current connected user for the expression to be
-true.  Returns <code>TRUE</code> if the expression evaluates thus for the
-current user, <code>FALSE</code> otherwise.<br>
-<br>
-<font color=blue>Bugs</font>: This function assumes use of
-<code>session.user</code>.  Better would be to evaluate <i>expr</i> against
-a caller-provided user name.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/dirtree.c.html#user_expression">src/dirtree.c</a><br>
 
 <hr>
 <a name="xaset_copy"><b>xaset_copy</b><br>

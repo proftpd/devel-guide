@@ -24,15 +24,16 @@
 <b>Controls API Functions</b><br>
 
 <pre>
-  int pr_ctrls_add(module *<i>module</i>, const char *<i>action</i>,
+  int pr_ctrls_register(module *<i>module</i>, const char *<i>action</i>,
     int (*<i>ctrls_cb</i>)(pr_ctrls_t *, int, char **));
-  int pr_ctrls_del(module *<i>module</i>, const char *<i>action</i>);
+  int pr_ctrls_unregister(module *<i>module</i>, const char *<i>action</i>);
   int pr_ctrls_add_arg(pr_ctrls_t *<i>ctrl</i>, char *<i>ctrls_arg</i>);
   int pr_ctrls_add_response(pr_ctrls_t *<i>ctrl</i>, char *<i>fmt</i>, ...);
   int pr_ctrls_connect(void);
   int pr_ctrls_copy_args(pr_ctrls_t *<i>src_ctrl</i>, pr_ctrls_t *<i>dest_ctrl</i>);
   int pr_ctrls_copy_resps(pr_ctrls_t *<i>src_ctrl</i>, pr_ctrls_t *<i>dest_ctrl</i>);
   int pr_ctrls_flush_response(pr_ctrls_t *<i>ctrl</i>);
+  int pr_ctrls_parse_msg(pool *<i>msg_pool</i>, char *<i>msg</i>, unsigned int *<i>msgargc</i>, char ***<i>msgargv</i>);
   int pr_ctrls_recv_request(pr_ctrls_cl_t *<i>cl</i>);
   int pr_ctrls_recv_response(pool *<i>resp_pool</i>, int <i>ctrls_sockfd</i>, int *<i>status</i>, char ***<i>respargv</i>); 
   int pr_ctrls_send_msg(int <i>sockfd</i>, int <i>msgstatus</i>, unsigned int <i>msgargc</i>, char **<i>msgargv</i>);
@@ -47,22 +48,22 @@
 </pre>
 
 <p>
-The <code>pr_ctrls_add()</code> function will be used by modules to register
-custom control handlers with the Controls layer.  The registration consists
-of a pointer to the registering module <i>module</i>, the <i>action</i> by
-which clients can request this control to be run, and a callback function
-pointer to the control's handler.  The control handler must return an
-integer status value (preferably conforming to the norm of <code>0</code>
-indicating success, <code>-1</code> indicating an error), and must take
-three arguments: a pointer to the registered <code>pr_ctrls_t</code> object,
-and integer number of request strings, and an array of the indicated number
-of request strings (similar to the <code>argc, argv</code> of most programs'
-<code>main()</code> function).  This function will return the ID of the
-registered <code>pr_ctrls_t</code> control object is successful, or
+The <code>pr_ctrls_register()</code> function will be used by modules to
+register custom control handlers with the Controls layer.  The registration
+consists of a pointer to the registering module <i>module</i>, the
+<i>action</i> by which clients can request this control to be run, and a
+callback function pointer to the control's handler.  The control handler must
+return an integer status value (preferably conforming to the norm of
+<code>0</code> indicating success, <code>-1</code> indicating an error), and
+must take three arguments: a pointer to the registered <code>pr_ctrls_t</code>
+object, and integer number of request strings, and an array of the indicated
+number of request strings (similar to the <code>argc, argv</code> of most
+programs' <code>main()</code> function).  This function will return the ID of
+the registered <code>pr_ctrls_t</code> control object if successful, or
 <code>-1</code> if an error occurred during registration.
 
 <p>
-The <code>pr_ctrls_del()</code> function unregisters any registered
+The <code>pr_ctrls_unregister()</code> function unregisters any registered
 control handlers that match the given <i>module</i> and <i>action</i>
 arguments.  <i>module</i> may be <code>ANY_MODULE</code>, meaning that
 control handlers from all modules should be searched.  <i>action</i> may not
@@ -106,11 +107,20 @@ to make a duplicate of <i>src_ctrl</i>'s handler response array for
 The <code>pr_ctrls_flush_response()</code> function flushes any responses
 of the given <i>ctrl</i> out to the client.  Note that this function
 should be used <b>rarely</b>, and only when the control handler <b>will not</b>
-be returning normally. (as when exiting the process).  If <i>ctrl</i> is
+be returning normally (as when exiting the process).  If <i>ctrl</i> is
 <code>NULL</code>, it will return <code>-1</code> with <code>errno</code> set
 to <code>EINVAL</code>; an <code>errno</code> of <code>EPERM</code> means
 that the function was unable to flush the response to the client. A value of
 <code>0</code> is returned if the flush was successful.
+
+<p>
+The <code>pr_ctrls_parse_msg()</code> function parses the given <i>msg</i>
+into the provided <i>msgargc</i>, <i>msgargv</i> pointers, splitting the
+<i>msg</i> on whitespace (honoring quoting and escapes).  The <i>msgargv</i>
+array of strings is allocated from <i>msg_pool</i>.  This is provided
+as a utility function to modules, so that they may prepare a single string
+for use by <code>pr_ctrls_send_msg()</code>.  A value of <code>0</code> is
+returned if successful, <code>-1</i> if an error occurred.
 
 <p>
 The <code>pr_ctrls_recv_request()</code> function reads in a client's control
@@ -134,10 +144,10 @@ was an error.
 
 <p>
 The <code>pr_ctrls_send_msg()</code> function is used to send both requests
-and responses.  It sends <i>msgargc</i> number of strings, <i>msgargv</i>,
-to the socket <i>sockfd</i>.  For requests, <i>msgstatus</i> is largely
-ignored; for responses, it contains the return value of the control handlers
-that handled the request.
+and responses.  It sends <i>msgargc</i> number of strings, found in
+<i>msgargv</i>, to the socket <i>sockfd</i>.  For requests, <i>msgstatus</i>
+is largely ignored; for responses, it contains the return value of the control
+handlers that handled the request.
 
 <p>
 The <code>pr_ctrls_find_ctrls()</code> function returns a pointer to a
@@ -157,18 +167,18 @@ had been called with the new <i>module</i> and the used <i>action</i>.
 <p>
 The <code>pr_block_ctrls()</code> function blocks control handlers from
 being run.  This is usually done when the control handler list is being
-modified, and should not be used.
+modified, and <i>should not</i> be used by modules.
 
 <p>
 The <code>pr_unblock_ctrls()</code> function restores the control handler
 list to useable status, signalling that the state of the list is once more
-stable.
+stable.  This <i>should not</i> be used by modules.
 
 <p>
 The <code>pr_check_ctrls()</code> function is used to do a sanity check of
 the register control handlers.  Some control handlers allow of only a single
 instance to handle a requested action, some allow multiple handlers for a
-requested action.
+requested action.  <i>Note: not currently implemented.</i>
 
 <p>
 The <code>pr_run_ctrls()</code> function iterates through the list of

@@ -70,7 +70,7 @@ typedef struct ctrls_obj {
   void *ctrls_data;
 
   <font color=green>/* For internal use only */</font>
-  unsigned long ctrls_flags;
+  volatile unsigned long ctrls_flags;
 
 } pr_ctrls_t;
 
@@ -92,7 +92,7 @@ typedef struct cl_obj {
   pid_t cl_pid;
 
   <font color=green>/* For internal use only */</font>
-  unsigned long cl_flags;
+  volatile unsigned long cl_flags;
 
   <font color=green>/* Pointers to all controls matching client request */</font>
   array_header *cl_ctrls;

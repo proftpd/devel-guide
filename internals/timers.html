@@ -125,7 +125,10 @@ macro: it defines your function argument variable names <i>a priori</i>, which
 can be easy to overlook when you're trying to figure out the name of the
 variables to use in your timer callback function.  Unfortunately, most
 of the current timer callback functions in the core code ignore the callback
-variables.
+variables.  When used, <i>p1</i> will always be zero (with the current code),
+<i>p2</i> will be the <i>timerno</i> of the timer, <i>p3</i> will be time
+elapsed on the timer (which should be less than or equal to zero), and
+<i>data</i> will be <code>NULL</code>.
 
 <pre>
 int auth_init_child()

@@ -37,61 +37,43 @@ Each module can supply up to two initialization routines via
 this module table.  The first initialization function is called immediately
 after the module is loaded, while the second is called after ProFTPD is
 connected to a client, and the main ProFTPD server (if not in <code>inetd</code>
-mode) has forked off.  The second initialization function's purpose is to let
+mode) has forked off.  The purpose of this second initialization function,
+called the session initialization function, is to let
 the module perform any necessary preparatory work once a client is connected
 and ProFTPD is ready to provide service to the new client.  In
-<code>inetd</code> mode, the &quot;child init&quot; function will be called
+<code>inetd</code> mode, the session initialization function will be called
 immediately after ProFTPD is loaded, because ProFTPD is <i>always</i> in
 &quot;child mode&quot; when run from <code>inetd</code>.  Note that both of
-these initialization routines are optional.  If you don't need them, or only
-need one, simply set the function pointer to <code>NULL</code> in the module
-table.
-
-<p>
-<b>Definition</b><br>
-<ul>
-  <li>pointer to the next module
-  <li>pointer to the previous module
-  <li>module API version
-  <li>module name
-  <li>module configuration directive handler table
-  <li>module command handler table
-  <li>module authentication handler table
-  <li>module initialization function
-  <li>module connection initialization function
-</ul>
+these initialization routines are optional.  If you do not need them, simply
+set the function pointer to <code>NULL</code> in the module table.
 
 <p>
 <b>Example</b><br>
 <pre>
 module sample_module = {
+  <font color=green>/* Always NULL */</font>
+  NULL, NULL,
 
-  <font color=blue>/* pointer to the next module -- always NULL (set internally) */</font>
-  NULL,
-
-  <font color=blue>/* pointer to the previous module -- always NULL (set internally) */</font>
-  NULL,
-
-  <font color=blue>/* Module API version (current version: 2.0) */</font>
+  <font color=green>/* Module API version (current version: 2.0) */</font>
   0x20,
 
-  <font color=blue>/* this module's name */</font>
+  <font color=green>/* Module name */</font>
   "sample",
 
-  <font color=blue>/* module configuration handler table */</font>
-  sample_config,
+  <font color=green>/* Module configuration handler table */</font>
+  sample_conftab,
 
-  <font color=blue>/* module command handler table */</font>
-  sample_commands,
+  <font color=green>/* Module command handler table */</font>
+  sample_cmdtab,
 
-  <font color=blue>/* module authentication handler table */</font>
+  <font color=green>/* Module authentication handler table */</font>
   NULL,
 
-  <font color=blue>/* module initialization function */</font>
+  <font color=green>/* Module initialization function */</font>
   sample_init,
 
-  <font color=blue>/* module "child mode" post-fork initialization function */</font>
-  sample_child_init
+  <font color=green>/* Session initialization function */</font>
+  sample_sess_init
 };
 </pre>
 

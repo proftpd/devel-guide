@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>ProFTPD Developer's Guide: Logging</title>
+<title>ProFTPD Developer's Guide: Module Logging</title>
 </head>
 
 <body bgcolor=white>
@@ -12,7 +12,7 @@
 <center>
 <img src="../images/proftpd.png">
 <br><br>
-<h3><b>ProFTPD Developer's Guide: Logging</b></h3>
+<h3><b>ProFTPD Developer's Guide: Module Logging</b></h3>
 <i><b>ProFTPD Version 1.2</b></i><br>
 </center>
 <hr><br>
@@ -21,22 +21,58 @@
 <center><a href="../toc.html">Table of Contents</a></center><br>
 
 <p>
-<b>Debugging</b><br>
+<b>Module Logging</b><br>
+Logging is an important part of any module.  It helps the administrator
+keep track of what the module is doing, and of any problems that might be
+causing trouble.
+
+<p>
+The first step is to <code>#define</code> a label for your module:
+<pre>
+  #define MOD_<i>module-name</i>_VERSION  "mod_<i>name</i>/<i>version</i>"
+</pre>
+For example, <code>mod_wrap</code> has:
+<pre>
+  #define MOD_WRAP_VERSION "mod_wrap/1.2.3"
+</pre>
+This identifying label helps to determine the version of your module, should
+someone need to check what version they are using.  It is also an extremely
+helpful part of the logging process, as described below.
+
+      log_debug(DEBUG4, MOD_NIFTY_VERSION ": unable to do something nifty");
+</pre>
+  It also helps to identify the version of your module, should someone
+need to check what version they are using.
+  </li>
+
+<p>
+<b>Logging</b><br>
 When developing a module, please make use of
+<a href="../api/functions.html#log_pri"><code>log_pri()</code></a> and
 <a href="../api/functions.html#log_debug"><code>log_debug()</code></a> where
 appropriate.  Not only will this aid you as your module develops, but it
-will help users report potential problems once your module is released.  It
-is also highly recommended to <code>#define</code> a name for your module,
-like so:
-
-    <li><code>proftpd -n -d 5</code> for debugging
-    <li><code>log_debug()</code> for debugging statements
-
-Signal 11 == usually, a NULL pointer:
-
+will help users report potential problems once your module is released.
+When calling these functions, make use of the module identifier:
 <pre>
-    localhost.localdomain (localhost.localdomain[127.0.0.1]) - ProFTPD terminating (signal 11)
+  log_pri(LOG_ERR, MOD_WRAP_VERSION ": error: unable to open '%s': %s",
+    filename, strerror(errno));
+
+  log_debug(DEBUG4, MOD_WRAP_VERSION ": checking ACLs for user %s",
+    session.user));
 </pre>
+With statements like this, the output from your module is much more easily
+identified in the server log files.
+
+<p>
+<b>Module-specific Log Files</b><br>
+For some modules, it makes more sense to have them log to their own separate
+log files, rather than adding the module-specific output to the rest of
+<code>proftpd</code>'s logging.
+
+<p>
+Some caveats if using this approach: check for world-writeable directories,
+be very cautious of log as root, stat()ing for symlinks.  These should all be
+core-provided services, but are not...yet.
 
 <p>
 <center><a href="../toc.html">Table of Contents</a></center><br>

@@ -34,23 +34,23 @@ The code definining the structure of an <code>fs_rec</code> is in
 for your reading pleasure:
 <pre>
 
-<font color=green>/* Modular filesystem object */</font>
+<font color=blue>/* Modular filesystem object */</font>
 struct pr_fs_rec_t {
 
-  <font color=green>/* these pointers will be effective once layered FS modules are
+  <font color=blue>/* these pointers will be effective once layered FS modules are
    * supported
    */</font>
   fs_rec *next, *prev;
 
-  <font color=green>/* descriptive tag for this fs_rec */</font>
+  <font color=blue>/* descriptive tag for this fs_rec */</font>
   char *name;
 
   char *path;
 
-  <font color=green>/* slot for module-specific data */</font>
+  <font color=blue>/* slot for module-specific data */</font>
   void *data;
 
-  <font color=green>/* pool for this object's use */</font>
+  <font color=blue>/* pool for this object's use */</font>
   pool *pool;
 
   <font>/* FS function pointers */</font>
@@ -71,7 +71,7 @@ struct pr_fs_rec_t {
   int (*chmod)(fs_rec *, const char *, mode_t);
   int (*chown)(fs_rec *, const char *, uid_t, gid_t);
 
-  <font color=green>/* for actual operations on the directory (or subdirs)
+  <font color=blue>/* for actual operations on the directory (or subdirs)
    * we cast the return from opendir to DIR* in src/fs.c, so
    * modules can use their own data type
    */</font>

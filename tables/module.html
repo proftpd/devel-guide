@@ -66,31 +66,31 @@ table.
 <pre>
 module sample_module = {
 
-  <font color=green>/* pointer to the next module -- always NULL (set internally) */</font>
+  <font color=blue>/* pointer to the next module -- always NULL (set internally) */</font>
   NULL,
 
-  <font color=green>/* pointer to the previous module -- always NULL (set internally) */</font>
+  <font color=blue>/* pointer to the previous module -- always NULL (set internally) */</font>
   NULL,
 
-  <font color=green>/* Module API version (current version: 2.0) */</font>
+  <font color=blue>/* Module API version (current version: 2.0) */</font>
   0x20,
 
-  <font color=green>/* this module's name */</font>
+  <font color=blue>/* this module's name */</font>
   "sample",
 
-  <font color=green>/* module configuration handler table */</font>
+  <font color=blue>/* module configuration handler table */</font>
   sample_config,
 
-  <font color=green>/* module command handler table */</font>
+  <font color=blue>/* module command handler table */</font>
   sample_commands,
 
-  <font color=green>/* module authentication handler table */</font>
+  <font color=blue>/* module authentication handler table */</font>
   NULL,
 
-  <font color=green>/* module initialization function */</font>
+  <font color=blue>/* module initialization function */</font>
   sample_init,
 
-  <font color=green>/* module "child mode" post-fork initialization function */</font>
+  <font color=blue>/* module "child mode" post-fork initialization function */</font>
   sample_child_init
 };
 </pre>

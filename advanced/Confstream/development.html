@@ -28,12 +28,12 @@ As an example Confstream implementation, here (excerpted from
 is the definition of a confstream object for handling regular text files.
 This &quot;filestream&quot; is the default confstream object.
 <pre>
-<font color=green>/* default "file" configuration stream definitions
+<font color=blue>/* default "file" configuration stream definitions
  */</font>
 static int filestream_open(confstream_rec *stream) {
   int res;
 
-  <font color=green>/* sanity check */</font>
+  <font color=blue>/* sanity check */</font>
   if (stream == NULL)
     return -1;
 
@@ -42,7 +42,7 @@ static int filestream_open(confstream_rec *stream) {
     return -1;
   }
 
-  <font color=green>/* the source field contains the filename to be read
+  <font color=blue>/* the source field contains the filename to be read
    */</font>
   if ((stream->data = (void *) fopen(stream->source, "r")) == NULL)
     res = -1;
@@ -68,7 +68,7 @@ static char *filestream_readstr(confstream_rec *stream, char *buf,
 static char *filestream_writestr(confstream_rec *stream, char *buf,
     size_t buflen) {
 
-  <font color=green>/* the current filestream object doesn't support writing of configuration
+  <font color=blue>/* the current filestream object doesn't support writing of configuration
    * information...yet
    */</font>
   return NULL;
@@ -93,7 +93,7 @@ static int filestream_iserror(confstream_rec *stream) {
 int init_confstream(void) {
   confstream_rec *filestream = NULL;
 
-  <font color=green>/* configure the default "file" configuration stream
+  <font color=blue>/* configure the default "file" configuration stream
    */</font>
   filestream = create_confstream(permanent_pool, "file");
 
@@ -118,18 +118,18 @@ An excellent example for using the Confstream functions can be found in
 function does many things, but for us the interesting bit at the moment is
 its use of confstreams to parse the files:
 <pre>
-  <font color=green>/* make sure the default file configuration stream is in effect, and
+  <font color=blue>/* make sure the default file configuration stream is in effect, and
    * configured for this .ftpaccess file.  Make sure to preserve
    * the current confstream, to be restored later.
    */</font>
   filestream = get_confstream(p, "file");
 
-  <font color=green>/* even if filestream is NULL, this will set the default confstream,
+  <font color=blue>/* even if filestream is NULL, this will set the default confstream,
    * which is for handling files anyway.
    */</font>
   old_confstream = set_confstream(filestream);
 
-  <font color=green>/* prepare the current confstream (filestream) for reading from
+  <font color=blue>/* prepare the current confstream (filestream) for reading from
    * the necessary source (the .ftpaccess file in question)
    */</font>
   confstream_setsource(dynpath);
@@ -142,7 +142,7 @@ its use of confstreams to parse the files:
 
   d->config_type = CONF_DYNDIR;
 
-  <font color=green>/* as .ftpaccess files are read during the operation of the process,
+  <font color=blue>/* as .ftpaccess files are read during the operation of the process,
    * don't choke on configuration errors in a .ftpaccess file, merely
    * log warnings about them.
    */</font>
@@ -160,7 +160,7 @@ its use of confstreams to parse the files:
 
   set_confstream(old_confstream);
 
-  <font color=green>/* can dispose of filestream now */</font>
+  <font color=blue>/* can dispose of filestream now */</font>
   if (filestream != NULL) {
     destroy_pool(filestream->pool);
     filestream = NULL;

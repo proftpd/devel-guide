@@ -53,14 +53,14 @@
 <pre>
  struct IO_File {
 
-   <font color=green>/* memory pool for this object */</font>
+   <font color=blue>/* memory pool for this object */</font>
    pool *pool;
    int fd;
 
-   <font color=green>/* 0 == read, 1 == write */</font>
+   <font color=blue>/* 0 == read, 1 == write */</font>
    int mode;
 
-   <font color=green>/* errno, if applicable */</font>
+   <font color=blue>/* errno, if applicable */</font>
    int xerrno;
 
    int flags;
@@ -68,10 +68,10 @@
  
    IOBUF *buf;
     
-   <font color=green>/* request buffer size */</font>
+   <font color=blue>/* request buffer size */</font>
    IOREQ *req;
 
-   <font color=green>/* default size of the request buffer */</font>
+   <font color=blue>/* default size of the request buffer */</font>
    int bufsize;
 
  };
@@ -93,13 +93,13 @@
 
    IOREQ *next, *prev;
 
-   <font color=green>/* memory pool for this object */</font>
+   <font color=blue>/* memory pool for this object */</font>
    pool *pool;
 
-   <font color=green>/* read or write */</font>
+   <font color=blue>/* read or write */</font>
    int req_type;
 
-   <font color=green>/* request flags */</font>
+   <font color=blue>/* request flags */</font>
    int req_flags;
        
    IOFILE *file;
@@ -107,22 +107,22 @@
    char *buf;
    char *bp, *bufnext;
 
-   <font color=green>/* buffer size */</font>
+   <font color=blue>/* buffer size */</font>
    int bufsize;
 
-   <font color=green>/* client buffer, and head pointer */</font>
+   <font color=blue>/* client buffer, and head pointer */</font>
    char *cl_buf, *cl_bp;
 
-   <font color=green>/* bytes remaining in the client buffer */</font>
+   <font color=blue>/* bytes remaining in the client buffer */</font>
    int cl_bytes;
 
-   <font color=green>/* client IO funtion (for async operations) */</font>
+   <font color=blue>/* client IO funtion (for async operations) */</font>
    int (*cl_io)(IOREQ *, char *, int);
 
-   <font color=green>/* error occurred */</font>
+   <font color=blue>/* error occurred */</font>
    void (*cl_err)(IOREQ *, int);
 
-   <font color=green>/* remote side closed */</font>
+   <font color=blue>/* remote side closed */</font>
    void (*cl_close)(IOREQ *);
 
  };
@@ -139,7 +139,7 @@
     
    xasetmember_t *xas_list;
 
-   <font color=green>/* memory pool for this object */</font>
+   <font color=blue>/* memory pool for this object */</font>
    pool *mempool;
 
    XASET_COMPARE xas_compare;
@@ -189,32 +189,32 @@
 
    struct config_struc *next, *prev;
  
-   <font color=green>/* this will be one of the CONF_* types */</font>
+   <font color=blue>/* this will be one of the CONF_* types */</font>
    int config_type;
 
-   <font color=green>/* memory pool for this object */</font>
+   <font color=blue>/* memory pool for this object */</font>
    pool *pool;
 
-   <font color=green>/* the set in which we're stored */</font>
+   <font color=blue>/* the set in which we're stored */</font>
    xaset_t *set;
 
    char *name;
    int argc;
    void **argv;
 
-   <font color=green>/* override classes */</font>
+   <font color=blue>/* override classes */</font>
    long overrides;
 
-   <font color=green>/* flags */</font>
+   <font color=blue>/* flags */</font>
    long flags;
 
-   <font color=green>/* server to which this config element is attached */</font>
+   <font color=blue>/* server to which this config element is attached */</font>
    server_rec *server;
 
-   <font color=green>/* parent configuration record */</font>
+   <font color=blue>/* parent configuration record */</font>
    config_rec *parent;
 
-   <font color=green>/* sub-configuration */</font>
+   <font color=blue>/* sub-configuration */</font>
    xaset_t *subset;
 
  };
@@ -249,11 +249,11 @@
    fsdir_t *next;
    char *name;
 
-   <font color=green>/* parent handlers */</font>
+   <font color=blue>/* parent handlers */</font>
    fsdir_t *parent;
    void *private;
 
-   <font color=green>/* actual handler functions */</font>
+   <font color=blue>/* actual handler functions */</font>
    int (*stat)(fsdir_t *, const char *, struct stat *);
    int (*lstat)(fsdir_t *, const char *, struct stat *);
    int (*rename)(fsdir_t *, const char *, const char *);
@@ -271,7 +271,7 @@
    int (*chown)(fsdir_t *, const char *, uid_t, gid_t);
    int (*chdir)(fsdir_t *, const char *);
 
-   <font color=green>/* for actual operations on the directory (or subdirs)
+   <font color=blue>/* for actual operations on the directory (or subdirs)
     * we cast the return from opendir to DIR * in src/fs.c
     * so modules can use their own data type
     */</font>
@@ -318,7 +318,7 @@
    char *lf_filename;
    logformat_t *lf_format;
 
-   <font color=green>/* pointer to the "owning" configuration */</font>
+   <font color=blue>/* pointer to the "owning" configuration */</font>
    config_rec *lf_conf;
 
  };
@@ -350,19 +350,19 @@
 <pre>
  struct modret_struc {
 
-   <font color=green>/* which module handled this? */</font>
+   <font color=blue>/* which module handled this? */</font>
    module *mr_handler_module;
 
-   <font color=green>/* not zero if there was an error */</font>
+   <font color=blue>/* not zero if there was an error */</font>
    int mr_error;
 
-   <font color=green>/* numeric error code */</font>
+   <font color=blue>/* numeric error code */</font>
    char *mr_numeric;
 
-   <font color=green>/* text message */</font>
+   <font color=blue>/* text message */</font>
    char *mr_message;
 
-   <font color=green>/* additional data -- undefined */</font>
+   <font color=blue>/* additional data -- undefined */</font>
    void *data;
 
  };
@@ -379,28 +379,28 @@
 
    module *next, *prev;
 
-   <font color=green>/* module API version -- NOT module version */</font>
+   <font color=blue>/* module API version -- NOT module version */</font>
    int ver;
 
-   <font color=green>/* module name */</font>
+   <font color=blue>/* module name */</font>
    char *name;
 
-   <font color=green>/* configuration directive table */</font>
+   <font color=blue>/* configuration directive table */</font>
    conftable *conftable;
 
-   <font color=green>/* command handler table */</font>
+   <font color=blue>/* command handler table */</font>
    cmdtable *cmdtable;
 
-   <font color=green>/* authentication handler table */</font>
+   <font color=blue>/* authentication handler table */</font>
    authtable *authtable;
 
-   <font color=green>/* module initialization */</font>
+   <font color=blue>/* module initialization */</font>
    int (*module_init)();
 
-   <font color=green>/* post-fork initialization */</font>
+   <font color=blue>/* post-fork initialization */</font>
    int (*module_init_child)();
 
-   <font color=green>/* internal use, greater number == higher priority */</font>
+   <font color=blue>/* internal use, greater number == higher priority */</font>
    int priority;
 
  };
@@ -437,7 +437,7 @@
    char *name;
 #<font color=red>endif</font>
 
-   <font color=green>/* has_arg can't be enum because some compilers complain
+   <font color=blue>/* has_arg can't be enum because some compilers complain
     * about type mismatches in all the code that assumes
     * it is an int.
     */</font>
@@ -554,10 +554,10 @@
 
    struct symbol_hash *next, *prev;
 
-   <font color=green>/* pointer to the directive, command, or other symbol */</font>
+   <font color=blue>/* pointer to the directive, command, or other symbol */</font>
    char *sym_name;
 
-   <font color=green>/* one of the SYM_* macros */</font>
+   <font color=blue>/* one of the SYM_* macros */</font>
    char sym_type;
 
    module *sym_module;

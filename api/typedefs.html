@@ -118,19 +118,19 @@
 <pre>
  typedef struct {
 
-   <font color=green>/* memory pool for this object */</font>
+   <font color=blue>/* memory pool for this object */</font>
    pool *pool;
 
-   <font color=green>/* the size of an individual element */</font>
+   <font color=blue>/* the size of an individual element */</font>
    int elt_size;
 
-   <font color=green>/* the number of elements currently stored */</font>
+   <font color=blue>/* the number of elements currently stored */</font>
    int nelts;
 
-   <font color=green>/* the number of spaces allocated */</font>
+   <font color=blue>/* the number of spaces allocated */</font>
    int nalloc;
 
-   <font color=green>/* pointer to the elements stored */</font>
+   <font color=blue>/* pointer to the elements stored */</font>
    void *elts;
 
  } array_header;
@@ -145,7 +145,7 @@
 <pre>
  typedef struct {
 
-   <font color=green>/* future use */</font>
+   <font color=blue>/* future use */</font>
    int auth_type;
 
    char *name;
@@ -168,21 +168,21 @@
 
    struct _binding *next;
 
-   <font color=green>/* server to handle the request */</font>
+   <font color=blue>/* server to handle the request */</font>
    server_rec *server;
 
-   <font color=green>/* IP address to which we're "bound" */</font>
+   <font color=blue>/* IP address to which we're "bound" */</font>
    p_in_addr_t ipaddr;
 
    int port;
 
-   <font color=green>/* listen connection (if separate) */</font>
+   <font color=blue>/* listen connection (if separate) */</font>
    connt_t *listen;
 
-   <font color=green>/* if default connection */</font>
+   <font color=blue>/* if default connection */</font>
    char isdefault;
 
-   <font color=green>/* if handles localhost */</font>
+   <font color=blue>/* if handles localhost */</font>
    char islocalhost;
 
  } binding_t;
@@ -225,13 +225,13 @@
 
    struct class_struc *next;
 
-   <font color=green>/* class name */</font>
+   <font color=blue>/* class name */</font>
    char *name;
 
-   <font color=green>/* max number of users in this class */</font>
+   <font color=blue>/* max number of users in this class */</font>
    int max_connections;
 
-   <font color=green>/* compiled regexp */</font>
+   <font color=blue>/* compiled regexp */</font>
    void *preg;
 
  } class_t;
@@ -246,35 +246,35 @@
 <pre>
  typedef struct cmd_struc {
 
-   <font color=green>/* memory pool for this object */</font>
+   <font color=blue>/* memory pool for this object */</font>
    pool *pool;
 
    server_rec *server;
    config_rec *config;
 
-   <font color=green>/* temporary pool which only exists while the cmd's handler is running
+   <font color=blue>/* temporary pool which only exists while the cmd's handler is running
     */</font>
    pool *tmp_pool;
 
    int argc;
    char **argv;
 
-   <font color=green>/* entire argument (excluding command) */</font>
+   <font color=blue>/* entire argument (excluding command) */</font>
    char *arg;
 
-   <font color=green>/* command group */</font>
+   <font color=blue>/* command group */</font>
    char *group;
 
-   <font color=green>/* command class */</font>
+   <font color=blue>/* command class */</font>
    int class;
 
-   <font color=green>/* hack to speed up symbol hashing in modules.c */</font>
+   <font color=blue>/* hack to speed up symbol hashing in modules.c */</font>
    int symtable_index;
 
-   <font color=green>/* private data for passing/retaining among handlers */</font>
+   <font color=blue>/* private data for passing/retaining among handlers */</font>
    privdata_t *private;
 
-   <font color=green>/* internal use */</font>
+   <font color=blue>/* internal use */</font>
    array_header *privarr;
 
  } cmd_rec;
@@ -289,20 +289,20 @@
 <pre>
  typedef struct {
 
-   <font color=green>/* command types: PRE_CMD, CMD, POST_CMD, LOG_CMD */</font>
+   <font color=blue>/* command types: PRE_CMD, CMD, POST_CMD, LOG_CMD */</font>
    int cmd_type;
 
    char *command;
 
-   <font color=green>/* command group */</font>
+   <font color=blue>/* command group */</font>
    char *group;
 
    modret_t *(*handler)(cmd_rec *);
 
-   <font color=green>/* is authentication required before this command may be used? */</font>
+   <font color=blue>/* is authentication required before this command may be used? */</font>
    int requires_auth;
 
-   <font color=green>/* is allowed to be issued during transfers? */</font>
+   <font color=blue>/* is allowed to be issued during transfers? */</font>
    int interrupt_xfer;
 
    int class;
@@ -334,7 +334,7 @@
 
    modret_t *(*handler)(cmd_rec *);
 
-   <font color=green>/* reference to owning module; set when the module is initialized
+   <font color=blue>/* reference to owning module; set when the module is initialized
     */</font>
    module *m;
 
@@ -350,45 +350,45 @@
 <pre>
  typedef struct conn_struc {
 
-   <font color=green>/* memory pool for this object */</font>
+   <font color=blue>/* memory pool for this object */</font>
    pool *pool;
 
-   <font color=green>/* current connection mode */</font>
+   <font color=blue>/* current connection mode */</font>
    int mode;
 
-   <font color=green>/* listening connection's file descriptor */</font>
+   <font color=blue>/* listening connection's file descriptor */</font>
    int listen_fd;
 
-   <font color=green>/* socket receive and send sizes */</font>
+   <font color=blue>/* socket receive and send sizes */</font>
    int rcvbuf, sndbuf;
 
-   <font color=green>/* set to errno if mode == CM_ERROR */</font>
+   <font color=blue>/* set to errno if mode == CM_ERROR */</font>
    int xerrno;
 
-   <font color=green>/* IP addresses to which we're listening */</font>
+   <font color=blue>/* IP addresses to which we're listening */</font>
    array_header *iplist;
 
    int niplist;
 
-   <font color=green>/* read and write file descriptors */</font>
+   <font color=blue>/* read and write file descriptors */</font>
    int rfd, wfd;
 
-   <font color=green>/* I/O streams */</font>
+   <font color=blue>/* I/O streams */</font>
    IOFILE *inf, *outf;
 
-   <font color=green>/* remote address of this connection */</font>
+   <font color=blue>/* remote address of this connection */</font>
    p_in_addr_t *remote_ipaddr;
 
-   <font color=green>/* remote port of this connection */</font>
+   <font color=blue>/* remote port of this connection */</font>
    int remote_port;
 
-   <font color=green>/* remote FQDN of this connection */</font>
+   <font color=blue>/* remote FQDN of this connection */</font>
    char *remote_name;
 
-   <font color=green>/* local address of this connection */</font>
+   <font color=blue>/* local address of this connection */</font>
    p_in_addr_t *local_ipaddr;
 
-   <font color=green>/* local port of this connection */</font>
+   <font color=blue>/* local port of this connection */</font>
    int local_port;
 
  } conn_t;
@@ -438,19 +438,19 @@
 <pre>
  typedef struct {
 
-   <font color=green>/* count of paths matched by the pattern */</font>
+   <font color=blue>/* count of paths matched by the pattern */</font>
    int gl_pathc;
 
-   <font color=green>/* list of matched pathnames */</font>
+   <font color=blue>/* list of matched pathnames */</font>
    char **gl_pathv;
 
-   <font color=green>/* slots to reserve in gl_pathv */</font>
+   <font color=blue>/* slots to reserve in gl_pathv */</font>
    int gl_offs;
 
-   <font color=green>/* set to FLAGS, maybe |GLOB_MAGCHAR */</font>
+   <font color=blue>/* set to FLAGS, maybe |GLOB_MAGCHAR */</font>
    int gl_flags;
 
-   <font color=green>/* if the GLOB_ALTDIRFUNC flag is set, the following
+   <font color=blue>/* if the GLOB_ALTDIRFUNC flag is set, the following
     * functions are used instead of the normal file access
     * functions.
     */</font>
@@ -509,13 +509,13 @@
 <pre>
  typedef struct {
 
-   <font color=green>/* always 0xdeadbeef */</font>
+   <font color=blue>/* always 0xdeadbeef */</font>
    unsigned long r_magic;
 
-   <font color=green>/* version of proftpd with which file was created */</font>
+   <font color=blue>/* version of proftpd with which file was created */</font>
    unsigned long r_version;
 
-   <font color=green>/* size of each entry (including first) */</font>
+   <font color=blue>/* size of each entry (including first) */</font>
    unsigned long r_size;
 
  } logrun_header_t;
@@ -667,49 +667,49 @@
 
    struct server_struc *next, *prev;
 
-   <font color=green>/* memory pool for this object */</font>
+   <font color=blue>/* memory pool for this object */</font>
    pool *pool;
 
-   <font color=green>/* set holding all the servers */</font>
+   <font color=blue>/* set holding all the servers */</font>
    xaset_t *set;
 
-   <font color=green>/* this server's name */</font>
+   <font color=blue>/* this server's name */</font>
    char *ServerName;
 
-   <font color=green>/* this server's address */</font>
+   <font color=blue>/* this server's address */</font>
    char *ServerAddress;
 
-   <font color=green>/* this server's fully qualified domain name */</font>
+   <font color=blue>/* this server's fully qualified domain name */</font>
    char *ServerFQDN;
 
-   <font color=green>/* this server administrator's name */</font>
+   <font color=blue>/* this server administrator's name */</font>
    char *ServerAdmin;
 
-   <font color=green>/* this server's welcome message */</font>
+   <font color=blue>/* this server's welcome message */</font>
    char *ServerMessage;
 
-   <font color=green>/* port number for this server */</font>
+   <font color=blue>/* port number for this server */</font>
    int ServerPort;
 
-   <font color=green>/* receive/send windows */</font>
+   <font color=blue>/* receive/send windows */</font>
    int tcp_rwin, tcp_swin;
 
-   <font color=green>/* specifically override the TCP rwin */</font>
+   <font color=blue>/* specifically override the TCP rwin */</font>
    int tcp_rwin_override;
 
-   <font color=green>/* specifically override the TCP swin */</font>
+   <font color=blue>/* specifically override the TCP swin */</font>
    int tcp_swin_override;
 
-   <font color=green>/* do not greet until after the user's logged in */</font>
+   <font color=blue>/* do not greet until after the user's logged in */</font>
    int AnonymousGreeting;
 
-   <font color=green>/* internal address of this server */</font>
+   <font color=blue>/* internal address of this server */</font>
    p_in_addr_t *ipaddr;
 
-   <font color=green>/* our listening connection */</font>
+   <font color=blue>/* our listening connection */</font>
    struct conn_struc *listen;
 
-   <font color=green>/* configuration details */</font>
+   <font color=blue>/* configuration details */</font>
    xaset_t *conf;
 
  } server_rec;
@@ -724,40 +724,40 @@
 <pre>
  typedef struct {
 
-   <font color=green>/* memory pool for this object */</font>
+   <font color=blue>/* memory pool for this object */</font>
    pool *pool;
 
-   <font color=green>/* session and state flags */</font>
+   <font color=blue>/* session and state flags */</font>
    long flags;
 
-   <font color=green>/* remote data address */</font>
+   <font color=blue>/* remote data address */</font>
    p_in_addr_t data_addr;
 
-   <font color=green>/* remote data port */</font>
+   <font color=blue>/* remote data port */</font>
    short data_port;
 
-   <font color=green>/* user identified by ident protocol */</font>
+   <font color=blue>/* user identified by ident protocol */</font>
    char *ident_user;
 
-   <font color=green>/* current working directory */</font>
+   <font color=blue>/* current working directory */</font>
    char cwd[MAX_PATH_LEN];
 
-   <font color=green>/* current virtual working directory */</font>
+   <font color=blue>/* current virtual working directory */</font>
    char vwd[MAX_PATH_LEN];
 
-   <font color=green>/* closest matching configuration for
+   <font color=blue>/* closest matching configuration for
     * the current operation
     */</font>
    struct config_struc *dir_config;
 
-   <font color=green>/* the UIDs/GIDs are manipulated by the
+   <font color=blue>/* the UIDs/GIDs are manipulated by the
     * PRIVS_* macros in privs.h
     */</font>
 
-   <font color=green>/* disable UID/GID switching */</font>
+   <font color=blue>/* disable UID/GID switching */</font>
    int disable_id_switching;
 
-   <font color=green>/* currently running UID, original (ie startup)
+   <font color=blue>/* currently running UID, original (ie startup)
     * UID, and current GID
     */</font>
    uid_t uid, ouid;
@@ -766,83 +766,83 @@
    array_header *gids;
    array_header *groups;
 
-   <font color=green>/* saved file UID */</font>
+   <font color=blue>/* saved file UID */</font>
    uid_t fsuid;
 
-   <font color=green>/* saved file GID */</font>
+   <font color=blue>/* saved file GID */</font>
    gid_t fsgid;
 
-   <font color=green>/* username/groupname after login */</font>
+   <font color=blue>/* username/groupname after login */</font>
    char *user, *group;
 
-   <font color=green>/* UID/GID after login, before the UID/GID fields
+   <font color=blue>/* UID/GID after login, before the UID/GID fields
     * above are changed
     */</font>
    uid_t login_uid;
    gid_t login_gid;
 
-   <font color=green>/* session class */</font>
+   <font color=blue>/* session class */</font>
    class_t *class;
 
-   <font color=green>/* the "prefix" of our process name */</font>
+   <font color=blue>/* the "prefix" of our process name */</font>
    char *proc_prefix;
 
-   <font color=green>/* are we logging to wtmp? */</font>
+   <font color=blue>/* are we logging to wtmp? */</font>
    int wtmp_log;
 
-   <font color=green>/* control connection */</font>
+   <font color=blue>/* control connection */</font>
    struct conn_struc *c;
 
-   <font color=green>/* data connection */</font>
+   <font color=blue>/* data connection */</font>
    struct conn_struc *d; 
 
-   <font color=green>/* active data connection request */</font>
+   <font color=blue>/* active data connection request */</font>
    struct IO_Request *d_req;
 
-   <font color=green>/* hide password from logs/ps listing */</font>
+   <font color=blue>/* hide password from logs/ps listing */</font>
    int hide_password;
 
-   <font color=green>/* &lt;Anonymous&gt; root directory */</font>
+   <font color=blue>/* &lt;Anonymous&gt; root directory */</font>
    char *anon_root;
 
-   <font color=green>/* &lt;Anonymous&gt; configuration */</font>
+   <font color=blue>/* &lt;Anonymous&gt; configuration */</font>
    struct config_struc *anon_config;
            
-   <font color=green>/* email address sent to us */</font>
+   <font color=blue>/* email address sent to us */</font>
    char *anon_user;
 
-   <font color=green>/* restart marked position */</font>
+   <font color=blue>/* restart marked position */</font>
    unsigned long restart_pos;
 
    struct {
 
-     <font color=green>/* memory pool for this object */</font>
+     <font color=blue>/* memory pool for this object */</font>
      struct pool *p;
 
-     <font color=green>/* xfer session attributes: default/append/hidden */</font>
+     <font color=blue>/* xfer session attributes: default/append/hidden */</font>
      int xfer_type;
      
      int direction;
 
-     <font color=green>/* as shown to user */</font>
+     <font color=blue>/* as shown to user */</font>
      char *filename;
 
-     <font color=green>/* as used in transfer */</font>
+     <font color=blue>/* as used in transfer */</font>
      char *path;
 
-     <font color=green>/* as used in hidden stores */</font>
+     <font color=blue>/* as used in hidden stores */</font>
      char *path_hidden;
 
      char *bufstart, *buf;
      int bufsize, buflen;
                 
-     <font color=green>/* time current transfer started */</font>
+     <font color=blue>/* time current transfer started */</font>
      struct timeval start_time;
 
-     <font color=green>/* total size of file (if known) */</font>
+     <font color=blue>/* total size of file (if known) */</font>
      unsigned long file_size;
 
-     <font color=green>/* total bytes transferred */</font>
+     <font color=blue>/* total bytes transferred */</font>
      unsigned long total_bytes;
 
      int (*get_data)(struct IO_FILE *, char *, int);
@@ -851,7 +851,7 @@
 
    } xfer;
 
-   <font color=green>/* total bytes transferred for this session */</font>
+   <font color=blue>/* total bytes transferred for this session */</font>
    unsigned long total_bytes;
 
  } session_t;
@@ -868,22 +868,22 @@
 
    struct timer_struc *next, *prev;
 
-   <font color=green>/* amount of time remaining */</font>
+   <font color=blue>/* amount of time remaining */</font>
    long count;
 
-   <font color=green>/* original length of timer */</font>
+   <font color=blue>/* original length of timer */</font>
    long interval;
 
-   <font color=green>/* caller-dependent timer number */</font>
+   <font color=blue>/* caller-dependent timer number */</font>
    int timerno;
 
-   <font color=green>/* module owning this timer */</font>
+   <font color=blue>/* module owning this timer */</font>
    module *mod;
 
-   <font color=green>/* function to call back */</font>
+   <font color=blue>/* function to call back */</font>
    callback_t callback;
 
-   <font color=green>/* internal use */</font>
+   <font color=blue>/* internal use */</font>
    char remove;
 
  } timer_t;

@@ -114,16 +114,16 @@ track them all down and dispose of them.
 With no further ado, the module itself:
 
 <pre>
-  <font color=green>/* Declaration of command handler
+  <font color=blue>/* Declaration of command handler
    */</font>
   MODRET fixup_filenames(cmd_rec *);
 
-  <font color=green>/* Declaration of configuration directive handlers
+  <font color=blue>/* Declaration of configuration directive handlers
    */</font>
   MODRET set_lowercase_filenames(cmd_rec *);
   MODRET set_uppercase_filenames(cmd_rec *);
 
-  <font color=green>/* Define the "configuration handler" table, which links configuration file
+  <font color=blue>/* Define the "configuration handler" table, which links configuration file
    * directives with the appropriate handlers in this module
    */</font>
   static conftable case_conftab[] = {
@@ -132,7 +132,7 @@ With no further ado, the module itself:
     { NULL }
   };
 
-  <font color=green>/* Define the "command handler" table, which links client-issued commands
+  <font color=blue>/* Define the "command handler" table, which links client-issued commands
    * with the interested handlers in this module
    */</font>
   static cmdtable case_cmdtab[] = {
@@ -142,15 +142,15 @@ With no further ado, the module itself:
 
   module case_module = {
 
-    NULL,                   <font color=green>/* pointer to the next module -- ALWAYS NULL */</font>
-    NULL,                   <font color=green>/* pointer to the previous module -- ALWAYS NULL */</font>
-    0x20,                   <font color=green>/* ProFTPD Module API version 2.0 */</font>
-    "case",                 <font color=green>/* the module's name */</font>
-    case_conftab,           <font color=green>/* configuration command handler table */</font>
-    case_cmdtab,            <font color=green>/* command handler table */</font>
-    NULL,                   <font color=green>/* authentication function table */</font>
-    NULL,                   <font color=green>/* initialization function */</font>
-    NULL                    <font color=green>/* "child" initialization function */</font>
+    NULL,                   <font color=blue>/* pointer to the next module -- ALWAYS NULL */</font>
+    NULL,                   <font color=blue>/* pointer to the previous module -- ALWAYS NULL */</font>
+    0x20,                   <font color=blue>/* ProFTPD Module API version 2.0 */</font>
+    "case",                 <font color=blue>/* the module's name */</font>
+    case_conftab,           <font color=blue>/* configuration command handler table */</font>
+    case_cmdtab,            <font color=blue>/* command handler table */</font>
+    NULL,                   <font color=blue>/* authentication function table */</font>
+    NULL,                   <font color=blue>/* initialization function */</font>
+    NULL                    <font color=blue>/* "child" initialization function */</font>
   };
 </pre>
 
@@ -418,24 +418,24 @@ directive looks basically the same, and won't be shown here):
     int bool = -1;
     config_rec *c = NULL;
 
-    <font color=green>/* make sure the directive was given one, and only one, argument
+    <font color=blue>/* make sure the directive was given one, and only one, argument
      */</font>
     CHECK_ARGS(cmd, 1);
 
-    <font color=green>/* check the context in which the directive was used, make sure that
+    <font color=blue>/* check the context in which the directive was used, make sure that
      * it was one of the allowed contexts of "server config", &lt;Anonymous&gt;,
      * &lt;Limit&gt;, or &lt;VirtualHost&gt;.
      */</font>
     CHECK_CONF(cmd, CONF_ROOT|CONF_ANON|CONF_LIMIT|CONF_VIRTUAL);
 
-    <font color=green>/* get_boolean() couldn't find a valid Boolean value as an argument
+    <font color=blue>/* get_boolean() couldn't find a valid Boolean value as an argument
      */</font>
     if ((bool = get_boolean(cmd, 1)) == -1)
       CONF_ERROR(cmd, "requires a boolean value");
 
     c = add_config_param("DowncaseFileNames", 1, (void *) bool);
 
-    <font color=green>/* merge this configuration directive "down", so that it affects any
+    <font color=blue>/* merge this configuration directive "down", so that it affects any
      * contained contexts
      */</font>
     c->flags |= CF_MERGEDOWN;
@@ -503,7 +503,7 @@ more or less like this:
     char *current_filename = NULL, *new_filename = NULL;
     config_rec *conf_downcase = NULL, *conf_upcase = NULL;
 
-    <font color=green>/* check the current configuration context for the configuration
+    <font color=blue>/* check the current configuration context for the configuration
      * directive boolean value, true or false.  If false, return now
      */</font>
 
@@ -515,7 +515,7 @@ more or less like this:
     if (!conf_downcase && !conf_upcase)
       return DECLINED(cmd);
 
-    <font color=green>/* get an adjusted requested filename
+    <font color=blue>/* get an adjusted requested filename
      */</font>
     if (conf_downcase->argv[0] == TRUE)
       new_filename = adjust_filename(cmd->server->pool, cmd->arg, PR_CASE_DOWN);
@@ -523,10 +523,10 @@ more or less like this:
     else if (conf_upcase->argv[0] == TRUE)
       new_filename = adjust_filename(cmd->server->pool, cmd->arg, PR_CASE_UP);
 
-    <font color=green>/* copy the new filename into the command record */</font>
+    <font color=blue>/* copy the new filename into the command record */</font>
     sstrcpy(cmd->arg, new_filename, strlen(new_filename));
 
-    <font color=green>/* done -- proceed with the download
+    <font color=blue>/* done -- proceed with the download
      */</font>
     return DECLINED(cmd);
   }

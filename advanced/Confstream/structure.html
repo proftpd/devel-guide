@@ -33,28 +33,28 @@ The code definining the structure of an <code>confstream_rec</code> is in
 included here for your reading pleasure:
 <pre>
 
-<font color=green>/* Modular confstream object */</font>
+<font color=blue>/* Modular confstream object */</font>
 struct pr_confstream_struc {
 
-  <font color=green>/* memory pool for this object */</font>
+  <font color=blue>/* memory pool for this object */</font>
   pool *pool;
 
-  <font color=green>/* descriptive string for this type of configuration stream (eg "file", "sql", etc) */</font>
+  <font color=blue>/* descriptive string for this type of configuration stream (eg "file", "sql", etc) */</font>
   const char *type;
  
-  <font color=green>/* source for this particular instance.  For example, file confstreams place the file name to be read here. */</font>
+  <font color=blue>/* source for this particular instance.  For example, file confstreams place the file name to be read here. */</font>
   char *source;
 
-  <font color=green>/* line number of the configuration stream */</font>
+  <font color=blue>/* line number of the configuration stream */</font>
   unsigned int lineno;
 
-  <font color=green>/* internal flag */</font>
+  <font color=blue>/* internal flag */</font>
   unsigned int status;
 
-  <font color=green>/* configuration stream-specific data */</font>
+  <font color=blue>/* configuration stream-specific data */</font>
   void *data;
 
-  <font color=green>/* Confstream callbacks */</font>
+  <font color=blue>/* Confstream callbacks */</font>
   int (*open)(confstream_rec *);
   int (*close)(confstream_rec *);
   int (*seek)(confstream_rec *, off_t, int);

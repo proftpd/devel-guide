@@ -31,40 +31,40 @@ The code definining the structures of these objects is in
 included here for your reading pleasure:
 <pre>
 
-<font color=green>/* Structure associating an IP address to a server_rec */</font>
+<font color=blue>/* Structure associating an IP address to a server_rec */</font>
 typedef struct ipbind_t {
   struct ipbind_t *next;
 
-  <font color=green>/* IP address to which this binding is &quot;bound&quot; */</font>
+  <font color=blue>/* IP address to which this binding is &quot;bound&quot; */</font>
   p_in_addr_t addr;
   unsigned int port;
 
-  <font color=green>/* default server to handle requests to this binding.  If namebinds are
+  <font color=blue>/* default server to handle requests to this binding.  If namebinds are
    * present, they will be checked before using this server
    */</font>
   server_rec *server;
 
-  <font color=green>/* List of name-based servers bound to the above IP address.  Note that
+  <font color=blue>/* List of name-based servers bound to the above IP address.  Note that
    * if this functionality becomes widely adopted and used, a more efficient
    * search-and-lookup mechanism will be needed, for performance reasons.
    */</font>
   array_header *namebinds;
 
-  <font color=green>/* listen connection, if separate from the main socket */</font>
+  <font color=blue>/* listen connection, if separate from the main socket */</font>
   conn_t *listen;
 
-  <font color=green>/* if this binding is the DefaultServer binding */</font>
+  <font color=blue>/* if this binding is the DefaultServer binding */</font>
   unsigned char isdefault;
 
-  <font color=green>/* if this binding handles localhost requests */</font>
+  <font color=blue>/* if this binding handles localhost requests */</font>
   unsigned char islocalhost;
 
-  <font color=green>/* if this binding is active */</font>
+  <font color=blue>/* if this binding is active */</font>
   unsigned char isactive;
 
 } ipbind_rec;
 
-<font color=green>/* Structure associating a name to a server_rec */</font>
+<font color=blue>/* Structure associating a name to a server_rec */</font>
 typedef struct namebind_t {
   server_rec *server;
   const char *name;

@@ -22,10 +22,19 @@
 
 <p>
 <b>Authentication Handlers</b><br>
-Authentication handlers allow a module to implement (or overload)
-the authentication layer, for providing account information (password,
-ID, home directory, and shell) and UID/GID-to-name and name-to-UID/GID mappings.
-In order for a module to provide this functionality, it must export an
+Strictly speaking, the authentication handlers are used for both
+<i>authentication</i> (that is, verifying that a user is who she claims to be)
+and <i>authorization</i> (determining what a user can and cannot do).  A
+password is often used for authentication; a user's UID and GID provide
+&quot;privileges&quot; that are used for authorization.  This combination
+of functionality separates proftpd auth modules from PAM modules; PAM
+modules are used for authentication only.
+
+<p>
+Authentication handlers allow a module to provide account information (password,
+IDs, home directory, and shell) and UID/GID-to-name and name-to-UID/GID
+mappings (used for directory listings).  In order for a module to provide this
+functionality, it must export an
 <code><a href="../api/typedefs.html#authtable">authtable</a></code>
 (via the module structure), and define <i>all</i> of the
 following handler <i>names</i>.  Even if the module is not going to do

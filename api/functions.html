@@ -3358,6 +3358,11 @@ may not work if permissions cause problems somewhere up the tree.<br>
 <pre>
   void end_login(int <i>exitcode</i>)
 </pre>
+<font color=blue>Comments</font>: Function used for terminating a session.
+The child process servicing the current session exits with the given
+<i>exitcode</i>. <a href="#end_login_noexit"><code>end_login_noexit()</code></a>
+is invoked before <code>_exit()</code> is used to terminate the process.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/main.c.html#end_login">src/main.c</a><br>
 
@@ -3368,6 +3373,10 @@ may not work if permissions cause problems somewhere up the tree.<br>
 <pre>
   void end_login_noexit()
 </pre>
+<font color=blue>Comments</font>: As part of a session termination, this
+function is called.  All registered exit handlers are run, and all necessary
+log files are closed.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/main.c.html#end_login_noexit">src/main.c</a><br>
 

@@ -69,14 +69,14 @@ queue an infinite number of signals.
 <p>
 <b>Signal Blocking and Masking</b><br>
 The following functions operate on the signals <code>TERM, CHLD, USR1, INT,
-QUIT, ALRM, IO, BUG</code> and <code>HUP</code>:
+QUIT, ALRM, IO, BUS</code> and <code>HUP</code>:
 <ul>
   <li><a href="../src/src/support.c.html#pr_signals_block"><code>pr_signals_block()</code></a>
   <li><a href="../src/src/support.c.html#pr_signals_unblock"><code>pr_signals_unblock()</code></a>
 </ul>
 
 <p>
-For blocking simply <code>SIGALRM</code>, use these two functions:
+For blocking only <code>SIGALRM</code>, use these two functions:
 <ul>
   <li><a href="../src/src/timers.c.html#pr_alarms_block"><code>pr_alarms_block()</code></a>
   <li><a href="../src/src/timers.c.html#pr_alarms_unblock"><code>pr_alarms_unblock()</code></a>
@@ -90,63 +90,75 @@ The <code>SIGKILL</code> signal cannot be caught or ignored.
 The core code implements handlers for the following signals:
 <ul>
   <li><code>SIGABRT</code><br>
-    Causes the daemon to abort
-
-  <p>
-  <li><code>SIGUSR1</code><br>
-    Disconnects all sessions
-
-  <p>
-  <li><code>SIGUSR2</code><br>
-    Prints memory pool debugging information to <code>stderr</code>
+    Causes the daemon to abort.<br>
+    Handled by daemon process; session processes retain default handling.
 
   <p>
   <li><code>SIGCHLD</code><br>
-    Process an ended session
+    Cleanup an ended session.<br>
+    Handled by daemon process; session processes retain default handling.
+
+  <p>
+  <li><code>SIGUSR1</code><br>
+    Disconnects all sessions.<br>
+    Handled by session processes; daemon retains default handling.
+
+  <p>
+  <li><code>SIGUSR2</code><br>
+    Prints memory pool debugging information to <code>stderr</code>.<br>
+    Handled by daemon process; ignored by session processes.
 
   <p>
   <li><code>SIGHUP</code><br>
-    Rehash the configuration file; does not disconnect current sessions
+    Rehash the configuration file; does not disconnect current sessions.<br>
+    Handled by daemon process; ignored by session processes.
 
   <p>
   <li><code>SIGTERM</code><br>
-    Perform a normal shutdown of the daemon
+    Perform a normal shutdown of the daemon.<br>
+    Handled by daemon process; session processes retain default handling.
 
   <p>
   <li><code>SIGXCPU</code><br>
-    <code>RLimitCPU</code> reached; handled by <code>SIGTERM</code> handler
+    <code>RLimitCPU</code> reached; handled by <code>SIGTERM</code> handler.
 
   <p>
   <li><code>SIGINT</code><br>
-    Handled by <code>SIGTERM</code> handler
+    Handled by <code>SIGTERM</code> handler in both daemon and session
+    processes.
 
   <p>
   <li><code>SIGILL</code><br>
-    Handled by <code>SIGTERM</code> handler
+    Handled by <code>SIGTERM</code> handler in both daemon and session
+    processes.
 
   <p>
   <li><code>SIGFPE</code><br>
-    Handled by <code>SIGTERM</code> handler
+    Handled by <code>SIGTERM</code> handler in both daemon and session
+    processes.
 
   <p>
   <li><code>SIGSEGV</code><br>
-    Handled by <code>SIGTERM</code> handler
+    Handled by <code>SIGTERM</code> handler in both daemon and session
+    processes.
 
   <p>
   <li><code>SIGURG</code><br>
-     Ignored
+     Ignored in both daemon and session processes.
 
   <p>
   <li><code>SIGSTKFLT</code><br>
-    Handled by the <code>SIGTERM</code> handler if defined
+    If defined, this signal is handled by the <code>SIGTERM</code> handler in
+    both daemon and session processes.
 
   <p>
   <li><code>SIGBUS</code><br>
-    Handled the <code>SIGTERM</code> handler if defined
+    If defined, this signal is handled by the <code>SIGTERM</code> handler in 
+    both daemon and session processes.
 
   <p>
   <li><code>SIGIO</code><br>
-    Ignored
+    Ignored in both daemon and session processes.
 </ul>
 
 <hr>

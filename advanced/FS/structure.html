@@ -67,7 +67,7 @@ struct pr_fs_rec_t {
   int (*link)(fs_rec *, const char *, const char *);
   int (*symlink)(fs_rec *, const char *, const char *);
   int (*readlink)(fs_rec *, const char *, char *, size_t);
-  int (*truncate)(fs_rec *, off_t);
+  int (*truncate)(fs_rec *, const char *, off_t);
   int (*chmod)(fs_rec *, const char *, mode_t);
   int (*chown)(fs_rec *, const char *, uid_t, gid_t);
 

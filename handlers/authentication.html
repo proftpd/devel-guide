@@ -306,7 +306,7 @@ a given username is the module that responds with the requested information
 first.  Having an <code>*Authoritative</code> module, which would return
 <code>ERROR</code> instead of <code>DECLINED</code> from its authentication
 handlers, breaks this layering model.  The <code>AuthOrder</code> directive
-(currently available as a patch) lets one explicitly set the order in which
+(available starting in 1.2.8rc1) lets one explicitly set the order in which
 authentication modules are searched and was written specifically to address
 this issue.
 

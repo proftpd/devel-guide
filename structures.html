@@ -1,0 +1,73 @@
+<!-- $Id$ -->
+<!-- $Source$ -->
+
+<html>
+<head>
+<title>ProFTPD Developer's Guide: Structures</title>
+</head>
+
+<body bgcolor=white>
+
+<hr><br>
+<center>
+<img src="images/proftpd.png">
+<br><br>
+<h3><b>ProFTPD Developer's Guide: Structures</b></h3>
+<i><b>ProFTPD Version 1.2.0</b></i><br>
+</center>
+<hr><br>
+
+<p>
+<center><a href="toc.html">Table of Contents</a></center><br>
+
+<p>
+<b>Module Structures</b><br>
+The structures discussed here provide the fundamental building and operating
+units for ProFTPD modules.
+
+<p>
+<b>MODRET</b><br>
+The <code>MODRET</code> is a <code>#define</code> alias for a
+<a href="api/structs.html#module_struc"><code>module_struc</code></a>,
+and is the main message unit that is returned by most module handlers
+(authentication handlers are a little different).
+
+<p>
+<b>config_rec</b><br>
+A <code>typedef</code> of
+<a href="api/structs.html#config_struc"><code>config_struc</code></a>,
+this structure is the storage unit used to maintain the configured options
+and states of the ProFTPD engine.
+
+<p>
+<b>cmd_rec</b><br>
+This data type is a <code>typedef<code> of
+<a href="api/typedefs.html#cmd_rec"><code>cmd_rec</code></a>, and is the
+data &quot;message&quot; passed to configuration directive and to FTP
+command handlers.
+
+<p>
+<b>server_rec</b><br>
+This <a href="api/typedefs.html#server_rec"><code>structure</code></a> holds
+most of the main configuration data for a ProFTPD <i>server</i>, be it the
+&quot;main&quot; server or a <code>&lt;VirtualHost&gt;</code>.
+
+<p>
+<center><a href="toc.html">Table of Contents</a></center><br>
+
+<hr><br>
+
+Author: <i>$Author$</i><br>
+Last Updated: <i>$Date$</i><br>
+
+<br><hr>
+
+<font size=2><b><i>
+&copy; Copyright 2000 TJ Saunders<br>
+ All Rights Reserved<br>
+</i></b></font>
+
+<hr><br>
+
+</body>
+</html>

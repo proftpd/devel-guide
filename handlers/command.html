@@ -75,17 +75,19 @@ as needed.
 <a name="PreCommandHandler"></a>
 <b>Pre-Command Handlers</b><br>
 As a general rule of thumb,
-<code><a href="../api/macros.html#PRE_CMD">PRE_CMD</a></code>-type command
+<a href="../api/macros.html#PRE_CMD"><code>PRE_CMD</code></a>-type command
 handlers should check command syntax and basic applicability of the command,
 check access restrictions, ensure the necessary resources are available,
 <i>etc etc</i>.  When one of these handlers returns
-<code><a href="../api/macros.html#DECLINED">DECLINED</a></code>, the next
+<a href="../api/macros.html#DECLINED"><code>DECLINED</code></a., the next
 <code>PRE_CMD</code>-type command handler will be called.  However, if it
-returns <code><a href="../api/macros.html#ERROR">ERROR</a></code>, the
+returns <a href="../api/macros.html#ERROR"><code>ERROR</code></a>, the
 dispatching to all command handlers will stop completely, with the exception
-of <code><a href="../api/macros.html#LOG_CMD_ERR">LOG_CMD_ERR</a></code>-type
+of <a href="../api/macros.html#LOG_CMD_ERR"><code>LOG_CMD_ERR</code></a>-type
 command handlers, which will be called in the event of an
-<code>ERROR</code>.
+<code>ERROR</code>.  These handlers should <i>never</i> return
+<a href="../api/macros.html#HANDLED"><code>HANDLED</code></a> themselves;
+this will break assumptions made by the command dispatch system.
 
 <p>
 Below is an example of a
@@ -117,11 +119,11 @@ MODRET pre_cmd(cmd_rec *cmd) {
 <p>
 <a name="CommandHandler"></a>
 <b>Command Handlers</b><br>
-<code><a href="../api/macros.html#CMD">CMD</a></code>-type command handlers
+<a href="../api/macros.html#CMD"><code>CMD</code></a>-type command handlers
 should do the actual <b><i>work</i></b>.  Much like
-<code><a href="../api/macros.html#PRE_CMD">PRE_CMD</a></code>-type command
+<a href="../api/macros.html#PRE_CMD"><code>PRE_CMD</code></a>-type command
 handlers, if
-<code><a href="../api/macros.html#DECLINED">DECLINED</a></code> is returned
+<a href="../api/macros.html#DECLINED"><code>DECLINED</code></a> is returned
 by a
 <code>CMD</code>-type command handler, then the next registered
 <code>CMD</code>-type command handler will be called with the same
@@ -129,7 +131,7 @@ by a
 <code>PRE_CMD</code>-type command handlers, if an <code>ERROR</code> is
 returned by a handler, the dispatching to other command handlers will halt;
 only the
-<code><a href="../api/macros.html#LOG_CMD_ERR">LOG_CMD_ERR</a></code>-type
+<a href="../api/macros.html#LOG_CMD_ERR"><code>LOG_CMD_ERR</code></a>-type
 command handlers will be called.
 
 <p>
@@ -142,6 +144,8 @@ then the registered <code>POST_CMD</code> handlers will be called.  If these
 handlers return <code>ERROR</code>, their message, if any, will be sent to
 <code>syslog</code>; not much else can be done, for the real work of the
 command has already been accomplished by the <code>CMD</code> handlers.
+As with <code>PRE_CMD</code> handlers, these should <i>never</i> return
+<code>HANDLED</code>.
 
 <p>
 <b>Example <code>POST_CMD</code> Handlers</b><br>

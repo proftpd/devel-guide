@@ -21,6 +21,8 @@
 <center><a href="../toc.html">Table of Contents</a></center><br>
 
     <li>style notes: respecting other modules, log_pri() at various debug levels
+    <li>use command dispatch system, not change core code
+    <li>code submission: documentation, diffs
     <li>OS dependencies and idiosyncrasies, #defines
     <li>Command handlers that handle every command except some...
     <li>proper log_{pri,auth,debug}() calls -- at least _three_ parameters
@@ -118,8 +120,8 @@ Module are prioritized in the <i>inverse</i> order of which they were loaded.
 In other words, the last loaded module is the <i>first</i> to receive calls
 for a particular configuration directive, FTP command or authentication request.
 This can be used to allow later loaded modules (higher priority) to
-(optionally) "override" lower priority modules.  Thus, load order of the
-modules can be <i>very</i> important.
+(optionally) &quot;override&quot; lower priority modules.  Thus, load order of
+the modules can be <i>very</i> important.
 
 <p>
 <center><a href="../toc.html">Table of Contents</a></center><br>

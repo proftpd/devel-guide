@@ -1065,6 +1065,16 @@ broken up, rearranged!</i><br>
   <a href="../src/modules/mod_xfer.c.html#_stor_abort">modules/mod_xfer.c</a><br>
 
 <hr>
+<a name="_stor_chown"><b>_stor_chown</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static void _stor_chown()
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_xfer.c.html#_stor_chown">modules/mod_xfer.c</a><br>
+
+<hr>
 <a name="_stor_done"><b>_stor_done</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -2001,6 +2011,23 @@ custom implementation of the <code>getpwent(3)</code> libc function.<br>
 <br>
 The purpose of the dispatched-to authentication handler is to provide a
 custom implementation of the <code>getpwnam(3)</code> libc function.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/auth.c.html#auth_getpwnam">src/auth.c</a><br>
+
+<hr>
+<a name="auth_getgroups"><b>auth_getgroups</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  struct passwd *auth_getgroups(pool *<i>p</i>, const char *<i>name</i>, array_header **<i>group_ids</i>,
+    array_header **<i>group_names</i>)
+</pre>
+<font color=blue>Comments</font>: Dispatcher for the
+<code>getgroups()</code> authentication handler.<br>
+<br>
+The purpose of the dispatched-to authentication handler is to provide a
+custom implementation of the <code>getgroups(2)</code> system call.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/auth.c.html#auth_getpwnam">src/auth.c</a><br>
@@ -4297,6 +4324,16 @@ file.<br>
   <a href="../src/src/dirtree.c.html#get_config_cmd">src/dirtree.c</a><br>
 
 <hr>
+<a name="get_context_name"><b>get_section_name</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  char *get_context_name(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/dirtree.c.html#get_context_name">src/dirtree.c</a><br>
+
+<hr>
 <a name="get_extendedlogs"><b>get_extendedlogs</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -4325,16 +4362,6 @@ file.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#get_full_cmd">src/dirtree.c</a><br>
-
-<hr>
-<a name="get_groups"><b>get_groups</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int *get_groups(pool *<i>p</i>, const char *<i>name</i>, array_header **<i>group_ids</i>, array_header **<i>group_names</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/auth.c.html#get_groups">src/auth.c</a><br>
 
 <hr>
 <a name="get_ident"><b>get_ident</b><br>
@@ -4462,16 +4489,6 @@ function was not preceded by a call to <code>get_param_ptr()</code>.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#get_param_ptr_next">src/dirtree.c</a><br>
-
-<hr>
-<a name="get_section_name"><b>get_section_name</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  char *get_section_name(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/dirtree.c.html#get_section_name">src/dirtree.c</a><br>
 
 <hr>
 <a name="get_token"><b>get_token</b><br>
@@ -5364,6 +5381,16 @@ otherwise.<br>
   <a href="../src/src/dirtree.c.html#kludge_enable_umask">src/dirtree.c</a><br>
 
 <hr>
+<a name="list_cleanup"><b>list_cleanup</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET list_cleanup(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_ls.c.html#list_cleanup">modules/mod_ls.c</a><br>
+
+<hr>
 <a name="list_modules"><b>list_modules</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -5821,6 +5848,16 @@ return value from the entire function; if <code><i>and</i> == 0</code>, an
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#login_check_limits">src/dirtree.c</a><br>
+
+<hr>
+<a name="ls_chk_glob"><b>ls_chk_glob</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET ls_chk_glob(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_ls.c.html#ls_chk_glob">modules/mod_ls.c</a><br>
 
 <hr>
 <a name="ls_done"><b>ls_done</b><br>
@@ -6626,6 +6663,16 @@ elements are pushed onto them.  Pushed elements appear at the <i>end</i> of the
   <a href="../src/modules/mod_unixpw.c.html#pw_getgrnam">modules/mod_unixpw.c</a><br>
 
 <hr>
+<a name="pw_getgroups"><b>pw_getgroups</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET pw_getgroups(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_unixpw.c.html#pw_getgroups">modules/mod_unixpw.c</a><br>
+
+<hr>
 <a name="pw_getpwent"><b>pw_getpwent</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -6776,6 +6823,16 @@ given <i>data</i> pointer.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#remove_config">src/dirtree.c</a><br>
+
+<hr>
+<a name="remove_exit_handlers"><b>remove_exit_handlers</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void remove_exit_handlers()
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/support.c.html#remove_exit_handlers">src/support.c</a><br>
 
 <hr>
 <a name="remove_timer"><b>remove_timer</b><br>
@@ -8190,6 +8247,19 @@ Boolean fields.<br>
   <a href="../src/modules/mod_core.c.html#set_useftpusers">modules/mod_core.c</a><br>
 
 <hr>
+<a name="set_useglobbing"><b>set_useglobbing</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET set_useglobbing(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>UseGlobbing</code> directive.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_ls.c.html#set_useglobbing">modules/mod_ls.c</a><br>
+
+<hr>
 <a name="set_user"><b>set_user</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -8917,6 +8987,16 @@ or one or more of the arguments are invalid.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/pool.c.html#xcalloc">src/pool.c</a><br>
+
+<hr>
+<a name="xfer_cleanup"><b>xfer_cleanup</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET xfer_cleanup(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_xfer.c.html#xfer_cleanup">modules/mod_xfer.c</a><br>
 
 <hr>
 <a name="xfer_init_child"><b>xfer_init_child</b><br>

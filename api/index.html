@@ -902,6 +902,7 @@ start_daemon
   <li><a href="functions.html#_setup_environment">_setup_environment</a>
   <li><a href="functions.html#_sleep_callback">_sleep_callback</a>
   <li><a href="functions.html#_stor_abort">_stor_abort</a>
+  <li><a href="functions.html#_stor_chown">_stor_chown</a>
   <li><a href="functions.html#_stor_done">_stor_done</a>
   <li><a href="functions.html#_strmatch">_strmatch</a>
   <li><a href="functions.html#_symlink">_symlink</a>
@@ -970,6 +971,7 @@ start_daemon
   <li><a href="functions.html#auth_getgrent">auth_getgrent</a>
   <li><a href="functions.html#auth_getgrgid">auth_getgrgid</a>
   <li><a href="functions.html#auth_getgrnam">auth_getgrnam</a>
+  <li><a href="functions.html#auth_getgroups">auth_getgroups</a>
   <li><a href="functions.html#auth_getpwent">auth_getpwent</a>
   <li><a href="functions.html#auth_getpwnam">auth_getpwnam</a>
   <li><a href="functions.html#auth_getpwuid">auth_getpwuid</a>
@@ -1163,10 +1165,10 @@ start_daemon
   <li><a href="functions.html#get_class">get_class</a>
   <li><a href="functions.html#get_command_class">get_command_class</a>
   <li><a href="functions.html#get_config_cmd">get_config_cmd</a>
+  <li><a href="functions.html#get_context_name">get_section_name</a>
   <li><a href="functions.html#get_extendedlogs">get_extendedlogs</a>
   <li><a href="functions.html#get_fs_size">get_fs_size</a>
   <li><a href="functions.html#get_full_cmd">get_full_cmd</a>
-  <li><a href="functions.html#get_groups">get_groups</a>
   <li><a href="functions.html#get_ident">get_ident</a>
   <li><a href="functions.html#get_name_max">get_name_max</a>
   <li><a href="functions.html#get_next_meta">get_next_meta</a>
@@ -1175,7 +1177,6 @@ start_daemon
   <li><a href="functions.html#get_param_int_next">get_param_int_next</a>
   <li><a href="functions.html#get_param_ptr">get_param_ptr</a>
   <li><a href="functions.html#get_param_ptr_next">get_param_ptr_next</a>
-  <li><a href="functions.html#get_section_name">get_section_name</a>
   <li><a href="functions.html#get_token">get_token</a>
   <li><a href="functions.html#get_word">get_word</a>
   <li><a href="functions.html#group_expression">group_expression</a>
@@ -1244,6 +1245,7 @@ start_daemon
   <li><a href="functions.html#kill_cleanups_for_fd">kill_cleanups_for_fd</a>
   <li><a href="functions.html#kludge_disable_umask">kludge_disable_umask</a>
   <li><a href="functions.html#kludge_enable_umask">kludge_enable_umask</a>
+  <li><a href="functions.html#list_cleanup">list_cleanup</a>
   <li><a href="functions.html#list_modules">list_modules</a>
   <li><a href="functions.html#listdir">listdir</a>
   <li><a href="functions.html#listen_binding">listen_binding</a>
@@ -1283,6 +1285,7 @@ start_daemon
   <li><a href="functions.html#log_xfer">log_xfer</a>
   <li><a href="functions.html#logformat">logformat</a>
   <li><a href="functions.html#login_check_limits">login_check_limits</a>
+  <li><a href="functions.html#ls_chk_glob">ls_chk_glob</a>
   <li><a href="functions.html#ls_done">ls_done</a>
   <li><a href="functions.html#ls_perms">ls_perms</a>
   <li><a href="functions.html#ls_perms_full">ls_perms_full</a>
@@ -1358,6 +1361,7 @@ start_daemon
   <li><a href="functions.html#pw_getgrent">pw_getgrent</a>
   <li><a href="functions.html#pw_getgrgid">pw_getgrgid</a>
   <li><a href="functions.html#pw_getgrnam">pw_getgrnam</a>
+  <li><a href="functions.html#pw_getgroups">pw_getgroups</a>
   <li><a href="functions.html#pw_getpwent">pw_getpwent</a>
   <li><a href="functions.html#pw_getpwnam">pw_getpwnam</a>
   <li><a href="functions.html#pw_getpwuid">pw_getpwuid</a>
@@ -1372,6 +1376,7 @@ start_daemon
   <li><a href="functions.html#register_cleanup">register_cleanup</a>
   <li><a href="functions.html#register_rehash">register_rehash</a>
   <li><a href="functions.html#remove_config">remove_config</a>
+  <li><a href="functions.html#remove_exit_handlers">remove_exit_handlers</a>
   <li><a href="functions.html#remove_timer">remove_timer</a>
   <li><a href="functions.html#reset_timer">reset_timer</a>
   <li><a href="functions.html#resolve_anonymous_dirs">resolve_anonymous_dirs</a>
@@ -1483,6 +1488,7 @@ start_daemon
   <li><a href="functions.html#set_timesgmt">set_timesgmt</a>
   <li><a href="functions.html#set_umask">set_umask</a>
   <li><a href="functions.html#set_useftpusers">set_useftpusers</a>
+  <li><a href="functions.html#set_useglobbing">set_useglobbing</a>
   <li><a href="functions.html#set_user">set_user</a>
   <li><a href="functions.html#set_usereversedns">set_usereversedns</a>
   <li><a href="functions.html#set_wtmplog">set_wtmplog</a>
@@ -1544,6 +1550,7 @@ start_daemon
   <li><a href="functions.html#xaset_subtract">xaset_subtract</a>
   <li><a href="functions.html#xaset_union">xaset_union</a>
   <li><a href="functions.html#xcalloc">xcalloc</a>
+  <li><a href="functions.html#xfer_cleanup">xfer_cleanup</a>
   <li><a href="functions.html#xfer_init_child">xfer_init_child</a>
   <li><a href="functions.html#xmalloc">xmalloc</a>
   <li><a href="functions.html#xrealloc">xrealloc</a>

@@ -10,7 +10,7 @@
 
 <hr><br>
 <center>
-<img src="images/proftpd.png">
+<img src="../images/proftpd.png">
 <br><br>
 <h3><b>ProFTPD Developer's Guide: Authentication Tables</b></h3>
 <i><b>ProFTPD Version 1.2.0</b></i><br>
@@ -31,8 +31,14 @@ declares
   <li>authentication type identifier -- only <code>0</code> defined at present
   <li>authentication function name
   <li>authentication handler function pointer, which <b>must</b> have the
-      prototype <code></code>.
+      prototype <code>MODRET func(cmd_rec *)</code>.
 </ul>
+
+<p>
+Each hander accepts data in from the <code>cmd_rec</code> structure, and should
+return its results via the <code>MODRET->data</code> member.  The core
+function <code>mod_create_data()</code> can create this data structure
+properly for returning to the caller.
 
 <p>
 <b>Example</b><br>

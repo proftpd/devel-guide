@@ -34,8 +34,8 @@ session properly, an auth module other than <code>mod_auth_pam</code> is
 needed. 
 
 <p>
-The PAM check only happens during the dispatching of the <code>auth_authenticate()</code> request; <code>mod_pam</code> registers only one authentication handler
-for this.  The following pseudocode from <code>mod_auth</code>'s
+The PAM check only happens during the dispatching of the <code>auth_authenticate()</code> request; <code>mod_auth_pam</code> registers only one authentication
+handler for this.  The following pseudocode from <code>mod_auth</code>'s
 <a href="../src/modules/mod_auth.c.html#_do_auth"><code>_do_auth()</code></a>
 function shows the sequence of events:
 <pre>

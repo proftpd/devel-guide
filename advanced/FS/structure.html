@@ -48,7 +48,7 @@ struct pr_fs_rec_t {
   char *path;
 
   <font color=green>/* slot for module-specific data */</font>
-  void *private;
+  void *data;
 
   <font color=green>/* pool for this object's use */</font>
   pool *pool;
@@ -87,14 +87,14 @@ struct pr_fs_rec_t {
 
 <p>
 The most noteworthy points of this structure are the <code>next</code>,
-<code>prev</code> pointers (currently unused), and the <code>private</code>
+<code>prev</code> pointers (currently unused), and the <code>data</code>
 field.  The pointers are there for when layered FS modules - multiple modules
 that are register an interest in handling identical paths - are supported; at
 that point, the <code>fs_rec</code>s for that path will be maintained in a
 linked-list, which could then be walked for any FS operation.
 
 <p>
-The <code>private</code> is where FS modules can store and pass around
+The <code>data</code> is where FS modules can store and pass around
 data specific to that module, <i>e.g.</i> database handles, connection
 information, ACLs, ciphers, etc etc.
 

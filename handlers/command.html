@@ -13,7 +13,7 @@
 <img src="../images/proftpd.png">
 <br><br>
 <h3><b>ProFTPD Developer's Guide: Command Handlers</b></h3>
-<i><b>ProFTPD Version 1.2.0</b></i><br>
+<i><b>ProFTPD Version 1.2</b></i><br>
 </center>
 <hr><br>
 
@@ -58,31 +58,41 @@ command from a client, it enters a cascading command delivery process:
 </ol>
 
 <p>
-The return value of f a particular command can allow or disallow further
+The return value of a particular command can allow or disallow further
 dispatching.  This allows a higher priority module to <i>overload</i> a
-PRE_CMD handler for a particular command, and allow or deny the command
+command handler for a particular command, and allow or deny the command
 as needed.
 
 <p>
 <a name="PreCommandHandler"></a>
 <b>Pre-Command Handlers</b><br>
-As a general rule of thumb, <code>PRE_CMD</code> type handlers should check
-syntax/basic applicability of the command, check access restrictions, ensure
-the necessary resources are available, <i>etc etc</i>.  When one of these
-handlers returns <code>DECLINED</code>, the next <code>PRE_CMD</code> handler
-will be called.  However, if it returns <code>ERROR</code>, the dispatching
-to all command handlers (except for <code>LOG_CMD_ERR</code> handlers, which
-will be called in the event of an <code>ERROR</code>) will stop completely.
+As a general rule of thumb,
+<code><a href="../api/macros.html#PRE_CMD">PRE_CMD</a></code>-type command
+handlers should check command syntax and basic applicability of the command,
+check access restrictions, ensure the necessary resources are available,
+<i>etc etc</i>.  When one of these handlers returns
+<code><a href="../api/macros.html#DECLINED">DECLINED</a></code>, the next
+<code>PRE_CMD</code>-type command handler will be called.  However, if it
+returns <code><a href="../api/macros.html#ERROR">ERROR</a></code>, the
+dispatching to all command handlers will stop completely, with the exception
+of <code><a href="../api/macros.html#LOG_CMD_ERR">LOG_CMD_ERR</a></code>-type
+command handlers, which will be called in the event of an
+<code>ERROR</code>.
 
 <p>
-Below is an example of a <code>PRE_CMD</code> handler, which simply logs all
-received commands via <code>log_debug()</code>.  We are careful to return
-<code>DECLINED</code>, otherwise other <code>PRE_CMD</code> handlers would not
-get the request.  Note that in order for this to work properly, this module
-would need to be loaded <i>last</i>, or after any other modules which do not
-return <code>DECLINED</code> for all their <code>PRE_CMD</code>s.  In practice,
-you should always return <code>DECLINED</code> unless you plan on having your
-module actually handle the command, or deny it.
+Below is an example of a
+<code><a href="../api/macros.html#PRE_CMD">PRE_CMD</a></code>-type command
+handler, which simply logs all received commands via
+<code><a href="../api/functions.html#log_debug">log_debug()</a></code>.
+It is careful to return
+<code><a href="../api/macros.html#DECLINED">DECLINED</a></code>, otherwise
+other
+<code>PRE_CMD</code>-type command handlers would not get the request.  Note
+that in order for this to work properly, this module would need to be loaded
+<i>last</i>, or after any other modules which do not return
+<code>DECLINED</code> for all their <code>PRE_CMD</code>-type command
+handlers.  In practice, you should always return <code>DECLINED</code> unless
+you plan on having your module actually handle the command, or deny it.
 
 <p>
 <b>Example <code>PRE_CMD</code> Handler</b><br>
@@ -99,24 +109,31 @@ MODRET pre_cmd(cmd_rec *cmd) {
 <p>
 <a name="CommandHandler"></a>
 <b>Command Handlers</b><br>
-<code>CMD</code> type handlers should actually do the actual <i>work</i>.
-Much like <code>PRE_CMD</code> handlers, if <code>DECLINED</code> is returned
-by a <code>CMD</code> handler, then the next registered <code>CMD</code>
-handler will be called with the same <code>cmd_rec</code> pointer.  And,
-like <code>PRE_CMD</code> handlers, if an <code>ERROR</code> is returned
-by a handler, the dispatching to other command handlers will halt; only the
-<code>LOG_CMD_ERR</code> handlers will be called.
+<code><a href="../api/macros.html#CMD">CMD</a></code>-type command handlers
+should do the actual <b><i>work</i></b>.  Much like
+<code><a href="../api/macros.html#PRE_CMD">PRE_CMD</a></code>-type command
+handlers, if
+<code><a href="../api/macros.html#DECLINED">DECLINED</a></code> is returned
+by a
+<code>CMD</code>-type command handler, then the next registered
+<code>CMD</code>-type command handler will be called with the same
+<code>cmd_rec</code> pointer.  And, like
+<code>PRE_CMD</code>-type command handlers, if an <code>ERROR</code> is
+returned by a handler, the dispatching to other command handlers will halt;
+only the
+<code><a href="../api/macros.html#LOG_CMD_ERR">LOG_CMD_ERR</a></code>-type
+command handlers will be called.
 
 <p>
 <a name="PostCommandHandler"></a>
 <b>Post-Command Handlers</b><br>
-<code>POST_CMD</code> type handlers generally handle any kind of cleanup.
-Should a command pass through the relevant <code>PRE_CMD</code> and 
-<code>CMD</code> handlers without error, then the registered
-<code>POST_CMD</code> handlers will be called.  If these handlers return
-<code>ERROR</code>, their message, if any, will be sent to <code>syslog</code>;
-not much else can be done, for the real work of the command has already been
-accomplished by the <code>CMD</code> handlers.
+<code>POST_CMD</code>-type command handlers generally handle any kind of
+cleanup.  Should a command pass through the relevant
+<code>PRE_CMD</code> and <code>CMD</code> command handlers without error,
+then the registered <code>POST_CMD</code> handlers will be called.  If these
+handlers return <code>ERROR</code>, their message, if any, will be sent to
+<code>syslog</code>; not much else can be done, for the real work of the
+command has already been accomplished by the <code>CMD</code> handlers.
 
 <p>
 <b>Example <code>POST_CMD</code> Handlers</b><br>

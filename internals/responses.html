@@ -13,7 +13,7 @@
 <img src="../images/proftpd.png">
 <br><br>
 <h3><b>ProFTPD Developer's Guide: Internals - Response Handlers</b></h3>
-<i><b>ProFTPD Version 1.2.0</b></i><br>
+<i><b>ProFTPD Version 1.2</b></i><br>
 </center>
 <hr><br>
 
@@ -73,17 +73,17 @@ For example, if the following
 <a href="../api/functions.html#add_response"><code>add_response()</code></a>
 calls were made from different modules:<br>
 <br>
-<b>Module A</b>:<br>
+<b>module A</b>:<br>
 <code>add_response(R_200, "Command successfully completed");</code><br>
 
 <br>
-<b>Module B</b>:<br>
+<b>module B</b>:<br>
 <code>
 add_response(R_DUP, "Statistics for command '%s': none", cmd->argv[0]);
 </code><br>
 
 <br>
-<b>Module C</b>:<br>
+<b>module C</b>:<br>
 <code>add_response(R_DUP, "XFOO post_cmd handler ran");</code><br>
 
 <p>

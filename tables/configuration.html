@@ -13,7 +13,7 @@
 <img src="../images/proftpd.png">
 <br><br>
 <h3><b>ProFTPD Developer's Guide: Configuration Tables</b></h3>
-<i><b>ProFTPD Version 1.2.0</b></i><br>
+<i><b>ProFTPD Version 1.2</b></i><br>
 </center>
 <hr><br>
 
@@ -22,19 +22,23 @@
 
 <p>
 <b>Configuration Tables</b><br>
-The <a href="../src/include/modules.h.html#conftable"><code>conftable</code></a>
+The <code><a href="../src/include/modules.h.html#conftable">conftable</a></code>
 declares configuration directives which this module is interested in handling,
-and the handlers for those directives.  The handlers will be invoked when
-ProFTPD parses configuration files either during start-up, or when it
-encounters <code>.ftpaccess</code> files.
+and the handler function names for those directives.  The handlers will be
+invoked when the server parses configuration files either during start-up, 
+after it receives a <code>SIGHUP</code>, or when it encounters
+<code>.ftpaccess</code> files.
 
 <p>
 <b>Definition</b><br>
-The structure for a configuration table is very simple:
+The structure for a configuration table entry is very simple:
 <ul>
   <li>configuration directive name
   <li>configuration directive handler function pointer.  This function
-      <b>must</b> have the prototype <code>MODRET func(cmd_rec *cmd)</code>.
+      <b>must</b> have the prototype:
+<pre>
+    MODRET func(cmd_rec *)
+</pre>
 </ul>
 
 <p>

@@ -13,7 +13,7 @@
 <img src="../images/proftpd.png">
 <br><br>
 <h3><b>ProFTPD Developer's Guide: Authentication Tables</b></h3>
-<i><b>ProFTPD Version 1.2.0</b></i><br>
+<i><b>ProFTPD Version 1.2</b></i><br>
 </center>
 <hr><br>
 
@@ -31,7 +31,10 @@ declares
   <li>authentication type identifier -- only <code>0</code> defined at present
   <li>authentication function name
   <li>authentication handler function pointer, which <b>must</b> have the
-      prototype <code>MODRET func(cmd_rec *)</code>.
+      prototype:
+<pre>
+    MODRET func(cmd_rec *)
+</pre>
 </ul>
 
 <p>
@@ -42,7 +45,8 @@ properly for returning to the caller.
 
 <p>
 <b>Example</b><br>
-This example authentication table is taken directly from modules/mod_unixpw.c:
+This example authentication table is taken directly from
+<a href="../src/modules/mod_unixpw.c.html">mod_unixpw.c</a>:
 <pre>
 static authtable unixpw_auth[] = {
   { 0, "setpwent", pw_setpwent },
@@ -66,7 +70,8 @@ static authtable unixpw_auth[] = {
 </pre>
 
 <p>
-The trailing <code>{ 0, NULL }</code> marks the end of the authentication table.
+The trailing <code>{ 0, NULL }</code> marks the end of the authentication table,
+and should always be used.
 
 <p>
 <center><a href="../toc.html">Table of Contents</a></center><br>

@@ -1340,8 +1340,13 @@ the parsing of configuration files.<br>
 </pre>
 <font color=blue>Comments</font>:  Adds a <code>config_rec</code> to the
 server's set with name <i>name</i>.  The added <code>config_rec</code> will
-have <i>num</i> arguments, <code>void *</code> pointers to data.  The given
-number of pointers <i>num</i> must follow.<br>
+have <i>num</i> arguments, each of which must a <code>void *</code> pointers to
+data.  The given number of pointers <i>num</i> must follow.  If planning to
+set those additional arguments manually, after this call, at least use
+<code>NULL</code> as a placeholder in the argument list.  This function, being
+a varargs function, will happily copy garbage from the stack into the created
+<code>config_rec</code> if an insufficient number of pointers follow the
+<i>num</i> argument.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#add_config_param">src/dirtree.c</a><br>
@@ -4411,6 +4416,14 @@ parameters are not allowed to contain negative integers.<br>
 <pre>
   long get_param_int_next(const char *<i>name</i>, int <i>recurse</i>)
 </pre>
+<font color=blue>Comments</font>:  Similar to
+<a href="#get_param_int"><code>get_param_int()</code></a>, this function will
+retrieve the next matching parameter after a call to
+<code>get_param_int()</code>.<br>
+<br>
+Returns <code>-1</code> if the parameter <i>name</i> is not found, or if this
+function was not preceded by a call to <code>get_param_int()</code>.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#get_param_int_next">src/dirtree.c</a><br>
 
@@ -4439,6 +4452,14 @@ Returns <code>NULL</code> if the parameter <i>name</i> is not found.<br>
 <pre>
   void *get_param_ptr_next(const char *<i>name</i>, int <i>recurse</i>)
 </pre>
+<font color=blue>Comments</font>:  Similar to
+<a href="#get_param_ptr"><code>get_param_ptr()</code></a>, this function will
+retrieve the next matching parameter after a call to
+<code>get_param_ptr()</code>.<br>
+<br>
+Returns <code>NULL</code> if the parameter <i>name</i> is not found, or if this
+function was not preceded by a call to <code>get_param_ptr()</code>.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#get_param_ptr_next">src/dirtree.c</a><br>
 

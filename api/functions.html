@@ -98,7 +98,7 @@ authentication fails.<br>
 </pre>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#_auth_lookup_id">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#_auth_lookup_id">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="_auth_resolve_user"><b>_auth_resolve_user</b><br>
@@ -254,7 +254,7 @@ if explicitly denied.<br>
   inline static int _compare_gid(idmap_t *<i>m1</i>, idmap_t *<i>m2</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#_compare_gid">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#_compare_gid">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="_compare_id"><b>_compare_id</b><br>
@@ -264,7 +264,7 @@ if explicitly denied.<br>
   inline static int _compare_id(xaset_t **<i>table</i>, idauth_t <i>id</i>, idauth_t <i>idcomp</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#_compare_id">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#_compare_id">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="_compare_sym"><b>_compare_sym</b><br>
@@ -284,7 +284,7 @@ if explicitly denied.<br>
   inline static int _compare_uid(idmap_t *<i>m1</i>, idmap_t *<i>m2</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#_compare_uid">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#_compare_uid">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="_copy_global_to_all"><b>_copy_global_to_all</b><br>
@@ -458,7 +458,7 @@ place to which to move a
   static char *_get_ppw_info(pool *<i>p</i>, const char *<i>u</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#_get_ppw_info">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#_get_ppw_info">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="_get_pw_info"><b>_get_pw_info</b><br>
@@ -469,7 +469,7 @@ place to which to move a
     time_t *<i>warn</i>, time_t *<i>inact</i>, time_t *<i>expire</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#_get_pw_info">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#_get_pw_info">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="_internal_abort"><b>_internal_abort</b><br>
@@ -4727,7 +4727,7 @@ explicit match; <code>-1</code> if it is an explicit mismatch (<i>i.e.</i>
   static void modpam_exit(void)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_pam.c.html#modpam_exit">modules/mod_pam.c</a><br>
+  <a href="../src/modules/mod_auth_pam.c.html#modpam_exit">modules/mod_auth_pam.c</a><br>
 
 <hr>
 <a name="mod_create_data"><b>mod_create_data</b><br>
@@ -4870,7 +4870,7 @@ from <i>nstrm</i>'s <code>pool</code>, and assign it to <i>nstrm</i>.<br>
   static void p_endgrent(void)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#p_endgrent">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#p_endgrent">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="p_endpwent"><b>p_endpwent</b><br>
@@ -4880,7 +4880,7 @@ from <i>nstrm</i>'s <code>pool</code>, and assign it to <i>nstrm</i>.<br>
   static void p_endpwent(void)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#p_endpwent">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#p_endpwent">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="p_getgrent"><b>p_getgrent</b><br>
@@ -4890,7 +4890,7 @@ from <i>nstrm</i>'s <code>pool</code>, and assign it to <i>nstrm</i>.<br>
   static struct group *p_getgrent(void)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#p_getgrent">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#p_getgrent">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="p_getgrgid"><b>p_getgrgid</b><br>
@@ -4900,7 +4900,7 @@ from <i>nstrm</i>'s <code>pool</code>, and assign it to <i>nstrm</i>.<br>
   static struct group *p_getgrgid(gid_t <i>gid</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#p_getgrgid">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#p_getgrgid">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="p_getgrnam"><b>p_getgrnam</b><br>
@@ -4910,7 +4910,7 @@ from <i>nstrm</i>'s <code>pool</code>, and assign it to <i>nstrm</i>.<br>
   static struct group *p_getgrnam(const char *<i>name</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#p_getgrnam">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#p_getgrnam">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="p_getpwent"><b>p_getpwent</b><br>
@@ -4920,7 +4920,7 @@ from <i>nstrm</i>'s <code>pool</code>, and assign it to <i>nstrm</i>.<br>
   static struct passwd *p_getpwent(void)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#p_getpwent">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#p_getpwent">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="p_getpwnam"><b>p_getpwnam</b><br>
@@ -4930,7 +4930,7 @@ from <i>nstrm</i>'s <code>pool</code>, and assign it to <i>nstrm</i>.<br>
   static struct passwd *p_getpwnam(const char *<i>name</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#p_getpwnam">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#p_getpwnam">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="p_getpwuid"><b>p_getpwuid</b><br>
@@ -4940,7 +4940,7 @@ from <i>nstrm</i>'s <code>pool</code>, and assign it to <i>nstrm</i>.<br>
   static struct passwd *p_getpwuid(uid_t <i>uid</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#p_getpwuid">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#p_getpwuid">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="p_setgrent"><b>p_setgrent</b><br>
@@ -4950,7 +4950,7 @@ from <i>nstrm</i>'s <code>pool</code>, and assign it to <i>nstrm</i>.<br>
   static void p_setgrent(void)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#p_setgrent">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#p_setgrent">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="p_setpwent"><b>p_setpwent</b><br>
@@ -4960,7 +4960,7 @@ from <i>nstrm</i>'s <code>pool</code>, and assign it to <i>nstrm</i>.<br>
   static void p_setpwent(void)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#p_setpwent">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#p_setpwent">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="palloc"><b>palloc</b><br>
@@ -4980,7 +4980,7 @@ from <i>nstrm</i>'s <code>pool</code>, and assign it to <i>nstrm</i>.<br>
   MODRET pam_auth(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_pam.c.html#pam_auth">modules/mod_pam.c</a><br>
+  <a href="../src/modules/mod_auth_pam.c.html#pam_auth">modules/mod_auth_pam.c</a><br>
 
 <hr>
 <a name="pam_exchange"><b>pam_exchange</b><br>
@@ -4991,7 +4991,7 @@ from <i>nstrm</i>'s <code>pool</code>, and assign it to <i>nstrm</i>.<br>
     void *<i>appdata_ptr</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_pam.c.html#pam_exchange">modules/mod_pam.c</a><br>
+  <a href="../src/modules/mod_auth_pam.c.html#pam_exchange">modules/mod_auth_pam.c</a><br>
 
 <hr>
 <a name="parse_config_file"><b>parse_config_file</b><br>
@@ -6409,7 +6409,7 @@ elements are pushed onto them.  Pushed elements appear at the <i>end</i> of the
   MODRET pw_auth(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#pw_auth">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#pw_auth">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="pw_check"><b>pw_check</b><br>
@@ -6419,7 +6419,7 @@ elements are pushed onto them.  Pushed elements appear at the <i>end</i> of the
   MODRET pw_check(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#pw_check">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#pw_check">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="pw_endgrent"><b>pw_endgrent</b><br>
@@ -6429,7 +6429,7 @@ elements are pushed onto them.  Pushed elements appear at the <i>end</i> of the
   MODRET pw_endgrent(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#pw_endgrent">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#pw_endgrent">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="pw_endpwent"><b>pw_endpwent</b><br>
@@ -6439,7 +6439,7 @@ elements are pushed onto them.  Pushed elements appear at the <i>end</i> of the
   MODRET pw_endpwent(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#pw_endpwent">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#pw_endpwent">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="pw_getgrent"><b>pw_getgrent</b><br>
@@ -6449,7 +6449,7 @@ elements are pushed onto them.  Pushed elements appear at the <i>end</i> of the
   MODRET pw_getgrent(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#pw_getgrent">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#pw_getgrent">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="pw_getgrgid"><b>pw_getgrgid</b><br>
@@ -6459,7 +6459,7 @@ elements are pushed onto them.  Pushed elements appear at the <i>end</i> of the
   MODRET pw_getgrgid(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#pw_getgrgid">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#pw_getgrgid">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="pw_getgrnam"><b>pw_getgrnam</b><br>
@@ -6469,7 +6469,7 @@ elements are pushed onto them.  Pushed elements appear at the <i>end</i> of the
   MODRET pw_getgrnam(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#pw_getgrnam">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#pw_getgrnam">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="pw_getgroups"><b>pw_getgroups</b><br>
@@ -6479,7 +6479,7 @@ elements are pushed onto them.  Pushed elements appear at the <i>end</i> of the
   MODRET pw_getgroups(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#pw_getgroups">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#pw_getgroups">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="pw_getpwent"><b>pw_getpwent</b><br>
@@ -6489,7 +6489,7 @@ elements are pushed onto them.  Pushed elements appear at the <i>end</i> of the
   MODRET pw_getpwent(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#pw_getpwent">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#pw_getpwent">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="pw_getpwnam"><b>pw_getpwnam</b><br>
@@ -6499,7 +6499,7 @@ elements are pushed onto them.  Pushed elements appear at the <i>end</i> of the
   MODRET pw_getpwnam(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#pw_getpwnam">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#pw_getpwnam">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="pw_getpwuid"><b>pw_getpwuid</b><br>
@@ -6509,7 +6509,7 @@ elements are pushed onto them.  Pushed elements appear at the <i>end</i> of the
   MODRET pw_getpwuid(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#pw_getpwuid">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#pw_getpwuid">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="pw_gid_name"><b>pw_gid_name</b><br>
@@ -6519,7 +6519,7 @@ elements are pushed onto them.  Pushed elements appear at the <i>end</i> of the
  i MODRET pw_gid_name(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#pw_gid_name">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#pw_gid_name">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="pw_name_gid"><b>pw_name_gid</b><br>
@@ -6529,7 +6529,7 @@ elements are pushed onto them.  Pushed elements appear at the <i>end</i> of the
   MODRET pw_name_gid(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#pw_name_gid">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#pw_name_gid">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="pw_name_uid"><b>pw_name_uid</b><br>
@@ -6539,7 +6539,7 @@ elements are pushed onto them.  Pushed elements appear at the <i>end</i> of the
   MODRET pw_name_uid(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#pw_name_uid">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#pw_name_uid">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="pw_setgrent"><b>pw_setgrent</b><br>
@@ -6549,7 +6549,7 @@ elements are pushed onto them.  Pushed elements appear at the <i>end</i> of the
   MODRET pw_setgrent(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#pw_setgrent">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#pw_setgrent">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="pw_setpwent"><b>pw_setpwent</b><br>
@@ -6559,7 +6559,7 @@ elements are pushed onto them.  Pushed elements appear at the <i>end</i> of the
   MODRET pw_setpwent(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#pw_setpwent">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#pw_setpwent">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="pw_uid_name"><b>pw_uid_name</b><br>
@@ -6569,7 +6569,7 @@ elements are pushed onto them.  Pushed elements appear at the <i>end</i> of the
   MODRET pw_uid_name(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#pw_uid_name">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#pw_uid_name">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="quote_dir"><b>quote_dir</b><br>
@@ -7005,7 +7005,7 @@ Boolean fields.<br>
 <code>AuthGroupFile</code> directive.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#set_authgroupfile">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#set_authgroupfile">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="set_authpam"><b>set_authpam</b><br>
@@ -7018,7 +7018,7 @@ Boolean fields.<br>
 <code>AuthPAM</code> directive.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_pam.c.html#set_authpam">modules/mod_pam.c</a><br>
+  <a href="../src/modules/mod_auth_pam.c.html#set_authpam">modules/mod_auth_pam.c</a><br>
 
 <hr>
 <a name="set_authpamauthoritative"><b>set_authpamauthoritative</b><br>
@@ -7031,7 +7031,7 @@ Boolean fields.<br>
 <code>AuthPAMAuthoritative</code> directive.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_pam.c.html#set_authpamauthoritative">modules/mod_pam.c</a><br>
+  <a href="../src/modules/mod_auth_pam.c.html#set_authpamauthoritative">modules/mod_auth_pam.c</a><br>
 
 <hr>
 <a name="set_authpamconfig"><b>set_authpamconfig</b><br>
@@ -7044,7 +7044,7 @@ Boolean fields.<br>
 <code>AuthPAMConfig</code> directive.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_pam.c.html#set_authpamconfig">modules/mod_pam.c</a><br>
+  <a href="../src/modules/mod_auth_pam.c.html#set_authpamconfig">modules/mod_auth_pam.c</a><br>
 
 <hr>
 <a name="set_authuserfile"><b>set_authuserfile</b><br>
@@ -7057,7 +7057,7 @@ Boolean fields.<br>
 <code>AuthUserFile</code> directive.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#set_authuserfile">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#set_authuserfile">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="set_authusingalias"><b>set_authusingalias</b><br>
@@ -7598,7 +7598,7 @@ directives.<br>
 <code>PersistentPasswd</code> directive.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#set_persistentpasswd">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#set_persistentpasswd">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="set_pidfile"><b>set_pidfile</b><br>
@@ -8727,24 +8727,24 @@ end of <i>dest</i> and refusing to copy more than <i>n</i> bytes.<br>
   <a href="../src/src/timers.c.html#timer_sleep">src/timers.c</a><br>
 
 <hr>
-<a name="unixpw_init"><b>unixpw_init</b><br>
+<a name="auth_unix_init"><b>auth_unix_init</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static int unixpw_init(void)
+  static int auth_unix_init(void)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#unixpw_init">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#auth_unix_init">modules/mod_auth_unix.c</a><br>
 
 <hr>
-<a name="unixpw_sess_init"><b>unixpw_sess_init</b><br>
+<a name="auth_unix_sess_init"><b>auth_unix_sess_init</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static int unixpw_sess_init(void)
+  static int auth_unix_sess_init(void)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#unixpw_sess_init">modules/mod_unixpw.c</a><br>
+  <a href="../src/modules/mod_auth_unix.c.html#auth_unix_sess_init">modules/mod_auth_unix.c</a><br>
 
 <hr>
 <a name="xaset_copy"><b>xaset_copy</b><br>

@@ -24,15 +24,15 @@
 <b>FS API Functions</b><br>
 
 <pre>
-  pr_fs_t *add_fs(pool *<i>pool</i>, const char *<i>name</i>, const char *<i>path</i>);
-  pr_fs_t *create_fs(pool *<i>pool</i>, const char *<i>name</i>);
+  pr_fs_t *pr_register_fs(pool *<i>pool</i>, const char *<i>name</i>, const char *<i>path</i>);
+  pr_fs_t *pr_create_fs(pool *<i>pool</i>, const char *<i>name</i>);
   pr_fs_t *get_fs(const char *<i>path</i>, int *<i>exact</i>);
-  int insert_fs(pr_fs_t *<i>fs</i>, const char *<i>path</i>);
-  int remove_fs(const char *<i>path</i>);
+  int pr_insert_fs(pr_fs_t *<i>fs</i>, const char *<i>path</i>);
+  int pr_unregister_fs(const char *<i>path</i>);
 </pre>
 
 <p>
-The <code>add_fs()</code> function is the one that FS modules should
+The <code>pr_register_fs()</code> function is the one that FS modules should
 use primarily, for it handles the creation and registration of an
 <code>pr_fs_t</code> in one shot.  The <code>pr_fs_t *</code> returned allows
 the caller to store that pointer for other, module-specific, purposes.  The
@@ -40,13 +40,13 @@ the caller to store that pointer for other, module-specific, purposes.  The
 <code>pr_fs_t</code>.  The <i>path</i> argument declares where the created
 <code>pr_fs_t</code> is to be registered in the filesystem, and is specific
 only to the created <code>pr_fs_t</code>; an FS module may call
-<code>add_fs()</code> multiple times for multiple paths.  Functionally,
-<code>add_fs()</code> is equivalent to calling <code>create_fs()</code>
-and <code>insert_fs()</code>.
+<code>pr_register_fs()</code> multiple times for multiple paths.  Functionally,
+<code>pr_register_fs()</code> is equivalent to calling
+<code>pr_create_fs()</code> and <code>pr_insert_fs()</code>.
 
 <p>
-The <code>pr_fs_t *</code> returned by both <code>add_fs()</code> and
-<code>create_fs()</code> has all of its function pointers initialized
+The <code>pr_fs_t *</code> returned by both <code>pr_register_fs()</code> and
+<code>pr_create_fs()</code> has all of its function pointers initialized
 to the system defaults.  To put the FS module's custom versions into effect,
 merely overwrite the appropriate function pointer.  Note that the FS access
 functions will check for <code>NULL</code> function pointers and return
@@ -55,13 +55,13 @@ easily be disabled by setting its <code>pr_fs_t</code> function pointer to
 <code>NULL</code>.
 
 <p>
-The <code>create_fs()</code> function instantiates an <code>pr_fs_t</code>
+The <code>pr_create_fs()</code> function instantiates an <code>pr_fs_t</code>
 with the given <i>name</i>.  This <code>pr_fs_t *</code> could then be used
-multiple times, passing the same pointer to <code>insert_fs()</code>
+multiple times, passing the same pointer to <code>pr_insert_fs()</code>
 for multiple paths.
 
 <p>
-The <code>insert_fs()</code> function inserts the given
+The <code>pr_insert_fs()</code> function inserts the given
 <code>pr_fs_t *</code> into a mapping of <code>pr_fs_t</code>s maintained by
 the FS layer.  This mapping is sorted and searched according to the given
 <i>path</i>; it is <b>highly recommended</b> that the <code>path</code> field
@@ -122,9 +122,9 @@ then that <code>pr_fs_t</code> would be considered best-matching by the search
 algorithm.
 
 <p>
-Finally, the <code>remove_fs()</code> function does just that - it searches
-the FS layer's map for <code>pr_fs_t</code>s whose paths match, removes them
-from the map, and destroys them.  It returns <code>TRUE</code> upon
+Finally, the <code>pr_unregister_fs()</code> function does just that - it
+searches the FS layer's map for <code>pr_fs_t</code>s whose paths match,
+removes them from the map, and destroys them.  It returns <code>TRUE</code> upon
 removing any matching <code>pr_fs_t</code>s, <code>FALSE</code> if there was
 no matching <code>pr_fs_t</code> in the map, if the given <i>path</i> was
 <code>NULL</code>, or if there is an attempt to remove the root

@@ -23,10 +23,10 @@
 <p>
 <b>FS API Structures</b><br>
 At the core of it, the FS API uses and manipulates a structure called an
-<code>pr_fs_t</code> which has function pointers to the actual filesystem
-functions to be used.  The FS access functions lookup the right
-<code>pr_fs_t</code> for the operation, and invoke the right function pointer.
-Simple.
+<code>pr_fs_t</code>, which represents a &quot;filesystem&quot; by storing
+callback function pointers to the actual filesystem to be used.  The FS access
+functions lookup the right <code>pr_fs_t</code> for the operation, and invoke
+the proper callback. Simple.
 
 <p>
 The code definining the structure of an <code>pr_fs_t</code> is in
@@ -34,23 +34,23 @@ The code definining the structure of an <code>pr_fs_t</code> is in
 for your reading pleasure:
 <pre>
 
-<font color=blue>/* Modular filesystem object */</font>
+<font color=green>/* Modular filesystem object */</font>
 struct fs_rec {
 
-  <font color=blue>/* these pointers will be effective once layered FS modules are
+  <font color=green>/* These pointers will be effective once layered FS modules are
    * supported
    */</font>
   pr_fs_t *fs_next, *fs_prev;
 
-  <font color=blue>/* descriptive tag for this pr_fs_t */</font>
+  <font color=green>/* Descriptive tag for this pr_fs_t */</font>
   char *fs_name;
 
   char *fs_path;
 
-  <font color=blue>/* slot for module-specific data */</font>
+  <font color=green>/* Slot for module-specific data */</font>
   void *fs_data;
 
-  <font color=blue>/* pool for this object's use */</font>
+  <font color=green>/* Pool for this object's use */</font>
   pool *fs_pool;
 
   <font>/* FS function pointers */</font>
@@ -71,7 +71,7 @@ struct fs_rec {
   int (*chmod)(pr_fs_t *, const char *, mode_t);
   int (*chown)(pr_fs_t *, const char *, uid_t, gid_t);
 
-  <font color=blue>/* for actual operations on the directory (or subdirs)
+  <font color=green>/* For actual operations on the directory (or subdirs)
    * we cast the return from opendir to DIR* in src/fs.c, so
    * modules can use their own data type
    */</font>
@@ -106,6 +106,15 @@ parent pool, and it is from this subpool (stored as
 Therefore, to destroy an <code>pr_fs_t</code>, one needs merely to call
 <a href="../../api/functions.html#destroy_pool"><code>destroy_pool()</code></a>
 on the <code>pr_fs_t</code>'s pool.
+
+<p>
+The <code>open</code> and <code>creat</code> callbacks return a pointer to a
+<code>pr_fh_t</code>, a proftpd filehandle.  This filehandle is then passed
+to the <code>close</code>, <code>lseek</code>, <code>read</code>, and
+<code>write</code> callbacks, very similar to a normal file descriptor.  This
+filehandle contains a pointer to the filesystem in which the file is located,
+and a buffer pointer, for core routines that may need to make use of buffered
+I/O.
 
 <p>
 <center><a href="../../toc.html">Table of Contents</a></center><br>

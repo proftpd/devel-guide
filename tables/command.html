@@ -1,0 +1,117 @@
+<!-- $Id$ -->
+<!-- $Source$ -->
+
+<html>
+<head>
+<title>ProFTPD Developer's Guide: Command Tables</title>
+</head>
+
+<body bgcolor=white>
+
+<hr><br>
+<center>
+<img src="../images/proftpd.png">
+<br><br>
+<h3><b>ProFTPD Developer's Guide: Command Tables</b></h3>
+<i><b>ProFTPD Version 1.2.0</b></i><br>
+</center>
+<hr><br>
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+<p>
+<b>Command Tables</b><br>
+The <a href="../src/include/modules.h.html#cmdtable"><code>cmdtable</code></a>
+is a structure which lists all FTP command handlers for the module.  Each entry
+in this table contains a special command <i>type</i> field which determines
+type of handler, be it <code>PRE_CMD</code>, <code>CMD</code>,
+<code>POST_CMD</code>, or <code>LOG_CMD</code> (see the
+<a href="../handlers/command.html">command</a> handlers documentation for more
+details on these types).
+
+<p>
+<b>Definition</b><br>
+<ul>
+  <li>command <i>type</i>
+
+  <li>command name, or the actual <code>NULL</code>-terminated ASCII text
+      sent by a client, <i>in uppercase</i>, for this command.  The
+      <a href="../src/include/ftp.h.html">include/ftp.h</a> header file has
+      macros which define all known RFC FTP protocol commands.  This name
+      can also be the special macro <code>C_ANY</code>, which receives
+      <i>all</i> commands.
+  </li>
+
+  <li>command group, which is the access control group, referenced by
+      <code>&lt;Limit&gt;</code> directives, to which this command belongs.
+      This group can be either <code>G_DIRS</code> for commands related to
+      directory listing, <code>G_READ</code> for commands related to reading
+      files, <code>G_WRITE</code> for commands related to writing files, or
+      the special <code>G_NONE</code> for those commands against which a
+      <code>&lt;Limit READ|WRITE|DIRS&gt;</code> will not be applied.
+   </li>
+
+   <li>function pointer to the handler function for this command.  This
+       function <b>must</b> have the prototype
+       <code>MODRET func(cmd_rec *cmd)</code>.
+   </li>
+
+   <li>Boolean value: <code>TRUE</code> if the command <i>cannot</i> be
+       used before authentication, via the <code>USER/PASS</code> commands,
+       has occurred, <code>FALSE</code> otherwise.
+   </li>
+
+   <li>Boolean value: <code>TRUE</code> if the command can be sent during
+       a file transfer, <code>FALSE</code> otherwise.  <i>Note</i>: as of
+       ProFTPD version 1.1.5, this field is obsolete, and is no longer used.
+   </li>
+</ul>
+
+<p>
+<b>Example</b><br>
+<pre>
+cmdtable sample_commands[] = {
+  { PRE_CMD,  C_ANY,  G_NONE, pre_cmd,        FALSE, FALSE },
+  { LOG_CMD,  C_ANY,  G_NONE, log_cmd,        FALSE, FALSE },
+  { POST_CMD, C_RETR, G_NONE, post_cmd_retr,  FALSE, FALSE },
+  { POST_CMD, C_STOR, G_NONE, post_cmd_stor,  FALSE, FALSE },
+  { POST_CMD, C_APPE, G_NONE, post_cmd_stor,  FALSE, FALSE },
+  { POST_CMD, C_LIST, G_NONE, post_cmd_list,  FALSE, FALSE },
+  { POST_CMD, C_NLST, G_NONE, post_cmd_nlst,  FALSE, FALSE },
+  { CMD,      "XFOO", G_DIRS, cmd_xfoo,       TRUE,  FALSE },
+  { 0, NULL }
+};
+</pre>
+
+<p>
+The one entry in the example table that defines a <code>CMD</code> demonstrates
+how to declare a command handler function for a custom FTP command, <code>
+XFOO</code> in this case.  Most FTP clients allow the user to send arbitrary
+&quot;commands&quot; to the FTP server; this ability combined with
+custom FTP commands handlers such as this <code>XFOO</code> allow the programmer
+to create arbitrary, albeit not widely implemented, FTP commands.
+
+<p>
+The trailing <code>{ 0, NULL }</code> field is the terminating field in
+the table, and should always be used.
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+<hr><br>
+
+Author: <i>$Author$</i><br>
+Last Updated: <i>$Date$</i><br>
+
+<br><hr>
+
+<font size=2><b><i>
+&copy; Copyright 2000 TJ Saunders<br>
+ All Rights Reserved<br>
+</i></b></font>
+
+<hr><br>
+
+</body>
+</html>

@@ -1,0 +1,1546 @@
+#!/usr/bin/perl
+# -------------------------------------------------------------------------
+# $Id$
+# $Source$
+# -------------------------------------------------------------------------
+
+# -------------------------------------------------------------------------
+# COPYRIGHT NOTICE                                                           
+# Copyright (C) 2000 TJ Saunders All Rights Reserved.                     
+#                                                                            
+# You may distribute under the terms of either the GNU General Public
+# License or the Artistic License, as specified in the Perl README file,
+# with the exception that it cannot be placed on a CD-ROM or similar media
+# for commercial distribution without the prior approval of the author.
+#
+# -------------------------------------------------------------------------
+
+use strict;
+
+use Carp;
+use File::Basename qw(basename dirname);
+use Getopt::Std;
+
+my $program = basename($0);
+my %opts = ();
+
+if (scalar(@ARGV) < 1) {
+	print STDOUT "usage: $program -h for further help\n";
+	exit(1);
+}
+
+# parse the command-line options
+getopts("Td:k:hl:nrs:t:v", \%opts);
+
+my @source_files = @ARGV;
+
+my $verbose = 0;
+$verbose = 1 if defined($opts{'v'});
+
+my $html_dir = "html";
+
+usage() if defined($opts{'h'});
+
+# determine the correct extension for the HTML files, based on
+# OS type (.htm for Windows, .html otherwise)
+
+my $html_file_extension = '.html';
+
+# NOTE: make this more intelligent (eg determine language type from extension
+#  of input files
+
+my $language = 'c';
+my @comment_chars = ('/*', '*/');
+my @source_extensions = ('*.[Cc]', '*.[Hh]');
+
+if ($verbose) {
+	print STDOUT "$program: using file extensions: ",
+		join(" ", @source_extensions), "\n";
+}
+
+# determine the directories to be skipped, when recursing
+my @skip_directories = ();
+if (defined($opts{'s'})) {
+
+	# split the input string
+	my @directories = split(/,(\s*?)/, $opts{'s'});
+
+	# make sure the specified directories are valid.  Assume the path is
+	# relative to the current directory, unless it begins with a '/'.
+
+	foreach my $dir (@directories) {
+
+		# keep this directory if it's valid
+		if (-d $dir) {
+			push(@skip_directories, $dir)
+
+		} else {
+			print STDOUT "$program: skip directory $dir does not exist\n";
+		}
+	}
+}
+
+# define some colors for the keywords
+my $preprocessor_color = "#ff3333";
+my $datatype_color = "#771199";
+my $default_color = "blue";
+
+# retrieve the keywords hash that pertains to the current source file(s)
+my $keywords = get_keywords( language => $language );
+
+my $tags_file = "tags";
+if (defined($opts{'t'})) {
+	$tags_file = $opts{'t'};
+}
+
+# make sure that user-specified tags file exists and is readable	
+unless (-e $tags_file) {
+	die "$program: tags file $tags_file does not exist\n";
+}
+
+unless (-r $tags_file) {
+	die "$program: tags file $tags_file is not readable\n";
+}
+my $tags = get_tags( file => $tags_file );
+
+$html_dir = $opts{'d'} if defined($opts{'d'});
+
+# make sure the user-specified directory exists.  If it does, make sure
+# I can write to it.  If it doesn't exist, create it.
+
+unless (-d $html_dir) {
+
+	unless (mkdir $html_dir, oct(644)) {
+		die "$program: unable to create $html_dir: $!\n";
+	}
+
+	print STDOUT "$program: creating $html_dir\n" if $verbose;
+}
+
+unless (-w $html_dir) {
+	die "$program: $html_dir is not writeable\n";
+}
+
+print STDOUT "$program: outputting HTML files to $html_dir\n" if $verbose;
+
+# now I know where to output files.  Deal with the files in the current
+# directory first (either via $source_extensions or @source_files), then
+# determine whether to recurse
+
+# if there's anything left from the command-line, assume it's a list of
+# files to be processed.  These "leftover" files will override the
+# language file extension pattern for the current directory only.
+
+my @htmlified_files;
+
+if (!$opts{'r'} && !@ARGV) {
+
+	@source_files = glob(@source_extensions);
+	htmlify_dir( dir => ".", files => \@source_files );
+
+} else {
+
+	if (@ARGV) {
+		htmlify_dir( dir => ".", files => \@ARGV );
+
+	} else {
+		htmlify_dir( dir => "." );
+	}
+}
+
+# generate the index.html file, to be located in the $html_dir top level
+
+# NOTE: future improvements could use the Getopt::Long modules, and allow
+#  for index.html files in each subdirectory (assuming -r is set, of course)
+#  as well as one master index.
+
+unless ($opts{'n'}) {
+
+	print STDOUT "$program: generating index$html_file_extension\n" if $verbose;
+
+	make_file_index( output_dir => $html_dir );
+
+	if ($opts{'T'}) {
+		print STDOUT
+			"$program: generating tagIndex$html_file_extension\n" if $verbose;
+
+		make_tag_index( output_dir => $html_dir );
+	}
+}
+
+# done!
+exit 0;
+
+# ----------------------------------------------------------------------
+#  Functions
+# ----------------------------------------------------------------------
+
+sub get_dirs {
+	my ($dir) = @_;
+
+	my @dirs = ();
+
+	# open a directory handle
+	opendir(DIR, $dir) or
+		die "$program: get_dirs(): unable to open $dir: $!\n";
+
+	# read in all the directories in this directory
+	while (my $dir_entry = readdir(DIR)) {
+
+		if (-d "$dir/$dir_entry") {
+			push(@dirs, $dir_entry);
+		}
+	}
+
+	closedir(DIR);
+
+	# strip out the . and .. directories
+	@dirs = grep !/^\.\.?$/, @dirs;
+
+	# and skip $html_dir, too...
+	@dirs = grep !/$html_dir/, @dirs;
+
+	return \@dirs;
+}
+
+# ---------------------------------------------------------------------
+sub get_keywords {
+	my %args = @_;
+
+	unless (defined($args{'language'})) {
+		die "$program: missing required argument: language\n";
+	}
+	my $language = $args{'language'};
+
+	# open the keyword database contained in this file and read in the list of
+	# words that I should pay attention to
+
+	# NOTE: future enhancement -- enable grouping of keyword into classes
+	#  like variables, operators, data types, etc etc, allowing for a different
+	#  HTML handling of each class (like a different color for data types than
+	#  language-specific operators, etc)
+
+	# slurp the entire list of keywords into an array
+	my @keyword_specs = ();
+
+	while (my $line = <DATA>) {
+
+		# skip any comments
+		next if $line =~ /^#/;
+
+		# skip blank lines, too
+		next if $line =~ /^\s+$/;
+
+		chomp($line);
+
+		push(@keyword_specs, $line);
+	}
+
+	# setup hash for keywords
+	my %keywords;
+
+	my $keyword_color = $default_color;
+
+	my $keep = 0;
+	foreach my $spec (@keyword_specs) {
+
+		if ($spec =~ /<$language>/) {
+			$keep = 1;
+			next;
+		}
+
+		next unless $keep;
+
+		# NOTE: future capability of grouping language keywords, and allowing
+		#  for custom coloring of each group, will be done here.
+
+		# NOTE: grouping in development -- here, hardcoded using the idea
+		#  of "context".  Each "context" is assigned a color.
+
+		# NOTE: C has both preprocess "if" and "else", as well as language
+		#  "if" and "else".  How to handle that?  Make handle_keyword_token()
+		#  aware of the differences (ie the leading # in a preprocessor
+		#  directive).
+
+		if ($keep) {
+
+			# break the specification down, keeping track of context
+	
+			if ($spec =~ /(\s+)?<preprocessor>/) {
+				$keyword_color = $preprocessor_color;
+				next;
+
+			} elsif ($spec =~ /(\s+)?<datatype>/) {
+				$keyword_color = $datatype_color;
+				next;
+
+			} elsif ($spec =~ /(\s+)?<\/preprocessor>/ ||
+							 $spec =~ /(\s+)?<\/datatype>/) {
+				$keyword_color = $default_color;
+				next;
+			}
+
+			if ($spec !~ /(\s+)?<\/$language>/) {
+
+				# remove whitespace from the specification
+				my $keyword = $spec;
+				$keyword =~ s/\s+//g;
+
+				$keywords{$keyword} =
+					"<font color=\"$keyword_color\">$keyword<\/font>";
+
+				next;
+			}
+		}
+
+		if ($spec =~ /<\/$language>/) {
+
+			# skip the rest
+			last;
+		}
+	}
+
+	# return the HTML/keyword hash as a reference
+	return \%keywords;
+}
+
+# ----------------------------------------------------------------------
+sub get_tags {
+	my %args = @_;
+
+	unless (defined($args{'file'})) {
+		die "$program: missing required argument: file\n";
+	}
+	my $tags_file = $args{'file'};
+
+	# read in the tags file
+	open(TAGS, "< $tags_file") or
+		die "$program: get_tags(): unable to open $tags_file: $!\n";
+
+	chomp(my @tags = <TAGS>);
+
+	close(TAGS) or
+		die "$program: get_tags(): unable to close $tags_file: $!\n";
+
+	# parse the @tags array, restructuring it into more useable hashes
+	# The idea here is to impart an awareness of the relationships between
+	# source files that ctags doesn't have (it can't...it's made to do its
+	# thing only on _one_ file, not on a source tree).
+
+	my %tags;
+  foreach my $tag_line (@tags) {
+
+		my %entry;
+		my $link;
+
+		# this array depends on the format of the tags file, usually output
+		# from the ctags program...
+
+		my ($tag_name, $tag_type, $tag_line_number, $tag_source_file,
+			@tag_declaration) = split(/\s+/, $tag_line);
+
+		# if the tag source name begins with a ./, strip that off (it confuses
+		# things later...)
+
+		$tag_source_file =~ s/^\.\///;
+
+		# join the tag declaration into one string
+		my $tag_declaration = join(" ", @tag_declaration);
+
+		# NOTE: how will this structure handle multiple tags with the same name?
+		#  This can arise with functions with file scope, thus allowing for
+		#  multiple functions with the same tag name -- duh, like main()? =)
+
+		# NOTE: Answer -- create a structure whose primary keys are tag names,
+		#  and whose secondary keys are source files.  The structure this
+		#  key combination references will contain the line number at which
+		#  to place the HTML anchor (if the source file is the one which defines
+		#  that tag), and a link to that source file/anchor to be used for
+		#  any other line number/source file combination for that tag.
+		#  The tag declaration will be used to determine exactly which tag
+		#  source file to use as the anchor reference (eg, the same tag name
+		#  might have the same tag type -- "macro" -- but one actually defines
+		#  the macro value, and one is just a preprocessor references of that
+		#  #define value.
+
+		# populate the %entry hash.  First, check $tags to see if this
+		# particular tag name has been encountered before.  If so, then
+		# a decision needs to be made about which tag entry is the canonical
+		# source, and which is the reference to that canonical source.
+
+		# ignore "variable" tags for now...
+		# NOTE: make this a command-line option
+
+		next if ($tag_type eq "variable");
+
+		# ignore "member" tags, too..
+		# NOTE: again, make this a command-line option
+
+		next if ($tag_type eq "member");
+
+		# now, determine whether this tag deserves to be _the_ definition
+		# and thus deserving of an anchor key, or if it's just a reference,
+		# based upon its declaration.
+
+		if ($tag_type eq 'enumerator') {
+
+			# there really isn't much to the declaration of an enumerator.  For
+			# now, just assume that this tag is _the_ definition
+
+			$entry{'anchor'} = $tag_line_number;
+			$link = "<a href=\"" . $tag_source_file . $html_file_extension .
+				"#$tag_name\">$tag_name<\/a>";
+
+		} elsif ($tag_type eq 'function') {
+
+			# let's see how intelligent ctags is.  For now, just assume that this
+			# tag is the definition
+
+			$entry{'anchor'} = $tag_line_number;
+			$link = "<a href=\"" . $tag_source_file . $html_file_extension .
+				"#$tag_name\">$tag_name<\/a>";
+
+		} elsif ($tag_type eq 'macro') {
+
+			# if the declaration does not begin with a #\s+?define, it's a reference,
+			# else it's the definition.  Simple.
+ 
+			if ($tag_declaration =~ /^(\s+)?#(\s+)?define/ ) {
+
+				$entry{'anchor'} = $tag_line_number;
+				$link = "<a href=\"" . $tag_source_file . $html_file_extension .
+					"#$tag_name\">$tag_name<\/a>";
+			}
+
+		} elsif ($tag_type eq 'struct') {
+
+			# let's see how intelligent ctags is.  For now, just assume that this
+			# tag is the definition
+
+			$entry{'anchor'} = $tag_line_number;
+			$link = "<a href=\"" . $tag_source_file . $html_file_extension .
+				"#$tag_name\">$tag_name<\/a>";
+
+		} elsif ($tag_type eq 'typedef') {
+
+			# let's see how intelligent ctags is.  For now, just assume that this
+			# tag is the definition
+
+			$entry{'anchor'} = $tag_line_number;
+			$link = "<a href=\"" . $tag_source_file . $html_file_extension .
+				"#$tag_name\">$tag_name<\/a>";
+
+		} else {
+
+			# should never reach this point, unless member/variable tags are
+			# allowed
+		}
+
+		# if $link contains a reference to a file in a "skipped" directory,
+		# then rewrite the link so that it is just plain text
+
+		if (scalar(@skip_directories)) {
+
+			foreach my $skip_dir (@skip_directories) {
+
+				# make a copy of the directory name to be skipped, then escape
+				# any metacharacters that can cause trouble...
+
+				my $dir = $skip_dir;
+				$dir =~ s/([\/\\\+\*])/\\$1/g;
+
+				if ($tag_source_file =~ /^$dir/) {
+					$link = $tag_name;
+
+					if ($verbose) {
+						print STDOUT
+							"$program: skipping tag $tag_name for $tag_source_file\n";
+					}
+				}
+			}
+		}
+
+		# store the references to this tag information
+
+		$tags{$tag_name}{$tag_source_file} = \%entry;
+		$tags{$tag_name}{'link'} = $link;
+
+		# NOTE: future improvement -- once grouping of datatype keywords is
+		#  implemented, allow for 'typedefs' to add to that datatype group,
+		#  so that a typedef'd object will be treated just like any other
+		#  data type.
+  }
+
+	# return a reference to the tags hash
+	return \%tags;
+}
+
+# ----------------------------------------------------------------------
+sub handle_comments {
+	my %args = @_;
+
+# NOTE: THIS FUNCTION CURRENTLY UNDER DEVELOPMENT, AND IS NOT IN USE
+
+	my $string = $args{'string'};
+
+	# find comments, and mark them with the appropriate HTML tags
+
+	# NOTE: the comment-determine routine should also know how to handle
+	#  Perl PODs
+
+	# NOTE: this should also recognize when the comment characters are
+	#  themselves in an embedded string, and thus to be ignored...
+
+		# NOTE: these "in a comment" checks are too simplistic, and thus
+		#  are causing problems.
+
+	my $line;
+	my $comment_count;
+	my $in_a_comment;
+	my $number_of_lines;
+	my $source_file;
+
+	if ($line =~ /\/\*/) {
+
+			# put the comments in green
+			$line =~ s/\/\*/<font color=\"#009900\">\/\*/;
+
+			$comment_count++;
+			$in_a_comment = $number_of_lines;
+		}
+
+    # initialize the line of actual code, as opposed to a comment line
+    # NOTE: this next section is a bit messy -- take some time to clean up
+    #  the organization and logic flow...
+
+    my $code_line;
+
+    if (! $in_a_comment) {
+
+      $line = htmlify_line( string => $line, file => $source_file,
+        line_number => $number_of_lines );
+
+    } elsif ($in_a_comment == $number_of_lines) {
+
+      # in a line with a comment.  This split() call needs to be made
+      # a little more intelligent, or at least the handling of its output,
+      # since it effectively strips the end off comments, which makes a problem
+      # when the comment end is in that bit that gets discarded...
+
+      my @symbols = split(/\/\*/, $line, 2);
+
+      # ignore the trailing comments, I'm only interested in the code right
+      # now...
+
+      $line = htmlify_line( string => $symbols[0], file => $source_file,
+        line_number => $number_of_lines );
+
+      # append the rest of the line to the htmlified line...
+      $line .= '/*';
+      $line .= $symbols[1];
+
+    }
+
+    # find closing comment
+    if ($line =~ /\*\// && $line !~ /"(.*?)?\*\/(.*?)?"/) {
+
+      # close the comment font-coloring tag
+      $line =~ s/\*\//\*\/<\/font>/;
+
+      $comment_count--;
+      $in_a_comment = 0;
+    }
+
+	return $string;
+}
+
+# ----------------------------------------------------------------------
+sub handle_keyword_token {
+	my %args = @_;
+
+	my $string = $args{'string'};
+	my $token = $args{'token'};
+
+	# if the current token is a keyword, colorize it -- unless that token
+	# appears in a string (denoted by "'s), in which case, ignore it.
+
+	$string = replace_tokens( string => $string, token => $token,
+		html => $keywords->{$token} );
+
+	return $string;
+}
+
+# ----------------------------------------------------------------------
+sub handle_link_token {
+	my %args = @_;
+
+	my $string = $args{'string'};
+	my $token = $args{'token'};
+	my $source_file = $args{'file'};
+	my $line_number = $args{'line_number'};
+	my $link;
+
+	if (defined($tags->{$token}{$source_file}) &&
+			$line_number == $tags->{$token}{$source_file}->{'anchor'}) {
+
+		# if the current line of code contains a tag, plant an HTML anchor
+		print HTML "<a name=\"$token\"><\/a>";
+
+		# the "link", in this case, will be just be the token name
+		$link = $token;
+
+	} else {
+
+		# get the right URL
+		unless ($link = $tags->{$token}{'link'}) {
+
+			# this covers the possibility that there is no "link" for the
+			# given token, for that link depends on the ctags output.  Some
+			# tags might be defined by system headers, libraries, or by
+			# the compiler, in which case ctags won't know about their definition,
+			# just the reference.  Without this clause, which just passes the
+			# token through unaltered, it would be translated to a blank, which
+			# is less than desired behavior.
+
+			$link = $token;
+		}
+	}
+
+	# substitute the token in the current line with the corresponding
+	# HTML link.  Make sure that links points to the right (relative)
+	# URL.  And make sure that all non-alphanumeric characters are
+	# appropriately quoted.
+
+	my $filename = "$source_file$html_file_extension";
+
+	# make a copy of the filename for comparison reasons
+	my $compare_filename = $filename;
+
+	# make sure that all non-alphanumeric characters are appropriately quoted
+	$compare_filename =~ s/([\/\\\+\*])/\\$1/g;
+
+	if ($link =~ /$compare_filename/) {
+
+		# the would-be link points to this source file, so to make it relative,
+		# just remove the filename portion from the URL
+
+		$link =~ s/$filename//;
+
+	} elsif ($link =~ /a href=\"(\S+)\.htm(l)?/) {
+
+		# count the number of /'s in $source_file.  This is the
+		# subdirectory depth, measured from $html_dir, of the current file.
+		# If the URL doesn't point to the current file, prepend that
+		# number of ../'s to make a working relative URL
+
+		my $count = $source_file =~ tr/\//\//;
+		my $new_filename = ('../' x $count) . $1;
+
+		$link =~ s/$1/$new_filename/;
+	}
+
+	# make sure, on these substitutions, that $token is not embedded
+	# in some larger word.
+
+	$string = replace_tokens( string => $string, token => $token,
+		html => $link);
+
+	return $string;
+}
+
+# ----------------------------------------------------------------------
+sub htmlify_dir {
+	my %args = @_;
+
+	my $current_dir = $args{'dir'};
+
+	# create this current directory under the HTML directory tree if
+	# it doesn't exist there, in order to maintain the same file layout
+	# in the HTML directory
+
+	my $output_dir;
+	unless ($current_dir eq ".") {
+		$output_dir = $html_dir . '/' . $current_dir;
+
+	} else {
+		$output_dir = $html_dir;
+	}
+
+	unless (-d $output_dir or $current_dir eq ".") {
+		unless (mkdir $output_dir, oct(777)) {
+			die "$program: htmlify_dir(): unable to create $output_dir: $!\n";
+		}
+	}
+
+	my @source_files;
+
+	unless (defined($args{'files'})) {
+
+		# first, tack on the current directory to the beginning of each
+		# extension pattern
+
+		# this local copy of the file extensions is necessary for preserving
+		# the original extensions when prepending subdirectory names...
+		my @current_extensions = @source_extensions;
+
+		foreach my $pattern (@current_extensions) {
+			unless ($current_dir eq ".") {
+				$pattern = $current_dir . "/" . $pattern;
+			}
+		}
+
+		@source_files = glob(join(" ", @current_extensions));
+
+	} else {
+		@source_files = @{ $args{'files'} };
+
+		# and undefine the recurse option while we're at it, since if a list
+		# of files to be processed is passed via the command-line, recursion
+		# will be assumed to not be desired.
+
+		delete $opts{'r'};
+	}
+
+	foreach my $source_file (@source_files) {
+		htmlify_file( file => $source_file, output_dir => $output_dir );
+	}
+
+	if ($opts{'r'}) {
+		my @dirs = @{ get_dirs( $current_dir ) };
+
+		SUBDIR:
+		foreach my $subdir (@dirs) {
+			
+			unless ($current_dir eq ".") {
+				$subdir = $current_dir . "/" . $subdir;
+			}
+
+			# if the user specified any directories to skip, make sure to skip
+			# them here
+
+			if (scalar(@skip_directories)) {
+
+				foreach my $skip_dir (@skip_directories) {
+
+					# make a copy of the directory name to be skipped, then escape
+					# any metacharacters that can cause trouble...
+
+					my $dir = $skip_dir;
+					$dir =~ s/([\/\\\+\*])/\\$1/g;
+
+					if ($subdir =~ /^$dir/) {
+						print STDOUT "$program: skipping $subdir\n" if $verbose;
+
+						next SUBDIR;
+					}
+				}
+			}
+
+			htmlify_dir( dir => $subdir );
+		}
+	}
+
+	return 1;
+}
+
+# ----------------------------------------------------------------------
+sub htmlify_file {
+	my %args = @_;
+
+	my $source_file = $args{'file'};
+	my $output_dir = $args{'output_dir'};
+
+	my $comment_count = 0;
+
+	# open, and read, the current source file
+	open(SOURCE, "< $source_file") or
+		die "$program: htmlify_file(): unable to open $source_file: $!\n";
+
+	my @lines = <SOURCE>;
+
+	close(SOURCE) or
+		die "$program: htmlify_file(): unable to close $source_file: $!\n";
+
+	# trim off any trailing slashes in $output_dir
+	if ($output_dir =~ /\/$/) {
+		chop($output_dir);
+	}
+
+	# open, and prepare, the HTML page for this source file
+
+	my $html_file;
+	if ($opts{'r'}) {
+
+		# if recursing, just get the base of the filename.  The necessary
+		# directory will already have been created.
+
+		$html_file = $output_dir . "/" . basename($source_file) .
+			$html_file_extension;
+
+	} else {
+
+		# if not recursing, get the directories of the filename, and make
+		# sure they exist under $output_dir.  If not, create them.
+
+		my $directories = dirname($source_file);
+
+		if ($verbose) {
+			print STDOUT "$program: creating directory $output_dir/$directories\n";
+		}
+
+		unless (-d "$output_dir/$directories") {
+			unless (mkdir "$output_dir/$directories", oct(777)) {
+				die "$program: htmlify_file(): unable to create $output_dir/$directories: $!\n";
+			}
+		}
+
+		$html_file = $output_dir . "/" . $source_file . $html_file_extension;
+	}
+
+	open(HTML, "> $html_file") or
+		die "$program: htmlify_file(): unable to open $html_file: $!\n";
+
+	print_html_header( title => $source_file );
+
+	# use the <pre> HTML tag for preserving the layout of the source code
+	print HTML "<pre>\n";
+
+	# initialize the line number count
+	my $number_of_lines = 0;
+
+	# set the "in a comment" flag
+	my $in_a_comment = 0;
+
+	foreach my $line (@lines) {
+
+		# keep track of the current line number with this counter
+		$number_of_lines++;
+
+		# find and replace ampersands
+		$line =~ s/&/&amp;/g;
+
+		# find and replace less thans and greater thans
+		$line =~ s/</&lt;/g;
+		$line =~ s/>/&gt;/g;
+
+		# find comments, and mark them with the appropriate HTML tags
+
+		# NOTE: this comment determination will need to be made into a subroutine
+		#  in order to correctly handle the different comment characters of
+		#  the different languages
+
+		# NOTE: the comment-determine routine should also know how to handle
+		#  Perl PODs
+
+		# NOTE: this should also recognize when the comment characters are
+		#  themselves in an embedded string, and thus to be ignored...
+
+		# NOTE: deal with single quotes (') correctly, as in:
+		#  while(**cp && (quote_mode ? (**cp != '\"') : !isspace((UCHAR)**cp))) {
+		#
+		#  which is currently causing trouble.
+
+		if ($line =~ /\/\*/) {
+
+			if ($line =~ /".*?".*?\/\*.*?(")?/ ) {
+
+				# put the comments in green
+				$line =~ s/\/\*/<font color=\"#009900\">\/\*/;
+      
+				$comment_count++;
+				$in_a_comment = $number_of_lines;
+
+			} elsif ($line =~ /".*?\/\*.*?"/) {
+				
+				# this catches comment characters embedded in real strings,
+				# which are to be left alone (ie, a no-op)
+
+			} else {
+
+				# put the comments in green
+				$line =~ s/\/\*/<font color=\"#009900\">\/\*/;
+
+				$comment_count++;
+				$in_a_comment = $number_of_lines;
+			}
+		}
+
+		# initialize the line of actual code, as opposed to a comment line
+		# NOTE: this next section is a bit messy -- take some time to clean up
+		#  the organization and logic flow...
+
+		my $code_line;
+
+		if (! $in_a_comment) {
+
+			$line = htmlify_line( string => $line, file => $source_file,
+				line_number => $number_of_lines );
+
+		} elsif ($in_a_comment == $number_of_lines) {
+   
+			# in a line with a comment.  This split() call needs to be made
+			# a little more intelligent, or at least the handling of its output,
+			# since it effectively strips the end off comments, which makes a problem
+			# when the comment end is in that bit that gets discarded...
+			
+			my @symbols = split(/\/\*/, $line, 2);
+
+			# ignore the trailing comments, I'm only interested in the code right
+			# now...
+
+			$line = htmlify_line( string => $symbols[0], file => $source_file,
+				line_number => $number_of_lines );
+
+			# append the rest of the line to the htmlified line...
+			$line .= '/*';
+			$line .= $symbols[1];
+
+		}
+
+		# find closing comment
+		if ($in_a_comment && $line =~ /\*\// && $line !~ /"(.*?)?\*\/(.*?)?"/) {	
+
+			# close the comment font-coloring tag
+			$line =~ s/\*\//\*\/<\/font>/;
+
+			$comment_count--;
+			$in_a_comment = 0;
+		}
+
+		# prettify the output HTML by wrapping the text?
+		print HTML $line;
+	}
+
+	print_html_footer();
+
+	if ($verbose && $comment_count) {
+
+		# if there are comments unaccounted for, display the count of them
+
+		print STDOUT
+			"$program: $source_file: UnclosedCommentCount = $comment_count\n";
+	}
+
+	print STDOUT "$program: htmlified $source_file\n" if $verbose;
+
+	# add this filename to the list of htmlified files
+	push(@htmlified_files, $source_file);
+
+	close(HTML) or
+		die "$program: htmlify_file(): unable to close $html_file: $!\n";
+
+	return 1;
+}
+
+# ----------------------------------------------------------------------
+sub htmlify_line {
+	my %args = @_;
+
+	my $line = $args{'string'};
+	my $source_file = $args{'file'};
+	my $line_number = $args{'line_number'};
+
+	# tokenize each word in $line, keeping only the unique tokens
+
+	my @words = split(/\W+/, $line);
+
+	my %seen = ();
+	my @tokens = ();
+
+	foreach my $word (@words) {
+		push(@tokens, $word) unless $seen{$word}++;
+	}
+
+	foreach my $token (@tokens) {
+
+		# if the current token is a keyword, colorize it -- unless that token
+		# appears in a string (denoted by "'s), in which case, ignore it.
+
+		if ($keywords->{$token}) {
+
+			# NOTE: UGLY HACK to handle keywords that are used both as preprocessor
+			#  directives as well as language words.  This needs to be abstracted,
+			#  generalized, as it currently relies as _a priori_ knowledge of these
+			#  dual-purpose keywords...
+
+			my $replace_color = 0;
+			my $replaced_html;
+
+			if ($line =~ /\s*?#\s*?if/ || $line =~ /\s*?#\s*?else/) {
+
+				# if this occurs, then the keyword should have the preprocessor
+				# HTML font-color.  Make sure it does, but keep a copy of
+				# whatever HTML tags _are_ set for it, to be restored later.
+
+				$replace_color = 1;
+
+				# get a temporary copy of the previous color tags
+				$replaced_html = $keywords->{$token};
+
+				# now, make it the preprocessor color tags
+				$keywords->{$token} =
+					"<font color=\"$preprocessor_color\">$token<\/font>";
+			}
+
+			$line = handle_keyword_token( string => $line, token => $token );
+
+			if ($replace_color) {
+
+				# reset the flag
+				$replace_color = 0;
+
+				# restore the original HTML font tag to %keywords
+				$keywords->{$token} = $replaced_html;				
+			}
+
+		} elsif (defined($tags->{$token})) {
+
+			# replace the token with the correct link
+			$line = handle_link_token( string => $line, token => $token,
+				file => $source_file, line_number => $line_number );
+		}
+	}
+
+	return $line;
+}
+
+# ----------------------------------------------------------------------
+sub make_file_index {
+	my %args = @_;
+
+	my $html_file = $html_dir . "/index$html_file_extension";
+
+  open(HTML, "> $html_file") or
+    die "$program: make_file_index(): unable to open $html_file: $!\n";
+
+  print_html_header( title => "Index of Files" );
+
+	print HTML "<hr>\n";
+	print HTML "<center><b><i>INDEX OF SOURCE FILES</i></b></center>\n";
+	print HTML "<hr>";
+	print HTML "<br><br>\n";
+
+	# if the tag index was requested, place a link to the generated
+	# function index on this page
+
+	if (defined($opts{'T'})) {
+		print HTML
+			"<a href=\"tagIndex$html_file_extension\">Index of Tags";
+		print HTML "</a><br>\n";
+		print HTML "<br>\n";
+	}
+
+	print HTML "<ul>\n";
+
+	# loop through @htmlified_files, and print a link for each htmlified file
+	foreach my $file (sort @htmlified_files) {
+
+		# make sure the pointed-to HTML file exists
+		if (-e "$html_dir/$file$html_file_extension") {
+			print HTML "<li><a href=\"$file$html_file_extension\">$file</a>\n";
+		}
+	}
+
+	print HTML "</ul><br>\n";
+
+  print_html_footer();
+
+  close(HTML) or
+    die "$program: make_file_index(): unable to close $html_file: $!\n";
+	
+	return 1;
+}
+
+# ----------------------------------------------------------------------
+sub make_tag_index {
+	my %args = @_;
+
+	my $html_file = $html_dir . "/tagIndex$html_file_extension";
+
+	open(HTML, "> $html_file") or
+		die "$program: make_tag_index(): unable to open $html_file: $!\n";
+
+	print_html_header( title => "Index of Tags" );
+
+	print HTML "<center><b><i>INDEX OF TAGS</i></b></center>\n";
+	print HTML "<hr>";
+	print HTML "<br><br>\n";
+	print HTML "<ul>\n";
+
+	# loop through %tags, and print a link for each function
+	foreach my $tag (sort keys %{ $tags }) {
+
+		# NOTE: need to check that this is a tag for an htmlified file
+		#  before printing...
+
+		print HTML "<li>$tag:<br>\n";
+		print HTML "\t<ul type=square>\n";
+
+		# make sure the pointed-to HTML file exists
+		if (-e "$html_dir/$html_file$html_file_extension") {
+
+			# modify the 'link' value a little, substituting the tag_name
+			# bracketed by the <a href> tags with the file name...
+
+			my $link = $tags->{$tag}{'link'};
+			$link =~ s/(<a.*>).+(<\/a>)/$1$html_file$2/;
+
+			print HTML "\t<li>$link";
+		}
+
+		print HTML "\t</ul><br>\n";
+	}
+
+	print HTML "</ul><br>\n";
+
+	print_html_footer();
+
+	close(HTML) or
+		die "$program: make_tag_index(): unable to close $html_file: $!\n";
+
+	return 1;
+}
+
+# ----------------------------------------------------------------------
+sub print_html_footer {
+
+  my $timestamp = scalar(localtime(time()));
+
+  # print the HTML foote, including a timestamp
+  print HTML <<END_OF_FOOTER;
+</pre>
+<hr>
+Last Updated: <i>$timestamp</i><br>
+<br>
+<i>HTML generated by tj's c2html script</i><br>
+</body>
+</html>
+END_OF_FOOTER
+
+}
+
+# ----------------------------------------------------------------------
+sub print_html_header {
+	my %args = @_;
+
+	my $title = $args{'title'};
+
+	# print out a header to the current HTML stream
+
+	print HTML <<END_OF_HEADER;
+<html>
+<head>
+<title>$title</title>
+</head>
+
+<body bgcolor="ffffff">
+END_OF_HEADER
+
+}
+
+# ----------------------------------------------------------------------
+sub replace_tokens {
+	my %args = @_;
+
+	my $string = $args{'string'};
+	my $token = $args{'token'};
+	my $html = $args{'html'};
+
+	# if $string contains any "'s or <>'s, do the token replacement
+	# outside of those areas.  Parse $string, and operate only on the
+	# "good" pieces
+
+	my @chars = split(//, $string);
+
+	my $in_html_tag = 0;
+	my $in_char_string = 0;
+	my $in_quote_string = 0 ;
+
+	my @start_positions = ();
+	my @end_positions = ();
+
+	for (my $index = 0; $index <= $#chars; $index++) {
+
+		if (!$in_quote_string && $chars[$index] eq '<') {
+				
+			# we're in an HTML tag
+
+			$in_html_tag = 1;
+			push(@start_positions, $index);
+
+		} elsif (!$in_quote_string && $chars[$index] eq '>') {
+
+			# HTML tag is over
+
+			$in_html_tag = 0;
+			push(@end_positions, $index);
+
+		} elsif (!$in_html_tag &&
+			($chars[$index] eq "\"" && $chars[$index - 1] ne "\\")) {
+
+			if ($in_quote_string) {
+
+				# the embedded string is over
+				$in_quote_string = 0;
+				push(@end_positions, $index);
+
+			} else {
+	
+				# an embedded string is just starting
+				$in_quote_string = 1;
+				push(@start_positions, $index);
+			}
+		}
+	}
+
+	# check for the case where only one " was found, so that $in_quote_string
+	# will be true after the end of the loop.  If true, pop the last number
+	# off of @start_positions
+
+	pop(@start_positions) if ($in_quote_string);
+
+	# NOTE: Eureka!  Found the quote bug!  It's here.  If the above code
+	#  detects an embedded string, BUT those embedded strings are part
+	#  of HTML tags, then this next block, which actually "colorizes" the
+	#  tokens, will never get triggered, because the $quote_count will
+	#  be zero.  If this is the case, then colorize the string normally.
+	#  The bug is as simple as NOT providing an "else" clause for this
+	#  check..."Silly programmer, bugs are for morons!" =)
+
+	if (scalar(@start_positions)) {
+		my $new_string = "";
+
+		# usually, there will be only one embedded string.  However, that's not
+		# a very safe assumption, so I'm generalizing this...
+
+		my $offset = 0;
+
+		for (my $index = 0; $index < scalar(@start_positions); $index++) {
+
+			# calculate the length of the substrings to be extracted
+			my $good_length = $start_positions[$index] - $offset;
+			my $bad_length =
+				$end_positions[$index] - $start_positions[$index] + 1;
+
+			# extract the substring on which to operate
+			my $good_string = substr($string, $offset, $good_length);
+
+			# perform the replacement
+			$good_string = substitute_token( string => $good_string, token => $token,
+				html => $html );
+
+			# reset the $offset
+			$offset = $start_positions[$index];
+
+			# extract the following "bad" string
+			my $bad_string = substr($string, $offset, $bad_length);
+
+			# reset $offset again
+			$offset = $end_positions[$index] + 1;
+
+			# now, tack these pieces onto the new $string
+			$new_string .= $good_string;
+			$new_string .= $bad_string;
+
+			# NOTE: this loop, currently structured, _assumes_ that $string
+			#  ends with a "bad" string, which is not always the case.
+		}
+
+		# one last substring call, to get any leftover "good" strings
+		my $good_length = length($string) - $offset;
+
+		if ($good_length) {
+			my $good_string = substr($string, $offset, $good_length);
+
+			$good_string = substitute_token( string => $good_string, token => $token,
+				html => $html );
+
+			$new_string .= $good_string;
+		}
+
+		# make the old string the new string
+		$string = $new_string;
+
+	} else {
+
+		# if there are no embedded strings in $string, the operation is much
+		# simpler...
+
+		$string = substitute_token( string => $string, token => $token,
+			html => $html );
+	}
+
+	return $string;
+}
+
+# ----------------------------------------------------------------------
+sub substitute_token {
+	my %args = @_;
+
+	my $string = $args{'string'};
+	my $token = $args{'token'};
+	my $html = $args{'html'};
+
+	# NOTE: substitution problem -- three different cases need to
+	#  be handled.  First, the token appears in the middle of the string,
+	#  separated by word boundaries.  Second, the token appears at the
+	#  very beginning of the string.  Third, the token appears at the very
+	#  end of the string.  And, in all cases, the token does _not_ appear
+	#  in comments; if so, it is to be ignored.
+
+	# using the /g modifier, march through every occurrence of $token in
+	# $string, one by one, and decide on a case-by-case basis whether to
+	# replace that occurrence with the relevant HTML tags.  No, this won't
+	# work, since it's not the occurrence of the token itself, but the
+	# immediate context of that occurrence, which determines whether to
+	# do the replacement.
+
+	# NOTE: perhaps make a local copy of $string, condense the whitespace,
+	#  then do the token checking.  If there's a leading *, then don't
+	#  do the substitution.
+
+	# the "#include <...>" case, where the <> will be the HTML codes for
+	# those characters...
+
+	if ($string =~ /&lt;(.+)?$token(.+)?&gt;/) {
+
+		# no-op
+		return $string;
+
+	} elsif ($string =~ /\b$token\b/) {
+
+		# the most common case
+		$string =~ s/\b$token\b/$html/g;
+	}
+
+	# the "beginning" case
+	if ($string =~ /^$token\b/) {
+		$string =~ s/^$token\b/$html/;
+	}
+
+	# the "ending" case
+	# NOTE: what about the newline character?
+
+	if ($string =~ /\b$token\n$/) {
+		$string =~ s/\b$token$/$html/;
+	}
+
+	return $string;
+}
+
+# ----------------------------------------------------------------------
+sub usage {
+
+	print STDOUT <<END_OF_USAGE;
+usage: $program [-T] [-d <output-directory>] [-h] [-l <log-file>] [-n] [-r]
+         [-s <directory>] [-t <tags-file>] [-v] file1 file2 .... fileN
+
+ -T -- generate an index of all tags (functions, macros, etc)
+ -d -- an output directory to contain the generated HTML pages
+       (default is $html_dir/ in the current directory)
+ -h -- help (this message)
+ -l -- specify a log file, to which verbose output will be sent in addition
+       to STDOUT [NOT IMPLEMENTED]
+ -n -- suppress automatic generation of index$html_file_extension
+ -r -- recurse down through the current directory for source files
+ -s -- specify a list of directories, surrounded by quotes, to skip when
+       recursing
+ -t -- specify an alternate tags file
+       (default is a file called "tags" in the current directory)
+ -v -- verbose messages while processing
+
+If no files are specified on the command line, the program will use the
+normal file extensions for C source code files (using globbing) in the 
+current directory to find files on which to operate.
+
+To generate a tags file, use the ctags(1) program, like thus:
+
+ctags -R -x --sort=no > tags
+
+Using a ctags file, $program can usually be run like thus:
+
+$program -r
+
+for recursing through the current directory, which contains C source files,
+and outputting the generated pages into a new html subdirectory.
+
+END_OF_USAGE
+
+	exit;
+}
+
+# -----------------------------------------------------------------------
+
+__END__
+
+# the language-specific keywords -- each language (and yes, I'm counting
+# C++ as a separate language than C in this case because of the superset
+# of special keywords it brings) has its own section denoted by HTML-like
+# tags
+
+# NOTE: future improvement -- allow for groups (eg datatypes, preprocessor)
+
+<c>
+case
+const
+default
+else
+extern
+for
+if
+register
+
+	<preprocessor>
+		define
+		defined
+		elif
+		endif
+		ifdef
+		ifndef
+		include
+                inline
+		sizeof
+		typedef
+		undef
+	</preprocessor>
+
+	<datatype>
+		char
+		double
+		float
+		int
+		long
+		short
+		struct
+		union
+		void
+	</datatype>
+
+return
+static
+switch
+unsigned
+while
+</c>
+
+<c++>
+case
+include
+ifdef
+ifndef
+else
+endif
+define
+undef
+void
+return
+static
+unsigned
+char
+int
+struct
+float
+double
+short
+long
+for
+while
+if
+else
+extern
+const
+sizeof
+typedef
+switch
+</c++>
+
+# NOTE: these keyword lists are currently unsupported, but I'll keep them
+#  here, in case I ever expand this program to support them.
+
+<java>
+abstract
+boolean
+break
+byte
+byvalue
+case
+cast
+catch
+char
+class
+const
+continue
+default
+do
+double
+else
+extends
+false
+final
+finally
+float
+for
+future
+generic
+goto
+if
+implements
+import
+inner
+instanceof
+int
+interface
+long
+native
+new
+null
+operator
+outer
+package
+private
+protected
+public
+rest
+return
+short
+static
+super
+switch
+synchronized
+this
+throw
+throws
+transient
+true
+try
+var
+void
+volatile
+while
+</java>
+
+<perl>
+AUTOLOAD
+BEGIN
+continue
+do
+else
+elsif
+END
+for
+foreach
+goto
+if
+last
+local
+my
+next
+package
+redo
+require
+sub
+then
+unless
+use
+while
+</perl>

@@ -17,36 +17,6 @@
 </center>
 
 <hr>
-<a name="IOBUF"><b>IOBUF</b></a><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- typedef struct IO_Buffer IOBUF;
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/include/io.h.html#IOBUF">include/io.h</a><br>
-
-<hr>
-<a name="IOFILE"><b>IOFILE</b></a><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- typedef struct IO_File IOFILE;
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/include/io.h.html#IOFILE">include/io.h</a><br>
-
-<hr>
-<a name="IOREQ"><b>IOREQ</b></a><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- typedef struct IO_Request IOREQ;
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/include/io.h.html#IOREQ">include/io.h</a><br>
-
-<hr>
 <a name="LPARAM"><b>LPARAM</b></a><br>
 <br>
 <font color=blue>Comments</font>: Longest bitsize compatible with a scalar and
@@ -503,53 +473,6 @@
   <a href="../src/modules/mod_log.c.html#logformat_t">modules/mod_log.c</a><br>
 
 <hr>
-<a name="logrun_header_t"><b>logrun_header_t</b></a><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- typedef struct {
-
-   <font color=blue>/* always 0xdeadbeef */</font>
-   unsigned long r_magic;
-
-   <font color=blue>/* version of proftpd with which file was created */</font>
-   unsigned long r_version;
-
-   <font color=blue>/* size of each entry (including first) */</font>
-   unsigned long r_size;
-
- } logrun_header_t;
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/include/log.h.html#logrun_header_t">include/log.h</a><br>
-
-<hr>
-<a name="logrun_t"><b>logrun_t</b></a><br>
-<br>
-<font color=blue>Comments</font>: This structure is used for writing
-	<code>/var/run/proftpd-*</code> files<br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- typdef struct {
-
-   pid_t pid;
-   uid_t uid;
-   gid_t gid;
-   p_in_addr_t server_ip;
-   unsigned short server_port;
-   time_t idle_since;
-   char user[100], op[200];
-   unsigned long transfer_size, transfer_complete;
-   char address[80], cwd[100];
-   char class[32], spare[100];
-
- } logrun_t;
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/include/log.h.html#logrun_t">include/log.h</a><br>
-
-<hr>
 <a name="modret_t"><b>modret_t</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -624,6 +547,58 @@
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/include/dirtree.h.html#privdata_t">include/dirtree.h</a><br>
+
+<hr>
+<a name="pr_scoreboard_entry_t"><b>pr_scoreboard_entry_t</b></a><br>
+<br>
+<font color=blue>Comments</font>: This structure is used for writing the scoreboard file<br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ typedef struct {
+   pid_t sce_pid;
+   uid_t sce_uid;
+   gid_t sce_gid;
+   char sce_user[32];
+   p_in_addr_t *sce_server_ip;
+   int sce_server_port;
+   char sce_server_addr[80], sce_server_name[32];
+   char sce_client_addr[80];
+   char sce_class[32];
+   char sce_cwd[PR_TUNABLE_SCOREBOARD_BUFFER_SIZE];
+   char sce_cmd[PR_TUNABLE_SCOREBOARD_BUFFER_SIZE];
+   time_t sce_begin_idle, sce_begin_session;
+   off_t sce_xfer_size, sce_xfer_done;
+
+ } pr_scoreboard_entry_t;
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/include/scoreboard.h.html#pr_scoreboard_entry_t">include/scoreboard.h</a><br>
+
+<hr>
+<a name="pr_scoreboard_header_t"><b>pr_scoreboard_header_t</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ typedef struct {
+
+  <font color=blue>/* Always 0xDEADBEEF */</font>
+  unsigned long sch_magic;
+
+  <font color=blue>/* Version of proftpd that created the scoreboard file */</fo
+nt>
+  unsigned long sch_version;
+
+  <font color=blue>/* PID of the process to which this scoreboard belongs, or zero if inetd */</font>
+  pid_t sch_pid;
+
+  <font color=blue>/* Time when the daemon wrote this header */</font>
+  time_t sch_uptime;
+
+} pr_scoreboard_header_t;
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/include/scoreboard.h.html#pr_scoreboard_header_t">include/scoreboard.h</a><br>
 
 <hr>
 <a name="response_t"><b>response_t</b></a><br>

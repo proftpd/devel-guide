@@ -83,10 +83,8 @@ cleanup_pool_for_exec
 fd_cleanup
 file_child_cleanup
 file_cleanup
-kill_cleanup
-kill_cleanups_for_fd
-note_cleanups_for_fd
-note_cleanups_for_file
+register_fd_cleanups
+register_file_cleanups
 register_cleanup
 run_child_cleanups
 run_cleanup
@@ -132,9 +130,7 @@ dir_canonical_path
 dir_check 
 dir_check_canon
 dir_check_full
-dir_check_hidden
 dir_check_limits
-dir_check_op
 dir_check_op_mode
 dir_exists
 dir_interpolate
@@ -196,7 +192,6 @@ fs_symlink
 fs_symlink_canon
 fs_unlink
 fs_unlink_canon
-fs_unregister
 fs_virtual_path
 fs_write
 init_fs
@@ -223,48 +218,38 @@ std_write
 
 <b>IO API</b><br>
 <ul>
-init_io
-io_abort
-io_close
+pr_init_netio
+pr_netio_abort
+pr_netio_close
 io_create
-io_gets
-io_newbuf
-io_open
-io_poll
-io_printf
-io_printf_async
-io_read
-io_reopen
-io_set_errno
+pr_netio_gets
+netio_buffer_alloc
+pr_netio_open
+pr_netio_poll
+pr_netio_printf
+pr_netio_printf_async
+pr_netio_read
+pr_netio_reopen
 io_set_poll_sleep
-io_telnet_gets
-io_write
-io_write_async
+pr_netio_telnet_gets
+pr_netio_write
+pr_netio_write_async
 </ul>
 
 <b>Logging API</b><br>
 <ul>
-_read_hdr
-_read_run
 debug_dump_config
 init_log
 log
-log_add_run
 log_auth
 log_close_run
 log_close_xfer
 log_closesyslog
 log_debug
 log_discard
-log_open_checkpath
-log_open_run
 log_open_xfer
 log_opensyslog
 log_pri
-log_read_run
-log_rm_run
-log_run_address
-log_run_checkpath
 log_run_cwd
 log_run_getpath
 log_run_setpath
@@ -278,14 +263,12 @@ log_wtmp
 <ul>
 __walk_pools
 bytes_in_block_list
-bytes_in_free_blocks
-bytes_in_pool
 chk_on_blk_list
 debug_pool_info
 debug_walk_pools
 destroy_pool
 free_blocks
-init_alloc
+pr_init_pools
 malloc_block
 new_block
 null_alloc
@@ -326,7 +309,6 @@ init_dyn_stacks
 parse_config_file
 resolve_anonymous_dirs
 resolve_defered_dirs
-scan_config_file
 start_new_server
 start_sub_config
 strip_end
@@ -336,7 +318,6 @@ strip_end
 <ul>
 clear_inet_pool
 clear_pool
-make_named_sub_pool
 make_sub_pool
 palloc
 pcalloc
@@ -373,7 +354,6 @@ send_response_raw
 <ul>
 run_schedule
 schedule
-schedulep
 </ul>
 
 <b>Sets</b><br>
@@ -390,7 +370,7 @@ xaset_union
 
 <b>Signals</b><br>
 <ul>
-_block_signals
+mask_signals
 block_signals
 install_signal_handlers
 set_sig_alarm
@@ -411,11 +391,10 @@ unblock_signals
 
 <b>Timers API</b><br>
 <ul>
-_compare_timer
-_reset_timers
+timer_cmp
 add_timer
 block_alarms
-handle_sig_alarm
+handle_alarm
 remove_timer
 reset_timer
 unblock_alarms
@@ -423,46 +402,46 @@ unblock_alarms
 
 <b>Command handlers</b><br>
 <ul>
-cmd_abor
-cmd_acct
-cmd_allo
-cmd_cdup
-cmd_cwd
-cmd_dele
-cmd_help
-cmd_list
+xfer_abor
+auth_acct
+xfer_allo
+core_cdup
+core_cwd
+core_dele
+core_help
+ls_list
 cmd_loop
-cmd_mdtm
-cmd_mkd
-cmd_mode
-cmd_nlst
-cmd_noop
-cmd_pass
-cmd_pasv
-cmd_port
-cmd_pwd
-cmd_quit
-cmd_rein
-cmd_rest
-cmd_retr
-cmd_rmd
-cmd_rnfr
-cmd_rnto
-cmd_site
-cmd_size
-cmd_smnt
-cmd_stat
-cmd_stor
-cmd_stou
-cmd_stru
-cmd_syst
-cmd_type
-cmd_user
-pre_cmd_appe
-pre_cmd_pass
-pre_cmd_retr
-pre_cmd_stor
-pre_cmd_user
+core_mdtm
+core_mkd
+xfer_mode
+ls_nlst
+core_noop
+auth_pass
+core_pasv
+core_port
+core_pwd
+core_quit
+auth_rein
+xfer_rest
+xfer_retr
+core_rmd
+core_rnfr
+core_rnto
+sit_cmd
+core_size
+xfer_smnt
+ls_stat
+xfer_stor
+xfer_stou
+xfer_stru
+core_syst
+xfer_type
+auth_user
+xfer_pre_appe
+auth_pre_pass
+xfer_pre_retr
+xfer_pre_stor
+auth_pre_user
 </ul>
 
 <b>Configuration directive handlers</b><br>
@@ -484,7 +463,7 @@ add_directory
 add_extendedlog
 add_global
 add_groupowner
-add_grouppassword
+set_grouppassword
 add_hidegroup
 add_hideuser
 add_limit
@@ -494,10 +473,10 @@ add_order
 add_ratebool
 add_ratenum
 add_transferlog
-add_useralias
+set_useralias
 add_userdirroot
 add_userowner
-add_userpassword
+set_userpassword
 add_virtualhost
 end_anonymous
 end_directory
@@ -507,7 +486,6 @@ end_limit
 set_accessdenymsg
 set_accessgrantmsg
 set_allowall
-set_allowchmod
 set_allowfilter
 set_allowforeignaddress
 set_allowlogsymlinks
@@ -537,7 +515,7 @@ set_displaygoaway
 set_displaylogin
 set_displayquit
 set_group
-set_hiddenstor
+set_hiddenstores
 set_hidenoaccess
 set_identlookups
 set_ignorehidden
@@ -549,9 +527,9 @@ set_maxhostsperuser
 set_maxinstances
 set_maxloginattempts
 set_multilinerfc2228
-set_pam
-set_pamauthoritative
-set_pamconfig
+set_authpam
+set_authpamauthoritative
+set_authpamconfig
 set_passiveports
 set_pathallowfilter
 set_pathdenyfilter
@@ -561,16 +539,18 @@ set_requirevalidshell
 set_rlimitcpu
 set_rlimitmemory
 set_rlimitopenfiles
-set_rlimits
+set_daemon_rlimits
 set_rootlogin
-set_scoreboardpath
+set_scoreboardfile
+set_server_privs
 set_serveradmin
 set_serverident
 set_servername
 set_serverport
 set_servertype
-set_showdotfiles
-set_showsymlinks
+set_session_rlimits
+set_socketbindtight
+set_storeuniqueprefix
 set_syslogfacility
 set_sysloglevel
 set_systemlog
@@ -581,6 +561,7 @@ set_tcpsendwindow
 set_timeoutidle
 set_timeoutlogin
 set_timeoutnoxfer
+set_timeoutsession
 set_timeoutstalled
 set_timesgmt
 set_umask
@@ -595,13 +576,12 @@ _add_allow_deny
 _add_allow_deny_group
 _add_allow_deny_user
 _auth_anonymous_group
-_auth_check_count
+auth_count_scoreboard
 _auth_check_ftpusers
 _auth_check_shell
 _auth_group
 _auth_lookup_id
 _auth_resolve_user
-_auth_shutdown
 _calc_fs
 _chdir
 _compare_file_mtime
@@ -610,7 +590,7 @@ _compare_gid
 _compare_id
 _compare_sym
 _compare_uid
-_conn_cleanup
+conn_cleanup_cb
 _create_inet_pool
 _data_active_open
 _data_new_xfer
@@ -619,7 +599,7 @@ _dir_check_op
 _dispatch
 _dispatch_auth
 _do_auth
-_do_user_counts
+auth_scan_scoreboard
 _dup_low_fd
 _exists
 _find_best_dir
@@ -629,7 +609,6 @@ _get_default_root
 _get_full_cmd
 _get_gmtoff
 _get_pw_info
-_grlist
 _hash_find
 _hash_find_next
 _hash_index
@@ -637,37 +616,35 @@ _hash_insert
 _hash_insert_auth
 _hash_insert_cmd
 _hash_insert_conf
-_ident_timeout
-_idle_timeout
-_inet_pool_cleanup
+ident_timeout_cb
+idle_timeout_cb
+inet_pool_cleanup_cb
 _internal_abort
 _log_transfer
-_login_timeout
+auth_login_timeout_cb
 _make_cmd
-_noxfer_timeout
+noxfer_timeout_cb
 _parse_classes
 _parse_options
-_pid_exists
 _prepare_core
 _rate_diffusec
 _rate_throttle
-_retr_abort
-_retr_done
-_server_conn_cleanup
+retr_abort
+retr_complete
+server_conn_cleanup_cb
 _set_oobinline
 _set_owner
-_set_timeout
 _sethide
 _setup_environment
-_sleep_callback
-_stor_abort
-_stor_done
+sleep_cb
+stor_abort
+stor_complete
 _strmatch
 _symlink
 _transmit_data
 _transmit_normal
 _transmit_sendfile
-_xfer_exit
+xfer_exit_cb
 _xlate_ascii_read
 _xlate_ascii_write
 accept_binding
@@ -679,8 +656,8 @@ addl_bindings
 call_module
 call_module_auth
 call_module_cmd
-check_auth
-check_conf
+auth_cmd_chk_cb
+check_context
 check_shutmsg
 cmp
 core_chmod
@@ -705,7 +682,7 @@ exists
 fgetbufline
 find_binding
 find_opendir
-fini_nlst
+ls_log_nlst
 fmt_time
 fork_server
 get_command_class
@@ -760,7 +737,7 @@ main_exit
 main_rehash
 main_set_idle
 make_arg_str
-make_cmd
+make_ftp_cmd
 match_ip
 mod_create_data
 mod_create_error
@@ -773,7 +750,6 @@ mod_privdata_find
 parse_group_expression
 parse_user_expression
 passwd_dup
-percent_complete
 pop_cwd
 preparse_arg
 push_cwd
@@ -799,7 +775,7 @@ sstrcat
 sstrncpy
 stalled_timeout
 standalone_main
-start_daemon
+daemonize
 
 -->
 
@@ -811,14 +787,9 @@ start_daemon
   <li><a href="functions.html#_add_allow_deny_group">_add_allow_deny_group</a>
   <li><a href="functions.html#_add_allow_deny_user">_add_allow_deny_user</a>
   <li><a href="functions.html#_auth_anonymous_group">_auth_anonymous_group</a>
-  <li><a href="functions.html#_auth_check_count">_auth_check_count</a>
-  <li><a href="functions.html#_auth_check_ftpusers">_auth_check_ftpusers</a>
-  <li><a href="functions.html#_auth_check_shell">_auth_check_shell</a>
   <li><a href="functions.html#_auth_group">_auth_group</a>
   <li><a href="functions.html#_auth_lookup_id">_auth_lookup_id</a>
   <li><a href="functions.html#_auth_resolve_user">_auth_resolve_user</a>
-  <li><a href="functions.html#_auth_shutdown">_auth_shutdown</a>
-  <li><a href="functions.html#_block_signals">_block_signals</a>
   <li><a href="functions.html#_calc_fs">_calc_fs</a>
   <li><a href="functions.html#_chdir">_chdir</a>
   <li><a href="functions.html#_check_group_access">_check_group_access</a>
@@ -835,9 +806,7 @@ start_daemon
   <li><a href="functions.html#_compare_gid">_compare_gid</a>
   <li><a href="functions.html#_compare_id">_compare_id</a>
   <li><a href="functions.html#_compare_sym">_compare_sym</a>
-  <li><a href="functions.html#_compare_timer">_compare_timer</a>
   <li><a href="functions.html#_compare_uid">_compare_uid</a>
-  <li><a href="functions.html#_conn_cleanup">_conn_cleanup</a>
   <li><a href="functions.html#_copy_global_to_all">_copy_global_to_all</a>
   <li><a href="functions.html#_copy_recur">_copy_recur</a>
   <li><a href="functions.html#_create_inet_pool">_create_inet_pool</a>
@@ -848,7 +817,6 @@ start_daemon
   <li><a href="functions.html#_dispatch">_dispatch</a>
   <li><a href="functions.html#_dispatch_auth">_dispatch_auth</a>
   <li><a href="functions.html#_do_auth">_do_auth</a>
-  <li><a href="functions.html#_do_user_counts">_do_user_counts</a>
   <li><a href="functions.html#_dup_low_fd">_dup_low_fd</a>
   <li><a href="functions.html#_exists">_exists</a>
   <li><a href="functions.html#_find_best_dir">_find_best_dir</a>
@@ -867,49 +835,30 @@ start_daemon
   <li><a href="functions.html#_hash_insert_auth">_hash_insert_auth</a>
   <li><a href="functions.html#_hash_insert_cmd">_hash_insert_cmd</a>
   <li><a href="functions.html#_hash_insert_conf">_hash_insert_conf</a>
-  <li><a href="functions.html#_ident_timeout">_ident_timeout</a>
-  <li><a href="functions.html#_idle_timeout">_idle_timeout</a>
-  <li><a href="functions.html#_inet_pool_cleanup">_inet_pool_cleanup</a>
   <li><a href="functions.html#_internal_abort">_internal_abort</a>
   <li><a href="functions.html#_log_transfer">_log_transfer</a>
-  <li><a href="functions.html#_login_timeout">_login_timeout</a>
   <li><a href="functions.html#_make_cmd">_make_cmd</a>
   <li><a href="functions.html#_mergedown">_mergedown</a>
-  <li><a href="functions.html#_noxfer_timeout">_noxfer_timeout</a>
   <li><a href="functions.html#_parse_classes">_parse_classes</a>
   <li><a href="functions.html#_parse_options">_parse_options</a>
-  <li><a href="functions.html#_pgetgrent">_pgetgrent</a>
-  <li><a href="functions.html#_pgetpwent">_pgetpwent</a>
-  <li><a href="functions.html#_pid_exists">_pid_exists</a>
   <li><a href="functions.html#_prepare_core">_prepare_core</a>
   <li><a href="functions.html#_rate_diffusec">_rate_diffusec</a>
   <li><a href="functions.html#_rate_throttle">_rate_throttle</a>
-  <li><a href="functions.html#_read_hdr">_read_hdr</a>
-  <li><a href="functions.html#_read_run">_read_run</a>
   <li><a href="functions.html#_recur_match_path">_recur_match_path</a>
   <li><a href="functions.html#_reorder_dirs">_reorder_dirs</a>
   <li><a href="functions.html#_reparent_all">_reparent_all</a>
-  <li><a href="functions.html#_reset_timers">_reset_timers</a>
-  <li><a href="functions.html#_retr_abort">_retr_abort</a>
-  <li><a href="functions.html#_retr_done">_retr_done</a>
   <li><a href="functions.html#_scan_fsdir">_scan_fsdir</a>
   <li><a href="functions.html#_scan_fsmatch">_scan_fsmatch</a>
-  <li><a href="functions.html#_server_conn_cleanup">_server_conn_cleanup</a>
   <li><a href="functions.html#_set_oobinline">_set_oobinline</a>
   <li><a href="functions.html#_set_owner">_set_owner</a>
-  <li><a href="functions.html#_set_timeout">_set_timeout</a>
   <li><a href="functions.html#_sethide">_sethide</a>
   <li><a href="functions.html#_setup_environment">_setup_environment</a>
-  <li><a href="functions.html#_sleep_callback">_sleep_callback</a>
-  <li><a href="functions.html#_stor_abort">_stor_abort</a>
   <li><a href="functions.html#_stor_chown">_stor_chown</a>
-  <li><a href="functions.html#_stor_done">_stor_done</a>
   <li><a href="functions.html#_strmatch">_strmatch</a>
   <li><a href="functions.html#_symlink">_symlink</a>
   <li><a href="functions.html#_transmit_data">_transmit_data</a>
   <li><a href="functions.html#_transmit_normal">_transmit_normal</a>
   <li><a href="functions.html#_transmit_sendfile">_transmit_sendfile</a>
-  <li><a href="functions.html#_xfer_exit">_xfer_exit</a>
   <li><a href="functions.html#_xlate_ascii_read">_xlate_ascii_read</a>
   <li><a href="functions.html#_xlate_ascii_write">_xlate_ascii_write</a>
   <li><a href="functions.html#accept_binding">accept_binding</a>
@@ -931,6 +880,7 @@ start_daemon
   <li><a href="functions.html#add_config_set">add_config_set</a>
   <li><a href="functions.html#add_defaultchdir">add_defaultchdir</a>
   <li><a href="functions.html#add_defaultroot">add_defaultroot</a>
+  <li><a href="functions.html#add_define">add_define</a>
   <li><a href="functions.html#add_deny">add_deny</a>
   <li><a href="functions.html#add_denygroup">add_denygroup</a>
   <li><a href="functions.html#add_denyuser">add_denyuser</a>
@@ -939,7 +889,6 @@ start_daemon
   <li><a href="functions.html#add_extendedlog">add_extendedlog</a>
   <li><a href="functions.html#add_global">add_global</a>
   <li><a href="functions.html#add_groupowner">add_groupowner</a>
-  <li><a href="functions.html#add_grouppassword">add_grouppassword</a>
   <li><a href="functions.html#add_hidegroup">add_hidegroup</a>
   <li><a href="functions.html#add_hideuser">add_hideuser</a>
   <li><a href="functions.html#add_hostname">add_hostname</a>
@@ -955,17 +904,21 @@ start_daemon
   <li><a href="functions.html#add_response_err">add_response_err</a>
   <li><a href="functions.html#add_timer">add_timer</a>
   <li><a href="functions.html#add_transferlog">add_transferlog</a>
-  <li><a href="functions.html#add_useralias">add_useralias</a>
   <li><a href="functions.html#add_userdirroot">add_userdirroot</a>
   <li><a href="functions.html#add_userowner">add_userowner</a>
-  <li><a href="functions.html#add_userpassword">add_userpassword</a>
   <li><a href="functions.html#add_virtualhost">add_virtualhost</a>
   <li><a href="functions.html#addfile">addfile</a>
   <li><a href="functions.html#addl_bindings">addl_bindings</a>
+  <li><a href="functions.html#allow_dyn_config">allow_dyn_config</a>
   <li><a href="functions.html#append_arrays">append_arrays</a>
   <li><a href="functions.html#array_cat">array_cat</a>
+  <li><a href="functions.html#auth_acct">auth_acct</a>
   <li><a href="functions.html#auth_authenticate">auth_authenticate</a>
   <li><a href="functions.html#auth_check">auth_check</a>
+  <li><a href="functions.html#auth_check_ftpusers">auth_check_ftpusers</a>
+  <li><a href="functions.html#auth_check_shell">auth_check_shell</a>
+  <li><a href="functions.html#auth_cmd_chk_cb">auth_cmd_chk_cb</a>
+  <li><a href="functions.html#auth_count_scoreboard">auth_count_scoreboard</a>
   <li><a href="functions.html#auth_endgrent">auth_endgrent</a>
   <li><a href="functions.html#auth_endpwent">auth_endpwent</a>
   <li><a href="functions.html#auth_getgrent">auth_getgrent</a>
@@ -977,70 +930,68 @@ start_daemon
   <li><a href="functions.html#auth_getpwuid">auth_getpwuid</a>
   <li><a href="functions.html#auth_gid_name">auth_gid_name</a>
   <li><a href="functions.html#auth_init">auth_init</a>
-  <li><a href="functions.html#auth_init_child">auth_init_child</a>
+  <li><a href="functions.html#auth_login_timeout_cb">auth_login_timeout_cb</a>
   <li><a href="functions.html#auth_name_gid">auth_name_gid</a>
   <li><a href="functions.html#auth_name_uid">auth_name_uid</a>
+  <li><a href="functions.html#auth_pass">auth_pass</a>
+  <li><a href="functions.html#auth_post_pass">auth_post_pass</a>
+  <li><a href="functions.html#auth_pre_pass">auth_pre_pass</a>
+  <li><a href="functions.html#auth_pre_user">auth_pre_user</a>
+  <li><a href="functions.html#auth_rein">auth_rein</a>
+  <li><a href="functions.html#auth_scan_scoreboard">auth_scan_scoreboard</a>
+  <li><a href="functions.html#auth_sess_init">auth_sess_init</a>
   <li><a href="functions.html#auth_setgrent">auth_setgrent</a>
   <li><a href="functions.html#auth_setpwent">auth_setpwent</a>
   <li><a href="functions.html#auth_uid_name">auth_uid_name</a>
+  <li><a href="functions.html#auth_user">auth_user</a>
   <li><a href="functions.html#block_alarms">block_alarms</a>
   <li><a href="functions.html#block_signals">block_signals</a>
   <li><a href="functions.html#build_dyn_config">build_dyn_config</a>
   <li><a href="functions.html#bytes_in_block_list">bytes_in_block_list</a>
-  <li><a href="functions.html#bytes_in_free_blocks">bytes_in_free_blocks</a>
-  <li><a href="functions.html#bytes_in_pool">bytes_in_pool</a>
   <li><a href="functions.html#call_module">call_module</a>
   <li><a href="functions.html#call_module_auth">call_module_auth</a>
   <li><a href="functions.html#call_module_cmd">call_module_cmd</a>
-  <li><a href="functions.html#check_auth">check_auth</a>
-  <li><a href="functions.html#check_conf">check_conf</a>
+  <li><a href="functions.html#check_context">check_context</a>
   <li><a href="functions.html#check_shutmsg">check_shutmsg</a>
   <li><a href="functions.html#chk_on_blk_list">chk_on_blk_list</a>
-  <li><a href="functions.html#cleanup_for_exec">cleanup_for_exec</a>
-  <li><a href="functions.html#cleanup_pool_for_exec">cleanup_pool_for_exec</a>
   <li><a href="functions.html#clear_inet_pool">clear_inet_pool</a>
   <li><a href="functions.html#clear_pool">clear_pool</a>
-  <li><a href="functions.html#cmd_abor">cmd_abor</a>
-  <li><a href="functions.html#cmd_acct">cmd_acct</a>
-  <li><a href="functions.html#cmd_allo">cmd_allo</a>
-  <li><a href="functions.html#cmd_cdup">cmd_cdup</a>
-  <li><a href="functions.html#cmd_cwd">cmd_cwd</a>
-  <li><a href="functions.html#cmd_dele">cmd_dele</a>
-  <li><a href="functions.html#cmd_help">cmd_help</a>
-  <li><a href="functions.html#cmd_list">cmd_list</a>
   <li><a href="functions.html#cmd_loop">cmd_loop</a>
-  <li><a href="functions.html#cmd_mdtm">cmd_mdtm</a>
-  <li><a href="functions.html#cmd_mkd">cmd_mkd</a>
-  <li><a href="functions.html#cmd_mode">cmd_mode</a>
-  <li><a href="functions.html#cmd_nlst">cmd_nlst</a>
-  <li><a href="functions.html#cmd_noop">cmd_noop</a>
-  <li><a href="functions.html#cmd_pass">cmd_pass</a>
-  <li><a href="functions.html#cmd_pasv">cmd_pasv</a>
-  <li><a href="functions.html#cmd_port">cmd_port</a>
-  <li><a href="functions.html#cmd_pwd">cmd_pwd</a>
-  <li><a href="functions.html#cmd_quit">cmd_quit</a>
-  <li><a href="functions.html#cmd_rein">cmd_rein</a>
-  <li><a href="functions.html#cmd_rest">cmd_rest</a>
-  <li><a href="functions.html#cmd_retr">cmd_retr</a>
-  <li><a href="functions.html#cmd_rmd">cmd_rmd</a>
-  <li><a href="functions.html#cmd_rnfr">cmd_rnfr</a>
-  <li><a href="functions.html#cmd_rnto">cmd_rnto</a>
-  <li><a href="functions.html#cmd_site">cmd_site</a>
-  <li><a href="functions.html#cmd_size">cmd_size</a>
-  <li><a href="functions.html#cmd_smnt">cmd_smnt</a>
-  <li><a href="functions.html#cmd_stat">cmd_stat</a>
-  <li><a href="functions.html#cmd_stor">cmd_stor</a>
-  <li><a href="functions.html#cmd_stou">cmd_stou</a>
-  <li><a href="functions.html#cmd_stru">cmd_stru</a>
-  <li><a href="functions.html#cmd_syst">cmd_syst</a>
-  <li><a href="functions.html#cmd_type">cmd_type</a>
-  <li><a href="functions.html#cmd_user">cmd_user</a>
+  <li><a href="functions.html#conn_cleanup_cb">conn_cleanup_cb</a>
+  <li><a href="functions.html#core_cdup">core_cdup</a>
+  <li><a href="functions.html#core_chgrp">core_chgrp</a>
+  <li><a href="functions.html#core_chmod">core_chmod</a>
+  <li><a href="functions.html#core_cwd">core_cwd</a>
+  <li><a href="functions.html#core_dele">core_dele</a>
+  <li><a href="functions.html#core_help">core_help</a>
+  <li><a href="functions.html#core_mdtm">core_mdtm</a>
+  <li><a href="functions.html#core_mkd">core_mkd</a>
+  <li><a href="functions.html#core_netio_abort_cb">core_netio_abort_cb</a>
+  <li><a href="functions.html#core_netio_close_cb">core_netio_close_cb</a>
+  <li><a href="functions.html#core_netio_open_cb">core_netio_open_cb</a>
+  <li><a href="functions.html#core_netio_poll_cb">core_netio_poll_cb</a>
+  <li><a href="functions.html#core_netio_postopen_cb">core_netio_postopen_cb</a>
+  <li><a href="functions.html#core_netio_read_cb">core_netio_read_cb</a>
+  <li><a href="functions.html#core_netio_reopen_cb">core_netio_reopen_cb</a>
+  <li><a href="functions.html#core_netio_write_cb">core_netio_write_cb</a>
+  <li><a href="functions.html#core_noop">core_noop</a>
+  <li><a href="functions.html#core_pasv">core_pasv</a>
+  <li><a href="functions.html#core_port">core_port</a>
+  <li><a href="functions.html#core_pwd">core_pwd</a>
+  <li><a href="functions.html#core_quit">core_quit</a>
+  <li><a href="functions.html#core_rehash_cb">core_rehash_cb</a>
+  <li><a href="functions.html#core_rmd">core_rmd</a>
+  <li><a href="functions.html#core_rnfr">core_rnfr</a>
+  <li><a href="functions.html#core_rnto">core_rnto</a>
+  <li><a href="functions.html#core_size">core_size</a>
+  <li><a href="functions.html#core_syst">core_syst</a>
   <li><a href="functions.html#cmp">cmp</a>
   <li><a href="functions.html#copy_array">copy_array</a>
   <li><a href="functions.html#copy_array_hdr">copy_array_hdr</a>
   <li><a href="functions.html#copy_array_str">copy_array_str</a>
   <li><a href="functions.html#core_chmod">core_chmod</a>
   <li><a href="functions.html#core_display_file">core_display_file</a>
+  <li><a href="functions.html#daemonize">daemonize</a>
   <li><a href="functions.html#data_abort">data_abort</a>
   <li><a href="functions.html#data_cleanup">data_cleanup</a>
   <li><a href="functions.html#data_close">data_close</a>
@@ -1060,12 +1011,10 @@ start_daemon
   <li><a href="functions.html#dir_check">dir_check</a>
   <li><a href="functions.html#dir_check_canon">dir_check_canon</a>
   <li><a href="functions.html#dir_check_full">dir_check_full</a>
-  <li><a href="functions.html#dir_check_hidden">dir_check_hidden</a>
   <li><a href="functions.html#dir_check_limits">dir_check_limits</a>
-  <li><a href="functions.html#dir_check_op">dir_check_op</a>
   <li><a href="functions.html#dir_check_op_mode">dir_check_op_mode</a>
   <li><a href="functions.html#dir_exists">dir_exists</a>
-  <li><a href="functions.html#dir_get_param">dir_get_param</a>
+  <li><a href="functions.html#dir_hide_file">dir_hide_file</a>
   <li><a href="functions.html#dir_interpolate">dir_interpolate</a>
   <li><a href="functions.html#dir_match_path">dir_match_path</a>
   <li><a href="functions.html#dir_realpath">dir_realpath</a>
@@ -1077,6 +1026,8 @@ start_daemon
   <li><a href="functions.html#dolist">dolist</a>
   <li><a href="functions.html#end_anonymous">end_anonymous</a>
   <li><a href="functions.html#end_directory">end_directory</a>
+  <li><a href="functions.html#end_ifdefine">end_ifdefine</a>
+  <li><a href="functions.html#end_ifmodule">end_ifmodule</a>
   <li><a href="functions.html#end_global">end_global</a>
   <li><a href="functions.html#end_limit">end_limit</a>
   <li><a href="functions.html#end_login">end_login</a>
@@ -1086,12 +1037,12 @@ start_daemon
   <li><a href="functions.html#end_virtualhost">end_virtualhost</a>
   <li><a href="functions.html#ensure_open_passwd">ensure_open_passwd</a>
   <li><a href="functions.html#exists">exists</a>
-  <li><a href="functions.html#fd_cleanup">fd_cleanup</a>
+  <li><a href="functions.html#fd_cleanup_cb">fd_cleanup_cb</a>
   <li><a href="functions.html#fgetbufline">fgetbufline</a>
   <li><a href="functions.html#fgetgrent">fgetgrent</a>
   <li><a href="functions.html#fgetpwent">fgetpwent</a>
-  <li><a href="functions.html#file_child_cleanup">file_child_cleanup</a>
-  <li><a href="functions.html#file_cleanup">file_cleanup</a>
+  <li><a href="functions.html#file_child_cleanup_cb">file_child_cleanup_cb</a>
+  <li><a href="functions.html#file_cleanup_cb">file_cleanup_cb</a>
   <li><a href="functions.html#file_exists">file_exists</a>
   <li><a href="functions.html#file_mode">file_mode</a>
   <li><a href="functions.html#find_binding">find_binding</a>
@@ -1102,7 +1053,6 @@ start_daemon
   <li><a href="functions.html#find_config_set_top">find_config_set_top</a>
   <li><a href="functions.html#find_hostname">find_hostname</a>
   <li><a href="functions.html#find_opendir">find_opendir</a>
-  <li><a href="functions.html#fini_nlst">fini_nlst</a>
   <li><a href="functions.html#fixup_dirs">fixup_dirs</a>
   <li><a href="functions.html#fixup_globals">fixup_globals</a>
   <li><a href="functions.html#fixup_servers">fixup_servers</a>
@@ -1157,7 +1107,6 @@ start_daemon
   <li><a href="functions.html#fs_symlink_canon">fs_symlink_canon</a>
   <li><a href="functions.html#fs_unlink">fs_unlink</a>
   <li><a href="functions.html#fs_unlink_canon">fs_unlink_canon</a>
-  <li><a href="functions.html#fs_unregister">fs_unregister</a>
   <li><a href="functions.html#fs_virtual_path">fs_virtual_path</a>
   <li><a href="functions.html#fs_write">fs_write</a>
   <li><a href="functions.html#genericlist">genericlist</a>
@@ -1180,8 +1129,9 @@ start_daemon
   <li><a href="functions.html#get_token">get_token</a>
   <li><a href="functions.html#get_word">get_word</a>
   <li><a href="functions.html#group_expression">group_expression</a>
-  <li><a href="functions.html#handle_sig_alarm">handle_sig_alarm</a>
-  <li><a href="functions.html#idle_time">idle_time</a>
+  <li><a href="functions.html#handle_alarm">handle_alarm</a>
+  <li><a href="functions.html#ident_timeout_cb">ident_timeout_cb</a>
+  <li><a href="functions.html#idle_timeout_cb">idle_timeout_cb</a>
   <li><a href="functions.html#inet_accept">inet_accept</a>
   <li><a href="functions.html#inet_accept_nowait">inet_accept_nowait</a>
   <li><a href="functions.html#inet_ascii">inet_ascii</a>
@@ -1201,6 +1151,7 @@ start_daemon
   <li><a href="functions.html#inet_initialize_connection">inet_initialize_connection</a>
   <li><a href="functions.html#inet_listen">inet_listen</a>
   <li><a href="functions.html#inet_openrw">inet_openrw</a>
+  <li><a href="functions.html#inet_pool_cleanup_cb">inet_pool_cleanup_cb</a>
   <li><a href="functions.html#inet_resetlisten">inet_resetlisten</a>
   <li><a href="functions.html#inet_resolve_ip">inet_resolve_ip</a>
   <li><a href="functions.html#inet_reverse_dns">inet_reverse_dns</a>
@@ -1211,94 +1162,65 @@ start_daemon
   <li><a href="functions.html#inet_setoptions">inet_setoptions</a>
   <li><a href="functions.html#inet_validate">inet_validate</a>
   <li><a href="functions.html#inetd_main">inetd_main</a>
-  <li><a href="functions.html#init_alloc">init_alloc</a>
   <li><a href="functions.html#init_child_modules">init_child_modules</a>
   <li><a href="functions.html#init_conf_stacks">init_conf_stacks</a>
   <li><a href="functions.html#init_config">init_config</a>
   <li><a href="functions.html#init_dyn_stacks">init_dyn_stacks</a>
   <li><a href="functions.html#init_fs">init_fs</a>
   <li><a href="functions.html#init_inet">init_inet</a>
-  <li><a href="functions.html#init_io">init_io</a>
   <li><a href="functions.html#init_log">init_log</a>
   <li><a href="functions.html#init_modules">init_modules</a>
   <li><a href="functions.html#init_set_proc_title">init_set_proc_title</a>
   <li><a href="functions.html#install_signal_handlers">install_signal_handlers</a>
-  <li><a href="functions.html#io_abort">io_abort</a>
-  <li><a href="functions.html#io_close">io_close</a>
-  <li><a href="functions.html#io_create">io_create</a>
-  <li><a href="functions.html#io_gets">io_gets</a>
-  <li><a href="functions.html#io_newbuf">io_newbuf</a>
-  <li><a href="functions.html#io_open">io_open</a>
-  <li><a href="functions.html#io_poll">io_poll</a>
-  <li><a href="functions.html#io_printf">io_printf</a>
-  <li><a href="functions.html#io_printf_async">io_printf_async</a>
-  <li><a href="functions.html#io_read">io_read</a>
-  <li><a href="functions.html#io_reopen">io_reopen</a>
-  <li><a href="functions.html#io_set_errno">io_set_errno</a>
-  <li><a href="functions.html#io_set_poll_sleep">io_set_poll_sleep</a>
-  <li><a href="functions.html#io_telnet_gets">io_telnet_gets</a>
-  <li><a href="functions.html#io_write">io_write</a>
-  <li><a href="functions.html#io_write_async">io_write_async</a>
   <li><a href="functions.html#is_dotdir">is_dotdir</a>
   <li><a href="functions.html#isnumeric">isnumeric</a>
-  <li><a href="functions.html#kill_cleanup">kill_cleanup</a>
-  <li><a href="functions.html#kill_cleanups_for_fd">kill_cleanups_for_fd</a>
   <li><a href="functions.html#kludge_disable_umask">kludge_disable_umask</a>
   <li><a href="functions.html#kludge_enable_umask">kludge_enable_umask</a>
-  <li><a href="functions.html#list_cleanup">list_cleanup</a>
   <li><a href="functions.html#list_modules">list_modules</a>
   <li><a href="functions.html#listdir">listdir</a>
   <li><a href="functions.html#listen_binding">listen_binding</a>
   <li><a href="functions.html#listfile">listfile</a>
   <li><a href="functions.html#lockdown">lockdown</a>
   <li><a href="functions.html#log">log</a>
-  <li><a href="functions.html#log_add_run">log_add_run</a>
   <li><a href="functions.html#log_auth">log_auth</a>
   <li><a href="functions.html#log_auth_complete">log_auth_complete</a>
-  <li><a href="functions.html#log_child_init">log_child_init</a>
-  <li><a href="functions.html#log_close_run">log_close_run</a>
   <li><a href="functions.html#log_close_xfer">log_close_xfer</a>
   <li><a href="functions.html#log_closesyslog">log_closesyslog</a>
   <li><a href="functions.html#log_command">log_command</a>
   <li><a href="functions.html#log_debug">log_debug</a>
   <li><a href="functions.html#log_discard">log_discard</a>
   <li><a href="functions.html#log_init">log_init</a>
-  <li><a href="functions.html#log_open_checkpath">log_open_checkpath</a>
-  <li><a href="functions.html#log_open_run">log_open_run</a>
   <li><a href="functions.html#log_open_xfer">log_open_xfer</a>
+  <li><a href="functions.html#log_openfile">log_openfile</a>
   <li><a href="functions.html#log_opensyslog">log_opensyslog</a>
   <li><a href="functions.html#log_pri">log_pri</a>
-  <li><a href="functions.html#log_read_run">log_read_run</a>
   <li><a href="functions.html#log_rehash">log_rehash</a>
-  <li><a href="functions.html#log_retr">log_retr</a>
-  <li><a href="functions.html#log_rm_run">log_rm_run</a>
-  <li><a href="functions.html#log_run_address">log_run_address</a>
-  <li><a href="functions.html#log_run_checkpath">log_run_checkpath</a>
-  <li><a href="functions.html#log_run_cwd">log_run_cwd</a>
-  <li><a href="functions.html#log_run_getpath">log_run_getpath</a>
-  <li><a href="functions.html#log_run_setpath">log_run_setpath</a>
+  <li><a href="functions.html#log_sess_init">log_sess_init</a>
   <li><a href="functions.html#log_setdebuglevel">log_setdebuglevel</a>
   <li><a href="functions.html#log_setfacility">log_setfacility</a>
   <li><a href="functions.html#log_stderr">log_stderr</a>
-  <li><a href="functions.html#log_stor">log_stor</a>
   <li><a href="functions.html#log_wtmp">log_wtmp</a>
   <li><a href="functions.html#log_xfer">log_xfer</a>
   <li><a href="functions.html#logformat">logformat</a>
   <li><a href="functions.html#login_check_limits">login_check_limits</a>
-  <li><a href="functions.html#ls_chk_glob">ls_chk_glob</a>
   <li><a href="functions.html#ls_done">ls_done</a>
+  <li><a href="functions.html#ls_err_nlst">ls_err_nlst</a>
+  <li><a href="functions.html#ls_list">ls_list</a>
+  <li><a href="functions.html#ls_log_nlst">ls_log_nlst</a>
+  <li><a href="functions.html#ls_nlst">ls_nlst</a>
   <li><a href="functions.html#ls_perms">ls_perms</a>
   <li><a href="functions.html#ls_perms_full">ls_perms_full</a>
+  <li><a href="functions.html#ls_post_pass">ls_post_pass</a>
+  <li><a href="functions.html#ls_stat">ls_stat</a>
   <li><a href="functions.html#ls_terminate">ls_terminate</a>
   <li><a href="functions.html#main_exit">main_exit</a>
-  <li><a href="functions.html#main_rehash">main_rehash</a>
   <li><a href="functions.html#main_set_idle">main_set_idle</a>
   <li><a href="functions.html#make_arg_str">make_arg_str</a>
   <li><a href="functions.html#make_array">make_array</a>
-  <li><a href="functions.html#make_cmd">make_cmd</a>
-  <li><a href="functions.html#make_named_sub_pool">make_named_sub_pool</a>
+  <li><a href="functions.html#make_ftp_cmd">make_ftp_cmd</a>
   <li><a href="functions.html#make_sub_pool">make_sub_pool</a>
   <li><a href="functions.html#malloc_block">malloc_block</a>
+  <li><a href="functions.html#mask_signals">mask_signals</a>
   <li><a href="functions.html#match_ip">match_ip</a>
   <li><a href="functions.html#modpam_exit">modpam_exit</a>
   <li><a href="functions.html#mod_create_data">mod_create_data</a>
@@ -1309,11 +1231,12 @@ start_daemon
   <li><a href="functions.html#mod_find_conf_symbol">mod_find_conf_symbol</a>
   <li><a href="functions.html#mod_privdata_alloc">mod_privdata_alloc</a>
   <li><a href="functions.html#mod_privdata_find">mod_privdata_find</a>
+  <li><a href="functions.html#module_exists">module_exists</a>
+  <li><a href="functions.html#netio_buffer_alloc">netio_buffer_alloc</a>
   <li><a href="functions.html#new_block">new_block</a>
   <li><a href="functions.html#nlstdir">nlstdir</a>
   <li><a href="functions.html#nlstfile">nlstfile</a>
-  <li><a href="functions.html#note_cleanups_for_fd">note_cleanups_for_fd</a>
-  <li><a href="functions.html#note_cleanups_for_file">note_cleanups_for_file</a>
+  <li><a href="functions.html#noxfer_timeout_cb">noxfer_timeout_cb</a>
   <li><a href="functions.html#null_alloc">null_alloc</a>
   <li><a href="functions.html#outputfiles">outputfiles</a>
   <li><a href="functions.html#p_endgrent">p_endgrent</a>
@@ -1336,19 +1259,31 @@ start_daemon
   <li><a href="functions.html#pcalloc">pcalloc</a>
   <li><a href="functions.html#pclosef">pclosef</a>
   <li><a href="functions.html#pdircat">pdircat</a>
-  <li><a href="functions.html#percent_complete">percent_complete</a>
   <li><a href="functions.html#pfclose">pfclose</a>
   <li><a href="functions.html#pfdopen">pfdopen</a>
   <li><a href="functions.html#pfopen">pfopen</a>
   <li><a href="functions.html#pool_release_free_block_list">pool_release_free_block_list</a>
   <li><a href="functions.html#pop_cwd">pop_cwd</a>
   <li><a href="functions.html#popenf">popenf</a>
-  <li><a href="functions.html#pre_cmd_appe">pre_cmd_appe</a>
-  <li><a href="functions.html#pre_cmd_pass">pre_cmd_pass</a>
-  <li><a href="functions.html#pre_cmd_retr">pre_cmd_retr</a>
-  <li><a href="functions.html#pre_cmd_stor">pre_cmd_stor</a>
-  <li><a href="functions.html#pre_cmd_user">pre_cmd_user</a>
   <li><a href="functions.html#preparse_arg">preparse_arg</a>
+  <li><a href="functions.html#pr_alloc_netio">pr_alloc_netio</a>
+  <li><a href="functions.html#pr_init_netio">pr_init_netio</a>
+  <li><a href="functions.html#pr_init_pools">pr_init_pools</a>
+  <li><a href="functions.html#pr_netio_abort">pr_netio_abort</a>
+  <li><a href="functions.html#pr_netio_close">pr_netio_close</a>
+  <li><a href="functions.html#pr_netio_gets">pr_netio_gets</a>
+  <li><a href="functions.html#pr_netio_lingering_close">pr_netio_lingering_close</a>
+  <li><a href="functions.html#pr_netio_open">pr_netio_open</a>
+  <li><a href="functions.html#pr_netio_poll">pr_netio_poll</a>
+  <li><a href="functions.html#pr_netio_postopen">pr_netio_postopen</a>
+  <li><a href="functions.html#pr_netio_printf">pr_netio_printf</a>
+  <li><a href="functions.html#pr_netio_printf_async">pr_netio_printf_async</a>
+  <li><a href="functions.html#pr_netio_read">pr_netio_read</a>
+  <li><a href="functions.html#pr_netio_reopen">pr_netio_reopen</a>
+  <li><a href="functions.html#pr_netio_set_poll_interval">pr_netio_set_poll_interval</a>
+  <li><a href="functions.html#pr_netio_telnet_gets">pr_netio_telnet_gets</a>
+  <li><a href="functions.html#pr_netio_write">pr_netio_write</a>
+  <li><a href="functions.html#pr_netio_write_async">pr_netio_write_async</a>
   <li><a href="functions.html#pstrcat">pstrcat</a>
   <li><a href="functions.html#pstrdup">pstrdup</a>
   <li><a href="functions.html#pstrndup">pstrndup</a>
@@ -1374,6 +1309,8 @@ start_daemon
   <li><a href="functions.html#quote_dir">quote_dir</a>
   <li><a href="functions.html#regex_filters">regex_filters</a>
   <li><a href="functions.html#register_cleanup">register_cleanup</a>
+  <li><a href="functions.html#register_fd_cleanups">register_fd_cleanups</a>
+  <li><a href="functions.html#register_file_cleanups">register_file_cleanups</a>
   <li><a href="functions.html#register_rehash">register_rehash</a>
   <li><a href="functions.html#remove_config">remove_config</a>
   <li><a href="functions.html#remove_exit_handlers">remove_exit_handlers</a>
@@ -1381,15 +1318,13 @@ start_daemon
   <li><a href="functions.html#reset_timer">reset_timer</a>
   <li><a href="functions.html#resolve_anonymous_dirs">resolve_anonymous_dirs</a>
   <li><a href="functions.html#resolve_defered_dirs">resolve_defered_dirs</a>
-  <li><a href="functions.html#run_child_cleanups">run_child_cleanups</a>
-  <li><a href="functions.html#run_cleanup">run_cleanup</a>
+  <li><a href="functions.html#retr_abort">retr_abort</a>
+  <li><a href="functions.html#retr_complete">retr_complete</a>
   <li><a href="functions.html#run_cleanups">run_cleanups</a>
   <li><a href="functions.html#run_exit_handlers">run_exit_handlers</a>
   <li><a href="functions.html#run_schedule">run_schedule</a>
   <li><a href="functions.html#safe_token">safe_token</a>
-  <li><a href="functions.html#scan_config_file">scan_config_file</a>
   <li><a href="functions.html#schedule">schedule</a>
-  <li><a href="functions.html#schedulep">schedulep</a>
   <li><a href="functions.html#semaphore_fds">semaphore_fds</a>
   <li><a href="functions.html#send_response">send_response</a>
   <li><a href="functions.html#send_response_async">send_response_async</a>
@@ -1399,15 +1334,15 @@ start_daemon
   <li><a href="functions.html#send_response_ml_start">send_response_ml_start</a>
   <li><a href="functions.html#send_response_raw">send_response_raw</a>
   <li><a href="functions.html#sendline">sendline</a>
+  <li><a href="functions.html#serv_conn_cleanup_cb">serv_conn_cleanup_cb</a>
   <li><a href="functions.html#server_loop">server_loop</a>
-  
   <li><a href="functions.html#set_accessdenymsg">set_accessdenymsg</a>
   <li><a href="functions.html#set_accessgrantmsg">set_accessgrantmsg</a>
   <li><a href="functions.html#set_allowall">set_allowall</a>
-  <li><a href="functions.html#set_allowchmod">set_allowchmod</a>
   <li><a href="functions.html#set_allowfilter">set_allowfilter</a>
   <li><a href="functions.html#set_allowforeignaddress">set_allowforeignaddress</a>
   <li><a href="functions.html#set_allowlogsymlinks">set_allowlogsymlinks</a>
+  <li><a href="functions.html#set_allowoverride">set_allowoverride</a>
   <li><a href="functions.html#set_allowoverwrite">set_allowoverwrite</a>
   <li><a href="functions.html#set_allowretrieverestart">set_allowretrieverestart</a>
   <li><a href="functions.html#set_allowstorerestart">set_allowstorerestart</a>
@@ -1415,11 +1350,16 @@ start_daemon
   <li><a href="functions.html#set_auth_check">set_auth_check</a>
   <li><a href="functions.html#set_authaliasonly">set_authaliasonly</a>
   <li><a href="functions.html#set_authgroupfile">set_authgroupfile</a>
+  <li><a href="functions.html#set_authpam">set_authpam</a>
+  <li><a href="functions.html#set_authpamauthoritative">set_authpamauthoritative</a>
+  <li><a href="functions.html#set_authpamconfig">set_authpamconfig</a>
   <li><a href="functions.html#set_authuserfile">set_authuserfile</a>
   <li><a href="functions.html#set_authusingalias">set_authusingalias</a>
   <li><a href="functions.html#set_class">set_class</a>
   <li><a href="functions.html#set_classes">set_classes</a>
   <li><a href="functions.html#set_commandbuffersize">set_commandbuffersize</a>
+  <li><a href="functions.html#set_daemon_rlimits">set_daemon_rlimits</a>
+  <li><a href="functions.html#set_defaultaddress">set_defaultaddress</a>
   <li><a href="functions.html#set_defaultserver">set_defaultserver</a>
   <li><a href="functions.html#set_defaulttransfermode">set_defaulttransfermode</a>
   <li><a href="functions.html#set_deferwelcome">set_deferwelcome</a>
@@ -1435,22 +1375,23 @@ start_daemon
   <li><a href="functions.html#set_displaylogin">set_displaylogin</a>
   <li><a href="functions.html#set_displayquit">set_displayquit</a>
   <li><a href="functions.html#set_group">set_group</a>
+  <li><a href="functions.html#set_grouppassword">set_grouppassword</a>
   <li><a href="functions.html#set_groups">set_groups</a>
-  <li><a href="functions.html#set_hiddenstor">set_hiddenstor</a>
+  <li><a href="functions.html#set_hiddenstores">set_hiddenstores</a>
+  <li><a href="functions.html#set_hidefiles">set_hidefiles</a>
   <li><a href="functions.html#set_hidenoaccess">set_hidenoaccess</a>
   <li><a href="functions.html#set_identlookups">set_identlookups</a>
   <li><a href="functions.html#set_ignorehidden">set_ignorehidden</a>
   <li><a href="functions.html#set_loginpasswordprompt">set_loginpasswordprompt</a>
   <li><a href="functions.html#set_lsdefaultoptions">set_lsdefaultoptions</a>
   <li><a href="functions.html#set_maxclients">set_maxclients</a>
+  <li><a href="functions.html#set_maxconnrate">set_maxconnrate</a>
+  <li><a href="functions.html#set_maxfilesize">set_maxfilesize</a>
   <li><a href="functions.html#set_maxhostclients">set_maxhostclients</a>
   <li><a href="functions.html#set_maxhostsperuser">set_maxhostsperuser</a>
   <li><a href="functions.html#set_maxinstances">set_maxinstances</a>
   <li><a href="functions.html#set_maxloginattempts">set_maxloginattempts</a>
   <li><a href="functions.html#set_multilinerfc2228">set_multilinerfc2228</a>
-  <li><a href="functions.html#set_pam">set_pam</a>
-  <li><a href="functions.html#set_pamauthoritative">set_pamauthoritative</a>
-  <li><a href="functions.html#set_pamconfig">set_pamconfig</a>
   <li><a href="functions.html#set_passiveports">set_passiveports</a>
   <li><a href="functions.html#set_pathallowfilter">set_pathallowfilter</a>
   <li><a href="functions.html#set_pathdenyfilter">set_pathdenyfilter</a>
@@ -1464,16 +1405,18 @@ start_daemon
   <li><a href="functions.html#set_rlimitopenfiles">set_rlimitopenfiles</a>
   <li><a href="functions.html#set_rlimits">set_rlimits</a>
   <li><a href="functions.html#set_rootlogin">set_rootlogin</a>
-  <li><a href="functions.html#set_scoreboardpath">set_scoreboardpath</a>
+  <li><a href="functions.html#set_scoreboardfile">set_scoreboardfile</a>
   <li><a href="functions.html#set_serveradmin">set_serveradmin</a>
   <li><a href="functions.html#set_serverident">set_serverident</a>
   <li><a href="functions.html#set_servername">set_servername</a>
   <li><a href="functions.html#set_serverport">set_serverport</a>
   <li><a href="functions.html#set_servertype">set_servertype</a>
-  <li><a href="functions.html#set_showdotfiles">set_showdotfiles</a>
+  <li><a href="functions.html#set_server_privs">set_server_privs</a>
+  <li><a href="functions.html#set_session_rlimits">set_session_rlimits</a>
   <li><a href="functions.html#set_showsymlinks">set_showsymlinks</a>
   <li><a href="functions.html#set_sig_alarm">set_sig_alarm</a>
   <li><a href="functions.html#set_socketbindtight">set_socketbindtight</a>
+  <li><a href="functions.html#set_storeuniqueprefix">set_storeuniqueprefix</a>
   <li><a href="functions.html#set_syslogfacility">set_syslogfacility</a>
   <li><a href="functions.html#set_sysloglevel">set_sysloglevel</a>
   <li><a href="functions.html#set_systemlog">set_systemlog</a>
@@ -1490,6 +1433,8 @@ start_daemon
   <li><a href="functions.html#set_useftpusers">set_useftpusers</a>
   <li><a href="functions.html#set_useglobbing">set_useglobbing</a>
   <li><a href="functions.html#set_user">set_user</a>
+  <li><a href="functions.html#set_useralias">set_useralias</a>
+  <li><a href="functions.html#set_userpassword">set_userpassword</a>
   <li><a href="functions.html#set_usereversedns">set_usereversedns</a>
   <li><a href="functions.html#set_wtmplog">set_wtmplog</a>
   <li><a href="functions.html#show_usage">show_usage</a>
@@ -1501,17 +1446,23 @@ start_daemon
   <li><a href="functions.html#sig_disconnect">sig_disconnect</a>
   <li><a href="functions.html#sig_rehash">sig_rehash</a>
   <li><a href="functions.html#sig_terminate">sig_terminate</a>
+  <li><a href="functions.html#site_chgrp">site_chgrp</a>
   <li><a href="functions.html#site_chmod">site_chmod</a>
+  <li><a href="functions.html#site_cmd">site_cmd</a>
   <li><a href="functions.html#site_dispatch">site_dispatch</a>
   <li><a href="functions.html#site_help">site_help</a>
+  <li><a href="functions.html#site_post_cmd">site_post_cmd</a>
+  <li><a href="functions.html#site_pre_cmd">site_pre_cmd</a>
+  <li><a href="functions.html#sleep_cb">sleep_cb</a>
   <li><a href="functions.html#sortfiles">sortfiles</a>
   <li><a href="functions.html#sreaddir">sreaddir</a>
   <li><a href="functions.html#sreplace">sreplace</a>
   <li><a href="functions.html#sstrcat">sstrcat</a>
   <li><a href="functions.html#sstrncpy">sstrncpy</a>
-  <li><a href="functions.html#stalled_timeout">stalled_timeout</a>
+  <li><a href="functions.html#stalled_timeout_cb">stalled_timeout_cb</a>
   <li><a href="functions.html#standalone_main">standalone_main</a>
-  <li><a href="functions.html#start_daemon">start_daemon</a>
+  <li><a href="functions.html#start_ifdefine">start_ifdefine</a>
+  <li><a href="functions.html#start_ifmodule">start_ifmodule</a>
   <li><a href="functions.html#start_new_server">start_new_server</a>
   <li><a href="functions.html#start_sub_config">start_sub_config</a>
   <li><a href="functions.html#std_chdir">std_chdir</a>
@@ -1533,13 +1484,19 @@ start_daemon
   <li><a href="functions.html#std_symlink">std_symlink</a>
   <li><a href="functions.html#std_unlink">std_unlink</a>
   <li><a href="functions.html#std_write">std_write</a>
+  <li><a href="functions.html#stor_abort">stor_abort</a>
+  <li><a href="functions.html#stor_complete">stor_complete</a>
   <li><a href="functions.html#strip_end">strip_end</a>
   <li><a href="functions.html#strsep">strsep</a>
+  <li><a href="functions.html#supp_getgrent">supp_getgrent</a>
+  <li><a href="functions.html#supp_getpwent">supp_getpwent</a>
+  <li><a href="functions.html#supp_grplist">supp_grplist</a>
+  <li><a href="functions.html#timer_cmp">timer_cmp</a>
   <li><a href="functions.html#timer_sleep">timer_sleep</a>
   <li><a href="functions.html#unblock_alarms">unblock_alarms</a>
   <li><a href="functions.html#unblock_signals">unblock_signals</a>
-  <li><a href="functions.html#unixpw_child">unixpw_child</a>
   <li><a href="functions.html#unixpw_init">unixpw_init</a>
+  <li><a href="functions.html#unixpw_sess_init">unixpw_sess_init</a>
   <li><a href="functions.html#user_expression">user_expression</a>
   <li><a href="functions.html#xaset_copy">xaset_copy</a>
   <li><a href="functions.html#xaset_create">xaset_create</a>
@@ -1549,11 +1506,26 @@ start_daemon
   <li><a href="functions.html#xaset_remove">xaset_remove</a>
   <li><a href="functions.html#xaset_subtract">xaset_subtract</a>
   <li><a href="functions.html#xaset_union">xaset_union</a>
-  <li><a href="functions.html#xcalloc">xcalloc</a>
-  <li><a href="functions.html#xfer_cleanup">xfer_cleanup</a>
-  <li><a href="functions.html#xfer_init_child">xfer_init_child</a>
+  <li><a href="functions.html#xfer_abor">xfer_abor</a>
+  <li><a href="functions.html#xfer_allo">xfer_allo</a>
+  <li><a href="functions.html#xfer_err_cleanup">xfer_err_cleanup</a>
+  <li><a href="functions.html#xfer_exit_cb">xfer_exit_cb</a>
+  <li><a href="functions.html#xfer_log_retr">xfer_log_retr</a>
+  <li><a href="functions.html#xfer_log_stor">xfer_log_stor</a>
+  <li><a href="functions.html#xfer_mode">xfer_mode</a>
+  <li><a href="functions.html#xfer_post_stou">xfer_post_stou</a>
+  <li><a href="functions.html#xfer_pre_appe">xfer_pre_appe</a>
+  <li><a href="functions.html#xfer_pre_retr">xfer_pre_retr</a>
+  <li><a href="functions.html#xfer_pre_stor">xfer_pre_stor</a>
+  <li><a href="functions.html#xfer_pre_stou">xfer_pre_stou</a>
+  <li><a href="functions.html#xfer_rest">xfer_rest</a>
+  <li><a href="functions.html#xfer_retr">xfer_retr</a>
+  <li><a href="functions.html#xfer_sess_init">xfer_sess_init</a>
+  <li><a href="functions.html#xfer_smnt">xfer_smnt</a>
+  <li><a href="functions.html#xfer_stor">xfer_stor</a>
+  <li><a href="functions.html#xfer_stru">xfer_stru</a>
+  <li><a href="functions.html#xfer_type">xfer_type</a>
   <li><a href="functions.html#xmalloc">xmalloc</a>
-  <li><a href="functions.html#xrealloc">xrealloc</a>
 </ul>
 
 <hr>
@@ -1568,7 +1540,6 @@ start_daemon
   <li><a href="macros.html#AUTH_NOPWD">AUTH_NOPWD</a>
   <li><a href="macros.html#BLOCK_MINFREE">BLOCK_MINFREE</a>
   <li><a href="macros.html#BUFSIZ">BUFSIZ</a>
-  <li><a href="macros.html#BUILDAS_FTPWHO">BUILDAS_FTPWHO</a>
   <li><a href="macros.html#CALLBACK_FRAME">CALLBACK_FRAME</a>
   <li><a href="macros.html#CF_DEFER">CF_DEFER</a>
   <li><a href="macros.html#CF_DYNAMIC">CF_DYNAMIC</a>
@@ -1613,22 +1584,30 @@ start_daemon
   <li><a href="macros.html#CURRENT_CONF">CURRENT_CONF</a>
   <li><a href="macros.html#C_ABOR">C_ABOR</a>
   <li><a href="macros.html#C_ACCT">C_ACCT</a>
+  <li><a href="macros.html#C_ADAT">C_ADAT</a>
   <li><a href="macros.html#C_ALLO">C_ALLO</a>
   <li><a href="macros.html#C_ANY">C_ANY</a>
   <li><a href="macros.html#C_APPE">C_APPE</a>
+  <li><a href="macros.html#C_AUTH">C_AUTH</a>
+  <li><a href="macros.html#C_CCC">C_CCC</a>
   <li><a href="macros.html#C_CDUP">C_CDUP</a>
+  <li><a href="macros.html#C_CONF">C_CONF</a>
   <li><a href="macros.html#C_CWD">C_CWD</a>
   <li><a href="macros.html#C_DELE">C_DELE</a>
+  <li><a href="macros.html#C_ENC">C_ENC</a>
   <li><a href="macros.html#C_HELP">C_HELP</a>
   <li><a href="macros.html#C_LIST">C_LIST</a>
   <li><a href="macros.html#C_MDTM">C_MDTM</a>
+  <li><a href="macros.html#C_MIC">C_MIC</a>
   <li><a href="macros.html#C_MKD">C_MKD</a>
   <li><a href="macros.html#C_MODE">C_MODE</a>
   <li><a href="macros.html#C_NLST">C_NLST</a>
   <li><a href="macros.html#C_NOOP">C_NOOP</a>
   <li><a href="macros.html#C_PASS">C_PASS</a>
   <li><a href="macros.html#C_PASV">C_PASV</a>
+  <li><a href="macros.html#C_PBSZ">C_PBSZ</a>
   <li><a href="macros.html#C_PORT">C_PORT</a>
+  <li><a href="macros.html#C_PROT">C_PROT</a>
   <li><a href="macros.html#C_PWD">C_PWD</a>
   <li><a href="macros.html#C_QUIT">C_QUIT</a>
   <li><a href="macros.html#C_REIN">C_REIN</a>
@@ -1658,6 +1637,10 @@ start_daemon
   <li><a href="macros.html#DEBUG3">DEBUG3</a>
   <li><a href="macros.html#DEBUG4">DEBUG4</a>
   <li><a href="macros.html#DEBUG5">DEBUG5</a>
+  <li><a href="macros.html#DEBUG6">DEBUG6</a>
+  <li><a href="macros.html#DEBUG7">DEBUG7</a>
+  <li><a href="macros.html#DEBUG8">DEBUG8</a>
+  <li><a href="macros.html#DEBUG9">DEBUG9</a>
   <li><a href="macros.html#DECIMAL_STRING_LENGTH">DECIMAL_STRING_LENGTH</a>
   <li><a href="macros.html#DECLINED">DECLINED</a>
   <li><a href="macros.html#DO">DO</a>
@@ -1693,28 +1676,22 @@ start_daemon
   <li><a href="macros.html#G_READ">G_READ</a>
   <li><a href="macros.html#G_WRITE">G_WRITE</a>
   <li><a href="macros.html#HANDLED">HANDLED</a>
+  <li><a href="macros.html#HASH_TABLE_SIZE">HASH_TABLE_SIZE</a>
   <li><a href="macros.html#IAC">IAC</a>
   <li><a href="macros.html#INADDR_ANY">INADDR_ANY</a>
   <li><a href="macros.html#INPORT_ANY">INPORT_ANY</a>
-  <li><a href="macros.html#INTERNAL_VERSION">INTERNAL_VERSION</a>
-  <li><a href="macros.html#IOR_CLOSED">IOR_CLOSED</a>
-  <li><a href="macros.html#IOR_ERROR">IOR_ERROR</a>
-  <li><a href="macros.html#IOR_REMOVE">IOR_REMOVE</a>
-  <li><a href="macros.html#IOR_REMOVE_FILE">IOR_REMOVE_FILE</a>
-  <li><a href="macros.html#IO_ABORT">IO_ABORT</a>
-  <li><a href="macros.html#IO_INTR">IO_INTR</a>
-  <li><a href="macros.html#IO_NONBLOCK">IO_NONBLOCK</a>
-  <li><a href="macros.html#IO_NORESTART">IO_NORESTART</a>
-  <li><a href="macros.html#IO_READ">IO_READ</a>
-  <li><a href="macros.html#IO_WRITE">IO_WRITE</a>
   <li><a href="macros.html#LARGE">LARGE</a>
   <li><a href="macros.html#LEFT">LEFT</a>
   <li><a href="macros.html#LOGBUFFER_SIZE">LOGBUFFER_SIZE</a>
   <li><a href="macros.html#LOGBUF_SIZE">LOGBUF_SIZE</a>
-  <li><a href="macros.html#LOGRUN_MAGIC">LOGRUN_MAGIC</a>
   <li><a href="macros.html#LOG_AUTHPRIV">LOG_AUTHPRIV</a>
   <li><a href="macros.html#LOG_CMD">LOG_CMD</a>
   <li><a href="macros.html#LOG_CMD_ERR">LOG_CMD_ERR</a>
+  <li><a href="macros.html#LOG_EXTENDED_MODE">LOG_EXTENDED_MODE</a>
+  <li><a href="macros.html#LOG_SYMLINK">LOG_SYMLINK</a>
+  <li><a href="macros.html#LOG_SYSTEM_MODE">LOG_SYSTEM_MODE</a>
+  <li><a href="macros.html#LOG_WRITEABLE_DIR">LOG_WRITEABLE_DIR</a>
+  <li><a href="macros.html#LOG_XFER_MODE">LOG_XFER_MODE</a>
   <li><a href="macros.html#LOOPBACK_MASK">LOOPBACK_MASK</a>
   <li><a href="macros.html#LOOPBACK_NET">LOOPBACK_NET</a>
   <li><a href="macros.html#MAP_GID">MAP_GID</a>
@@ -1731,14 +1708,16 @@ start_daemon
   <li><a href="macros.html#META_ENV_VAR">META_ENV_VAR</a>
   <li><a href="macros.html#META_FILENAME">META_FILENAME</a>
   <li><a href="macros.html#META_IDENT_USER">META_IDENT_USER</a>
+  <li><a href="macros.html#META_LOCAL_FQDN">META_LOCAL_FQDN</a>
+  <li><a href="macros.html#META_LOCAL_IP">META_LOCAL_IP</a>
+  <li><a href="macros.html#META_LOCAL_NAME">META_LOCAL_NAME</a>
+  <li><a href="macros.html#META_LOCAL_PORT">META_LOCAL_PORT</a>
   <li><a href="macros.html#META_METHOD">META_METHOD</a>
   <li><a href="macros.html#META_PID">META_PID</a>
   <li><a href="macros.html#META_REMOTE_HOST">META_REMOTE_HOST</a>
   <li><a href="macros.html#META_REMOTE_IP">META_REMOTE_IP</a>
   <li><a href="macros.html#META_RESPONSE_CODE">META_RESPONSE_CODE</a>
   <li><a href="macros.html#META_SECONDS">META_SECONDS</a>
-  <li><a href="macros.html#META_SERVERNAME">META_SERVERNAME</a>
-  <li><a href="macros.html#META_SERVER_PORT">META_SERVER_PORT</a>
   <li><a href="macros.html#META_START">META_START</a>
   <li><a href="macros.html#META_TIME">META_TIME</a>
   <li><a href="macros.html#META_USER">META_USER</a>
@@ -1770,13 +1749,15 @@ start_daemon
   <li><a href="macros.html#POOL_HDR_BYTES">POOL_HDR_BYTES</a>
   <li><a href="macros.html#POOL_HDR_CLICKS">POOL_HDR_CLICKS</a>
   <li><a href="macros.html#POST_CMD">POST_CMD</a>
+  <li><a href="macros.html#POST_CMD_ERR">POST_CMD_ERR</a>
   <li><a href="macros.html#PRE_CMD">PRE_CMD</a>
   <li><a href="macros.html#PRIVS_RELINQUISH">PRIVS_RELINQUISH</a>
   <li><a href="macros.html#PRIVS_REVOKE">PRIVS_REVOKE</a>
   <li><a href="macros.html#PRIVS_ROOT">PRIVS_ROOT</a>
   <li><a href="macros.html#PRIVS_SETUP">PRIVS_SETUP</a>
   <li><a href="macros.html#PRIVS_USER">PRIVS_USER</a>
-  <li><a href="macros.html#PROFTPD_PATHS_H">PROFTPD_PATHS_H</a>
+  <li><a href="macros.html#PROFTPD_VERSION_NUMBER">PROFTPD_VERSION_NUMBER</a>
+  <li><a href="macros.html#PROFTPD_VERSION_TEXT">PROFTPD_VERSION_TEXT</a>
   <li><a href="macros.html#PR_BYTES_BAD_FORMAT">PR_BYTES_BAD_FORMAT</a>
   <li><a href="macros.html#PR_BYTES_BAD_UNITS">PR_BYTES_BAD_UNITS</a>
   <li><a href="macros.html#PR_LOG_ALERT">PR_LOG_ALERT</a>
@@ -1785,9 +1766,23 @@ start_daemon
   <li><a href="macros.html#PR_LOG_EMERG">PR_LOG_EMERG</a>
   <li><a href="macros.html#PR_LOG_ERR">PR_LOG_ERR</a>
   <li><a href="macros.html#PR_LOG_INFO">PR_LOG_INFO</a>
-  <li><a href="macros.html#PR_LOG_LEVELMASK">PR_LOG_LEVELMASK</a>
   <li><a href="macros.html#PR_LOG_NOTICE">PR_LOG_NOTICE</a>
+  <li><a href="macros.html#PR_LOG_PRIMASK">PR_LOG_PRIMASK</a>
   <li><a href="macros.html#PR_LOG_WARNING">PR_LOG_WARNING</a>
+  <li><a href="macros.html#PR_NETIO_IO_RD">PR_NETIO_IO_RD</a>
+  <li><a href="macros.html#PR_NETIO_IO_WR">PR_NETIO_IO_WR</a>
+  <li><a href="macros.html#PR_NETIO_SESS_ABORT">PR_NETIO_SESS_ABORT</a>
+  <li><a href="macros.html#PR_NETIO_SESS_INTR">PR_NETIO_SESS_INTR</a>
+  <li><a href="macros.html#PR_TUNABLE_BUFFER_SIZE">PR_TUNABLE_BUFFER_SIZE</a>
+  <li><a href="macros.html#PR_TUNABLE_DEFAULT_BACKLOG">PR_TUNABLE_DEFAULT_BACKLOG</a>
+  <li><a href="macros.html#PR_TUNABLE_DEFAULT_RWIN">PR_TUNABLE_DEFAULT_RWIN</a>
+  <li><a href="macros.html#PR_TUNABLE_DEFAULT_SWIN">PR_TUNABLE_DEFAULT_SWIN</a>
+  <li><a href="macros.html#PR_TUNABLE_NEW_POOL_SIZE">PR_TUNABLE_NEW_POOL_SIZE</a> 
+  <li><a href="macros.html#PR_TUNABLE_TIMEOUTIDENT">PR_TUNABLE_TIMEOUTIDENT</a>
+  <li><a href="macros.html#PR_TUNABLE_TIMEOUTIDLE">PR_TUNABLE_TIMEOUTIDLE</a>
+  <li><a href="macros.html#PR_TUNABLE_TIMEOUTLOGIN">PR_TUNABLE_TIMEOUTLOGIN</a>
+  <li><a href="macros.html#PR_TUNABLE_TIMEOUTNOXFER">PR_TUNABLE_TIMEOUTNOXFER</a> 
+  <li><a href="macros.html#PR_TUNABLE_TIMEOUTSTALLED">PR_TUNABLE_TIMEOUTSTALLED</a>
   <li><a href="macros.html#R_110">R_110</a>
   <li><a href="macros.html#R_120">R_120</a>
   <li><a href="macros.html#R_125">R_125</a>
@@ -1805,14 +1800,20 @@ start_daemon
   <li><a href="macros.html#R_226">R_226</a>
   <li><a href="macros.html#R_227">R_227</a>
   <li><a href="macros.html#R_230">R_230</a>
+  <li><a href="macros.html#R_232">R_232</a>
+  <li><a href="macros.html#R_234">R_234</a>
+  <li><a href="macros.html#R_235">R_235</a>
   <li><a href="macros.html#R_250">R_250</a>
   <li><a href="macros.html#R_257">R_257</a>
   <li><a href="macros.html#R_331">R_331</a>
   <li><a href="macros.html#R_332">R_332</a>
+  <li><a href="macros.html#R_334">R_334</a>
+  <li><a href="macros.html#R_335">R_335</a>
   <li><a href="macros.html#R_350">R_350</a>
   <li><a href="macros.html#R_421">R_421</a>
   <li><a href="macros.html#R_425">R_425</a>
   <li><a href="macros.html#R_426">R_426</a>
+  <li><a href="macros.html#R_431">R_431</a>
   <li><a href="macros.html#R_450">R_450</a>
   <li><a href="macros.html#R_451">R_451</a>
   <li><a href="macros.html#R_452">R_452</a>
@@ -1823,10 +1824,16 @@ start_daemon
   <li><a href="macros.html#R_504">R_504</a>
   <li><a href="macros.html#R_530">R_530</a>
   <li><a href="macros.html#R_532">R_532</a>
+  <li><a href="macros.html#R_533">R_533</a>
+  <li><a href="macros.html#R_534">R_534</a>
+  <li><a href="macros.html#R_535">R_535</a>
+  <li><a href="macros.html#R_536">R_536</a>
+  <li><a href="macros.html#R_537">R_537</a>
   <li><a href="macros.html#R_550">R_550</a>
   <li><a href="macros.html#R_551">R_551</a>
   <li><a href="macros.html#R_552">R_552</a>
   <li><a href="macros.html#R_553">R_553</a>
+  <li><a href="macros.html#R_554">R_554</a>
   <li><a href="macros.html#R_DUP">R_DUP</a>
   <li><a href="macros.html#SERVER_INETD">SERVER_INETD</a>
   <li><a href="macros.html#SERVER_STANDALONE">SERVER_STANDALONE</a>
@@ -1853,19 +1860,8 @@ start_daemon
   <li><a href="macros.html#TIMER_STALLED">TIMER_STALLED</a>
   <li><a href="macros.html#TOPLEVEL_CONF">TOPLEVEL_CONF</a>
   <li><a href="macros.html#TRUE">TRUE</a>
-  <li><a href="macros.html#TUNABLE_BUFFER_SIZE">TUNABLE_BUFFER_SIZE</a>
-  <li><a href="macros.html#TUNABLE_DEFAULT_BACKLOG">TUNABLE_DEFAULT_BACKLOG</a>
-  <li><a href="macros.html#TUNABLE_DEFAULT_RWIN">TUNABLE_DEFAULT_RWIN</a>
-  <li><a href="macros.html#TUNABLE_DEFAULT_SWIN">TUNABLE_DEFAULT_SWIN</a>
-  <li><a href="macros.html#TUNABLE_NEW_POOL_SIZE">TUNABLE_NEW_POOL_SIZE</a>
-  <li><a href="macros.html#TUNABLE_TIMEOUTIDENT">TUNABLE_TIMEOUTIDENT</a>
-  <li><a href="macros.html#TUNABLE_TIMEOUTIDLE">TUNABLE_TIMEOUTIDLE</a>
-  <li><a href="macros.html#TUNABLE_TIMEOUTLOGIN">TUNABLE_TIMEOUTLOGIN</a>
-  <li><a href="macros.html#TUNABLE_TIMEOUTNOXFER">TUNABLE_TIMEOUTNOXFER</a>
-  <li><a href="macros.html#TUNABLE_TIMEOUTSTALLED">TUNABLE_TIMEOUTSTALLED</a>
   <li><a href="macros.html#U32BITS">U32BITS</a>
   <li><a href="macros.html#VALID_SHELL_PATH">VALID_SHELL_PATH</a>
-  <li><a href="macros.html#VERSION">VERSION</a>
   <li><a href="macros.html#WILL">WILL</a>
   <li><a href="macros.html#WONT">WONT</a>
   <li><a href="macros.html#WTMP_FILE">WTMP_FILE</a>
@@ -1904,9 +1900,6 @@ start_daemon
 <hr>
 <a name="Typedefs"></a><a href="typedefs.html"><b><i>Typedefs</i></b></a><br>
 <ul>
-  <li><a href="typedefs.html#IOBUF">IOBUF</a>
-  <li><a href="typedefs.html#IOFILE">IOFILE</a>
-  <li><a href="typedefs.html#IOREQ">IOREQ</a>
   <li><a href="typedefs.html#LPARAM">LPARAM</a>
   <li><a href="typedefs.html#UCHAR">UCHAR</a>
   <li><a href="typedefs.html#UINT">UINT</a>
@@ -1931,8 +1924,6 @@ start_daemon
   <li><a href="typedefs.html#hostname_t">hostname_t</a>
   <li><a href="typedefs.html#logfile_t">logfile_t</a>
   <li><a href="typedefs.html#logformat_t">logformat_t</a>
-  <li><a href="typedefs.html#logrun_header_t">logrun_header_t</a>
-  <li><a href="typedefs.html#logrun_t">logrun_t</a>
   <li><a href="typedefs.html#modret_t">modret_t</a>
   <li><a href="typedefs.html#module">module</a>
   <li><a href="typedefs.html#opendir_t">opendir_t</a>
@@ -1940,6 +1931,8 @@ start_daemon
   <li><a href="typedefs.html#pidrec_t">pidrec_t</a>
   <li><a href="typedefs.html#pool">pool</a>
   <li><a href="typedefs.html#privdata_t">privdata_t</a>
+  <li><a href="typedefs.html#pr_scoreboard_entry_t">pr_scoreboard_entry_t</a>
+  <li><a href="typedefs.html#pr_scoreboard_header_t">pr_scoreboard_header_t</a>
   <li><a href="typedefs.html#response_t">response_t</a>
   <li><a href="typedefs.html#sched_t">sched_t</a>
   <li><a href="typedefs.html#server_rec">server_rec</a>

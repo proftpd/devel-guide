@@ -75,46 +75,6 @@ directive was found, or else <code>NULL</code>.<br>
   <a href="../src/modules/mod_auth.c.html#_auth_anonymous_group">modules/mod_auth.c</a><br>
 
 <hr>
-<a name="_auth_check_count"><b>_auth_check_count</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static void _auth_check_count(cmd_rec *<i>cmd</i>, char *<i>user</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_auth.c.html#_auth_check_count">modules/mod_auth.c</a><br>
-
-<hr>
-<a name="_auth_check_ftpusers"><b>_auth_check_ftpusers</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int _auth_check_ftpusers(xaset_t *<i>set</i>, const char *<i>user</i>)
-</pre>
-<font color=blue>Comments</font>:  Check the given <i>user</i> against a list
-of prohibited users, usually contained in <code>/etc/ftpusers</code>, a file
-used by <code>wu-ftpd</code> servers.  This check can be skipped by using the
-<code>UseFtpUsers</code> configuration directive.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_auth.c.html#_auth_check_ftpusers">modules/mod_auth.c</a><br>
-
-<hr>
-<a name="_auth_check_shell"><b>_auth_check_shell</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int _auth_check_shell(xaset_t *<i>set</i>, const char *<i>shell</i>)
-</pre>
-<font color=blue>Comments</font>: Check the given <i>shell</i> of the
-connecting user against a list of valid system shells, usually contained in
-<code>/etc/shells</code>.  This check can be skipped by using the
-<code>RequireValidShell</code> configuration directive.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_auth.c.html#_auth_check_shell">modules/mod_auth.c</a><br>
-
-<hr>
 <a name="_auth_group"><b>_auth_group</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -150,26 +110,6 @@ authentication fails.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_auth.c.html#_auth_resolve_user">modules/mod_auth.c</a><br>
-
-<hr>
-<a name="_auth_shutdown"><b>_auth_shutdown</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int _auth_shutdown(CALLBACK_FRAME)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_auth.c.html#_auth_shutdown">modules/mod_auth.c</a><br>
-
-<hr>
-<a name="_block_signals"><b>_block_signals</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static void _block_signals(int <i>block</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/support.c.html#_block_signals">src/support.c</a><br>
 
 <hr>
 <a name="_calc_fs"><b>_calc_fs</b><br>
@@ -337,16 +277,6 @@ if explicitly denied.<br>
   <a href="../src/src/modules.c.html#_compare_sym">src/modules.c</a><br>
 
 <hr>
-<a name="_compare_timer"><b>_compare_timer</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int _compare_timer(timer_t *<i>t1</i>, timer_t *<i>t2</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/timers.c.html#_compare_timer">src/timers.c</a><br>
-
-<hr>
 <a name="_compare_uid"><b>_compare_uid</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -355,16 +285,6 @@ if explicitly denied.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_unixpw.c.html#_compare_uid">modules/mod_unixpw.c</a><br>
-
-<hr>
-<a name="_conn_cleanup"><b>_conn_cleanup</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static void _conn_cleanup(void *<i>cv</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#_conn_cleanup">src/inet.c</a><br>
 
 <hr>
 <a name="_copy_global_to_all"><b>_copy_global_to_all</b><br>
@@ -465,16 +385,6 @@ if explicitly denied.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_auth.c.html#_do_auth">modules/mod_auth.c</a><br>
-
-<hr>
-<a name="_do_user_counts"><b>_do_user_counts</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static void _do_user_counts(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_auth.c.html#_do_user_counts">modules/mod_auth.c</a><br>
 
 <hr>
 <a name="_dup_low_fd"><b>_dup_low_fd</b><br>
@@ -592,16 +502,6 @@ place to which to move a
   <a href="../src/modules/mod_unixpw.c.html#_get_pw_info">modules/mod_unixpw.c</a><br>
 
 <hr>
-<a name="_grlist"><b>_grlist</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static char **_grlist(char *<i>s</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/lib/pwgrent.c.html#_grlist">lib/pwgrent.c</a><br>
-
-<hr>
 <a name="_hash_find"><b>_hash_find</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -681,45 +581,6 @@ This function returns the index at which <i>sym</i> was inserted.<br>
   <a href="../src/src/modules.c.html#_hash_insert_conf">src/modules.c</a><br>
 
 <hr>
-<a name="_ident_timeout"><b>_ident_timeout</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int _ident_timeout(CALLBACK_FRAME)
-</pre>
-<font color=blue>Comments</font>: Timer callback function which aborts an
-ident (RFC 1413) lookup.  The timer length is set to 10 seconds, and is
-tunable via the <code>TUNABLE_TIMEOUTIDENT</code> macro, defined in
-<a href="../src/include/options.h.html#TUNABLE_TIMEOUTIDENT">include/options.h</a>.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/ident.c.html#_ident_timeout">src/ident.c</a><br>
-
-<hr>
-<a name="_idle_timeout"><b>_idle_timeout</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int _idle_timeout(CALLBACK_FRAME)
-</pre>
-<font color=blue>Comments</font>:  Timer callback function which disconnects
-an idle session.  The timer length is configurable via the
-<code>TimeoutIdle</code> configuration directive.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/main.c.html#_idle_timeout">src/main.c</a><br>
-
-<hr>
-<a name="_inet_pool_cleanup"><b>_inet_pool_cleanup</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static void _inet_pool_cleanup(void *<i>ignore</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/inet.c.html#_inet_pool_cleanup">src/inet.c</a><br>
-
-<hr>
 <a name="_internal_abort"><b>_internal_abort</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -738,21 +599,6 @@ an idle session.  The timer length is configurable via the
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_xfer.c.html#_log_transfer">modules/mod_xfer.c</a><br>
-
-<hr>
-<a name="_login_timeout"><b>_login_timeout</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int _login_timeout(CALLBACK_FRAME)
-</pre>
-<font color=blue>Comments</font>:  Timer callback function which disconnects
-the control connection if the timer has elapsed before the client has
-successfully authenticated.  The timer length is configurable via the
-<code>TimeoutLogin</code> configuration directive.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_auth.c.html#_login_timeout">modules/mod_auth.c</a><br>
 
 <hr>
 <a name="_make_cmd"><b>_make_cmd</b><br>
@@ -775,16 +621,6 @@ successfully authenticated.  The timer length is configurable via the
   <a href="../src/src/dirtree.c.html#_mergedown">src/dirtree.c</a><br>
 
 <hr>
-<a name="_noxfer_timeout"><b>_noxfer_timeout</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int _noxfer_timeout(CALLBACK_FRAME)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#_noxfer_timeout">modules/mod_xfer.c</a><br>
-
-<hr>
 <a name="_parse_classes"><b>_parse_classes</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -803,40 +639,6 @@ successfully authenticated.  The timer length is configurable via the
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_ls.c.html#_parse_options">modules/mod_ls.c</a><br>
-
-<hr>
-<a name="_pgetgrent"><b>_pgetgrent</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- _pgetgrent(const char *<i>buf</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/lib/pwgrent.c.html#_pgetgrent">lib/pwgrent.c</a><br>
-
-<hr>
-<a name="_pgetpwent"><b>_pgetpwent</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static struct passwd *_pgetpwent(const char *<i>buf</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/lib/pwgrent.c.html#_pgetpwent">lib/pwgrent.c</a><br>
-
-<hr>
-<a name="_pid_exists"><b>_pid_exists</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int _pid_exists(pid_t <i>pid</i>)
-</pre>
-<font color=blue>Comments</font>:  This function checks to see that the given
-<i>pid</i> is valid, meaning that it belongs to an active process.  Returns
-<code>1</code> if there is a such a process, <code>0</code> otherwise.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/log.c.html#_pid_exists">src/log.c</a><br>
 
 <hr>
 <a name="_prepare_core"><b>_prepare_core</b><br>
@@ -871,26 +673,6 @@ in microseconds, between <code>timeval</code>'s.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_xfer.c.html#_rate_throttle">modules/mod_xfer.c</a><br>
-
-<hr>
-<a name="_read_hdr"><b>_read_hdr</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static size_t _read_hdr(int <i>fd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/log.c.html#_read_hdr">src/log.c</a><br>
-
-<hr>
-<a name="_read_run"><b>_read_run</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int _read_run(int <i>fd</i>, size_t <i>size</i>, logrun_t *<i>ent</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/log.c.html#_read_run">src/log.c</a><br>
 
 <hr>
 <a name="_recur_match_path"><b>_recur_match_path</b><br>
@@ -932,36 +714,6 @@ configuration set, <i>newparent</i>.<br>
   <a href="../src/src/dirtree.c.html#_reparent_all">src/dirtree.c</a><br>
 
 <hr>
-<a name="_reset_timers"><b>_reset_timers</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int _reset_timers(int <i>elapsed</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/timers.c.html#_reset_timers">src/timers.c</a><br>
-
-<hr>
-<a name="_retr_abort"><b>_retr_abort</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static void _retr_abort(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#_retr_abort">modules/mod_xfer.c</a><br>
-
-<hr>
-<a name="_retr_done"><b>_retr_done</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static void _retr_done(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#_retr_done">modules/mod_xfer.c</a><br>
-
-<hr>
 <a name="_scan_fsdir"><b>_scan_fsdir</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -982,16 +734,6 @@ configuration set, <i>newparent</i>.<br>
   <a href="../src/src/fs.c.html#_scan_fsmatch">src/fs.c</a><br>
 
 <hr>
-<a name="_server_conn_cleanup"><b>_server_conn_cleanup</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static void _server_conn_cleanup(void *<i>connp</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/main.c.html#_server_conn_cleanup">src/main.c</a><br>
-
-<hr>
 <a name="_set_oobinline"><b>_set_oobinline</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -1010,16 +752,6 @@ configuration set, <i>newparent</i>.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/inet.c.html#_set_owner">src/inet.c</a><br>
-
-<hr>
-<a name="_set_timeout"><b>_set_timeout</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET _set_timeout(int *<i>v</i>, cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#_set_timeout">modules/mod_core.c</a><br>
 
 <hr>
 <a name="_sethide"><b>_sethide</b><br>
@@ -1045,26 +777,6 @@ broken up, rearranged!</i><br>
   <a href="../src/modules/mod_auth.c.html#_setup_environment">modules/mod_auth.c</a><br>
 
 <hr>
-<a name="_sleep_callback"><b>_sleep_callback</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int _sleep_callback(CALLBACK_FRAME)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/timers.c.html#_sleep_callback">src/timers.c</a><br>
-
-<hr>
-<a name="_stor_abort"><b>_stor_abort</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static void _stor_abort(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#_stor_abort">modules/mod_xfer.c</a><br>
-
-<hr>
 <a name="_stor_chown"><b>_stor_chown</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -1073,16 +785,6 @@ broken up, rearranged!</i><br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_xfer.c.html#_stor_chown">modules/mod_xfer.c</a><br>
-
-<hr>
-<a name="_stor_done"><b>_stor_done</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static void _stor_done(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#_stor_done">modules/mod_xfer.c</a><br>
 
 <hr>
 <a name="_strmatch"><b>_strmatch</b><br>
@@ -1142,16 +844,6 @@ symlink).  This recursing function catches symlink loops via the
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_xfer.c.html#_transmit_sendfile">modules/mod_xfer.c</a><br>
-
-<hr>
-<a name="_xfer_exit"><b>_xfer_exit</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static void _xfer_exit(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#_xfer_exit">modules/mod_xfer.c</a><br>
 
 <hr>
 <a name="_xlate_ascii_read"><b>_xlate_ascii_read</b><br>
@@ -1428,6 +1120,19 @@ name <i>name</i>.<br>
   <a href="../src/modules/mod_auth.c.html#add_defaultroot">modules/mod_auth.c</a><br>
 
 <hr>
+<a name="add_define"><b>add_define</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET add_define(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>Define</code> directive.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_core.c.html#add_define">modules/mod_core.c</a><br>
+
+<hr>
 <a name="add_deny"><b>add_deny</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -1533,19 +1238,6 @@ called, which happens in
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_core.c.html#add_groupowner">modules/mod_core.c</a><br>
-
-<hr>
-<a name="add_grouppassword"><b>add_grouppassword</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET add_grouppassword(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Configuration directive handler for the
-<code>GroupPassword</code> directive.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#add_grouppassword">modules/mod_core.c</a><br>
 
 <hr>
 <a name="add_hidegroup"><b>add_hidegroup</b><br>
@@ -1743,19 +1435,6 @@ of the timer is returned.<br>
   <a href="../src/modules/mod_core.c.html#add_transferlog">modules/mod_core.c</a><br>
 
 <hr>
-<a name="add_useralias"><b>add_useralias</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET add_useralias(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Configuration directive handler for the
-<code>UserAlias</code> directive.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#add_useralias">modules/mod_core.c</a><br>
-
-<hr>
 <a name="add_userdirroot"><b>add_userdirroot</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -1780,19 +1459,6 @@ of the timer is returned.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_core.c.html#add_userowner">modules/mod_core.c</a><br>
-
-<hr>
-<a name="add_userpassword"><b>add_userpassword</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET add_userpassword(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Configuration directive handler for the
-<code>UserPassword</code> directive.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#add_userpassword">modules/mod_core.c</a><br>
 
 <hr>
 <a name="add_virtualhost"><b>add_virtualhost</b><br>
@@ -1835,6 +1501,18 @@ server's IP address and port.<br>
   <a href="../src/src/main.c.html#addl_bindings">src/main.c</a><br>
 
 <hr>
+<a name="allow_dyn_config"><b>allow_dyn_config</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static int allow_dyn_config(void)
+</pre>
+<font color=blue>Comments</font>:<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/dirtree.c.html#allow_dyn_config">src/dirtree.c</a><br>
+
+<hr>
 <a name="append_arrays"><b>append_arrays</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -1862,6 +1540,19 @@ concatenated <code>array_header</code>s.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/pool.c.html#array_cat">src/pool.c</a><br>
+
+<hr>
+<a name="auth_acct"><b>auth_acct</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET auth_acct(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Command handler for the <code>ACCT</code>
+FTP command.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_auth.c.html#auth_acct">modules/mod_auth.c</a><br>
 
 <hr>
 <a name="auth_authenticate"><b>auth_authenticate</b><br>
@@ -1901,14 +1592,54 @@ the cleartext password belongs to that user.<br>
   <a href="../src/src/auth.c.html#auth_check">src/auth.c</a><br>
 
 <hr>
-<a name="auth_child_init"><b>auth_child_init</b><br>
+<a name="auth_check_ftpusers"><b>auth_check_ftpusers</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static int auth_child_init(void)
+  static unsigned char auth_check_ftpusers(xaset_t *<i>set</i>, const char *<i>user</i>)
+</pre>
+<font color=blue>Comments</font>:  Check the given <i>user</i> against a list
+of prohibited users, usually contained in <code>/etc/ftpusers</code>, a file
+used by <code>wu-ftpd</code> servers.  This check can be skipped by using the
+<code>UseFtpUsers</code> configuration directive.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_auth.c.html#auth_check_ftpusers">modules/mod_auth.c</a><br>
+
+<hr>
+<a name="auth_check_shell"><b>_auth_check_shell</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static unsigned char auth_check_shell(xaset_t *<i>set</i>, const char *<i>shell</i>)
+</pre>
+<font color=blue>Comments</font>: Check the given <i>shell</i> of the
+connecting user against a list of valid system shells, usually contained in
+<code>/etc/shells</code>.  This check can be skipped by using the
+<code>RequireValidShell</code> configuration directive.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_auth.c.html#auth_check_shell">modules/mod_auth.c</a><br>
+
+<hr>
+<a name="auth_cmd_chk_cb"><b>auth_cmd_chk_cb</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static int auth_cmd_chk_cb(cmd_rec *cmd)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_auth.c.html#auth_init_child">modules/mod_auth.c</a><br>
+  <a href="../src/modules/mod_auth.c.html#auth_cmd_chk_cb">modules/mod_auth.c</a><br>
+
+<hr>
+<a name="auth_count_scoreboard"><b>auth_count_scoreboard</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static void auth_count_scoreboard(cmd_rec *<i>cmd</i>, char *<i>user</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_auth.c.html#auth_count_scoreboard">modules/mod_auth.c</a><br>
 
 <hr>
 <a name="auth_endgrent"><b>auth_endgrent</b><br>
@@ -2082,6 +1813,21 @@ GID-to-name lookup for the given GID <i>gid</i>.<br>
   <a href="../src/modules/mod_auth.c.html#auth_init">modules/mod_auth.c</a><br>
 
 <hr>
+<a name="auth_login_timeout_cb"><b>auth_login_timeout_cb</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static int auth_login_timeout_cb(CALLBACK_FRAME)
+</pre>
+<font color=blue>Comments</font>:  Timer callback function which disconnects
+the control connection if the timer has elapsed before the client has
+successfully authenticated.  The timer length is configurable via the
+<code>TimeoutLogin</code> configuration directive.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_auth.c.html#auth_login_timeout_cb">modules/mod_auth.c</a><br>
+
+<hr>
 <a name="auth_name_gid"><b>auth_name_gid</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -2120,6 +1866,82 @@ caution when handling the returned <code>uid_t</code>, and treat a
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/auth.c.html#auth_name_uid">src/auth.c</a><br>
+
+<hr>
+<a name="auth_pass"><b>auth_pass</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET auth_pass(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Command handler for the <code>PASS</code>
+FTP command.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_auth.c.html#auth_pass">modules/mod_auth.c</a><br>
+
+<hr>
+<a name="auth_post_pass"><b>auth_post_pass</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET auth_post_pass(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_auth.c.html#auth_post_pass">modules/mod_auth.c</a><br>
+
+<hr>
+<a name="auth_pre_pass"><b>auth_pre_pass</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET auth_pre_pass(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_auth.c.html#auth_pre_pass">modules/mod_auth.c</a><br>
+
+<hr>
+<a name="auth_pre_user"><b>auth_pre_user</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET auth_pre_user(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_auth.c.html#auth_pre_user">modules/mod_auth.c</a><br>
+
+<hr>
+<a name="auth_rein"><b>auth_rein</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET auth_rein(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Command handler for the <code>REIN</code>
+FTP command.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_auth.c.html#auth_rein">modules/mod_auth.c</a><br>
+
+<hr>
+<a name="auth_scan_scoreboard"><b>auth_scan_scoreboard</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static void auth_scan_scoreboard(void)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_auth.c.html#auth_scan_scoreboard">modules/mod_auth.c</a><br>
+
+<hr>
+<a name="auth_sess_init"><b>auth_sess_init</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static int auth_sess_init(void)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_auth.c.html#auth_sess_init">modules/mod_auth.c</a><br>
 
 <hr>
 <a name="auth_setgrent"><b>auth_setgrent</b><br>
@@ -2168,6 +1990,20 @@ UID-to-name lookup for the given UID <i>uid</i>.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/auth.c.html#auth_uid_name">src/auth.c</a><br>
+
+<hr>
+<a name="auth_user"><b>auth_user</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET auth_user(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Command handler for the <code>USER</code>
+FTP command.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_auth.c.html#auth_user">modules/mod_auth.c</a><br>
+
 
 <hr>
 <a name="block_alarms"><b>block_alarms</b><br>
@@ -2227,31 +2063,6 @@ from the configuration records.<br>
   <a href="../src/src/pool.c.html#bytes_in_block_list">src/pool.c</a><br>
 
 <hr>
-<a name="bytes_in_free_blocks"><b>bytes_in_free_blocks</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  long bytes_in_free_blocks(void)
-</pre>
-<font color=blue>Comments</font>: Return the number of free block bytes.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/pool.c.html#bytes_in_free_blocks">src/pool.c</a><br>
-
-<hr>
-<a name="bytes_in_pool"><b>bytes_in_pool</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  long bytes_in_pool(pool *<i>p</i>)
-</pre>
-<font color=blue>Comments</font>: Return the number of bytes in
-<code>pool</code> <i>p</i>.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/pool.c.html#bytes_in_pool">src/pool.c</a><br>
-
-<hr>
 <a name="call_module"><b>call_module</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -2282,24 +2093,14 @@ from the configuration records.<br>
   <a href="../src/src/modules.c.html#call_module_cmd">src/modules.c</a><br>
 
 <hr>
-<a name="check_auth"><b>check_auth</b><br>
+<a name="check_context"><b>check_context</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  int check_auth(cmd_rec *<i>cmd</i>)
+  unsigned char check_context(cmd_rec *<i>cmd</i>, int <i>allowed</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_auth.c.html#check_auth">modules/mod_auth.c</a><br>
-
-<hr>
-<a name="check_conf"><b>check_conf</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int check_conf(cmd_rec *<i>cmd</i>, int <i>allowed</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/dirtree.c.html#check_conf">src/dirtree.c</a><br>
+  <a href="../src/src/dirtree.c.html#check_context">src/dirtree.c</a><br>
 
 <hr>
 <a name="check_shutmsg"><b>check_shutmsg</b><br>
@@ -2333,35 +2134,6 @@ chained <code>union block_hdr</code>s point to <code>union block_hdr</code>
   <a href="../src/src/pool.c.html#chk_on_blk_list">src/pool.c</a><br>
 
 <hr>
-<a name="cleanup_for_exec"><b>cleanup_for_exec</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void cleanup_for_exec(void)
-</pre>
-<font color=blue>Comments</font>: A wrapper function for
-<code>cleanup_pool_for_exec</code> that just blocks and unblocks alarms
-before calling that function.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/pool.c.html#cleanup_for_exec">src/pool.c</a><br>
-
-<hr>
-<a name="cleanup_pool_for_exec"><b>cleanup_pool_for_exec</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static void cleanup_pool_for_exec(pool *<i>p</i>)
-</pre>
-<font color=blue>Comments</font>: This function walks the subpools of
-<code>pool</code> <i>p</i>, invoking any child clean-up callback function
-for a subpool (via <code>run_child_cleanups</code>, and cleaning up the
-allocated resources.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/pool.c.html#cleanup_pool_for_exec">src/pool.c</a><br>
-
-<hr>
 <a name="clear_inet_pool"><b>clear_inet_pool</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -2386,110 +2158,6 @@ allocated resources.<br>
   <a href="../src/src/pool.c.html#clear_pool">src/pool.c</a><br>
 
 <hr>
-<a name="cmd_abor"><b>cmd_abor</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET cmd_abor(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Command handler for the <code>ABOR</code>
-FTP command.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#cmd_abor">modules/mod_xfer.c</a><br>
-
-<hr>
-<a name="cmd_acct"><b>cmd_acct</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET cmd_acct(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Command handler for the <code>ACCT</code>
-FTP command.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_auth.c.html#cmd_acct">modules/mod_auth.c</a><br>
-
-<hr>
-<a name="cmd_allo"><b>cmd_allo</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET cmd_allo(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Command handler for the <code>ALLO</code>
-FTP command.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#cmd_allo">modules/mod_xfer.c</a><br>
-
-<hr>
-<a name="cmd_cdup"><b>cmd_cdup</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET cmd_cdup(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Command handler for the <code>CDUP</code>
-FTP command.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#cmd_cdup">modules/mod_core.c</a><br>
-
-<hr>
-<a name="cmd_cwd"><b>cmd_cwd</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET cmd_cwd(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Command handler for the <code>CWD</code>
-and <code>XCWD</code> FTP commands.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#cmd_cwd">modules/mod_core.c</a><br>
-
-<hr>
-<a name="cmd_dele"><b>cmd_dele</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET cmd_dele(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Command handler for the <code>DELE</code>
-FTP command.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#cmd_dele">modules/mod_core.c</a><br>
-
-<hr>
-<a name="cmd_help"><b>cmd_help</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET cmd_help(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Command handler for the <code>HELP</code>
-FTP command.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#cmd_help">modules/mod_core.c</a><br>
-
-<hr>
-<a name="cmd_list"><b>cmd_list</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET cmd_list(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Command handler for the <code>LIST</code>
-FTP command.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_ls.c.html#cmd_list">modules/mod_ls.c</a><br>
-
-<hr>
 <a name="cmd_loop"><b>cmd_loop</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -2500,7 +2168,91 @@ FTP command.<br>
   <a href="../src/src/main.c.html#cmd_loop">src/main.c</a><br>
 
 <hr>
-<a name="cmd_mdtm"><b>cmd_mdtm</b><br>
+<a name="conn_cleanup_cb"><b>conn_cleanup_cb</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static void conn_cleanup_cb(void *<i>cv</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#conn_cleanup_cb">src/inet.c</a><br>
+
+<hr>
+<a name="core_cdup"><b>core_cdup</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET core_cdup(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Command handler for the <code>CDUP</code>
+FTP command.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_core.c.html#cmd_cdup">modules/mod_core.c</a><br>
+
+<hr>
+<a name="core_chgrp"><b>core_chgrp</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int core_chgrp(cmd_rec *<i>cmd</i>, char *<i>dir</i>, uid_t <i>uid</i>, gid_t <i>gid</i>)
+</pre>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_core.c.html#core_chgrp">modules/mod_core.c</a><br>
+
+<hr>
+<a name="core_chmod"><b>core_chmod</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int core_chmod(cmd_rec *<i>cmd</i>, char *<i>dir</i>, mode_t <i>mode</i>)
+</pre>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_core.c.html#core_chmod">modules/mod_core.c</a><br>
+
+<hr>
+<a name="core_cwd"><b>core_cwd</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET core_cwd(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Command handler for the <code>CWD</code>
+and <code>XCWD</code> FTP commands.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_core.c.html#core_cwd">modules/mod_core.c</a><br>
+
+<hr>
+<a name="core_dele"><b>core_dele</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET core_dele(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Command handler for the <code>DELE</code>
+FTP command.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_core.c.html#core_dele">modules/mod_core.c</a><br>
+
+<hr>
+<a name="core_help"><b>core_help</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET core_help(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Command handler for the <code>HELP</code>
+FTP command.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_core.c.html#core_help">modules/mod_core.c</a><br>
+
+<hr>
+<a name="core_mdtm"><b>core_mdtm</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -2513,326 +2265,245 @@ FTP command.<br>
   <a href="../src/modules/mod_core.c.html#cmd_mdtm">modules/mod_core.c</a><br>
 
 <hr>
-<a name="cmd_mkd"><b>cmd_mkd</b><br>
+<a name="core_mkd"><b>core_mkd</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  MODRET cmd_mkd(cmd_rec *<i>cmd</i>)
+  MODRET core_mkd(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Comments</font>: Command handler for the <code>MKD</code>
 FTP command.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#cmd_mkd">modules/mod_core.c</a><br>
+  <a href="../src/modules/mod_core.c.html#core_mkd">modules/mod_core.c</a><br>
 
 <hr>
-<a name="cmd_mode"><b>cmd_mode</b><br>
+<a name="core_netio_abort_cb"><b>core_netio_abort_cb</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  MODRET cmd_mode(cmd_rec *<i>cmd</i>)
+  static void core_netio_abort_cb(pr_netio_stream_t *<i>nstrm</i>)
 </pre>
-<font color=blue>Comments</font>: Command handler for the <code>MODE</code>
-FTP command.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#cmd_mode">modules/mod_xfer.c</a><br>
+  <a href="../src/src/netio.c.html#core_netio_abort_cb">src/netio.c</a><br>
 
 <hr>
-<a name="cmd_nlst"><b>cmd_nlst</b><br>
+<a name="core_netio_close_cb"><b>core_netio_close_cb</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
- MODRET cmd_nlst(cmd_rec *<i>cmd</i>)
+  static int core_netio_close_cb(pr_netio_stream_t *<i>nstrm</i>)
 </pre>
-<font color=blue>Comments</font>: Command handler for the <code>NLST</code>
-FTP command.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_ls.c.html#cmd_nlst">modules/mod_ls.c</a><br>
+  <a href="../src/src/netio.c.html#core_netio_close_cb">src/netio.c</a><br>
 
 <hr>
-<a name="cmd_noop"><b>cmd_noop</b><br>
+<a name="core_netio_open_cb"><b>core_netio_open_cb</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  MODRET cmd_noop(cmd_rec *<i>cmd</i>)
+  static pr_netio_stream_t *core_netio_open_cb(pr_netio_stream_t *<i>nstrm</i>, int <i>fd</i>, int <i>mode</i>)
+</pre>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#core_netio_open_cb">src/netio.c</a><br>
+
+<hr>
+<a name="core_netio_poll_cb"><b>core_netio_poll_cb</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static int core_netio_poll_cb(pr_netio_stream_t *<i>nstrm</i>)
+</pre>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#core_netio_poll_cb">src/netio.c</a><br>
+
+<hr>
+<a name="core_netio_postopen_cb"><b>core_netio_postopen_cb</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static int core_netio_postopen_cb(pr_netio_stream_t *<i>nstrm</i>)
+</pre>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#core_netio_postopen_cb">src/netio.c</a><br>
+
+<hr>
+<a name="core_netio_read_cb"><b>core_netio_read_cb</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static int core_netio_read_cb(pr_netio_stream_t *<i>nstrm</i>, char *<i>buf</i>, size_t <i>buflen</i>)
+</pre>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#core_netio_read_cb">src/netio.c</a><br>
+
+<hr>
+<a name="core_netio_reopen_cb"><b>core_netio_reopen_cb</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+static pr_netio_stream_t *core_netio_reopen_cb(pr_netio_stream_t *<i>nstrm</i>, int <i>fd</i>, int <i>mode</i>)
+</pre>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#core_netio_reopen_cb">src/netio.c</a><br>
+
+<hr>
+<a name="core_netio_write_cb"><b>core_netio_write_cb</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static int core_netio_write_cb(pr_netio_stream_t *<i>nstrm</i>, char *<i>buf</i>, size_t <i>buflen</i>)
+</pre>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#core_netio_write_cb">src/netio.c</a><br>
+
+<hr>
+<a name="core_noop"><b>core_noop</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET core_noop(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Comments</font>: Command handler for the <code>NOOP</code>
 FTP command.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#cmd_noop">modules/mod_core.c</a><br>
+  <a href="../src/modules/mod_core.c.html#core_noop">modules/mod_core.c</a><br>
 
 <hr>
-<a name="cmd_pass"><b>cmd_pass</b><br>
+<a name="core_pasv"><b>core_pasv</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  MODRET cmd_pass(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Command handler for the <code>PASS</code>
-FTP command.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#cmd_pass">modules/mod_core.c</a><br>
-
-<hr>
-<a name="cmd_pasv"><b>cmd_pasv</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET cmd_pasv(cmd_rec *<i>cmd</i>)
+  MODRET core_pasv(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Comments</font>: Command handler for the <code>PASV</code>
 FTP command.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#cmd_pasv">modules/mod_core.c</a><br>
+  <a href="../src/modules/mod_core.c.html#core_pasv">modules/mod_core.c</a><br>
 
 <hr>
-<a name="cmd_port"><b>cmd_port</b><br>
+<a name="core_port"><b>core_port</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  MODRET cmd_port(cmd_rec *<i>cmd</i>)
+  MODRET core_port(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Comments</font>: Command handler for the <code>PORT</code>
 FTP command.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#cmd_port">modules/mod_core.c</a><br>
+  <a href="../src/modules/mod_core.c.html#core_port">modules/mod_core.c</a><br>
 
 <hr>
-<a name="cmd_pwd"><b>cmd_pwd</b><br>
+<a name="core_pwd"><b>core_pwd</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  MODRET cmd_pwd(cmd_rec *<i>cmd</i>)
+  MODRET core_pwd(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Comments</font>: Command handler for the <code>PWD</code>
 FTP command.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#cmd_pwd">modules/mod_core.c</a><br>
+  <a href="../src/modules/mod_core.c.html#core_pwd">modules/mod_core.c</a><br>
 
 <hr>
-<a name="cmd_quit"><b>cmd_quit</b><br>
+<a name="core_quit"><b>core_quit</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  MODRET cmd_quit(cmd_rec *<i>cmd</i>)
+  MODRET core_quit(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Comments</font>: Command handler for the <code>QUIT</code>
 FTP command.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#cmd_quit">modules/mod_core.c</a><br>
+  <a href="../src/modules/mod_core.c.html#core_quit">modules/mod_core.c</a><br>
 
 <hr>
-<a name="cmd_rein"><b>cmd_rein</b><br>
+<a name="core_rehash_cb"><b>core_rehash_cb</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  MODRET cmd_rein(cmd_rec *<i>cmd</i>)
+  static void core_rehash_cb(void *<i>d1</i>, void *<i>d2</i>, void *<i>d3</i>, void *<i>d4</i>)
 </pre>
-<font color=blue>Comments</font>: Command handler for the <code>REIN</code>
-FTP command.<br>
-<br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_auth.c.html#cmd_rein">modules/mod_auth.c</a><br>
+  <a href="../src/src/main.c.html#core_rehash_cb">src/main.c</a><br>
 
 <hr>
-<a name="cmd_rest"><b>cmd_rest</b><br>
+<a name="core_rmd"><b>core_rmd</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  MODRET cmd_rest(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Command handler for the <code>REST</code>
-FTP command.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#cmd_rest">modules/mod_xfer.c</a><br>
-
-<hr>
-<a name="cmd_retr"><b>cmd_retr</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET cmd_retr(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Command handler for the <code>RETR</code>
-FTP command.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#cmd_retr">modules/mod_xfer.c</a><br>
-
-<hr>
-<a name="cmd_rmd"><b>cmd_rmd</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET cmd_rmd(cmd_rec *<i>cmd</i>)
+  MODRET core_rmd(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Comments</font>: Command handler for the <code>RMD</code>
 FTP command.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#cmd_rmd">modules/mod_core.c</a><br>
+  <a href="../src/modules/mod_core.c.html#core_rmd">modules/mod_core.c</a><br>
 
 <hr>
-<a name="cmd_rnfr"><b>cmd_rnfr</b><br>
+<a name="core_rnfr"><b>core_rnfr</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  MODRET cmd_rnfr(cmd_rec *<i>cmd</i>)
+  MODRET core_rnfr(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Comments</font>: Command handler for the <code>RNFR</code>
 FTP command.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#cmd_rnfr">modules/mod_core.c</a><br>
+  <a href="../src/modules/mod_core.c.html#core_rnfr">modules/mod_core.c</a><br>
 
 <hr>
-<a name="cmd_rnto"><b>cmd_rnto</b><br>
+<a name="core_rnto"><b>core_rnto</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  MODRET cmd_rnto(cmd_rec *<i>cmd</i>)
+  MODRET core_rnto(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Comments</font>: Command handler for the <code>RNTO</code>
 FTP command.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#cmd_rnto">modules/mod_core.c</a><br>
+  <a href="../src/modules/mod_core.c.html#core_rnto">modules/mod_core.c</a><br>
 
 <hr>
-<a name="cmd_site"><b>cmd_site</b><br>
+<a name="core_size"><b>core_size</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  MODRET cmd_site(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Command handler for the <code>SITE</code>
-FTP comand.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#cmd_site">modules/mod_core.c</a><br>
-
-<hr>
-<a name="cmd_size"><b>cmd_size</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET cmd_size(cmd_rec *<i>cmd</i>)
+  MODRET core_size(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Comments</font>: Command handler for the <code>SIZE</code>
 FTP command.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#cmd_size">modules/mod_core.c</a><br>
+  <a href="../src/modules/mod_core.c.html#core_size">modules/mod_core.c</a><br>
 
 <hr>
-<a name="cmd_smnt"><b>cmd_smnt</b><br>
+<a name="core_syst"><b>core_syst</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  MODRET cmd_smnt(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Command handler for the <code>SMNT</code>
-FTP command.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#cmd_smnt">modules/mod_xfer.c</a><br>
-
-<hr>
-<a name="cmd_stat"><b>cmd_stat</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET cmd_stat(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Command handler for the <code>STAT</code>
-FTP command.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_ls.c.html#cmd_stat">modules/mod_ls.c</a><br>
-
-<hr>
-<a name="cmd_stor"><b>cmd_stor</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET cmd_stor(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Command handler for the <code>STOR</code>
-FTP command.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#cmd_stor">modules/mod_xfer.c</a><br>
-
-<hr>
-<a name="cmd_stou"><b>cmd_stou</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET cmd_stou(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#cmd_stou">modules/mod_xfer.c</a><br>
-
-<hr>
-<a name="cmd_stru"><b>cmd_stru</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET cmd_stru(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Command handler for the <code>STRU</code>
-FTP command.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#cmd_stru">modules/mod_xfer.c</a><br>
-
-<hr>
-<a name="cmd_syst"><b>cmd_syst</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET cmd_syst(cmd_rec *<i>cmd</i>)
+  MODRET core_syst(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Comments</font>: Command handler for the <code>SYST</code>
 FTP command.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#cmd_syst">modules/mod_core.c</a><br>
-
-<hr>
-<a name="cmd_type"><b>cmd_type</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET cmd_type(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Command handler for the <code>TYPE</code>
-FTP command.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#cmd_type">modules/mod_xfer.c</a><br>
-
-<hr>
-<a name="cmd_user"><b>cmd_user</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET cmd_user(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Command handler for the <code>USER</code>
-FTP command.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#cmd_user">modules/mod_core.c</a><br>
+  <a href="../src/modules/mod_core.c.html#core_syst">modules/mod_core.c</a><br>
 
 <hr>
 <a name="cmp"><b>cmp</b><br>
@@ -2915,6 +2586,16 @@ file is displayed without trouble.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_core.c.html#core_display_file">modules/mod_core.c</a><br>
+
+<hr>
+<a name="daemonize"><b>daemonize</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static void daemonize(void)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/main.c.html#daemonize">src/main.c</a><br>
 
 <hr>
 <a name="data_abort"><b>data_abort</b><br>
@@ -3159,20 +2840,6 @@ It returns <code>TRUE</code> if an operation is allowed on the current
   <a href="../src/src/dirtree.c.html#dir_check_full">src/dirtree.c</a><br>
 
 <hr>
-<a name="dir_check_hidden"><b>dir_check_hidden</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int dir_check_hidden(const char *<i>path</i>)
-</pre>
-<font color=blue>Comments</font>: Determines whether the given <i>path</i> is
-to be treated as a &quot;hidden&quot; file.  Returns <code>TRUE</code> if so,
-<code>FALSE</code> otherwise.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/dirtree.c.html#dir_check_hidden">src/dirtree.c</a><br>
-
-<hr>
 <a name="dir_check_limits"><b>dir_check_limits</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -3181,16 +2848,6 @@ to be treated as a &quot;hidden&quot; file.  Returns <code>TRUE</code> if so,
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#dir_check_limits">src/dirtree.c</a><br>
-
-<hr>
-<a name="dir_check_op"><b>dir_check_op</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int dir_check_op(pool *<i>pp</i>, char *<i>path</i>, int <i>op</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/dirtree.c.html#dir_check_op">src/dirtree.c</a><br>
 
 <hr>
 <a name="dir_check_op_mode"><b>dir_check_op_mode</b><br>
@@ -3214,6 +2871,16 @@ exists and is a directory, <code>FALSE</code> otherwise.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/support.c.html#dir_exists">src/support.c</a><br>
+
+<hr>
+<a name="dir_hide_file"><b>dir_hide_file</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  unsigned char dir_hide_file(const char *<i>path</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/dirtree.c.html#dir_hide_file">src/dirtree.c</a><br>
 
 <hr>
 <a name="dir_interpolate"><b>dir_interpolate</b><br>
@@ -3362,6 +3029,32 @@ to be sent to all children processed, terminating them, thus
   <a href="../src/modules/mod_core.c.html#end_directory">modules/mod_core.c</a><br>
 
 <hr>
+<a name="end_ifdefine"><b>end_ifdefine</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET end_ifdefine(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>&lt;/IfDefine&gt;</code> directive.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_core.c.html#end_ifdefine">modules/mod_core.c</a><br>
+
+<hr>
+<a name="end_ifmodule"><b>end_ifmodule</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET end_ifmodule(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>&lt;/IfModule&gt;</code> directive.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_core.c.html#end_ifmodule">modules/mod_core.c</a><br>
+
+<hr>
 <a name="end_global"><b>end_global</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -3467,17 +3160,17 @@ log files are closed.<br>
   <a href="../src/src/support.c.html#exists">src/support.c</a><br>
 
 <hr>
-<a name="fd_cleanup"><b>fd_cleanup</b><br>
+<a name="fd_cleanup_cb"><b>fd_cleanup_cb</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static void fd_cleanup(void *<i>fdv</i>)
+  static void fd_cleanup_cb(void *<i>fdv</i>)
 </pre>
 <font color=blue>Comments</font>: <code>close()</code>s the file descriptor
 <i>fdv</i>.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/src/pool.c.html#fd_cleanup">src/pool.c</a><br>
+  <a href="../src/src/pool.c.html#fd_cleanup_cb">src/pool.c</a><br>
 
 <hr>
 <a name="fgetbufline"><b>fgetbufline</b><br>
@@ -3510,30 +3203,30 @@ log files are closed.<br>
   <a href="../src/lib/pwgrent.c.html#fgetpwent">lib/pwgrent.c</a><br>
 
 <hr>
-<a name="file_child_cleanup"><b>file_child_cleanup</b><br>
+<a name="file_child_cleanup_cb"><b>file_child_cleanup_cb</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static void file_child_cleanup(void *<i>fpv</i>)
+  static void file_child_cleanup_cb(void *<i>fpv</i>)
 </pre>
 <font color=blue>Comments</font>: <code>close()</code>s the file pointed to
 by <code>FILE</code> pointer <i>fpv</i>.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/src/pool.c.html#file_child_cleanup">src/pool.c</a><br>
+  <a href="../src/src/pool.c.html#file_child_cleanup_cb">src/pool.c</a><br>
 
 <hr>
-<a name="file_cleanup"><b>file_cleanup</b><br>
+<a name="file_cleanup_cb"><b>file_cleanup_cb</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static void file_cleanup(void *<i>fpv</i>)
+  static void file_cleanup_cb(void *<i>fpv</i>)
 </pre>
 <font color=blue>Comments</font>: <code>fclose()</code>s the file pointed
 to by <code>FILE</code> pointer <i>fpv</i>.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/src/pool.c.html#file_cleanup">src/pool.c</a><br>
+  <a href="../src/src/pool.c.html#file_cleanup_cb">src/pool.c</a><br>
 
 <hr>
 <a name="file_exists"><b>file_exists</b><br>
@@ -3644,16 +3337,6 @@ always be <code>FALSE</code>.  Exceptions to this rule are very rare.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/fs.c.html#find_opendir">src/fs.c</a><br>
-
-<hr>
-<a name="fini_nlst"><b>fini_nlst</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET fini_nlst(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_ls.c.html#fini_nlst">modules/mod_ls.c</a><br>
 
 <hr>
 <a name="fixup_dirs"><b>fixup_dirs</b><br>
@@ -4245,16 +3928,6 @@ A basic optimization - if the path contains no slashes,
   <a href="../src/src/fs.c.html#fs_unlink_canon">src/fs.c</a><br>
 
 <hr>
-<a name="fs_unregister"><b>fs_unregister</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void fs_unregister(fsdir_t *<i>fsd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#fs_unregister">src/fs.c</a><br>
-
-<hr>
 <a name="fs_virtual_path"><b>fs_virtual_path</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -4570,24 +4243,43 @@ a caller-provided array of group names.<br>
   <a href="../src/src/dirtree.c.html#group_expression">src/dirtree.c</a><br>
 
 <hr>
-<a name="handle_sig_alarm"><b>handle_sig_alarm</b><br>
+<a name="handle_alarm"><b>handle_alarm</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void handle_sig_alarm(void)
+  void handle_alarm(void)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/src/timers.c.html#handle_sig_alarm">src/timers.c</a><br>
+  <a href="../src/src/timers.c.html#handle_alarm">src/timers.c</a><br>
 
 <hr>
-<a name="idle_time"><b>idle_time</b><br>
+<a name="ident_timeout_cb"><b>ident_timeout_cb</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static char *idle_time(time_t *<i>i</i>)
+  static int ident_timeout_cb(CALLBACK_FRAME)
 </pre>
+<font color=blue>Comments</font>: Timer callback function which aborts an
+ident (RFC 1413) lookup.  The timer length is set to 10 seconds, and is
+tunable via the <code>PR_TUNABLE_TIMEOUTIDENT</code> macro, defined in
+<a href="../src/include/options.h.html#PR_TUNABLE_TIMEOUTIDENT">include/options.h</a>.<br>
+<br>
 <font color=blue>Source File</font>:
-  <a href="../src/src/ftpcount.c.html#idle_time">src/ftpcount.c</a><br>
+  <a href="../src/src/ident.c.html#ident_timeout_cb">src/ident.c</a><br>
+
+<hr>
+<a name="idle_timeout_cb"><b>idle_timeout_cb</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static int idle_timeout_cb(CALLBACK_FRAME)
+</pre>
+<font color=blue>Comments</font>:  Timer callback function which disconnects
+an idle session.  The timer length is configurable via the
+<code>TimeoutIdle</code> configuration directive.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/main.c.html#idle_timeout_cb">src/main.c</a><br>
 
 <hr>
 <a name="inet_accept"><b>inet_accept</b><br>
@@ -4660,7 +4352,7 @@ the remote address is reverse solved.<br>
 <font color=blue>Comments</font>:  With this function, it is not necessary
 to close file descriptors or schedule <code>IOFILE</code>s for removal
 because the creator of the connection, either <a href="#inet_create_connection"><code>inet_create_connection()</code></a> or <a href="#inet_copy_connection"><code>inet_copy_connection()</code></a> will have registered a <code>pool</code>
-cleanup handler (<a href="#_conn_cleanup"><code>_conn_cleanup()</code></a>)
+cleanup handler (<a href="#conn_cleanup_cb"><code>conn_cleanup_cb()</code></a>)
 which will do all of this work for us.  Simply destroy the connection <i>c</i>'s
 <code>pool</code>, and it will do the rest.  The given <i>pool</i> is not used
 by this function.<br>
@@ -4858,6 +4550,16 @@ address.  A new connection structure is created from <i>pool</i>.<br>
   <a href="../src/src/inet.c.html#inet_openrw">src/inet.c</a><br>
 
 <hr>
+<a name="inet_pool_cleanup_cb"><b>_inet_pool_cleanup</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static void inet_pool_cleanup_cb(void *<i>ignore</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/inet.c.html#inet_pool_cleanup_cb">src/inet.c</a><br>
+
+<hr>
 <a name="inet_resetlisten"><b>inet_resetlisten</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -4987,19 +4689,6 @@ server configuration.<br>
   <a href="../src/src/main.c.html#inetd_main">src/main.c</a><br>
 
 <hr>
-<a name="init_alloc"><b>init_alloc</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void init_alloc(void)
-</pre>
-<font color=blue>Comments</font>: Initialize the pool system by creating the
-base <code>permanent_pool</code>.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/pool.c.html#init_alloc">src/pool.c</a><br>
-
-<hr>
 <a name="init_child_modules"><b>init_child_modules</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -5064,16 +4753,6 @@ been spawned.<br>
   <a href="../src/src/inet.c.html#init_inet">src/inet.c</a><br>
 
 <hr>
-<a name="init_io"><b>init_io</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void init_io(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/io.c.html#init_io">src/io.c</a><br>
-
-<hr>
 <a name="init_log"><b>init_log</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -5123,233 +4802,6 @@ more and more memory on long uptimes.<br>
   <a href="../src/src/main.c.html#install_signal_handlers">src/main.c</a><br>
 
 <hr>
-<a name="io_abort"><b>io_abort</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void io_abort(IOFILE *<i>f</i>)
-</pre>
-<font color=blue>Comments</font>:  This function sets the
-<a href="macros.html#IO_ABORT"><code>IO_ABORT</code></a> flag on the given
-<a href="structs.html#IO_File"><code>IOBUF</code></a> <i>f</i>.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/io.c.html#io_abort">src/io.c</a><br>
-
-<hr>
-<a name="io_close"><b>io_close</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int io_close(IOFILE *<i>f</i>)
-</pre>
-<font color=blue>Comments</font>:  Close <i>f</i>'s file descriptor, and
-destroy <i>f</i>.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/io.c.html#io_close">src/io.c</a><br>
-
-<hr>
-<a name="io_create"><b>io_create</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  IOFILE *io_create(pool *<i>p</i>)
-</pre>
-<font color=blue>Comments</font>:  Create a new <code>IOFILE</code> object,
-allocating a subpool from <i>p</i> for the new object.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/io.c.html#io_create">src/io.c</a><br>
-
-<hr>
-<a name="io_gets"><b>io_gets</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  char *io_gets(char *<i>buf</i>, int <i>size</i>, IOFILE *<i>f</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/io.c.html#io_gets">src/io.c</a><br>
-
-<hr>
-<a name="io_newbuf"><b>io_newbuf</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  IOBUF *io_newbuf(IOFILE *<i>f</i>)
-</pre>
-<font color=blue>Comments</font>:  Create a new <code>IOBUF</code> from
-<i>f</i>'s <code>pool</code>, and assign it to <i>f</i>.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/io.c.html#io_newbuf">src/io.c</a><br>
-
-<hr>
-<a name="io_open"><b>io_open</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  IOFILE *io_open(pool *<i>p</i>, int <i>fd</i>, int <i>mode</i>)
-</pre>
-<font color=blue>Comments</font>:  Create a new <code>IOFILE</code> from
-<i>p</i>, and assign to it the file descriptor <i>fd</i> and mode <i>mode</i>.
-The <i>mode</i> argument must either <code>0</code> for reading or
-<code>1</code> for writing.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/io.c.html#io_open">src/io.c</a><br>
-
-<hr>
-<a name="io_poll"><b>io_poll</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int io_poll(IOFILE *<i>f</i>)
-</pre>
-<font color=blue>Comments</font>:  This function is needed instead of simply
-blocking <code>read()</code>/<code>write()</code> because there is a race
-condition if the syscall <i>should</i> be interrupted inside
-<code>read()</code>, or <code>write()</code>, but the signal is received
-before we actually hit the <code>read()</code> or <code>write()</code> call.
-<code>select()</code> alleviates this problem by timing out (configurable
-via <a href="#io_set_restart_interval"><code>io_set_restart_interval()</code></a>), restarting the syscall if <code>IO_NTR</code> is not set, or returning if
-it is set and we are interrupted by a signal.  If after the timeout
-<code>IO_ABORT</code> is set (presumably by a signal handler) or
-<code>IO_INTR</code> and <code>errno == EINTR</code>, this functions returns
-<code>1</code>.  Otherwise, return <code>0</code> when data are available,
-<code>-1</code> if there are other errors.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/io.c.html#io_poll">src/io.c</a><br>
-
-<hr>
-<a name="io_printf"><b>io_printf</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int io_printf(IOFILE *<i>f</i>, char *<i>fmt</i>, ...)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/io.c.html#io_printf">src/io.c</a><br>
-
-<hr>
-<a name="io_printf_async"><b>io_printf_async</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int io_printf_async(IOFILE *<i>f</i>, char *<i>fmt</i>, ...)
-</pre>
-<font color=blue>Comments</font>:  This function is for use inside of
-alarm handlers, where no <a href="#io_poll"><code>io_poll()</code></a> blocking
-is allowed.  This is necessary because otherwise
-<a href="#io_poll"><code>io_poll()</code></a> can potentially hang forever
-if the send queue is full and the socket hasa been closed.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/io.c.html#io_printf_async">src/io.c</a><br>
-
-<hr>
-<a name="io_read"><b>io_read</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int io_read(IOFILE *<i>f</i>, char *<i>buf</i>, int <i>size</i>, int <i>min</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/io.c.html#io_read">src/io.c</a><br>
-
-<hr>
-<a name="io_reopen"><b>io_reopen</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  IOFILE *io_reopen(IOFILE *<i>f</i>, int <i>fd</i>, int <i>mode</i>)
-</pre>
-<font color=blue>Comments</font>:  Close <i>f</i>'s current file descriptor,
-and assign to <i>f</i> the new file descriptor <i>fd</i> and mode
-<i>mode</i>.  The <i>mode</i> argument must be either <code>0</code> for
-reading or <code>1</code> for writing.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/io.c.html#io_reopen">src/io.c</a><br>
-
-<hr>
-<a name="io_set_errno"><b>io_set_errno</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void io_set_errno(IOFILE *<i>f</i>, int <i>xerrno</i>)
-</pre>
-<font color=blue>Comments</font>:  This is an accessor function which
-sets the <code>xerrno</code> member of the given
-<a href="structs#IO_File"><code>IOBUF</code></a> <i>f</i>.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/io.c.html#io_set_errno">src/io.c</a><br>
-
-<hr>
-<a name="io_set_poll_sleep"><b>io_set_poll_sleep</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void io_set_poll_sleep(IOFILE *<i>f</i>, unsigned int <i>secs</i>)
-</pre>
-<font color=blue>Comments</font>:  Sets the
-<a href="macros.html#IO_INTR"><code>IO_INTR</code></a> flag for <i>f</i>,
-and configures the <code>select()</code> timeout used in
-<a href="#io_poll"><code>io_poll()</code></a> to <i>secs</i>.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/io.c.html#io_set_poll_sleep">src/io.c</a><br>
-
-<hr>
-<a name="io_telnet_gets"><b>io_telnet_gets</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  char *io_telnet_gets(char *<i>buf</i>, int <i>size</i>, IOFILE *<i>f</i>, IOFILE *<i>o</i>)
-</pre>
-<font color=blue>Comments</font>:  This function is exactly like
-<a href="#io_gets"><code>io_gets()</code></a>, except that a few special
-telnet characters are handled, which takes care of the
-[<code>IAC</code>]<code>ABOR</code> command, and odd clients.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/io.c.html#io_telnet_gets">src/io.c</a><br>
-
-<hr>
-<a name="io_write"><b>io_write</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int io_write(IOFILE *<i>f</i>, char *<i>buf</i>, int <i>size</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/io.c.html#io_write">src/io.c</a><br>
-
-<hr>
-<a name="io_write_async"><b>io_write_async</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int io_write_async(IOFILE *<i>f</i>, char *<i>buf</i>, int <i>size</i>)
-</pre>
-<font color=blue>Comments</font>: This is a bit odd, because <code>io_*</code>
-functions are opaque, and we can't be sure that we are dealing with a
-<code>conn_t</code> or that it is in <code>O_NONBLOCK</code> mode.  Trying to
-do this without <code>O_NONBLOCK</code> would cause the kernel itself to block
-here, and thus invalidate the whole principle.  Instead, we save the flags and
-put the file descriptor in <code>O_NONBLOCK</code> mode.<br>
-<br>
-This function returns <code>-1</code> if an error occurred, and
-<code>errno</code> is set appropriately.  If everything goes smoothly,
-the number of bytes written is returned.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/io.c.html#io_write_async">src/io.c</a><br>
-
-<hr>
 <a name="is_dotdir"><b>is_dotdir</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -5375,26 +4827,6 @@ otherwise.<br>
   <a href="../src/src/ftpshut.c.html#isnumeric">src/ftpshut.c</a><br>
 
 <hr>
-<a name="kill_cleanup"><b>kill_cleanup</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void kill_cleanup(pool *<i>p</i>, void *<i>data</i>, void (*<i>cleanup</i>)(void *))
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/pool.c.html#kill_cleanup">src/pool.c</a><br>
-
-<hr>
-<a name="kill_cleanups_for_fd"><b>kill_cleanups_for_fd</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void kill_cleanups_for_fd(pool *<i>p</i>, int <i>fd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/pool.c.html#kill_cleanups_for_fd">src/pool.c</a><br>
-
-<hr>
 <a name="kludge_disable_umask"><b>kludge_disable_umask</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -5413,16 +4845,6 @@ otherwise.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#kludge_enable_umask">src/dirtree.c</a><br>
-
-<hr>
-<a name="list_cleanup"><b>list_cleanup</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET list_cleanup(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_ls.c.html#list_cleanup">modules/mod_ls.c</a><br>
 
 <hr>
 <a name="list_modules"><b>list_modules</b><br>
@@ -5488,22 +4910,6 @@ list of modules compiled into the server at configure-time.<br>
   <a href="../src/src/log.c.html#log">src/log.c</a><br>
 
 <hr>
-<a name="log_add_run"><b>log_add_run</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int log_add_run(pid_t <i>mpid</i>, time_t *<i>idle_since</i>, char *<i>user</i>, char *<i>class</i>, p_in_addr_t *<i>server_ip</i>,
-    unsigned short <i>server_port</i>, unsigned long <i>tx_size</i>, unsigned long <i>tx_done</i>, char *<i>op</i>, ...)
-</pre>
-<font color=blue>Comments</font>: <code>log_add_run</code> logs the current
-process and connection information to the <i>scoreboard-path/proftpd-[master daemon pid]</i> file.  If an existing record for the current PID is
-found, it is overwritten.  Passing in a <code>NULL</code> <i>user</i>
-will clear the entry.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/log.c.html#log_add_run">src/log.c</a><br>
-
-<hr>
 <a name="log_auth"><b>log_auth</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -5527,26 +4933,6 @@ log entry does not need to be seen by everyone.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_log.c.html#log_auth_complete">modules/mod_log.c</a><br>
-
-<hr>
-<a name="log_child_init"><b>log_child_init</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int log_child_init(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_log.c.html#log_child_init">modules/mod_log.c</a><br>
-
-<hr>
-<a name="log_close_run"><b>log_close_run</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int log_close_run(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/log.c.html#log_close_run">src/log.c</a><br>
 
 <hr>
 <a name="log_close_xfer"><b>log_close_xfer</b><br>
@@ -5617,38 +5003,6 @@ greater than the current debug level, the message is silently ignored.<br>
   <a href="../src/modules/mod_log.c.html#log_init">modules/mod_log.c</a><br>
 
 <hr>
-<a name="log_open_checkpath"><b>log_open_checkpath</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int log_open_checkpath(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/log.c.html#log_open_checkpath">src/log.c</a><br>
-
-<hr>
-<a name="log_open_run"><b>log_open_run</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int log_open_run(pid_t <i>mpid</i>, int <i>trunc</i>, int <i>allow_update</i>)
-</pre>
-<font color=blue>Comments</font>: Open a scoreboard file for the current
-connection, and write in the proper header information to the file.  If
-the <i>trunc</i> argument is <code>TRUE</code>, then if the necessary scoreboard
-file is not found, it will be opened with the <code>O_TRUNC</code> flag.  If
-the <i>allow_update</i> argument is <code>TRUE</code>, then out-of-date
-or corrupted scoreboard entries are removed.<br>
-<br>
-If successful, the opened file descriptor to the scoreboard file will be
-returned.  If a file descriptor for the scoreboard file is already opened,
-<code>0</code> will be returned.  If an error occurs, <code>-1</code> is
-returned, and <code>errno</code> is set.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/log.c.html#log_open_run">src/log.c</a><br>
-
-<hr>
 <a name="log_open_xfer"><b>log_open_xfer</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -5657,6 +5011,16 @@ returned, and <code>errno</code> is set.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/log.c.html#log_open_xfer">src/log.c</a><br>
+
+<hr>
+<a name="log_openfile"><b>log_openfile</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int log_openfile(const char *<i>log_file</i>, int *<i>log_fd</i>, mode_t <i>log_mode</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/log.c.html#log_openfile">src/log.c</a><br>
 
 <hr>
 <a name="log_opensyslog"><b>log_opensyslog</b><br>
@@ -5686,16 +5050,6 @@ the given <i>priority</i>.  <i>priority</i> should be one the
   <a href="../src/src/log.c.html#log_pri">src/log.c</a><br>
 
 <hr>
-<a name="log_read_run"><b>log_read_run</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  logrun_t *log_read_run(pid_t *<i>mpid</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/log.c.html#log_read_run">src/log.c</a><br>
-
-<hr>
 <a name="log_rehash"><b>log_rehash</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -5706,74 +5060,14 @@ the given <i>priority</i>.  <i>priority</i> should be one the
   <a href="../src/modules/mod_log.c.html#log_rehash">modules/mod_log.c</a><br>
 
 <hr>
-<a name="log_retr"><b>log_retr</b><br>
+<a name="log_sess_init"><b>log_sess_init</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  MODRET log_retr(cmd_rec *<i>cmd</i>)
+  static int log_sess_init(void)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#log_retr">modules/mod_xfer.c</a><br>
-
-<hr>
-<a name="log_rm_run"><b>log_rm_run</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void log_rm_run(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/log.c.html#log_rm_run">src/log.c</a><br>
-
-<hr>
-<a name="log_run_address"><b>log_run_address</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void log_run_address(const char *<i>remote_name</i>, const p_in_addr_t *<i>remote_ipaddr</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/log.c.html#log_run_address">src/log.c</a><br>
-
-<hr>
-<a name="log_run_checkpath"><b>log_run_checkpath</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int log_run_checkpath(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/log.c.html#log_run_checkpath">src/log.c</a><br>
-
-<hr>
-<a name="log_run_cwd"><b>log_run_cwd</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void log_run_cwd(const char *<i>cwd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/log.c.html#log_run_cwd">src/log.c</a><br>
-
-<hr>
-<a name="log_run_getpath"><b>log_run_getpath</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  const char *log_run_getpath(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/log.c.html#log_run_getpath">src/log.c</a><br>
-
-<hr>
-<a name="log_run_setpath"><b>log_run_setpath</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void log_run_setpath(const char *<i>path</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/log.c.html#log_run_setpath">src/log.c</a><br>
+  <a href="../src/modules/mod_log.c.html#log_sess_init">modules/mod_log.c</a><br>
 
 <hr>
 <a name="log_setdebuglevel"><b>log_setdebuglevel</b><br>
@@ -5815,16 +5109,6 @@ terminal.  After disabling <b>stderr</b>, all messages will be sent to
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/log.c.html#log_stderr">src/log.c</a><br>
-
-<hr>
-<a name="log_stor"><b>log_stor</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET log_stor(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#log_stor">modules/mod_xfer.c</a><br>
 
 <hr>
 <a name="log_wtmp"><b>log_wtmp</b><br>
@@ -5884,16 +5168,6 @@ return value from the entire function; if <code><i>and</i> == 0</code>, an
   <a href="../src/src/dirtree.c.html#login_check_limits">src/dirtree.c</a><br>
 
 <hr>
-<a name="ls_chk_glob"><b>ls_chk_glob</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET ls_chk_glob(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_ls.c.html#ls_chk_glob">modules/mod_ls.c</a><br>
-
-<hr>
 <a name="ls_done"><b>ls_done</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -5902,6 +5176,52 @@ return value from the entire function; if <code><i>and</i> == 0</code>, an
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_ls.c.html#ls_done">modules/mod_ls.c</a><br>
+
+<hr>
+<a name="ls_err_nlst"><b>ls_err_nlst</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET ls_err_nlst(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_ls.c.html#ls_err_nlst">modules/mod_ls.c</a><br>
+
+<hr>
+<a name="ls_list"><b>ls_list</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET ls_list(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Command handler for the <code>LIST</code>
+FTP command.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_ls.c.html#ls_list">modules/mod_ls.c</a><br>
+
+<hr>
+<a name="ls_log_nlst"><b>ls_log_nlst</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET ls_log_nlst(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_ls.c.html#ls_log_nlst">modules/mod_ls.c</a><br>
+
+<hr>
+<a name="ls_nlst"><b>ls_nlst</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ MODRET ls_nlst(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Command handler for the <code>NLST</code>
+FTP command.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_ls.c.html#ls_nlst">modules/mod_ls.c</a><br>
 
 <hr>
 <a name="ls_perms"><b>ls_perms</b><br>
@@ -5924,6 +5244,29 @@ return value from the entire function; if <code><i>and</i> == 0</code>, an
   <a href="../src/modules/mod_ls.c.html#ls_perms_full">modules/mod_ls.c</a><br>
 
 <hr>
+<a name="ls_post_pass"><b>ls_post_pass</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET ls_post_pass(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_ls.c.html#ls_post_pass">modules/mod_ls.c</a><br>
+
+<hr>
+<a name="ls_stat"><b>ls_stat</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET ls_stat(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Command handler for the <code>STAT</code>
+FTP command.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_ls.c.html#ls_stat">modules/mod_ls.c</a><br>
+
+<hr>
 <a name="ls_terminate"><b>ls_terminate</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -5942,16 +5285,6 @@ return value from the entire function; if <code><i>and</i> == 0</code>, an
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/main.c.html#main_exit">src/main.c</a><br>
-
-<hr>
-<a name="main_rehash"><b>main_rehash</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void main_rehash(void *<i>d1</i>, void *<i>d2</i>, void *<i>d3</i>, void *<i>d4</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/main.c.html#main_rehash">src/main.c</a><br>
 
 <hr>
 <a name="main_set_idle"><b>main_set_idle</b><br>
@@ -5991,24 +5324,14 @@ the <code>array_header</code> has at least one allocated slot.<br>
   <a href="../src/src/pool.c.html#make_array">src/pool.c</a><br>
 
 <hr>
-<a name="make_cmd"><b>make_cmd</b><br>
+<a name="make_ftp_cmd"><b>make_ftp_cmd</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static cmd_rec *make_cmd(pool *<i>p</i>, char *<i>buf</i>)
+  static cmd_rec *make_ftp_cmd(pool *<i>p</i>, char *<i>buf</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/src/main.c.html#make_cmd">src/main.c</a><br>
-
-<hr>
-<a name="make_named_sub_pool"><b>make_named_sub_pool</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  struct pool *make_named_sub_pool(struct pool *<i>p</i>, const char *<i>symbol</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/pool.c.html#make_named_sub_pool">src/pool.c</a><br>
+  <a href="../src/src/main.c.html#make_ftp_cmd">src/main.c</a><br>
 
 <hr>
 <a name="make_sub_pool"><b>make_sub_pool</b><br>
@@ -6029,6 +5352,16 @@ the <code>array_header</code> has at least one allocated slot.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/pool.c.html#malloc_block">src/pool.c</a><br>
+
+<hr>
+<a name="mask_signals"><b>mask_signals</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static void mask_signals(unsigned char <i>block</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/support.c.html#mask_signals">src/support.c</a><br>
 
 <hr>
 <a name="match_ip"><b>match_ip</b><br>
@@ -6137,6 +5470,29 @@ explicit match; <code>-1</code> if it is an explicit mismatch (<i>i.e.</i>
   <a href="../src/src/modules.c.html#mod_privdata_find">src/modules.c</a><br>
 
 <hr>
+<a name="module_exists"><b>module_exists</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int module_exists(const char *<i>name</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/modules.c.html#module_exists">src/modules.c</a><br>
+
+<hr>
+<a name="netio_buffer_alloc"><b>netio_buffer_alloc</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static pr_netio_buffer_t *netio_buffer_alloc(pr_netio_stream_t *<i>nstrm</i>)
+</pre>
+<font color=blue>Comments</font>:  Create a new <code>pr_netio_buffer_t</code>
+from <i>nstrm</i>'s <code>pool</code>, and assign it to <i>nstrm</i>.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#netio_buffer_alloc">src/netio.c</a><br>
+
+<hr>
 <a name="new_block"><b>new_block</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -6167,24 +5523,14 @@ explicit match; <code>-1</code> if it is an explicit mismatch (<i>i.e.</i>
   <a href="../src/modules/mod_ls.c.html#nlstfile">modules/mod_ls.c</a><br>
 
 <hr>
-<a name="note_cleanups_for_fd"><b>note_cleanups_for_fd</b><br>
+<a name="noxfer_timeout_cb"><b>noxfer_timeout_cb</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void note_cleanups_for_fd(pool *<i>p</i>, int <i>fd</i>)
+  static int noxfer_timeout_cb(CALLBACK_FRAME)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/src/pool.c.html#note_cleanups_for_fd">src/pool.c</a><br>
-
-<hr>
-<a name="note_cleanups_for_file"><b>note_cleanups_for_file</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void note_cleanups_for_file(pool *<i>p</i>, FILE *<i>fp</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/pool.c.html#note_cleanups_for_file">src/pool.c</a><br>
+  <a href="../src/modules/mod_xfer.c.html#noxfer_timeout_cb">modules/mod_xfer.c</a><br> 
 
 <hr>
 <a name="null_alloc"><b>null_alloc</b><br>
@@ -6422,15 +5768,6 @@ character (<i>e.g.</i> <code>/</code>), to create a path.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/pool.c.html#pdircat">src/pool.c</a><br>
-<hr>
-<a name="percent_complete"><b>percent_complete</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static char *percent_complete(unsigned long <i>size</i>, unsigned long <i>done</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/ftpcount.c.html#percent_complete">src/ftpcount.c</a><br>
 
 <hr>
 <a name="pfclose"><b>pfclose</b><br>
@@ -6493,56 +5830,6 @@ character (<i>e.g.</i> <code>/</code>), to create a path.<br>
   <a href="../src/src/pool.c.html#popenf">src/pool.c</a><br>
 
 <hr>
-<a name="pre_cmd_appe"><b>pre_cmd_appe</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET pre_cmd_appe(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#pre_cmd_appe">modules/mod_xfer.c</a><br>
-
-<hr>
-<a name="pre_cmd_pass"><b>pre_cmd_pass</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET pre_cmd_pass(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_auth.c.html#pre_cmd_pass">modules/mod_auth.c</a><br>
-  
-<hr>
-<a name="pre_cmd_retr"><b>pre_cmd_retr</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET pre_cmd_retr(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#pre_cmd_retr">modules/mod_xfer.c</a><br>
-
-<hr>
-<a name="pre_cmd_stor"><b>pre_cmd_stor</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET pre_cmd_stor(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#pre_cmd_stor">modules/mod_xfer.c</a><br>
-
-<hr>
-<a name="pre_cmd_user"><b>pre_cmd_user</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET pre_cmd_user(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_auth.c.html#pre_cmd_user">modules/mod_auth.c</a><br>
-
-<hr>
 <a name="preparse_arg"><b>preparse_arg</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -6551,6 +5838,255 @@ character (<i>e.g.</i> <code>/</code>), to create a path.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_log.c.html#preparse_arg">modules/mod_log.c</a><br>
+
+<hr>
+<a name="pr_alloc_netio"><b>pr_alloc_netio</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  pr_netio_t *pr_alloc_netio(pool *<i>parent_pool</i>)
+</pre>
+<font color=blue>Comments</font>:  Create a new <code>pr_netio_t</code> object,
+allocating a subpool from <i>parent_pool</i> for the new object.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#pr_alloc_netio">src/netio.c</a><br>
+
+<hr>
+<a name="pr_init_netio"><b>pr_init_netio</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_init_netio(void)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#pr_init_netio">src/netio.c</a><br>
+
+<hr>
+<a name="pr_init_pools"><b>pr_init_pools</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_init_pools(void)
+</pre>
+<font color=blue>Comments</font>: Initialize the pool system by creating the
+base <code>permanent_pool</code>.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/pool.c.html#pr_init_pools">src/pool.c</a><br>
+
+<hr>
+<a name="pr_netio_abort"><b>pr_netio_abort</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_netio_abort(pr_netio_stream_t *<i>nstrm</i>)
+</pre>
+<font color=blue>Comments</font>:  This function sets the
+<a href="macros.html#PR_NETIO_ABORT"><code>PR_NETIO_ABORT</code></a> flag on
+the given <a href="structs.html#pr_netio_stream_t"><code>pr_netio_stream_t</code></a> <i>nstrm</i>.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#pr_netio_abort">src/netio.c</a><br>
+
+<hr>
+<a name="pr_netio_close"><b>pr_netio_close</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_netio_close(pr_netio_stream_t *<i>nstrm</i>)
+</pre>
+<font color=blue>Comments</font>:  Close <i>nstrm</i>'s file descriptor, and
+destroy <i>nstrm</i>.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#pr_netio_close">src/netio.c</a><br>
+
+<hr>
+<a name="pr_netio_gets"><b>pr_netio_gets</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  char *pr_netio_gets(char *<i>buf</i>, size_t <i>buflen</i>, pr_netio_stream_t *<i>nstrm</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#pr_netio_gets">src/netio.c</a><br>
+
+<hr>
+<a name="pr_netio_lingering_close"><b>pr_netio_lingering_close</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_netio_lingering_close(pr_netio_stream_t *<i>nstrm</i>, long <i>linger</i>)
+</pre>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#pr_netio_lingering_close">src/netio.c</a><br>
+
+<hr>
+<a name="pr_netio_open"><b>pr_netio_open</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  pr_netio_stream_t *pr_netio_open(pool *<i>parent_pool</i>, int <i>strm_type</i>, int <i>fd</i>, int <i>mode</i>)
+</pre>
+<font color=blue>Comments</font>:  Create a new <code>pr_netio_stream_t</code>
+from <i>parent_pool</i>, and assign to it the file descriptor <i>fd</i> and
+mode <i>mode</i>.  The <i>mode</i> argument must either
+<code>PR_NETIO_IO_RD</code> for reading or <code>PR_NETIO_IO_WR</code> for
+writing.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#pr_netio_open">src/netio.c</a><br>
+
+<hr>
+<a name="pr_netio_poll"><b>pr_netio_poll</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_netio_poll(pr_netio_stream_t *<i>nstrm</i>)
+</pre>
+<font color=blue>Comments</font>:  This function is needed instead of simply
+blocking <code>read()</code>/<code>write()</code> because there is a race
+condition if the syscall <i>should</i> be interrupted inside
+<code>read()</code>, or <code>write()</code>, but the signal is received
+before we actually hit the <code>read()</code> or <code>write()</code> call.
+<code>select()</code> alleviates this problem by timing out (configurable
+via <a href="#pr_netio_set_poll_interval"><code>pr_netio_set_poll_interval()</code></a>), restarting the syscall if <code>PR_NETIO_SESS_INTR</code> is not set,
+or returning if it is set and we are interrupted by a signal.  If after the
+timeout <code>PR_NETIO_SESS_ABORT</code> is set (presumably by a signal
+handler) or <code>PR_NETIO_SESS_INTR</code> and <code>errno == EINTR</code>,
+this function returns <code>1</code>.  Otherwise, return <code>0</code> when
+data are available, <code>-1</code> if there are other errors.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#pr_netio_poll">src/netio.c</a><br>
+
+<hr>
+<a name="pr_netio_postopen"><b>pr_netio_postopen</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_netio_postopen(pr_netio_stream_t *<i>nstrm</i>)
+</pre>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#pr_netio_postopen">src/netio.c</a><br>
+
+<hr>
+<a name="pr_netio_printf"><b>pr_netio_printf</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_netio_printf(pr_netio_stream_t *<i>nstrm</i>, char *<i>fmt</i>, ...)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#pr_netio_printf">src/netio.c</a><br>
+
+<hr>
+<a name="pr_netio_printf_async"><b>pr_netio_printf_async</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_netio_printf_async(pr_netio_stream_t *<i>nstrm</i>, char *<i>fmt</i>, ...)
+</pre>
+<font color=blue>Comments</font>:  This function is for use inside of
+alarm handlers, where no
+<a href="#pr_netio_poll"><code>pr_netio_poll()</code></a> blocking
+is allowed.  This is necessary because otherwise
+<a href="#pr_netio_poll"><code>pr_netio_poll()</code></a> can potentially hang
+forever if the send queue is full and the socket has been closed.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#pr_netio_printf_async">src/netio.c</a><br>
+
+<hr>
+<a name="pr_netio_read"><b>pr_netio_read</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_netio_read(pr_netio_stream_t *<i>nstrm</i>, char *<i>buf</i>, size_t <i>buflen</i>, int <i>bufmin</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#pr_netio_read">src/netio.c</a><br>
+
+<hr>
+<a name="pr_netio_reopen"><b>pr_netio_reopen</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  pr_netio_stream_t *pr_netio_reopen(pr_netio_stream_t *<i>nstrm</i>, int <i>fd</i>, int <i>mode</i>)
+</pre>
+<font color=blue>Comments</font>:  Close <i>nstrm</i>'s current file descriptor,
+and assign to <i>nstrm</i> the new file descriptor <i>fd</i> and mode
+<i>mode</i>.  The <i>mode</i> argument must be either
+<code>PR_NETIO_IO_RD</code> for reading or <code>PR_NETIO_IO_WR</code> for
+writing.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#pr_netio_reopen">src/netio.c</a><br>
+
+<hr>
+<a name="pr_netio_set_poll_interval"><b>pr_netio_set_poll_interval</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void pr_netio_set_poll_interval(pr_netio_stream_t *<i>nstrm</i>, unsigned int <i>secs</i>)
+</pre>
+<font color=blue>Comments</font>:  Sets the
+<a href="macros.html#PR_NETIO_SESS_INTR"><code>PR_NETIO_SESS_INTR</code></a>
+flag for <i>nstrm</i>, and configures the <code>select()</code> timeout used in
+<a href="#pr_netio_poll"><code>pr_netio_poll()</code></a> to <i>secs</i>.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#pr_netio_set_poll_interval">src/netio.c</a><br>
+
+<hr>
+<a name="pr_netio_telnet_gets"><b>pr_netio_telnet_gets</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  char *pr_netio_telnet_gets(char *<i>buf</i>, size_t <i>buflen</i>, pr_netio_stream_t *<i>in_nstrm</i>,
+      pr_netio_stream_t *<i>out_nstrm</i>)
+</pre>
+<font color=blue>Comments</font>:  This function is exactly like
+<a href="#pr_netio_gets"><code>pr_netio_gets()</code></a>, except that a few
+special telnet characters are handled, which takes care of the
+[<code>IAC</code>]<code>ABOR</code> command, and odd clients.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#pr_netio_telnet_gets">src/netio.c</a><br>
+
+<hr>
+<a name="pr_netio_write"><b>pr_netio_write</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_netio_write(pr_netio_stream_t *<i>nstrm</i>, char *<i>buf</i>, size_t <i>buflen</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#pr_netio_write">src/netio.c</a><br>
+
+<hr>
+<a name="pr_netio_write_async"><b>pr_netio_write_async</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  int pr_netio_write_async(pr_netio_stream_t *<i>nstrm</i>, char *<i>buf</i>, size_t <i>buflen</i>)
+</pre>
+<font color=blue>Comments</font>: This is a bit odd, because
+<code>pr_netio_*</code> functions are opaque, and we cannot be sure that we are
+dealing with a <code>conn_t</code> or that it is in <code>O_NONBLOCK</code>
+mode.  Trying to do this without <code>O_NONBLOCK</code> would cause the kernel
+itself to block here, and thus invalidate the whole principle.  Instead, we
+save the flags and put the file descriptor in <code>O_NONBLOCK</code> mode.<br>
+<br>
+This function returns <code>-1</code> if an error occurred, and
+<code>errno</code> is set appropriately.  If everything goes smoothly,
+the number of bytes written is returned.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/src/netio.c.html#pr_netio_write_async">src/netio.c</a><br>
 
 <hr>
 <a name="pstrcat"><b>pstrcat</b><br>
@@ -6835,6 +6371,26 @@ quotes must be duplicated.<br>
   <a href="../src/src/pool.c.html#register_cleanup">src/pool.c</a><br>
 
 <hr>
+<a name="register_fd_cleanups"><b>register_fd_cleanups</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void register_fd_cleanups(pool *<i>p</i>, int <i>fd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/pool.c.html#register_fd_cleanups">src/pool.c</a><br>
+
+<hr>
+<a name="register_file_cleanups"><b>register_file_cleanups</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void register_file_cleanups(pool *<i>p</i>, FILE *<i>fp</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/pool.c.html#register_file_cleanups">src/pool.c</a><br>
+
+<hr>
 <a name="register_rehash"><b>register_rehash</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -6934,24 +6490,24 @@ is usually called after a connection has been made to a server.<br>
   <a href="../src/src/dirtree.c.html#resolve_defered_dirs">src/dirtree.c</a><br>
 
 <hr>
-<a name="run_child_cleanups"><b>run_child_cleanups</b><br>
+<a name="retr_abort"><b>retr_abort</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static void run_child_cleanups(struct cleanup *<i>c</i>)
+  static void retr_abort(void)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/src/pool.c.html#run_child_cleanups">src/pool.c</a><br>
+  <a href="../src/modules/mod_xfer.c.html#retr_abort">modules/mod_xfer.c</a><br>
 
 <hr>
-<a name="run_cleanup"><b>run_cleanup</b><br>
+<a name="retr_complete"><b>retr_complete</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void run_cleanup(pool *<i>p</i>, void *<i>data</i>, void (*<i>cleanup</i>)(void *))
+  static void retr_complete(void)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/src/pool.c.html#run_cleanup">src/pool.c</a><br>
+  <a href="../src/modules/mod_xfer.c.html#retr_complete">modules/mod_xfer.c</a><br>
 
 <hr>
 <a name="run_cleanups"><b>run_cleanups</b><br>
@@ -7000,16 +6556,6 @@ string if no token remains in the source string.<br>
   <a href="../src/src/support.c.html#safe_token">src/support.c</a><br>
 
 <hr>
-<a name="scan_config_file"><b>scan_config_file</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static void scan_config_file(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/ftpcount.c.html#scan_config_file">src/ftpcount.c</a><br>
-
-<hr>
 <a name="schedule"><b>schedule</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -7019,22 +6565,6 @@ string if no token remains in the source string.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/support.c.html#schedule">src/support.c</a><br>
-
-<hr>
-<a name="schedulep"><b>schedulep</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  int schedulep(void)
-</pre>
-<font color=blue>Comments</font>:  Returns <code>TRUE</code> if there is
-a scheduled function waiting, <code>FALSE</code> otherwise.<br>
-<br>
-<font color=blue>Notes:</font> This function should probably be given a more
-descriptive name.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/src/support.c.html#schedulep">src/support.c</a><br>
 
 <hr>
 <a name="semaphore_fds"><b>semaphore_fds</b><br>
@@ -7152,6 +6682,16 @@ FTP protocol response with the given <i>numeric</i>.<br>
   <a href="../src/modules/mod_ls.c.html#sendline">modules/mod_ls.c</a><br>
 
 <hr>
+<a name="serv_conn_cleanup_cb"><b>serv_conn_cleanup_cb</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static void serv_conn_cleanup_cb(void *<i>connp</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/main.c.html#serv_conn_cleanup_cb">src/main.c</a><br>
+
+<hr>
 <a name="server_loop"><b>server_loop</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -7201,19 +6741,6 @@ FTP protocol response with the given <i>numeric</i>.<br>
   <a href="../src/modules/mod_core.c.html#set_allowall">modules/mod_core.c</a><br>
 
 <hr>
-<a name="set_allowchmod"><b>set_allowchmod</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET set_allowchmod(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Configuration directive handler for the
-<code>AllowChmod</code> directive.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_site.c.html#set_allowchmod">modules/mod_site.c</a><br>
-
-<hr>
 <a name="set_allowfilter"><b>set_allowfilter</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -7253,6 +6780,19 @@ FTP protocol response with the given <i>numeric</i>.<br>
   <a href="../src/modules/mod_log.c.html#set_allowlogsymlinks">modules/mod_log.c</a><br>
 
 <hr>
+<a name="set_allowoverride"><b>set_allowoverride</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET set_allowoverride(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>AllowOverride</code> directive.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_core.c.html#set_allowoverride">modules/mod_core.c</a><br>
+
+<hr>
 <a name="set_allowoverwrite"><b>set_allowoverwrite</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -7263,7 +6803,7 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <code>AllowOverwrite</code> directive.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#set_allowoverwrite">modules/mod_core.c</a><br>
+  <a href="../src/modules/mod_xfer.c.html#set_allowoverwrite">modules/mod_xfer.c</a><br>
 
 <hr>
 <a name="set_allowretrieverestart"><b>set_allowretrieverestart</b><br>
@@ -7349,6 +6889,45 @@ Boolean fields.<br>
   <a href="../src/modules/mod_unixpw.c.html#set_authgroupfile">modules/mod_unixpw.c</a><br>
 
 <hr>
+<a name="set_authpam"><b>set_authpam</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET set_authpam(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>AuthPAM</code> directive.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_pam.c.html#set_authpam">modules/mod_pam.c</a><br>
+
+<hr>
+<a name="set_authpamauthoritative"><b>set_authpamauthoritative</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET set_authpamauthoritative(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>AuthPAMAuthoritative</code> directive.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_pam.c.html#set_authpamauthoritative">modules/mod_pam.c</a><br>
+
+<hr>
+<a name="set_authpamconfig"><b>set_authpamconfig</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET set_authpamconfig(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>AuthPAMConfig</code> directive.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_pam.c.html#set_authpamconfig">modules/mod_pam.c</a><br>
+
+<hr>
 <a name="set_authuserfile"><b>set_authuserfile</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -7412,6 +6991,29 @@ Boolean fields.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_core.c.html#set_commandbuffersize">modules/mod_core.c</a><br>
+
+<hr>
+<a name="set_daemon_rlimits"><b>set_daemon_rlimits</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void set_daemon_rlimits(void)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/main.c.html#set_daemon_rlimits">src/main.c</a><br>
+
+<hr>
+<a name="set_defaultaddress"><b>set_defaultaddress</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET set_defaultaddress(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>DefaultAddress</code> directive.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_core.c.html#set_defaultaddress">modules/mod_core.c</a><br>
 
 <hr>
 <a name="set_defaultserver"><b>set_defaultserver</b><br>
@@ -7609,6 +7211,19 @@ Boolean fields.<br>
   <a href="../src/modules/mod_core.c.html#set_group">modules/mod_core.c</a><br>
 
 <hr>
+<a name="set_grouppassword"><b>set_grouppassword</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET set_grouppassword(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>GroupPassword</code> directive.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_auth.c.html#set_grouppassword">modules/mod_core.c</a><br>
+
+<hr>
 <a name="set_groups"><b>set_groups</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -7619,17 +7234,30 @@ Boolean fields.<br>
   <a href="../src/src/auth.c.html#set_groups">src/auth.c</a><br>
 
 <hr>
-<a name="set_hiddenstor"><b>set_hiddenstor</b><br>
+<a name="set_hiddenstores"><b>set_hiddenstores</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  MODRET set_hiddenstor(cmd_rec *<i>cmd</i>)
+  MODRET set_hiddenstores(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Comments</font>: Configuration directive handler for the
-<code>HiddenStor</code> directive.<br>
+<code>HiddenStores</code> directive.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#set_hiddenstor">modules/mod_core.c</a><br>
+  <a href="../src/modules/mod_xfer.c.html#set_hiddenstores">modules/mod_xfer.c</a><br>
+
+<hr>
+<a name="set_hidefiles"><b>set_hidefiles</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET set_hidefiles(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>HideFiles</code> directive.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_core.c.html#set_hidefiles">modules/mod_core.c</a><br>
 
 <hr>
 <a name="set_hidenoaccess"><b>set_hidenoaccess</b><br>
@@ -7710,6 +7338,33 @@ Boolean fields.<br>
   <a href="../src/modules/mod_core.c.html#set_maxclients">modules/mod_core.c</a><br>
 
 <hr>
+<a name="set_maxconnrate"><b>set_maxconnrate</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET set_maxconnrate(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>MaxConnectionRate</code> directive.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_core.c.html#set_maxconnrate">modules/mod_core.c</a><br>
+
+<hr>
+<a name="set_maxfilesize"><b>set_maxfilesize</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET set_maxfilesize(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>MaxRetrieveFileSize</code> and <code>MaxStoreFileSize</code>
+directives.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_xfer.c.html#set_maxconnrate">modules/mod_xfer.c</a><br>
+
+<hr>
 <a name="set_maxhostclients"><b>set_maxhostclients</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -7773,45 +7428,6 @@ Boolean fields.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_core.c.html#set_multilinerfc2228">modules/mod_core.c</a><br>
-
-<hr>
-<a name="set_pam"><b>set_pam</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET set_pam(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Configuration directive handler for the
-<code>AuthPAM</code> directive.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_pam.c.html#set_pam">modules/mod_pam.c</a><br>
-
-<hr>
-<a name="set_pamauthoritative"><b>set_pamauthoritative</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET set_pamauthoritative(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Configuration directive handler for the
-<code>AuthPAMAuthoritative</code> directive.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_pam.c.html#set_pamauthoritative">modules/mod_pam.c</a><br>
-
-<hr>
-<a name="set_pamconfig"><b>set_pamconfig</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  MODRET set_pamconfig(cmd_rec *<i>cmd</i>)
-</pre>
-<font color=blue>Comments</font>: Configuration directive handler for the
-<code>AuthPAMConfig</code> directive.<br>
-<br>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_pam.c.html#set_pamconfig">modules/mod_pam.c</a><br>
 
 <hr>
 <a name="set_passiveports"><b>set_passiveports</b><br>
@@ -7951,16 +7567,6 @@ Boolean fields.<br>
   <a href="../src/modules/mod_core.c.html#set_rlimitopenfiles">modules/mod_core.c</a><br>
 
 <hr>
-<a name="set_rlimits"><b>set_rlimits</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static void set_rlimits(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/main.c.html#set_rlimits">src/main.c</a><br>
-
-<hr>
 <a name="set_rootlogin"><b>set_rootlogin</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -7974,17 +7580,17 @@ Boolean fields.<br>
   <a href="../src/modules/mod_auth.c.html#set_rootlogin">modules/mod_auth.c</a><br>
 
 <hr>
-<a name="set_scoreboardpath"><b>set_scoreboardpath</b><br>
+<a name="set_scoreboardfile"><b>set_scoreboardfile</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  MODRET set_scoreboardpath(cmd_rec *<i>cmd</i>)
+  MODRET set_scoreboardfile(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Comments</font>: Configuration directive handler for the
-<code>ScoreboardPath</code> directive.<br>
+<code>ScoreboardFile</code> directive.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#set_scoreboardpath">modules/mod_core.c</a><br>
+  <a href="../src/modules/mod_core.c.html#set_scoreboardfile">modules/mod_core.c</a><br>
 
 <hr>
 <a name="set_serveradmin"><b>set_serveradmin</b><br>
@@ -8052,17 +7658,24 @@ Boolean fields.<br>
   <a href="../src/modules/mod_core.c.html#set_servertype">modules/mod_core.c</a><br>
 
 <hr>
-<a name="set_showdotfiles"><b>set_showdotfiles</b><br>
+<a name="set_server_privs"><b>set_server_privs</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  MODRET set_showdotfiles(cmd_rec *<i>cmd</i>)
+  static void set_server_privs(void)
 </pre>
-<font color=blue>Comments</font>: Configuration directive handler for the
-<code>ShowDotFiles</code> directive.<br>
-<br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_ls.c.html#set_showdotfiles">modules/mod_ls.c</a><br>
+  <a href="../src/src/main.c.html#set_server_privs">src/main.c</a><br>
+
+<hr>
+<a name="set_session_rlimits"><b>set_session_rlimits</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  void set_session_rlimits(void)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/main.c.html#set_session_rlimits">src/main.c</a><br>
 
 <hr>
 <a name="set_showsymlinks"><b>set_showsymlinks</b><br>
@@ -8099,6 +7712,19 @@ Boolean fields.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_core.c.html#set_socketbindtight">modules/mod_core.c</a><br>
+
+<hr>
+<a name="set_storeuniqueprefix"><b>set_storeuniqueprefix</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET set_storeuniqueprefix(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>StoreUniquePrefix</code> directive.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_xfer.c.html#set_storeuniqueprefix">modules/mod_xfer.c</a><br>
 
 <hr>
 <a name="set_syslogfacility"><b>set_syslogfacility</b><br>
@@ -8215,7 +7841,7 @@ Boolean fields.<br>
 <code>TimeoutLogin</code> directive.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_core.c.html#set_timeoutlogin">modules/mod_core.c</a><br>
+  <a href="../src/modules/mod_auth.c.html#set_timeoutlogin">modules/mod_auth.c</a><br>
 
 <hr>
 <a name="set_timeoutnoxfer"><b>set_timeoutnoxfer</b><br>
@@ -8229,6 +7855,19 @@ Boolean fields.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_core.c.html#set_timeoutnoxfer">modules/mod_core.c</a><br>
+
+<hr>
+<a name="set_timeoutsession"><b>set_timeoutsession</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET set_timeoutsession(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>TimeoutSession</code> directive.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_auth.c.html#set_timeoutsession">modules/mod_auth.c</a><br>
 
 <hr>
 <a name="set_timeoutstalled"><b>set_timeoutstalled</b><br>
@@ -8307,6 +7946,33 @@ Boolean fields.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_core.c.html#set_user">modules/mod_core.c</a><br>
+
+<hr>
+<a name="set_useralias"><b>set_useralias</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET set_useralias(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>UserAlias</code> directive.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_auth.c.html#set_useralias">modules/mod_core.c</a><br>
+
+<hr>
+<a name="set_userpassword"><b>set_userpassword</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET set_userpassword(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>UserPassword</code> directive.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_auth.c.html#set_userpassword">modules/mod_core.c</a><br>
+
 
 <hr>
 <a name="set_usereversedns"><b>set_usereversedns</b><br>
@@ -8437,6 +8103,16 @@ children by the master daemon.<br>
   <a href="../src/src/main.c.html#sig_terminate">src/main.c</a><br>
 
 <hr>
+<a name="site_chgrp"><b>site_chgrp</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET site_chgrp(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_site.c.html#site_chgrp">modules/mod_site.c</a><br>
+
+<hr>
 <a name="site_chmod"><b>site_chmod</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -8445,6 +8121,19 @@ children by the master daemon.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_site.c.html#site_chmod">modules/mod_site.c</a><br>
+
+<hr>
+<a name="site_cmd"><b>site_cmd</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET site_cmd(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Command handler for the <code>SITE</code>
+FTP comand.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_site.c.html#site_cmd">modules/mod_core.c</a><br>
 
 <hr>
 <a name="site_dispatch"><b>site_dispatch</b><br>
@@ -8465,6 +8154,38 @@ children by the master daemon.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_site.c.html#site_help">modules/mod_site.c</a><br>
+
+<hr>
+<a name="site_post_cmd"><b>site_post_cmd</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET site_post_cmd(cmd_rec *<i>cmd</i>)
+</pre>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_site.c.html#site_post_cmd">modules/mod_site.c</a><br>
+
+<hr>
+<a name="site_pre_cmd"><b>site_pre_cmd</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET site_pre_cmd(cmd_rec *<i>cmd</i>)
+</pre>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_site.c.html#site_pre_cmd">modules/mod_site.c</a><br>
+
+<hr>
+<a name="sleep_cb"><b>sleep_cb</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static int sleep_cb(CALLBACK_FRAME)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/timers.c.html#sleep_cb">src/timers.c</a><br>
 
 <hr>
 <a name="sortfiles"><b>sortfiles</b><br>
@@ -8541,14 +8262,14 @@ end of <i>dest</i> and refusing to copy more than <i>n</i> bytes.<br>
   <a href="../src/src/support.c.html#sstrncpy">src/support.c</a><br>
 
 <hr>
-<a name="stalled_timeout"><b>stalled_timeout</b><br>
+<a name="stalled_timeout_cb"><b>stalled_timeout_cb</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static int stalled_timeout(CALLBACK_FRAME)
+  static int stalled_timeout_cb(CALLBACK_FRAME)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/src/data.c.html#stalled_timeout">src/data.c</a><br>
+  <a href="../src/src/data.c.html#stalled_timeout_cb">src/data.c</a><br>
 
 <hr>
 <a name="standalone_main"><b>standalone_main</b><br>
@@ -8561,14 +8282,30 @@ end of <i>dest</i> and refusing to copy more than <i>n</i> bytes.<br>
   <a href="../src/src/main.c.html#standalone_main">src/main.c</a><br>
 
 <hr>
-<a name="start_daemon"><b>start_daemon</b><br>
+<a name="start_ifdefine"><b>start_ifdefine</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void start_daemon(void)
+  MODRET start_ifdefine(cmd_rec *<i>cmd</i>)
 </pre>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>&lt;IfDefine&gt;</code> directive.<br>
+<br>
 <font color=blue>Source File</font>:
-  <a href="../src/src/main.c.html#start_daemon">src/main.c</a><br>
+  <a href="../src/modules/mod_core.c.html#start_ifdefine">modules/mod_core.c</a><br>
+
+<hr>
+<a name="start_ifmodule"><b>start_ifmodule</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET start_ifmodule(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>&lt;IfModule&gt;</code> directive.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_core.c.html#start_ifmodule">modules/mod_core.c</a><br>
 
 <hr>
 <a name="start_new_server"><b>start_new_server</b><br>
@@ -8781,6 +8518,26 @@ end of <i>dest</i> and refusing to copy more than <i>n</i> bytes.<br>
   <a href="../src/src/fs.c.html#std_write">src/fs.c</a><br>
 
 <hr>
+<a name="stor_abort"><b>stor_abort</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static void stor_abort(void)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_xfer.c.html#stor_abort">modules/mod_xfer.c</a><br>
+
+<hr>
+<a name="stor_complete"><b>stor_complete</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static void stor_complete(void)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_xfer.c.html#stor_complete">modules/mod_xfer.c</a><br>
+
+<hr>
 <a name="strip_end"><b>strip_end</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -8799,6 +8556,46 @@ end of <i>dest</i> and refusing to copy more than <i>n</i> bytes.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/lib/strsep.c.html#strsep">lib/strsep.c</a><br>
+
+<hr>
+<a name="supp_getgrent"><b>supp_getgrent</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static struct group *supp_getgrent(const char *<i>buf</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/lib/pwgrent.c.html#supp_getgrent">lib/pwgrent.c</a><br>
+
+<hr>
+<a name="supp_getpwent"><b>supp_getpwent</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static struct passwd *supp_getpwent(const char *<i>buf</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/lib/pwgrent.c.html#supp_getpwent">lib/pwgrent.c</a><br>
+
+<hr>
+<a name="supp_grplist"><b>supp_grplist</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static char **supp_grplist(char *<i>s</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/lib/pwgrent.c.html#supp_grplist">lib/pwgrent.c</a><br>
+
+<hr>
+<a name="timer_cmp"><b>timer_cmp</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static int timer_cmp(timer_t *<i>t1</i>, timer_t *<i>t2</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/timers.c.html#timer_cmp">src/timers.c</a><br>
 
 <hr>
 <a name="timer_sleep"><b>timer_sleep</b><br>
@@ -8831,16 +8628,6 @@ end of <i>dest</i> and refusing to copy more than <i>n</i> bytes.<br>
   <a href="../src/src/support.c.html#unblock_signals">src/support.c</a><br>
 
 <hr>
-<a name="unixpw_child"><b>unixpw_child</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  static int unixpw_child(void)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_unixpw.c.html#unixpw_child">modules/mod_unixpw.c</a><br>
-
-<hr>
 <a name="unixpw_init"><b>unixpw_init</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -8849,6 +8636,16 @@ end of <i>dest</i> and refusing to copy more than <i>n</i> bytes.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_unixpw.c.html#unixpw_init">modules/mod_unixpw.c</a><br>
+
+<hr>
+<a name="unixpw_sess_init"><b>unixpw_sess_init</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static int unixpw_sess_init(void)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_unixpw.c.html#unixpw_sess_init">modules/mod_unixpw.c</a><br>
 
 <hr>
 <a name="user_expression"><b>user_expression</b><br>
@@ -9015,34 +8812,221 @@ or one or more of the arguments are invalid.<br>
   <a href="../src/src/sets.c.html#xaset_union">src/sets.c</a><br>
 
 <hr>
-<a name="xcalloc"><b>xcalloc</b><br>
+<a name="xfer_abor"><b>xfer_abor</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void *xcalloc(size_t <i>num</i>, size_t <i>size</i>)
+  MODRET xfer_abor(cmd_rec *<i>cmd</i>)
 </pre>
+<font color=blue>Comments</font>: Command handler for the <code>ABOR</code>
+FTP command.<br>
+<br>
 <font color=blue>Source File</font>:
-  <a href="../src/src/pool.c.html#xcalloc">src/pool.c</a><br>
+  <a href="../src/modules/mod_xfer.c.html#xfer_abor">modules/mod_xfer.c</a><br>
 
 <hr>
-<a name="xfer_cleanup"><b>xfer_cleanup</b><br>
+<a name="xfer_allo"><b>xfer_allo</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  MODRET xfer_cleanup(cmd_rec *<i>cmd</i>)
+  MODRET xfer_allo(cmd_rec *<i>cmd</i>)
 </pre>
+<font color=blue>Comments</font>: Command handler for the <code>ALLO</code>
+FTP command.<br>
+<br>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#xfer_cleanup">modules/mod_xfer.c</a><br>
+  <a href="../src/modules/mod_xfer.c.html#xfer_allo">modules/mod_xfer.c</a><br>
 
 <hr>
-<a name="xfer_init_child"><b>xfer_init_child</b><br>
+<a name="xfer_err_cleanup"><b>xfer_err_cleanup</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  int xfer_init_child(void)
+  MODRET xfer_err_cleanup(cmd_rec *<i>cmd</i>)
 </pre>
 <font color=blue>Source File</font>:
-  <a href="../src/modules/mod_xfer.c.html#xfer_init_child">modules/mod_xfer.c</a><br>
+  <a href="../src/modules/mod_xfer.c.html#xfer_err_cleanup">modules/mod_xfer.c</a><br>
+
+<hr>
+<a name="xfer_exit_cb"><b>xfer_exit_cb</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static void xfer_exit_cb(void)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_xfer.c.html#xfer_exit_cb">modules/mod_xfer.c</a><br>
+
+<hr>
+<a name="xfer_log_retr"><b>xfer_log_retr</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET xfer_log_retr(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_xfer.c.html#xfer_log_retr">modules/mod_xfer.c</a><br>
+
+<hr>
+<a name="xfer_log_stor"><b>xfer_log_stor</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET xfer_log_stor(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_xfer.c.html#xfer_log_stor">modules/mod_xfer.c</a><br>
+
+<hr>
+<a name="xfer_mode"><b>xfer_mode</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET xfer_mode(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Command handler for the <code>MODE</code>
+FTP command.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_xfer.c.html#xfer_mode">modules/mod_xfer.c</a><br>
+
+<hr>
+<a name="xfer_post_stou"><b>xfer_post_stou</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET xfer_post_stou(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_xfer.c.html#xfer_post_stou">modules/mod_xfer.c</a><br>
+
+<hr>
+<a name="xfer_pre_appe"><b>xfer_pre_appe</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET xfer_pre_appe(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_xfer.c.html#xfer_pre_appe">modules/mod_xfer.c</a><br>
+
+<hr>
+<a name="xfer_pre_retr"><b>xfer_pre_retr</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET xfer_pre_retr(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_xfer.c.html#xfer_pre_retr">modules/mod_xfer.c</a><br>
+
+<hr>
+<a name="xfer_pre_stor"><b>xfer_pre_stor</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET xfer_pre_stor(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_xfer.c.html#xfer_pre_stor">modules/mod_xfer.c</a><br>
+
+<hr>
+<a name="xfer_pre_stou"><b>xfer_pre_stou</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET xfer_pre_stou(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_xfer.c.html#xfer_pre_stou">modules/mod_xfer.c</a><br>
+
+<hr>
+<a name="xfer_rest"><b>xfer_rest</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET xfer_rest(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Command handler for the <code>REST</code>
+FTP command.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_xfer.c.html#xfer_rest">modules/mod_xfer.c</a><br>
+
+<hr>
+<a name="xfer_retr"><b>xfer_retr</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET xfer_retr(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Command handler for the <code>RETR</code>
+FTP command.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_xfer.c.html#xfer_retr">modules/mod_xfer.c</a><br>
+
+<hr>
+<a name="xfer_sess_init"><b>xfer_sess_init</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  static int xfer_sess_init(void)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_xfer.c.html#xfer_sess_init">modules/mod_xfer.c</a><br>
+
+<hr>
+<a name="xfer_smnt"><b>xfer_smnt</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET xfer_smnt(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Command handler for the <code>SMNT</code>
+FTP command.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_xfer.c.html#xfer_smnt">modules/mod_xfer.c</a><br>
+
+<hr>
+<a name="xfer_stor"><b>xfer_stor</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET xfer_stor(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Command handler for the <code>STOR</code>
+FTP command.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_xfer.c.html#xfer_stor">modules/mod_xfer.c</a><br>
+
+<hr>
+<a name="xfer_stru"><b>xfer_stru</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET xfer_stru(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Command handler for the <code>STRU</code>
+FTP command.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_xfer.c.html#xfer_stru">modules/mod_xfer.c</a><br>
+
+<hr>
+<a name="xfer_type"><b>xfer_type</b><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  MODRET xfer_type(cmd_rec *<i>cmd</i>)
+</pre>
+<font color=blue>Comments</font>: Command handler for the <code>TYPE</code>
+FTP command.<br>
+<br>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_xfer.c.html#xfer_type">modules/mod_xfer.c</a><br>
 
 <hr>
 <a name="xmalloc"><b>xmalloc</b><br>
@@ -9053,16 +9037,6 @@ or one or more of the arguments are invalid.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/pool.c.html#xmalloc">src/pool.c</a><br>
-
-<hr>
-<a name="xrealloc"><b>xrealloc</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
-  void *xrealloc(void *<i>p</i>, size_t <i>size</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/pool.c.html#xrealloc">src/pool.c</a><br>
 
 <hr><br>
 

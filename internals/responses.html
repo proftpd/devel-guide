@@ -127,27 +127,27 @@ The following are some macros specific to response generation, both by
 modules and by the core engine:
 
 <ul>
-  <li><a href="../api/macros.html#DECLINED"><code>DECLINED</code></a><code>(cmd_rec *command)</code><br>
+  <li><a href="../api/macros.html#DECLINED"><code>DECLINED</code></a><code>(cmd_rec *<i>cmd</i>)</code><br>
     Indicates that the engine should act as though the handler was never
     called and continue processing. <code>POST_CMD</code> handlers will
     <b>not</b> be called in this case.<br>
   </li>
   <br>
 
-  <li><a href="../api/macros.html#ERROR"><code>ERROR</code></a><code>(cmd_rec *command)</code><br>
+  <li><a href="../api/macros.html#ERROR"><code>ERROR</code></a><code>(cmd_rec *<i>cmd</i>)</code><br>
     Indicates that a protocol error occurred. <code>POST_CMD</code> handlers
     are <b>not</b> called.<br>
   </li>
   <br>
 
-  <li><a href="../api/macros.html#ERROR_INT"><code>ERROR_INT</code></a><code>(cmd_rec *command, int err_code)</code><br>
+  <li><a href="../api/macros.html#ERROR_INT"><code>ERROR_INT</code></a><code>(cmd_rec *<i>cmd</i>, int <i>err_code</i>)</code><br>
     Similar to <code>ERROR</code></a>, except that the single integer numeric
     error is indicated.  This is used only by authentication/mapping handlers,
     <i>eg</i> <code>mod_ldap</code> and <code>mod_unixpw</code>.<br>
   </li>
   <br>
 
-  <li><a href="../api/macros.html#ERROR_MSG"><code>ERROR_MSG</code></a><code>(cmd_rec *, int err_code, char *err_message)</code><br>
+  <li><a href="../api/macros.html#ERROR_MSG"><code>ERROR_MSG</code></a><code>(cmd_rec *<i>cmd</i>, int <i>err_code</i>, char *<i>err_message</i>)</code><br>
     Similar to <code>ERROR</code>, except that a string composed of
     <i>err_code</i> and <i>err_message</i> is sent to the client.  In the case
     of configuration directive handlers, the numeric argument is ignored,
@@ -156,7 +156,7 @@ modules and by the core engine:
   </li>
   <br>
 
-  <li><a href="../api/macros.html#HANDLED"><code>HANDLED</code></a><code>(cmd_rec *command)</code><br>
+  <li><a href="../api/macros.html#HANDLED"><code>HANDLED</code></a><code>(cmd_rec *<i>cmd</i>)</code><br>
     Indicates that the handler has properly handled the command, and that the
     engine should consider the command complete and continue processing.  Note
     that if a module handler returns <code>HANDLED</code>,

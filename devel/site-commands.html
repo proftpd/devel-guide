@@ -141,6 +141,17 @@ forget to document any custom <code>SITE</code> commands supported by your
 module.
 
 <p>
+Note that the <code>requires_auth</code> field of the above
+<code>cmdtable</code> entry (<i>i.e.</i> the first <code>FALSE</code>)
+is <code>FALSE</code>, and that the example handler performs the same
+authentication check (requiring that the user be authenticated before
+using the command) as if <code>requires_auth</code> had been <code>TRUE</code>.
+This is normal, and in general a good idea: let your <code>SITE</code>
+handlers determine if and how to perform an authentication/authorization
+check for themselves, rather than always relying on the core checking
+ability.
+
+<p>
 <center><a href="../toc.html">Table of Contents</a></center><br>
 
 <hr><br>

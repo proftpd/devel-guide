@@ -84,6 +84,7 @@ must adhere:
   int (*postopen)(pr_netio_stream_t *<i>nstrm</i>);
   int (*read)(pr_netio_stream_t *<i>nstrm</i>, char *<i>buf</i>, size_t <i>buflen</i>);
   pr_netio_stream_t *(*reopen)(pr_netio_stream_t *<i>nstrm</i>, int <i>fd</i>, int <i>mode</i>);
+  int (*shutdown)(pr_netio_stream_t *<i>nstrm</i>, int <i>how</i>);
   int (*write)(pr_netio_stream_t *<i>nstrm</i>, char *<i>buf</i>, size_t <i>buflen</i>);
 </pre>
 

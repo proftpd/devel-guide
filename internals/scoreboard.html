@@ -114,6 +114,8 @@ scoreboard upon return of the function.
 The <code>pr_restore_scoreboard()</code> is used when done reading the
 scoreboard.  It restores the file position pointer of the scoreboard to
 the position it had before <code>pr_rewind_scoreboard()</code> was called.
+Failure to call this function after using <code>pr_rewind_scoreboard()</code>
+can result in corruption of the scoreboard.
 
 <p>
 <code>pr_rewind_scoreboard()</code> is used only when the scoreboard is

@@ -155,9 +155,9 @@ configuration directive handler like so:
   c = add_config_param(...);
   <b>c->flags |= CF_MERGEDOWN;</b>
 </pre>
-This flag tells the context-processing functions that any lower configuration
-contexts are to inherit this <code>config_rec</code> setting, unless the
-lower context already has a <code>config_rec</code> of the same name.
+This flag tells the context-processing functions that configuration
+sub-contexts are to inherit this <code>config_rec</code> setting, unless the
+sub-context already has a <code>config_rec</code> of the same name.
 
 <p>
 The other two flags, <code>CF_DEFER</code> and <code>CF_DYNAMIC</code>, are
@@ -166,54 +166,60 @@ contexts, respectively.
 
 <p>
 <b>Creating your own contexts</b><br>
+At present, there is no way for module to declare and process its own custom
+configuration contexts.  Changes to the core context processing functions are
+needed, should you need to have your own context.
 
-<a href="../api/functions.html#start_sub_config"><code>start_sub_config()</code></a>
+<p>
+First, you'll need two configuration directives, one to handle the opening
+<code>&lt;MyContextName&gt;</code> directive, and one to handle the closing
+<code>&lt;/MyContextName&gt;</code> directive.  In the opening context
+handler, you'll need to call
+<a href="../api/functions.html#start_sub_config"><code>start_sub_config()</code></a>.  The closing context handler will need to call, appropriately enough,
+<a href="../api/functions.html#end_sub_config"><code>end_sub_config()</code></a>.
+
+<p>
+Here are the <code>add_global()</code> and <code>end_global()</code>
+configuration handlers, from <code>mod_core.c</code>, which illustrate these
+mentioned sub-configuration functions:
 <pre>
-MODRET add_limit(cmd_rec *cmd)
+MODRET add_global(cmd_rec *cmd)
 {
   config_rec *c;
-  int cargc;
-  char **argv, **cargv;
 
-  if(cmd->argc < 2)
-    CONF_ERROR(cmd,"directive requires one or more FTP commands.");
+  CHECK_ARGS(cmd,0);
+  CHECK_CONF(cmd,CONF_ROOT|CONF_VIRTUAL);
 
-  CHECK_CONF(cmd,CONF_ROOT|CONF_VIRTUAL|CONF_DIR|CONF_ANON|CONF_DYNDIR|CONF_GLOBAL);
-
-  c = start_sub_config("Limit");
-  c->config_type = CONF_LIMIT;
-  cargc = cmd->argc - 1;
-  cargv = cmd->argv + 1;
-
-  c->argc = cmd->argc - 1;
-  c->argv = pcalloc(c->pool, cmd->argc * sizeof(void *));
-  argv = (char**)c->argv;
-
-  while (cargc--)
-    *argv++ = pstrdup(permanent_pool, *cargv++);
-
-  *argv = NULL;
+  c = start_sub_config("Global");
+  c->config_type = CONF_GLOBAL;
 
   return HANDLED(cmd);
 }
-</pre>
 
-<a href="../api/functions.html#end_sub_config"><code>end_sub_config()</code></a>
-<pre>
-MODRET end_limit(cmd_rec *cmd)
+MODRET end_global(cmd_rec *cmd)
 {
   CHECK_ARGS(cmd, 0);
-  CHECK_CONF(cmd, CONF_LIMIT);
+  CHECK_CONF(cmd,CONF_GLOBAL);
 
   end_sub_config();
   return HANDLED(cmd);
 }
 </pre>
 
-<a href="../api/functions.html#get_section_name"><code>get_section_name()</code></a><br>
-<code>#define CONF_MYCTX</code><br>
+<p>
+In addition to some configuration directive handlers, you'll need to add
+some code to the
+<a href="../api/functions.html#get_section_name"><code>get_section_name()</code></a>
+internal function, so that the name of your custom context (or section) is
+correctly reported in the case of an error.  Adding new code to this function
+is trivial, but will require that you <code>#define</code> a <code>CONF_</code>
+macro for your context:
+<pre>
+  #define CONF_MYCTX
+</pre>
 
 <p>
+<b>Caveat Emptor</b><br>
 The configuration subsystem is one of the areas targeted for change in the
 1.3.x series, so expect this information to become obsolete in the future.
 

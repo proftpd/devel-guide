@@ -28,15 +28,10 @@ The primitive for creating a subpool is
 <a href="../api/functions.html#make_sub_pool"><code>make_sub_pool</code></a>,
 which takes another <code>pool</code> - the parent <code>pool</code> - as an
 argument.  When the main <code>pool</code> is cleared, the subpool will be
-destroyed.  The subpool may also be cleared or destroyed at any time, by
-calling the functions
-<a href="../api/functions.html#clear_pool"><code>clear_pool()</code></a> and
-<a href="../api/functions.html#destroy_pool"><code>destroy_pool()</code></a>,
-respectively. The difference is that <code>clear_pool()</code> frees resources
-associated with the <code>pool</code>, while <code>destroy_pool()</code> also
-deallocates the <code>pool</code> itself.  In the former case, you can
-allocate new resources within the <code>pool</code>, and clear it again, and
-so forth; in the latter case, the <code>pool</code> is simply gone.
+destroyed.  The subpool may also be destroyed at any time, by
+calling the function
+<a href="../api/functions.html#destroy_pool"><code>destroy_pool()</code></a>.
+This function will deallocate the entire pool.
 
 <p>
 <b>Example</b>
@@ -47,6 +42,8 @@ so forth; in the latter case, the <code>pool</code> is simply gone.
   subpool = make_sub_pool(parent_pool);
   c = (config_rec *) pcalloc(subpool, sizeof(config_rec));
   c->pool = subpool;
+  ...
+  destroy_pool(c->pool);
 </pre>
 
 <p>
@@ -60,13 +57,13 @@ object, so that later, when that object is no longer needed, you can do
 which will take care of the entire object.
 
 <p>
-If you make your own subpool, be sure to call <code>clear_pool()</code> if you
-plan to reuse that subpool later, or <code>destroy_pool()</code> if you are
-completely finished with your subpool.  As when using <code>malloc()</code>
-and <code>free()</code>, if you allocate your own <code>pool</code>s, then
-you are responsible for cleaning up after yourself.  Well, not precisely.
-When your parent <code>pool</code> is cleared or destroyed, your subpool will
-be cleared or destroyed as well.
+If you make your own subpool, be sure to call <code>destroy_pool()</code> once
+you are completely finished with your subpool.  As when using
+<code>malloc()</code> and <code>free()</code>, if you allocate your own
+sub<code>pool</code>s, then you are responsible for cleaning up after yourself.
+Well, this not precisely the case; when your parent <code>pool</code> is
+destroyed, any subpools allocated from it, including <i>your</i> subpool, will
+be destroyed as well.
 
 <p>
 On rare occasions, too-free use of
@@ -82,6 +79,9 @@ primitives discussed here can hair up your code quite a bit, with very little
 gain.
 
 <p>
+<hr width=60%>
+
+<p>
 <b>Most Frequently Used Pools</b><br>
 The following are <code>pool</code>s that already exist in the most common
 structures within ProFTPD, and should be used for most purposes.
@@ -92,14 +92,18 @@ Never <i>ever <b>ever</b></i> allocate memory directly from
 <code>permanent_pool</code> using one of the <code>p*()</code> pool
 functions listed below.  Instead, make a subpool, do what you need to, and
 clear or destroy that subpool.  <code>permanent_pool</code> only gets cleared
-once, on shutdown.  Abuse of this pool <b>will</b> lead to memory leaks.<br>
+rarely, on <code>SIGHUP</code> and shutdown.  Abuse of this pool <b>will</b>
+lead to memory leaks.<br>
 <br>
 <i>Allocated</i>: in
 <a href="../api/functions.html#init_alloc"><code>init_alloc()</code></a>,
-when the master daemon first starts up<br>
+when the master daemon first starts up, or catches a <code>SIGHUP</code><br>
 <br>
 <i>Deallocated</i>: automatically, when the master daemon calls
 <code>_exit()</code><br>
+
+<p>
+<hr width=40%>
 
 <p>
 <b><code>server_rec->pool</code></b><br>
@@ -121,6 +125,9 @@ concurrent connections.<br> This <code>pool</code> is also deallocated if a
 <a href="../api/functions.html#main_rehash"><code>main_rehash()</code></a>.<br>
 
 <p>
+<hr width=40%>
+
+<p>
 <b><code>session_t->pool</code></b><br>
 <br>
 <i>Allocated</i>: this <code>pool</code> is not actually allocated, rather it
@@ -140,6 +147,9 @@ duplicated memory space that the child process, via
 <i>Deallocated</i>: this <code>pool</code>, being a duplicate of, and <i>not</i>
 synonymous with, <code>permanent_pool</code>, is deallocated when the child
 process exits.
+
+<p>
+<hr width=40%>
 
 <p>
 <b><code>session_t.xfer->pool</code></b><br>
@@ -166,6 +176,9 @@ and in
 see comment in code for these two functions.<br>
 
 <p>
+<hr width=40%>
+
+<p>
 <b><code>conn_t->pool</code></b><br>
 <br>
 <i>Allocated</i>: in either
@@ -179,6 +192,9 @@ inet_copy_connection?), or in
 when a connection is done.<br>
 
 <p>
+<hr width=40%>
+
+<p>
 <b><code>config_rec->pool</code></b><br>
 <br>
 <i>Allocated</i>: in
@@ -189,6 +205,9 @@ the time when the configuration directive was parsed.<br>
 <i>Deallocated</i>: in
 <a href="../api/functions.html#remove_config"><code>remove_config()</code></a>, or when the containing <code>server_rec</code>'s <code>pool</code> is
 destroyed.<br>
+
+<p>
+<hr width=40%>
 
 <p>
 <b><code>cmd_rec->pool</code></b><br>
@@ -207,8 +226,10 @@ happens in
 the command handler dispatch has returned.<br>
 
 <p>
-<b><code>cmd_rec->tmp_pool</code></b><br>
-<br>
+<hr width=40%>
+
+<p>
+<li><dt><b><code>cmd_rec->tmp_pool</code></b><br>
 <i>Allocated</i>: this occurs, for commands, in 
 <a href="../api/functions.html#_dispatch"><code>_dispatch()</code></a>, prior
 to the call to
@@ -222,6 +243,9 @@ will also allocate this <code>pool</code>, if it is not already present.<br>
 <a href="../api/functions.html#_dispatch"><code>_dispatch()</code></a>, after
 the command handler has returned, and after any possible handler errors are
 dealt with.<br>
+
+<p>
+<hr width=60%>
 
 <p>
 <b>Pool Functions</b><br>

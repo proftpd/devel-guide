@@ -62,6 +62,11 @@ permanent pool, displaying a tree.<br>
 <hr>
 <a name="_auth_anonymous_group"><b>_auth_anonymous_group</b><br>
 <br>
+<font color=blue>Comments</font>: Check to see if the given <i>user</i> is a
+member of an <code>AnonymousGroup</code> group, and returns the
+<code>config_rec</code> in which the matching <code>AnonymousGroup</code>
+directive was found, or else <code>NULL</code>.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  static config_rec *_auth_anonymous_group(pool *p, char *user)
@@ -1074,6 +1079,9 @@ symlink).  This recursing function catches symlink loops via the
 <hr>
 <a name="add_allow"><b>add_allow</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>Allow</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET add_allow(cmd_rec *cmd)
@@ -1083,6 +1091,9 @@ symlink).  This recursing function catches symlink loops via the
 
 <hr>
 <a name="add_allowgroup"><b>add_allowgroup</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>AllowGroup</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1094,6 +1105,9 @@ symlink).  This recursing function catches symlink loops via the
 <hr>
 <a name="add_allowuser"><b>add_allowuser</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>AllowUser</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET add_allowuser(cmd_rec *cmd)
@@ -1103,6 +1117,9 @@ symlink).  This recursing function catches symlink loops via the
 
 <hr>
 <a name="add_anonymous"><b>add_anonymous</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>&lt;Anonymous&gt;</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1114,6 +1131,9 @@ symlink).  This recursing function catches symlink loops via the
 <hr>
 <a name="add_anonymousgroup"><b>add_anonymousgroup</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>AnonymousGroup</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET add_anonymousgroup(cmd_rec *cmd)
@@ -1123,6 +1143,9 @@ symlink).  This recursing function catches symlink loops via the
 
 <hr>
 <a name="add_bind"><b>add_bind</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>Bind</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1154,6 +1177,9 @@ symlink).  This recursing function catches symlink loops via the
 
 <hr>
 <a name="add_cdpath"><b>add_cdpath</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>CDPath</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1234,6 +1260,9 @@ name <i>name</i>.<br>
 <hr>
 <a name="add_defaultchdir"><b>add_defaultchdir</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>DefaultChdir</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET add_defaultchdir(cmd_rec *cmd)
@@ -1243,6 +1272,9 @@ name <i>name</i>.<br>
 
 <hr>
 <a name="add_defaultroot"><b>add_defaultroot</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>DefaultRoot</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1254,6 +1286,9 @@ name <i>name</i>.<br>
 <hr>
 <a name="add_deny"><b>add_deny</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>Deny</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET add_deny(cmd_rec *cmd)
@@ -1263,6 +1298,9 @@ name <i>name</i>.<br>
 
 <hr>
 <a name="add_denygroup"><b>add_denygroup</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>DenyGroup</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1274,6 +1312,9 @@ name <i>name</i>.<br>
 <hr>
 <a name="add_denyuser"><b>add_denyuser</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>DenyUser</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET add_denyuser(cmd_rec *cmd)
@@ -1283,6 +1324,9 @@ name <i>name</i>.<br>
 
 <hr>
 <a name="add_directory"><b>add_directory</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>&lt;Directory&gt;</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1304,6 +1348,9 @@ name <i>name</i>.<br>
 <hr>
 <a name="add_extendedlog"><b>add_extendedlog</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>ExtendedLog</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET add_extendedlog(cmd_rec *cmd)
@@ -1324,6 +1371,9 @@ name <i>name</i>.<br>
 <hr>
 <a name="add_global"><b>add_global</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>&lt;Global&gt;</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET add_global(cmd_rec *cmd)
@@ -1333,6 +1383,9 @@ name <i>name</i>.<br>
 
 <hr>
 <a name="add_groupowner"><b>add_groupowner</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>GroupOwner</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1344,6 +1397,9 @@ name <i>name</i>.<br>
 <hr>
 <a name="add_grouppassword"><b>add_grouppassword</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>GroupPassword</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET add_grouppassword(cmd_rec *cmd)
@@ -1353,6 +1409,9 @@ name <i>name</i>.<br>
 
 <hr>
 <a name="add_hidegroup"><b>add_hidegroup</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>HideGroup</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1364,6 +1423,9 @@ name <i>name</i>.<br>
 <hr>
 <a name="add_hidenoaccess"><b>add_hidenoaccess</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>HideNoAccess</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET add_hidenoaccess(cmd_rec *cmd)
@@ -1373,6 +1435,9 @@ name <i>name</i>.<br>
 
 <hr>
 <a name="add_hideuser"><b>add_hideuser</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>HideUser</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1394,6 +1459,9 @@ name <i>name</i>.<br>
 <hr>
 <a name="add_include"><b>add_include</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>Include</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET add_include(cmd_rec *cmd)
@@ -1404,6 +1472,9 @@ name <i>name</i>.<br>
 <hr>
 <a name="add_limit"><b>add_limit</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>&lt;Limit&gt;</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET add_limit(cmd_rec *cmd)
@@ -1413,6 +1484,9 @@ name <i>name</i>.<br>
 
 <hr>
 <a name="add_logformat"><b>add_logformat</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>LogFormat</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1435,6 +1509,9 @@ name <i>name</i>.<br>
 <hr>
 <a name="add_order"><b>add_order</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>Order</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET add_order(cmd_rec *cmd)
@@ -1455,6 +1532,9 @@ name <i>name</i>.<br>
 <hr>
 <a name="add_ratebool"><b>add_ratebool</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>RateReadHardBPS</code> and <code>RateWriteHardBPS</code> directives.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET add_ratebool(cmd_rec *cmd)
@@ -1464,6 +1544,10 @@ name <i>name</i>.<br>
 
 <hr>
 <a name="add_ratenum"><b>add_ratenum</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>RateReadBPS</code>, <code>RateReadFreeBytes</code>,
+<code>RateWriteBPS</code>, and <code>RateWriteFreeBytes</code> directives.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1523,6 +1607,9 @@ the FTP command processing results in an error.<br>
 <hr>
 <a name="add_transferlog"><b>add_transferlog</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>TransferLog</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET add_transferlog(cmd_rec *cmd)
@@ -1532,6 +1619,9 @@ the FTP command processing results in an error.<br>
 
 <hr>
 <a name="add_useralias"><b>add_useralias</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>UserAlias</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1543,6 +1633,9 @@ the FTP command processing results in an error.<br>
 <hr>
 <a name="add_userdirroot"><b>add_userdirroot</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>UserDirRoot</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET add_userdirroot (cmd_rec *cmd)
@@ -1552,6 +1645,9 @@ the FTP command processing results in an error.<br>
 
 <hr>
 <a name="add_userowner"><b>add_userowner</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>UserOwner</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -1563,6 +1659,9 @@ the FTP command processing results in an error.<br>
 <hr>
 <a name="add_userpassword"><b>add_userpassword</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>UserPassword</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET add_userpassword(cmd_rec *cmd)
@@ -1572,6 +1671,9 @@ the FTP command processing results in an error.<br>
 
 <hr>
 <a name="add_virtualhost"><b>add_virtualhost</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>&lt;VirtualHost&gt;</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -2881,6 +2983,9 @@ permissions cause problems somewhere up the tree.<br>
 <hr>
 <a name="end_anonymous"><b>end_anonymous</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>&lt;/Anonymous&gt;</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET end_anonymous(cmd_rec *cmd)
@@ -2890,6 +2995,9 @@ permissions cause problems somewhere up the tree.<br>
 
 <hr>
 <a name="end_directory"><b>end_directory</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>&lt;/Directory&gt;</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -2901,6 +3009,9 @@ permissions cause problems somewhere up the tree.<br>
 <hr>
 <a name="end_global"><b>end_global</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>&lt;/Global&gt;</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET end_global(cmd_rec *cmd)
@@ -2910,6 +3021,9 @@ permissions cause problems somewhere up the tree.<br>
 
 <hr>
 <a name="end_limit"><b>end_limit</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>&lt;/Limit&gt;</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6122,6 +6236,9 @@ elements are pushed onto them.  Pushed elements appear at the <i>end</i> of the
 <hr>
 <a name="readme_add_entry"><b>readme_add_entry</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>DisplayReadme</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET readme_add_entry (cmd_rec *cmd)
@@ -6436,6 +6553,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_accessgrantmsg"><b>set_accessgrantmsg</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>AccessGrantMsg</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_accessgrantmsg(cmd_rec *cmd)
@@ -6445,6 +6565,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_allowall"><b>set_allowall</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>AllowAll</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6456,6 +6579,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_allowchmod"><b>set_allowchmod</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>AllowChmod</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_allowchmod(cmd_rec *cmd)
@@ -6465,6 +6591,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_allowfilter"><b>set_allowfilter</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>AllowFilter</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6476,6 +6605,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_allowforeignaddress"><b>set_allowforeignaddress</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>AllowForeignAddress</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_allowforeignaddress(cmd_rec *cmd)
@@ -6485,6 +6617,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_allowoverwrite"><b>set_allowoverwrite</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>AllowOverwrite</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6496,6 +6631,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_allowretrieverestart"><b>set_allowretrieverestart</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>AllowRetrieveRestart</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_allowretrieverestart(cmd_rec *cmd)
@@ -6506,6 +6644,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_allowstorerestart"><b>set_allowstorerestart</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>AllowStoreRestart</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_allowstorerestart(cmd_rec *cmd)
@@ -6515,6 +6656,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_anonrequirepassword"><b>set_anonrequirepassword</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>AnonRequirePassword</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6536,6 +6680,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_authaliasonly"><b>set_authaliasonly</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>AuthAliasOnly</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_authaliasonly(cmd_rec *cmd)
@@ -6545,6 +6692,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_authgroupfile"><b>set_authgroupfile</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>AuthGroupFile</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6556,6 +6706,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_authuserfile"><b>set_authuserfile</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>AuthUserFile</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_authuserfile(cmd_rec *cmd)
@@ -6565,6 +6718,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_authusingalias"><b>set_authusingalias</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>AuthUsingAlias</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6576,6 +6732,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_class"><b>set_class</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>Class</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_class(cmd_rec *cmd)
@@ -6585,6 +6744,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_classes"><b>set_classes</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>Classes</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6596,6 +6758,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_commandbuffersize"><b>set_commandbuffersize</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>CommandBufferSize</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_commandbuffersize(cmd_rec *cmd)
@@ -6605,6 +6770,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_defaultserver"><b>set_defaultserver</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>DefaultServer</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6616,6 +6784,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_defaulttransfermode"><b>set_defaulttransfermode</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>DefaultTransferMode</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_defaulttransfermode(cmd_rec *cmd)
@@ -6625,6 +6796,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_deferwelcome"><b>set_deferwelcome</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>DeferWelcome</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6636,6 +6810,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_deleteabortedstores"><b>set_deleteabortedstores</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>DeleteAbortedStores</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_deleteabortedstores(cmd_rec *cmd)
@@ -6645,6 +6822,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_denyall"><b>set_denyall</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>DenyAll</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6656,6 +6836,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_denyfilter"><b>set_denyfilter</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>DenyFilter</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_denyfilter(cmd_rec *cmd)
@@ -6665,6 +6848,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_dirfakegroup"><b>set_dirfakegroup</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>DirFakeGroup</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6676,6 +6862,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_dirfakemode"><b>set_dirfakemode</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>DirFakeMode</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_dirfakemode(cmd_rec *cmd)
@@ -6685,6 +6874,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_dirfakeuser"><b>set_dirfakeuser</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>DirFakeUser</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6696,6 +6888,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_displayconnect"><b>set_displayconnect</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>DisplayConnect</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_displayconnect(cmd_rec *cmd)
@@ -6705,6 +6900,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_displayfirstchdir"><b>set_displayfirstchdir</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>DisplayFirstChdir</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6716,6 +6914,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_displaygoaway"><b>set_displaygoaway</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>DisplayGoAway</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_displaygoaway(cmd_rec *cmd)
@@ -6725,6 +6926,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_displaylogin"><b>set_displaylogin</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>DisplayLogin</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6736,6 +6940,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_displayquit"><b>set_displayquit</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>DisplayQuit</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_displayquit(cmd_rec *cmd)
@@ -6745,6 +6952,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_group"><b>set_group</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>Group</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6756,6 +6966,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_hiddenstor"><b>set_hiddenstor</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>HiddenStor</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_hiddenstor(cmd_rec *cmd)
@@ -6765,6 +6978,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_identlookups"><b>set_identlookups</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>IdentLookups</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6776,6 +6992,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_ignorehidden"><b>set_ignorehidden</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>IgnoreHidden</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_ignorehidden(cmd_rec *cmd)
@@ -6785,6 +7004,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_loginpasswordprompt"><b>set_loginpasswordprompt</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>LoginPasswordPrompt</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6796,6 +7018,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_lsdefaultoptions"><b>set_lsdefaultoptions</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>LsDefaultOptions</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_lsdefaultoptions(cmd_rec *cmd)
@@ -6805,6 +7030,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_maxclients"><b>set_maxclients</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>MaxClients</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6816,6 +7044,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_maxhostclients"><b>set_maxhostclients</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>MaxClientsPerHost</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_maxhostclients(cmd_rec *cmd)
@@ -6825,6 +7056,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_maxhostsperuser"><b>set_maxhostsperuser</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>MaxHostsPerUser</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6836,6 +7070,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_maxinstances"><b>set_maxinstances</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>MaxInstances</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_maxinstances(cmd_rec *cmd)
@@ -6845,6 +7082,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_maxloginattempts"><b>set_maxloginattempts</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>MaxLoginAttempts</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6856,6 +7096,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_multilinerfc2228"><b>set_multilinerfc2228</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>MultilineRFC2228</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_multilinerfc2228(cmd_rec *cmd)
@@ -6864,7 +7107,23 @@ FTP protocol response with the given <i>numeric</i>.<br>
   <a href="../src/modules/mod_core.c.html#set_multilinerfc2228">modules/mod_core.c</a><br>
 
 <hr>
+<a name="set_passiveports"><b>set_passiveports</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>PassivePorts</code> directive.<br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ MODRET set_passiveports(cmd_rec *cmd)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_core.c.html#set_passiveports">modules/mod_core.c</a><br>
+
+<hr>
 <a name="set_pathallowfilter"><b>set_pathallowfilter</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>PathAllowFilter</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6876,6 +7135,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_pathdenyfilter"><b>set_pathdenyfilter</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>PathDenyFilter</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_pathdenyfilter(cmd_rec *cmd)
@@ -6886,6 +7148,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_persistentpasswd"><b>set_persistentpasswd</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>PersistentPasswd</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_persistentpasswd(cmd_rec *cmd)
@@ -6895,6 +7160,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_pidfile"><b>set_pidfile</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>PidFile</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6926,6 +7194,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_requirevalidshell"><b>set_requirevalidshell</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>RequireValidShell</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_requirevalidshell(cmd_rec *cmd)
@@ -6946,6 +7217,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_rootlogin"><b>set_rootlogin</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>RootLogin</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_rootlogin(cmd_rec *cmd)
@@ -6955,6 +7229,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_scoreboardpath"><b>set_scoreboardpath</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>ScoreboardPath</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6966,6 +7243,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_serveradmin"><b>set_serveradmin</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>ServerAdmin</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_serveradmin(cmd_rec *cmd)
@@ -6975,6 +7255,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_serverident"><b>set_serverident</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>ServerIdent</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -6986,6 +7269,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_servername"><b>set_servername</b><br>
 <br>
+<font color=blue>Comments</font>:  Configuration directive handler for the
+<code>ServerName</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_servername(cmd_rec *cmd)
@@ -6995,6 +7281,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_serverport"><b>set_serverport</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>Port</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -7006,6 +7295,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_servertype"><b>set_servertype</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>ServerType</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_servertype(cmd_rec *cmd)
@@ -7016,6 +7308,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_showdotfiles"><b>set_showdotfiles</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>ShowDotFiles</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_showdotfiles(cmd_rec *cmd)
@@ -7025,6 +7320,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_showsymlinks"><b>set_showsymlinks</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>ShowSymlinks</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -7046,6 +7344,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_socketbindtight"><b>set_socketbindtight</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>SocketBindTight</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_socketbindtight(cmd_rec *cmd)
@@ -7055,6 +7356,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_syslogfacility"><b>set_syslogfacility</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>SyslogFacility</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -7066,6 +7370,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_sysloglevel"><b>set_sysloglevel</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>SyslogLevel</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_sysloglevel(cmd_rec *cmd)
@@ -7075,6 +7382,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_systemlog"><b>set_systemlog</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>SystemLog</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -7086,6 +7396,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_tcpbacklog"><b>set_tcpbacklog</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>tcpBackLog</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_tcpbacklog(cmd_rec *cmd)
@@ -7095,6 +7408,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_tcpnodelay"><b>set_tcpnodelay</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>tcpNoDelay</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -7106,6 +7422,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_tcpreceivewindow"><b>set_tcpreceivewindow</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>tcpReceiveWindow</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_tcpreceivewindow(cmd_rec *cmd)
@@ -7115,6 +7434,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_tcpsendwindow"><b>set_tcpsendwindow</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>tcpSendWindow</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -7126,6 +7448,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_timeoutidle"><b>set_timeoutidle</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>TimeoutIdle</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_timeoutidle(cmd_rec *cmd)
@@ -7135,6 +7460,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_timeoutlogin"><b>set_timeoutlogin</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>TimeoutLogin</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -7146,6 +7474,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_timeoutnoxfer"><b>set_timeoutnoxfer</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>TimeoutNoTransfer</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_timeoutnoxfer(cmd_rec *cmd)
@@ -7155,6 +7486,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_timeoutstalled"><b>set_timeoutstalled</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>TimeoutStalled</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -7166,6 +7500,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_timesgmt"><b>set_timesgmt</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>TimesGMT</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_timesgmt(cmd_rec *cmd)
@@ -7175,6 +7512,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_umask"><b>set_umask</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>Umask</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -7186,6 +7526,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_useftpusers"><b>set_useftpusers</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>UseFtpUsers</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_useftpusers(cmd_rec *cmd)
@@ -7195,6 +7538,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_user"><b>set_user</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>User</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -7206,6 +7552,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <hr>
 <a name="set_usereversedns"><b>set_usereversedns</b><br>
 <br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>UseReverseDNS</code> directive.<br>
+<br>
 <font color=blue>Declaration</font>:<br>
 <pre>
  MODRET set_usereversedns(cmd_rec *cmd)
@@ -7215,6 +7564,9 @@ FTP protocol response with the given <i>numeric</i>.<br>
 
 <hr>
 <a name="set_wtmplog"><b>set_wtmplog</b><br>
+<br>
+<font color=blue>Comments</font>: Configuration directive handler for the
+<code>WtmpLog</code> directive.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>

@@ -27,14 +27,15 @@ authentication, UID/GID-to-name and name-to-UID/GID mappings.
 
 <p>
 In order for a module to provide this functionality, it must export an
-<code>authtable</code> (via the module structure), and define one or more of the
-following handler <i>names</i> (authtable.name).
+<code>authtable</code> (via the module structure), and define <i>all</i> of the
+following handler <i>names</i>.  Even if the module is not going to do
+anything for a particular authentication function, it should define a handler,
+so that a slot is properly reserved for the module.
 
 <p>
 Each handler accepts data via the <code>cmd</code> structure and should return
 its data via the <code>MODRET->data</code> field.  The core function
-<code>mod_create_data()</code> can create this data structure properly for
-return to the caller.
+<a href="../api/functions.html#mod_create_data"><code>mod_create_data()</code></a> can create this data structure properly, for return to the caller.
 
 <p>
 Defined <code>authtable</code> names are:
@@ -145,8 +146,15 @@ Defined <code>authtable</code> names are:
 </ul>
 
 <p>
+In the 1.3.x series, expect to see a new authentication handler hook
+added, <code>get_groups</code>, so that an authentication module may override
+the process of retrieving the supplemental group membership lists for incoming
+connections.
+
+<p>
+<b>Authentication Cascade Order</b><br>
 The cascaded order of authentication handlers is similar to that of command
-handlers, although slightly different:
+handlers:
 <ol>
   <li>If an authentication handler returns <code>DECLINED</code>, handlers in
       other modules are called in priority load order, just as with command
@@ -157,9 +165,10 @@ handlers, although slightly different:
 
   <li>If an authentication handler returns <code>HANDLED</code>, ProFTPD assumes
       that the operation completed successfully, and will stop calling
-      auth handlers.  Most auth handlers <i>must</i> return data if they
-      complete successfully (note that some void-style handlers do not have
-      this requirement; <i>ie</i> <code>setpwent</code> and friends).<br>
+      auth handlers.  Most authentication handlers <i>must</i> return data if
+      they complete successfully.  Note that some <code>void</code>-style
+      handlers do not have this requirement; <i>ie</i> <code>setpwent</code>
+      and friends.<br>
   </li>
   <br>
 

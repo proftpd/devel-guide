@@ -10,7 +10,7 @@
 
 <hr><br>
 <center>
-<img src="../images/proftpd.png">
+<img src="../images/proftpd.png" border=0>
 <br><br>
 <h3><b>ProFTPD Developer's Guide: Module Logging</b></h3>
 <i><b>ProFTPD Version 1.2</b></i><br>
@@ -37,13 +37,7 @@ For example, <code>mod_wrap</code> has:
 </pre>
 This identifying label helps to determine the version of your module, should
 someone need to check what version they are using.  It is also an extremely
-helpful part of the logging process, as described below.
-
-      log_debug(DEBUG4, MOD_NIFTY_VERSION ": unable to do something nifty");
-</pre>
-  It also helps to identify the version of your module, should someone
-need to check what version they are using.
-  </li>
+helpful part of the logging process.
 
 <p>
 <b>Logging</b><br>
@@ -52,27 +46,27 @@ When developing a module, please make use of
 <a href="../api/functions.html#log_debug"><code>log_debug()</code></a> where
 appropriate.  Not only will this aid you as your module develops, but it
 will help users report potential problems once your module is released.
-When calling these functions, make use of the module identifier:
+When calling these functions, make use of the <code>#define</code>d module
+label:
 <pre>
-  log_pri(LOG_ERR, MOD_WRAP_VERSION ": error: unable to open '%s': %s",
-    filename, strerror(errno));
+  log_pri(LOG_ERR, MOD_WRAP_VERSION ": error: unable to open '%s': %s", path, strerror(errno));
 
-  log_debug(DEBUG4, MOD_WRAP_VERSION ": checking ACLs for user %s",
-    session.user));
+  log_debug(DEBUG4, MOD_WRAP_VERSION ": checking ACLs for user %s", session.user));
 </pre>
 With statements like this, the output from your module is much more easily
-identified in the server log files.
+identified in the server log files.  Not all third-party modules do this,
+it is true; it is a good habit to adopt, though.
 
 <p>
-<b>Module-specific Log Files</b><br>
 For some modules, it makes more sense to have them log to their own separate
 log files, rather than adding the module-specific output to the rest of
-<code>proftpd</code>'s logging.
-
-<p>
-Some caveats if using this approach: check for world-writeable directories,
-be very cautious of log as root, stat()ing for symlinks.  These should all be
-core-provided services, but are not...yet.
+<code>proftpd</code>'s logging.  Some caveats if using this approach: check
+for world-writeable directories (logs should not accessible to the world), be
+<b>very</b> cautious of logging as root (what files might you be overwriting,
+filesystem/disk space) , <code>stat()</code>ing for symlinks (race conditions),
+etc..  These should all be core-provided services, but are not...yet.  For
+examples of such logging code, see <code>mod_quotatab</code> or
+<code>mod_rename</code>.
 
 <p>
 <center><a href="../toc.html">Table of Contents</a></center><br>

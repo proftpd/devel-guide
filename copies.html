@@ -43,19 +43,19 @@ the <a href="http://www.proftpd.org">www.proftpd.org</a> site, and use
 my <a href="bin/c2html">c2html</a> Perl script (<code>c2html -h</code> for
 usage):
 <ul>
+  <li>Create a directory <b>outside the source code directory</b> for
+      the generated HTML pages:
+<pre>
+    mkdir /tmp/proftpd
+</pre>
+  </li>
+
   <li>Unpack the source code tarball, and <code>cd</code> into that
       directory:
 <pre>
     tar zxvf proftpd-<i>release</i>.tar.gz
     cd proftpd-<i>release</i>
 </pre>
-  </li>
-
-  <li>Create a directory <b>outside the source code directory</b> for
-      the generated HTML pages:
-<pre>
-    mkdir /tmp/proftpd
-</pre>  
   </li>
 
   <li>Use the <code>ctags</code> program to generate the information needed

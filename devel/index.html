@@ -27,84 +27,76 @@ when building a module.  There are also other things to consider as part of
 the development process, such as configure scripts and documentation.
 
 <p>
-<b>Common tasks</b><br>
-As you develop your module, you will find that there are some routines and
-operations needed that will have inevitably been done before, either in
-other modules, or in the core code itself.  These pages describe some of the
-common tasks you can expect to counter, and how they can be done:
-<ul>
-  <li><a href="session-credentials.html">detecting</a> session credentials
-      (<i>i.e.</i> user, groups, class)
-  <li><a href="chroot-workarounds.html">working</a> around the
-      <code>chroot()</code> function
-  <li><a href="logging.html">logging</a>
-</ul>
-
-<p>
-Here are some other <a href="tips.html">tips</a> to keep in mind as you work
-on your module.
-
-<p>
-<b>Licensing</b><br>
-For the most part, this is easy -- GPL.  However, when working with 
-third-party libraries or code, be sure to include the necessary copyrights
-and licensing information as required by the use of those files.  If
-writing security modules, please be cognizant of any governmental laws or
-restrictions on the code you are writing.
+If you are developing a module for wider distribution with <code>proftpd</code>,
+please keep in mind the overall design philosophy: no use of the
+<code>exec*e(2)</code> or <code>system(2)</code> system calls.  Helper
+applications to accompany the module are acceptable; the server (and modules)
+should simply not invoke any code outside of its control.
+Here are some recommended <a href="secure-programming.html">sources</a> for
+further reading on secure programming.
 
 <p>
 <b>Security</b><br>
-Always, <i>always</i>, <b><i>always</i></b> check, verify, and sanitize user
+Always, <b><i>always</i></b>, <b>ALWAYS</b> check, verify, and sanitize user
 input, be it from configuration files such as <code>.ftpaccess</code>, from
 the configuration directive arguments for your modules, from any FTP commands
-you've created, etc etc.  If you're going to open and write a file while
-running with root privileges, check to see if the file exists first.  If it
-does, check whether it is a symlink, has data, whatever.  Just do not blindly
-write to a file name, unless you are absolutely certain of the conditions of
-the directory and file to which you are writing.
-
-<p>
-Overall ProFTPD philosophy: no <code>exec*e()</code>, no <code>system()</code>,
-no external programs, <code>mod_site</code>.  links to secure programming
-sites/docs.
-
-<p>
-<b>Debugging</b><br>
-    <li><code>proftpd -n -d 5</code> for debugging
-    <li><code>log_debug()</code> for debugging statements
-
-Signal 11 == usually, a NULL pointer:
-
-<pre>
-<code>
-    localhost.localdomain (localhost.localdomain[127.0.0.1]) - ProFTPD terminating (signal 11)
-</code>
-</pre>
-
-<p>
-<b>Configuration</b><br>
-This refers to any third-party libraries that your module might require, such
-as libwrap.a (the tcpwrappers library), the OpenSSL library, the MySQL
-libraries, etc.  Such dependencies will require changes to the configure
-script which is run before ProFTPD is compiled.
-
-<p>
-<b>Installation</b><br>
-    <li>copy module code into <code>contrib/</code>
-    <li><code>./configure --with-module=XXX</code> and module ordering
-Install required third-party libraries/files, and <i>note their locations</i>
-(eg mysql). copy module to <code>contrib/</code>, use --with-module=mod_nifty.
-Use --with-includes, --with-libraries, --enable-nifty, etc as necessary.
+you've created, etc etc.  If you're going to open and write a file with
+root privileges, check to see if the file exists first.  If it does, check
+whether it is a symlink, has data, whatever.  <b>Do not</b> blindly write to a
+file name, unless you are absolutely certain of the conditions of the directory
+and file to which you are writing.
 
 <p>
 <b>Documentation</b><br>
 <i><b>No</b> modules or patches will be accepted into the ProFTPD source
 <b>without documentation.</b></i>  Modules submitted without documents on what
-they do, or on how to properly use any configuration directives the module
-might define, are next to useless by the ProFTPD community.  Patches without
-descriptions of what they are fixing <i>and why</i> force developers to read the
-code of the patch in order to decipher the purpose; most developers have better
-things to do with their time.
+they do, on how to properly use any configuration directives the module
+might define, or on how to install and use the module, are next to useless by
+the ProFTPD community.
+
+<p>
+Patches without descriptions of what they are fixing, <i>and why</i>, force developers to read the code of the patch in order to decipher the purpose; the
+author of the patch has the best insight into the patch's purpose.
+
+<p>
+<b>Licensing</b><br>
+For the most part, this is easy -- GPL.  However, when working with
+third-party libraries or code, be sure to include the necessary copyrights
+and licensing information as required by the use of those files.  Some
+licensing issues to keep in mind are mentioned here:
+<pre>
+  <a href="http://www.gnu.org/licenses/gpl-faq.html#GPLModuleLicense">http://www.gnu.org/licenses/gpl-faq.html#GPLModuleLicense</a>
+  <a href="http://www.gnu.org/licenses/gpl-faq.html#GPLAndPlugins">http://www.gnu.org/licenses/gpl-faq.html#GPLAndPlugins</a>
+</pre>
+Due to the nature of <code>proftpd</code>'s module interface, third-party
+modules are considered part of the main binary, and thus by definition fall
+under the GPL (or <a href="http://www.gnu.org/licenses/license-list.html#GPLCompatibleLicenses">GPL-compatible licenses</a>), unless explicitly excluded
+(the OpenSSL code is excluded this way).
+<p>
+If developing modules that rely on cryptographic code, please be cognizant of
+any governmental laws or restrictions on the cryptographic code in use,
+in its licensing and distribution.
+
+<p>
+<b>Common tasks</b><br>
+As you develop your module, you will find that there are some routines and
+operations needed that will have inevitably been done before, either in
+other modules, or in the core code itself.  These pages describe some of the
+common tasks you can expect to encounter, and how they can be done:
+<ul>
+  <li>module <a href="module-logging.html">logging</a>
+  <li>detecting <a href="session-credentials.html">session credentials</a>
+      (<i>i.e.</i> user, groups, class)
+  <li>adding module-specific <a href="site-commands.html">SITE</a> commands
+  <li><a href="chroot-workarounds.html">working</a> around the
+      <code>chroot()</code> function
+  <li>using <a href="third-party-libraries.html">third-party libraries</a>
+      in your module
+</ul>
+
+<p>
+Here are some other <a href="tips.html">tips</a> to keep in mind as you work
+on your module.
 
 <p>
 <center><a href="../toc.html">Table of Contents</a></center><br>

@@ -57,6 +57,7 @@ struct pr_confstream_struc {
   <font color=green>/* Confstream callbacks */</font>
   int (*open)(confstream_rec *);
   int (*close)(confstream_rec *);
+  int (*seek)(confstream_rec *, off_t, int);
   char *(*readstr)(confstream_rec *, char *, size_t);
   char *(*writestr)(confstream_rec *, char *, size_t);
   int (*iserror)(confstream_rec *);

@@ -89,6 +89,7 @@ described below.
 <pre>
   int confstream_open(void);
   int confstream_close(void);
+  int confstream_seek(off_t <i>offset</i>, int <i>whence</i>);
   char *confstream_readstr(char *<i>buf</i>, size_t <i>buflen</i>);
   char *confstream_writestr(char *<i>buf</i>, size_t <i>buflen</i>);
   int confstream_iserror(void);
@@ -108,6 +109,14 @@ confstream will be set to zero if successful.
 The <code>confstream_close()</code> function calls on the current confstream
 object to close the configuration streamm.  It returns <code>0</code> on
 success, <code>-1</code> on error.
+
+<p>
+The <code>confstream_seek()</code> function calls on the current confstream
+object to seek to a given point in the configuration stream according to
+the <i>whence</i> argument, starting at the specified <i>offset</i>.
+Acceptable values for <i>whence</i> are confstream object-specific.  It
+returns <code>0</code> on success, <code>-1</code> on failure; if there was
+an error, <code>errno</code> should be set accordingly.
 
 <p>
 The <code>confstream_readstr()</code> function calls on the current confstream
@@ -160,6 +169,38 @@ destroyed and its pool released.
 The <code>confstream_getlineno()</code> function returns the <i>lineno</i>
 field of the current confstream object.  It will return <code>0</code> if
 there is no configuration stream set.
+
+<p>
+<b>Confstream Auxiliary Functions</b><br>
+There are a few other functions that come into play when using the Confstream
+API:
+<pre>
+  int init_parser(pool *<i>parent_pool</i>, config_rec *<i>top</i>, int <i>isdynamic</i>);
+  int free_parser(void);
+</pre>
+
+<p>
+The <code>init_parser()</code> function initializes the parser, preparing it
+to maintain context states as it handles the set configuration stream.  It uses
+the given <i>parent_pool</i> for memory for the context stacks, and sets
+the parent context to <i>top</i>.  These arguments may be <code>NULL</code>,
+in which case the <code>permanent_pool</code> will be used for memory, and
+there will be no top context.  <i>Note</i>: this should only be the case
+when proftpd starts up, and never in a module.  The <i>isdynamic</i> argument
+is a Boolean value signalling whether the parser will be handling
+&quot;dynamic&quot; configuration streams, these being any configuration
+stream that is not parsed at startup/rehash time; this will almost always
+be <code>TRUE</code> for modules.  It is an error to attempt to initialize
+the parser once it has been initialized; in this case,
+<code>init_parser()</code> will return <code>-1</code>.
+
+<p>
+The <code>free_parser()</code> function frees any memory used by the parser,
+clearing its stacks and context state.  If the parser is in an inconsistent
+state, meaning configuration contexts have not been properly closed, when
+it is freed, the process will <code>exit()</code>.  It is an error to attempt
+to free the parser once it has been freed; if attempted,
+<code>free_parser()</code> will return <code>-1</code>.
 
 <p>
 <center><a href="../../toc.html">Table of Contents</a></center><br>

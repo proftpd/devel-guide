@@ -23,6 +23,79 @@
 
 <p>
 <b>Tutorial</b><br>
+As an example Confstream implementation, here (excerpted from
+<a href="../../src/src/confstream.c.html">confstream.c</a>)
+is the definition of a confstream object for handling regular text files.
+This &quot;filestream&quot; is the default confstream object.
+<pre>
+<font color=green>/* default "file" configuration stream definitions
+ */</font>
+static int filestream_open(confstream_rec *stream) {
+  int res;
+
+  <font color=green>/* sanity check */</font>
+  if (stream == NULL)
+    return -1;
+
+  if (stream->source == NULL) {
+    log_pri(LOG_ERR, "no source set for file configuration");
+    return -1;
+  }
+
+  <font color=green>/* the source field contains the filename to be read
+   */</font>
+  if ((stream->data = (void *) fopen(stream->source, "r")) == NULL)
+    res = -1;
+  else
+    res = 0;
+
+  return res;
+}
+
+static int filestream_close(confstream_rec *stream) {
+  return fclose((FILE *) stream->data);
+}
+
+static int filestream_seek(confstream_rec *stream, off_t offset, int whence) {
+  return fseek((FILE *) stream->data, offset, whence);
+}
+
+static char *filestream_readstr(confstream_rec *stream, char *buf,
+    size_t buflen) {
+  return fgets(buf, buflen, (FILE *) stream->data);
+}
+
+static char *filestream_writestr(confstream_rec *stream, char *buf,
+    size_t buflen) {
+
+  <font color=green>/* the current filestream object doesn't support writing of configuration
+   * information...yet
+   */</font>
+  return NULL;
+}
+static int filestream_iserror(confstream_rec *stream) {
+  return ferror((FILE *) stream->data);
+}
+
+int init_confstream(void) {
+  confstream_rec *filestream = NULL;
+
+  <font color=green>/* configure the default "file" configuration stream
+   */</font>
+  filestream = create_confstream(permanent_pool, "file");
+
+  filestream->open = filestream_open;
+  filestream->close = filestream_close;
+  filestream->readstr = filestream_readstr;
+  filestream->writestr = filestream_writestr;
+  filestream->iserror = filestream_iserror;
+  ...
+}
+</pre>
+
+<p>
+
+<p>
 An excellent example for using the Confstream functions can be found in
 <a href="../../api/functions.html#build_dyn_config"><code>build_dyn_config()</code></a>, the function that parses <code>.ftpaccess</code> files.  This
 function does many things, but for us the interesting bit at the moment is
@@ -44,7 +117,12 @@ its use of confstreams to parse the files:
    */</font>
   confstream_setsource(dynpath);
 
-  init_parser(p, d);
+  if (init_parser(p, d, TRUE) < 0) {
+    log_pri(LOG_ERR, "error: unable to parse .ftpaccess file '%s'",
+      dynpath);
+    return;
+  }
+
   d->config_type = CONF_DYNDIR;
 
   <font color=green>/* as .ftpaccess files are read during the operation of the process,
@@ -143,7 +221,8 @@ useful and desirable to halt the daemon when parsing is at startup time, or
 when rehashing the main configuration stream because of a <code>SIGHUP</code>.
 
 <p>
-Notes: mergedown() and CF_DYNAMIC?
+Notes: mergedown() and CF_DYNAMIC? --> merge_config_set().  Called
+automatically by free_parser().
 
 <p>
 <b>Notes</b><br>

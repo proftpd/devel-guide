@@ -108,21 +108,21 @@ and the <i>path</i> given to <code>pr_get_fs()</code> is
 <pre>
   /path/to/dir/file1
 </pre>
-then the root <code>pr_fs_t</code> will be returned, as that's the best-matching
-path.  <code>/path/to/dir</code> is considered to be a file, not a directory,
-by this function.  However, if instead of
+then the root <code>pr_fs_t</code> will be returned, as that is the
+best-matching path.  <code>/path/to/dir</code> is considered to be a file, not
+a directory, by this function.  However, if instead of:
 <pre>
   /path/to/dir
 </pre>
-the other <code>pr_fs_t</code> was registered to handle
+the other <code>pr_fs_t</code> was registered to handle:
 <pre>
   /path/to/dir/
 </pre>
-then that <code>pr_fs_t</code> would be considered best-matching by the search
+then that <code>pr_fs_t</code> would be considered best-matching by the lookup
 algorithm.
 
 <p>
-Finally, the <code>pr_unregister_fs()</code> function does just that - it
+Finally, the <code>pr_unregister_fs()</code> function does just that -- it
 searches the FSIO layer's map for <code>pr_fs_t</code>s whose paths match,
 removes them from the map, and destroys them.  It returns <code>TRUE</code> upon
 removing any matching <code>pr_fs_t</code>s, <code>FALSE</code> if there was

@@ -32,6 +32,8 @@ if the requested user is allowed to log in, based on any <code>&lt;Limit
 LOGIN&gt;</code> directives.  Then it will check to see if the login is
 allowed by any configured <code>MaxClients</code>,
 <code>MaxClientsPerHost</code>, and <code>MaxHostsPerUser</code> directives.
+If these directives mean that the client connection cannot be accepted,
+any configured <code>DisplayGoAway</code> message is sent to the client.
 
 <p>
 When ProFTPD receives a <code>PASS</code> command, it will again check
@@ -41,11 +43,16 @@ the handling of the <code>USER</code> command, handles
 <code>UserAlias</code>ed usernames; this check handles <i>real</i> usernames.
 The actual work of authenticating the user then takes place (more on this
 below).  If the authentication succeeds, any <code>DisplayLogin</code> and
-<code>AccessGrantMsg</code> messages are sent to the client.
+<code>AccessGrantMsg</code> messages are sent to the client.  Otherwise,
+any <code>AccessDenyMsg</code> message is sent.
 
 <p>
 <b>Authenticating the User</b><br>
-This process is handled by the
+During authentication, the process handling the connection is running under
+the identity configured using the <code>User</code> and <code>Group</code>
+configuration directives.  Only after successfully authenticating the user
+will the process assume the identity and privileges of that user.  This
+process of authentication is handled by the
 <code><a href="../src/modules/mod_auth.c.html#_setup_environment">_setup_environment()</a></code> function, and involves quite a bit.
 
 <p>
@@ -87,7 +94,8 @@ in which to place the user, either their home directory or any applicable
 for any applicable <code>&lt;Limit&gt;</code> directives.  Next, after
 logging a <code>wtmp</code> or <code>utmp</code> log (unless configured
 not to), this function will check and apply any <code>DefaultRoot</code>
-configuration directives as needed.
+configuration directives as needed.  Last, the identity of the current process
+is changed to be that of the authenticated user.
 
 <p>
 At this point, unless authentication has failed at any point earlier,

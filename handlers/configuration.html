@@ -27,44 +27,161 @@ checks to make sure that the requirements for using the configuration directive
 are met, such as number and types of arguments, and context in which the
 directive appears.  Next, the typical handler, depending on its complexity,
 will allocate any necessary resources and perform any needed computations on
-the directive arguments.  Last, a configuration record will be set, 
-  1. contexts, context merging (see include/dirtree.h) w/ examples
-     (see doc/mod_sample.c:
-<pre>
-  /* By adding the CF_MERGEDOWN flag to the parameter we just created
-   * we are telling ProFTPD that this parameter should be copied and
-   * "merged" into all "lower" contexts until it either hits a
-   * parameter w/ the same name or bottoms out.
-   *
-   * Example _without_ CF_MERGEDOWN:
-   *
-   * <VirtualHost>
-   *      |----------\
-   *             <Anonymous>
-   *                 | - FooBarDirective  <------- Config places it here
-   *                 |-----------\
-   *                         <Directory>  <------- Doesn't apply here
-   *                             |-------------\
-   *                                        <Limit> <--- Or here.....
-   *
-   * Now, if we specify CF_MERGDOWN, the tree ends up looking like:
-   *
-   * <VirtualHost>
-   *      |----------\
-   *             <Anonymous>
-   *                 | - FooBarDirective  <------- Config places it here
-   *                 |-----------\
-   *                         <Directory>  <------- Now, it DOES apply here
-   *                             | - FooBarDirective
-   *                             |-------------\
-   *                                        <Limit> <-------- And here ...
-   *                                           | - FooBarDirective
-   *
-   */
+the directive arguments.  Last, a configuration record containing the
+processed information will be created, and stored for later retrieval.
 
+<p>
+In the passed in <code>cmd_rec</code>, <code>cmd_rec->arg</code> will 
+point to a string of all the configured directive parameters.
+<code>cmd_rec->argc</code> is the count of directive parameters, including
+the directive name itself; <code>cmd_rec->argv</code> is an array of strings
+of those parameters.  <code>cmd_rec->argv[0]</code> is the directive name.
+
+<p>
+<b>Useful functions and macros for configuration handlers</b><br>
+First, there are the basic checks of the directive parameters to be made:
+are there enough parameters?  Is the directive being used in the correct
+configuration context?  For these, the
+<code><a href="../api/macros.html#CHECK_ARGS">CHECK_ARGS</a></code> and
+<code><a href="../api/macros.html#CHECK_CONF">CHECK_CONF</a></code> macros
+can be used.
+
+<p>
+If the directive parameters include a Boolean parameter, use
+<code><a href="../api/functions.html#get_boolean">get_boolean()</a></code>
+to parse the parameter.
+
+<p>
+Once the parameters have been processed, and the handler is ready to create
+and populate a <code>config_rec</code> for storing the data, the
+<code><a href="../api/functions.html#add_config_param">add_config_param()</a></code> and
+<code><a href="../api/functions.html#add_config_param_str">add_config_param_str()</a></code> functions should be used.
+
+<p>
+If, during the handling of this directive, a fatal or irrecoverable error
+is detected in the directive parameters, use the
+<code><a href="../api/macros.html#CONF_ERROR">CONF_ERROR</a></code> macro
+to error out of the configuration handler.
+
+<p>
+Finally, if everything is in order, the configuration handler should signal
+to the parsing engine that the directive was successfully processed, using
+the
+<code><a href="../api/macros.html#HANDLED">HANDLED</a></code> macro.
+
+<p>
+Here's the configuration handler for the <code>RootLogin</code> directive, a
+configuration directive that accepts only a single Boolean parameter:
+<pre>
+MODRET set_rootlogin(cmd_rec *cmd) {
+  int bool;
+
+  <font color=blue>/* make sure there's at least one parameter */</font>
+  CHECK_ARGS(cmd, 1);
+
+  <font color=blue>/* check that the directive occurs in a legal context */</font>
+  CHECK_CONF(cmd, CONF_ROOT|CONF_VIRTUAL|CONF_ANON|CONF_GLOBAL);
+
+  <font color=blue>/* make sure a correct Boolean parameter was given, and return
+   * an informative error message if not.
+   */</font>
+  if ((bool = get_boolean(cmd, 1)) == -1)
+    CONF_ERROR(cmd, "expected boolean argument.");
+
+  <font color=blue>/* add the Boolean value to the configuration record set */</font>
+  add_config_param("RootLogin", 1, (void *) bool);
+  return HANDLED(cmd);
+}
+</pre>
+
+<p>
+<b>Storing complex data</b><br>
+
+<p>
+<b>Configuration record flags</b><br>
+By adding the
+<code><a href="../api/macros.html#CF_MERGEDOWN">CF_MERGEDOWN</a></code>
+flag to the <code>config_rec</code> returned by
+<code>add_config_param()</code> or <code>add_config_param_str()</code>, we
+can tell the server that this <code>config_rec</code> should be copied and
+&quot;merged&quot; into all lower contexts until it either hits a
+configuration record with the same name or bottoms out.
+
+<p>
+Example of what the configuration tree looks like, <i>without</i>
+<code>CF_MERGEDOWN</code>, for a fictitious <code>FooBarDirective</code>:
+<pre>
+  &lt;VirtualHost&gt;
+        |----------\
+               &lt;Anonymous&gt;
+                   | - FooBarDirective  <font color=blue><------- configuration placed here</font>
+                   |-----------\
+                           &lt;Directory&gt;  <font color=blue><------- configuration doesn't apply here</font>
+                               |-----------\
+                                        &lt;Limit&gt; <font color=blue><--- or here....</font>
+</pre>
+
+<p>
+If the <code>CF_MERGEDOWN</code> flag is set by the configuration handler,
+like so:
+<pre>
+  config_rec *c = NULL;
+  ...
+  c = add_config_param("FooBarDirective", 1, (void *) foo);
   c->flags |= CF_MERGEDOWN;
 </pre>
-     )
+
+then the configuration tree would look like:
+<pre>
+  &lt;VirtualHost&gt;
+        |----------\
+               &lt;Anonymous&gt;
+                   | - FooBarDirective  <font color=blue><------- configuration placed here</font>
+                   |-----------\
+                           &lt;Directory&gt;  <font color=blue><------- mergedown means it is <b>also</b> placed here</font>
+                               | - FooBarDirective
+                               |-------------\
+                                          &lt;Limit&gt; <font color=blue><-------- and here...</font>
+                                             | - FooBarDirective
+
+</pre>
+
+<p>
+<b>Multiple configuration records</b><br>
+There is nothing to prevent a given configuration directive from occurring
+multiple times in the configuration file.  Indeed, for some configuration
+directives this can be the desired usage.  Each time a configuration directive
+is encountered, the configuration handler for that directive is called.
+Most configuration handlers do not need to do anything special to handle
+multiply configured directives; should that directive be only used once,
+however, the configuration handler should enforce this.
+
+<p>
+As most configuration handler functions call <code>add_config_param()</code>
+or <code>add_config_param_str()</code>, a developer might think that a
+directive that occurs multiple times might overwrite the previously set
+<code>config_rec</code>.  However, a new <code>config_rec</code> is generated
+and inserted into a <code>xaset_t</code>, which can handle configuration
+records of the same name.
+
+<p>
+For multiply defined configuration directives to <i>work</i> properly, however,
+the way in which they are retrieved needs to be handled carefully.  Most
+configuration records are retrieved via a single call to
+<code><a href="../api/functions.html#get_param_int">get_param_int()</a></code>,
+or perhaps to
+<code><a href="../api/functions.html#get_param_ptr">get_param_ptr()</a></code>.
+In order to handle configuration directives that might be multiply defined,
+the code that retrieves the <code>config_rec</code> will need to make use
+of
+<code><a href="../api/functions.html#find_config">find_config()</a></code>
+and
+<code><a href="../api/functions.html#find_config_next">find_config_next()</a></code>.
+
+<p>
+However, this ranging a bit far afield from the original topic.  Should anyone
+read this, and wish to see an example, just email me, and I'll add it to
+this page.
 
 <p>
 <center><a href="../toc.html">Table of Contents</a></center><br>

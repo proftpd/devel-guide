@@ -27,7 +27,7 @@ Strictly speaking, the authentication handlers are used for both
 and <i>authorization</i> (determining what a user can and cannot do).  A
 password is often used for authentication; a user's UID and GID provide
 &quot;privileges&quot; that are used for authorization.  This combination
-of functionality separates proftpd auth modules from PAM modules; PAM
+of functionality separates ProFTPD auth modules from PAM modules; PAM
 modules are used for authentication only.
 
 <p>
@@ -234,7 +234,7 @@ lifetime of the server:
       logging in.
   <li><code>getgrent</code> handlers are used repeatedly to obtain a list of
       supplemental groups for the user. (<i>Note that currently this is
-      specific to <code>mod_unixpw</code>; other authentication modules may
+      specific to <code>mod_auth_unix</code>; other authentication modules may
       use the <code>getgroups</code> handler for retrieiving supplemental
       group membership information.</i>)
   <li><code>auth</code> handlers are invoked to authenticate a username and
@@ -290,9 +290,9 @@ the authentication module author <i>should</i> provide handlers for all of
 the auth slots.  Failure to do so means that the authentication module
 provides an incomplete authentication layer, and cascaded calls will appear
 to &quot;skip&quot; the module without reason.  At present,
-<code>mod_pam</code> exhibits this behavior: it is an authentication module,
-but provides no mechanisms for providing group information or IDs.  It solely
-provides <code>auth</code>'s &quot;yes/no&quot; answer.
+<code>mod_auth_pam</code> exhibits this behavior: it is an authentication
+module, but provides no mechanisms for providing group information or IDs.
+It solely provides <code>auth</code>'s &quot;yes/no&quot; answer.
 
 <p>
 This cascading structure also allows authentication modules the opportunity

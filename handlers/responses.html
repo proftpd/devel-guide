@@ -1,0 +1,198 @@
+<!-- $Id$ -->
+<!-- $Source$ -->
+
+<html>
+<head>
+<title>ProFTPD Developer's Guide: Response Handlers</title>
+</head>
+
+<body bgcolor=white>
+
+<hr><br>
+<center>
+<img src="../images/proftpd.png" border=0>
+<br><br>
+<h3><b>ProFTPD Developer's Guide: Response Handlers</b></h3>
+<i><b>ProFTPD Version 1.2</b></i><br>
+</center>
+<hr><br>
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+<p>
+<b>Responding To Client Requests</b><br>
+Whenever the server processes a request from the client, it must generate an
+appropriate, RFC-compliant response back to the client.  There are two
+main ways of generating these responses, usually done from within a command
+handler.
+
+<p>
+<b>Response Chains</b><br>
+The first, and prefered, method of transmitting numeric-plus-text message
+responses back to clients is via the internal <i>response chains</i>.  Using
+these allows all handlers to add their own individual responses, which will then
+all be sent <i>en masse</i> after the command successfully completes, or fails.
+
+<p>
+The engine maintains two such response chains, one chain for success
+messages, and one for error messages.  When all handlers for a given command
+have been called, the engine evaluates the final condition of the command.  If
+it has failed (signaled by a handler returning one of the available
+<a href="#ResponseMacros"><code>ERROR*</code></a> macros), all responses
+pending in the error response chain are sent.  If, on the other hand, the
+command has successfully completed, the success response chain is sent.  If a
+command has neither completed successfully nor resulted in an error, it is
+assumed to be an invalid command, and the client is informed approppriately.
+In any case, once the &quot;lifetime&quot; of the command is over, and one
+(or none) of the response chains has been sent, <i>both</i> chains are
+destroyed.
+
+<p>
+The response chain method uses the following functions:
+<ul>
+  <li><a href="../api/functions.html#add_response"><code>add_response()</code></a>
+  <li><a href="../api/functions.html#add_response_err"><code>add_response_err()</code></a>
+</ul>
+
+<p>
+As you can see, with the response chain method, there are no multiline functions
+for multiline replies, as there are with the second response method. This is
+because the server automatically generates a multiline formated reply if it
+detects that there are two or more responses with the same numeric waiting to
+be sent to the client.  In many cases, you may be writing a handler,
+<code>POST_CMD</code> for example, that neither specifically knows nor cares
+what numerics other handlers are using during their responses.  In this case,
+you can use the special
+<a href="../api/macros.html#R_DUP"><code>R_DUP</code></a> response numeric,
+which tells the server that your response should be <i>assumed</i> to be part
+of a multiline response started by another handler.
+
+<p>
+For example, if the following
+<a href="../api/functions.html#add_response"><code>add_response()</code></a>
+calls were made from different modules:<br>
+<br>
+<b>module A</b>:<br>
+<code>add_response(R_200, "Command successfully completed");</code><br>
+
+<br>
+<b>module B</b>:<br>
+<code>
+add_response(R_DUP, "Statistics for command '%s': none", cmd->argv[0]);
+</code><br>
+
+<br>
+<b>module C</b>:<br>
+<code>add_response(R_DUP, "XFOO post_cmd handler ran");</code><br>
+
+<p>
+The final output sent to the client, assuming the command was successfully
+handled, would be (assuming your command is named 'XFOO'):
+<pre>
+  200-Command successfully completed.
+   Statistics for command 'XFOO': none.
+  200 XFOO post_cmd handler ran.
+</pre>
+
+<p>
+See <a href="../src/include/ftp.h.html#R_110">include/ftp.h</a> for the full
+listing of response numerics.
+
+<p>
+Responses to the client should be added using <code>add_response()</code>
+when the handler is going to return <code>HANDLED</code> or
+<code>DECLINED</code>; <code>add_response_err()</code> should be used if
+the handler is going to return <code>ERROR</code>.  At least one response
+in the chain, either &quot;normal&quot; or error chain, should be present
+in order to return an RFC-compliant response code to the client.  This
+is important; returning the wrong code for a command, or no code at all,
+can hang the client.  Note also that responses may be added to both
+chains simultaneously, however only one chain of response will be flushed
+back to the client.
+
+<p>
+<b>Direct Response</b><br>
+The second way, a <i>direct response</i> method, is incompatible with other
+handlers, and should be used only if the handler is about to terminate the
+current connection, and thus kill the <code>fork()</code>ed child server,
+usually via
+<a href="../api/functions.html#end_login"><code>end_login()</code></a>.
+This method must use one of the functions listed below, for the
+&quot;normal&quot; response chains will never be processed by the core
+engine.
+
+<p>
+The direct response method utilizes the following functions:
+<ul>
+  <li><a href="../api/functions.html#send_response"><code>send_response()</code></a>,
+  <li><a href="../api/functions.html#send_response_async"><code>send_response_async()</code></a>,
+  <li><a href="../api/functions.html#send_response_ml"><code>send_response_ml()</code></a>
+  <li><a href="../api/functions.html#send_response_ml_end"><code>send_response_ml_end()</code></a>
+  <li><a href="../api/functions.html#send_response_ml_start"><code>send_response_ml_start()</code></a>
+</ul>
+
+<p>
+<a name="ResponseMacros"></a>
+<b>Response handler macros</b><br>
+The following are some macros specific to response generation, both by
+modules and by the core engine:
+
+<ul>
+  <li><a href="../api/macros.html#DECLINED"><code>DECLINED</code></a><code>(cmd_rec *<i>cmd</i>)</code><br>
+    Indicates that the engine should act as though the handler was never
+    called and continue processing. <code>POST_CMD</code> handlers will
+    <b>not</b> be called in this case.<br>
+  </li>
+  <br>
+
+  <li><a href="../api/macros.html#ERROR"><code>ERROR</code></a><code>(cmd_rec *<i>cmd</i>)</code><br>
+    Indicates that a protocol error occurred. <code>POST_CMD</code> handlers
+    are <b>not</b> called.<br>
+  </li>
+  <br>
+
+  <li><a href="../api/macros.html#ERROR_INT"><code>ERROR_INT</code></a><code>(cmd_rec *<i>cmd</i>, int <i>err_code</i>)</code><br>
+    Similar to <code>ERROR</code></a>, except that the single integer numeric
+    error is indicated.  This is used only by authentication/mapping handlers,
+    <i>eg</i> <code>mod_ldap</code> and <code>mod_unixpw</code>.<br>
+  </li>
+  <br>
+
+  <li><a href="../api/macros.html#ERROR_MSG"><code>ERROR_MSG</code></a><code>(cmd_rec *<i>cmd</i>, int <i>err_code</i>, char *<i>err_message</i>)</code><br>
+    Similar to <code>ERROR</code>, except that a string composed of
+    <i>err_code</i> and <i>err_message</i> is sent to the client.  In the case
+    of configuration directive handlers, the numeric argument is ignored,
+    the string message is displayed to the user or logged via
+    <code>syslog</code>, and the forked process terminates.<br>
+  </li>
+  <br>
+
+  <li><a href="../api/macros.html#HANDLED"><code>HANDLED</code></a><code>(cmd_rec *<i>cmd</i>)</code><br>
+    Indicates that the handler has properly handled the command, and that the
+    engine should consider the command complete and continue processing.  Note
+    that if a module handler returns <code>HANDLED</code>,
+    <code>POST_CMD</code> handlers will be called for the command.<br>
+  </li>
+  <br>
+</ul>
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+<hr><br>
+
+Author: <i>$Author$</i><br>
+Last Updated: <i>$Date$</i><br>
+
+<br><hr>
+
+<font size=2><b><i>
+&copy; Copyright 2000-2002 TJ Saunders<br>
+ All Rights Reserved<br>
+</i></b></font>
+
+<hr><br>
+
+</body>
+</html>

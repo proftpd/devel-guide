@@ -22,40 +22,109 @@
 
 <p>
 <b>Configuration Handlers</b><br>
-The typical configuration directive handler does three things.  First, it
-checks to make sure that the requirements for using the configuration directive
-are met, such as number and types of arguments, and context in which the
-directive appears.  Next, the typical handler, depending on its complexity,
-will allocate any necessary resources and perform any needed computations on
-the directive arguments.  Last, a configuration record containing the
-processed information will be created, and stored for later retrieval.
+Modules can be used to extend the functionality of the server; often that
+additional functionality is configurable, and can behave differently according
+to the server administrator's needs.  In order to allow the administrator
+the ability to tweak the module functionality behavior, the module often
+needs to add its own configuration directives.  Thus, one of the common
+tasks of the module developer is the writing of a function that handles
+a configuration directive, checking it for format, syntax, and sanity.
+Next, the typical handler, depending on its complexity, will allocate any
+necessary resources and perform any needed computations on the directive
+arguments.  Last, a configuration record containing the processed information
+will be created, and stored for later retrieval.
 
 <p>
-In the passed in <code>cmd_rec</code>, <code>cmd_rec->arg</code> will 
-point to a string of all the configured directive parameters.
-<code>cmd_rec->argc</code> is the count of directive parameters, including
-the directive name itself; <code>cmd_rec->argv</code> is an array of strings
-of those parameters.  <code>cmd_rec->argv[0]</code> is the directive name.
+The steps taken during the handling of a configuration directive are
+straightforward:
+<ol>
+  <li>check the number of parameters used in the configuration file
+  <li>check the configuration contexts in which the directive appeared
+  <li>parse the given parameters
+  <li>set a configuration record
+  <li>documenting the proper usage of the directive
+</ol>
 
 <p>
 <b>Useful functions and macros for configuration handlers</b><br>
-First, there are the basic checks of the directive parameters to be made:
-are there enough parameters?  Is the directive being used in the correct
-configuration context?  For these, the
-<code><a href="../api/macros.html#CHECK_ARGS">CHECK_ARGS</a></code> and
-<code><a href="../api/macros.html#CHECK_CONF">CHECK_CONF</a></code> macros
-can be used.
+To help facilitate checking the number of parameters given for the
+configuration directive there is the
+<a href="../api/macros.html#CHECK_ARGS"><code>CHECK_ARGS</code></a> macro.
+This macro takes the <code>cmd_rec *</code> passed to the configuration
+directive handler function, and the number of arguments that directive
+<i>should</i> have.  Note, however, that the current macro is inadequate, as
+it only checks that there are <i>at least</i> the requested number of
+arguments but does not produce an error if there are <i>more</i> than the
+requested number of arguments used.  Other, less frequently used macros
+for the checking of number of parameters are
+<a href="../api/macros.html#CHECK_HASARGS"><code>CHECK_HASARGS</code></a>
+and
+<a href="../api/macros.html#CHECK_VARARGS"><code>CHECK_VARARGS</code></a>.
+Thus, for example, to check that your directive is used with at least
+two parameters:
+<pre>
+  CHECK_ARGS(cmd, 2);
+</pre>
 
 <p>
-If the directive parameters include a Boolean parameter, use
-<code><a href="../api/functions.html#get_boolean">get_boolean()</a></code>
-to parse the parameter.
+As with checking the number of parameters, there is a convenience macro
+used to check the context in which your directive was used against a list
+of legal contexts:
+<a href="../api/macros.html#CHECK_CONF"><code>CHECK_CONF</code></a>.  This
+macro takes two arguments: the <code>cmd_rec *</code> passed to the
+configuration directive handler, and an <code>OR</code>'d list of context
+values (see the Internals page on
+<a href="../internals/contexts.html">contexts</a>).  For example, if your
+directive should only be used in the <code>&lt;VirtualHost&gt;</code> and
+<code>&lt;Directory&gt;</code> contexts:
+<pre>
+  CHECK_CONF(cmd, CONF_VIRTUAL|CONF_DIR);
+</pre>
 
 <p>
-Once the parameters have been processed, and the handler is ready to create
-and populate a <code>config_rec</code> for storing the data, the
-<code><a href="../api/functions.html#add_config_param">add_config_param()</a></code> and
-<code><a href="../api/functions.html#add_config_param_str">add_config_param_str()</a></code> functions should be used.
+Now we come to the substance of the configuration handler: parsing the
+parameters given for proper format, syntax, range, and suitability.  What is
+proper format, syntax, range, and suitability all depend on the purpose of
+your directive, what kind of parameters it should be accepting, and how those
+parameters will be used later by the module code.
+
+<p>
+First, there's the matter of accessing the parameters that appeared in the
+configuration file.  A configuration directive handler accepts a single
+argument, a <code>cmd_rec *</code>.  The parameter values for the directive
+are stored in this structure in a manner similar to what is passed by the
+operating system to any C program's <code>main()</code> function: an
+<code>int argc</code> denoting the number of arguments, and an
+<code>char **argv</code> containing the array of parameters as strings.  In
+the given <code>cmd_rec *</code>, then, <code>cmd-&gt;argc</code> is the number
+of parameters used <b>including</b> the directive name itself, and
+<code>cmd-&gt;argv</code> are those parameters, also including the directive
+name itself (<code>cmd-&gt;argv[0]</code>).
+<code>cmd-&gt;argv[cmd-&gt;argc]</code> is always <code>NULL</code>.
+
+<p>
+One common type of configuration directive is a simple one, an on/off Boolean
+switch.  For parsing a parameter that should be a Boolean value there is the
+<a href="../api/functions.html#get_boolean"><code>get_boolean()</code></a>
+function.  Many places in the server's core configuration directives will
+have:
+<pre>
+  int bool = -1;
+    ...
+  if ((bool = get_boolean(cmd, 1)) == -1)
+    CONF_ERROR(cmd, "expected boolean value");
+</pre>
+If the parameter should be a numeric value, make sure that given parameter is
+indeed a number (use <code>strtol()</code> or <code>strtoul()</code> for their
+range-checking abilities as well as string-to-number conversion ability), and
+that the number is within the proper range: is it negative or zero when it
+should only be positive?  Is it smaller than the largest possible value in
+the parameter range?  If the parameter value should be a path, check that
+the given string is an absolute path, if required, and/or that the path
+exists, and leads to a file of the correct type (<i>eg</i> directory,
+regular file, symbolic link, whatever).  Try to verify and validate as
+much as possible at this stage, for it will save you time, debugging, and
+error-handling code elsewhere in the module code.
 
 <p>
 If, during the handling of this directive, a fatal or irrecoverable error
@@ -64,42 +133,50 @@ is detected in the directive parameters, use the
 to error out of the configuration handler.
 
 <p>
-Finally, if everything is in order, the configuration handler should signal
-to the parsing engine that the directive was successfully processed, using
-the
-<code><a href="../api/macros.html#HANDLED">HANDLED</a></code> macro.
+<b>Storing configuration parameters</b><br>
+Once the parameters have been processed, the handler is ready to create
+and populate a <code>config_rec</code> for storing the parsed data. The
+parsing of the configuration data occurs when the server starts up, and when
+it is restarting (as when signalled with a <code>SIGHUP</code>).  How then to
+store configuration parameters in a persistent place, to be looked up later
+when a command handler, or an authentication handler, is called?  That
+persistent place turns out to be a bag of configuration records, called
+<code>config_rec</code>s, stored in hierarchical sets.  This structure allows
+for easy retrieval of a record using a string as the key.  So, the module
+configuration handlers simply need to know how to add their configuration
+data to this structure.
 
 <p>
-Here's the configuration handler for the <code>RootLogin</code> directive, a
-configuration directive that accepts only a single Boolean parameter:
-<pre>
-MODRET set_rootlogin(cmd_rec *cmd) {
-  int bool;
-
-  <font color=blue>/* make sure there's at least one parameter */</font>
-  CHECK_ARGS(cmd, 1);
-
-  <font color=blue>/* check that the directive occurs in a legal context */</font>
-  CHECK_CONF(cmd, CONF_ROOT|CONF_VIRTUAL|CONF_ANON|CONF_GLOBAL);
-
-  <font color=blue>/* make sure a correct Boolean parameter was given, and return
-   * an informative error message if not.
-   */</font>
-  if ((bool = get_boolean(cmd, 1)) == -1)
-    CONF_ERROR(cmd, "expected boolean argument.");
-
-  <font color=blue>/* add the Boolean value to the configuration record set */</font>
-  add_config_param("RootLogin", 1, (void *) bool);
-  return HANDLED(cmd);
-}
-</pre>
+The basic function to use is
+<a href="../api/functions.html#add_config_param"><code>add_config_param()</code></a>.  This function creates a <code>config_rec</code> and stores it in the
+structure according to the server and context in which the directive occurred.
+This function stores void pointers, so any arbitrary data can be stored, via
+pointer, in the created <code>config_rec</code>.  If the parameter data to
+be stored will be all strings, as is common, then a similar storage function,
+<a href="../api/functions.html#add_config_param_str"><code>add_config_param_str()</code></a> should be used.  This second function calls
+<a href="../api/functions.html#pstrdup"><code>pstrdup()</code></a> on each
+of its arguments, assuming they are strings (and that assumption had better
+<i>be a valid assumption</i>!).  This way you don't have to worry about
+figuring out which pool to use for allocating space for those strings.
+Knowing which pools to use, and their various lifetimes, is discussed
+<a href="../internals/pools.html">here</a>.
 
 <p>
-<b>Storing complex data</b><br>
+In much of the current code, the first argument to either of these functions
+is a string literal, usually the name of the configuration directive that
+trigged the use of the configuration handler.  However, another way (and
+slightly more efficient, as it uses less stack memory) is to use
+<code>cmd-&gt;argv[0]</code>, which points to the same string.
 
 <p>
-<b>Configuration record flags</b><br>
-By adding the
+<b>Configuration flags</b><br>
+One thing to bear in mind when storing configuration parameters is the
+contexts in which they will be retrieved.  Is the directive allowed only
+in the server contexts of &quot;server config&quot;,
+<code>&lt;VirtualHost&gt;</code>, or <code>&lt;Global&gt;</code>?  Or will it
+be useful in the <code>&lt;Anonymous&gt;</code> context as well?  Maybe it
+pertains to directories, and so will be in <code>&lt;Directory&gt;</code>
+and <code>.ftpacces</code> contexts?  By adding the
 <code><a href="../api/macros.html#CF_MERGEDOWN">CF_MERGEDOWN</a></code>
 flag to the <code>config_rec</code> returned by
 <code>add_config_param()</code> or <code>add_config_param_str()</code>, we
@@ -109,7 +186,9 @@ configuration record with the same name or bottoms out.
 
 <p>
 Example of what the configuration tree looks like, <i>without</i>
-<code>CF_MERGEDOWN</code>, for a fictitious <code>FooBarDirective</code>:
+<code>CF_MERGEDOWN</code>, for a fictitious <code>FooBarDirective</code>,
+assuming that directive appeared within an <code>&lt;Anonymous&gt;</code>
+context in the configuration file:
 <pre>
   &lt;VirtualHost&gt;
         |----------\
@@ -122,8 +201,8 @@ Example of what the configuration tree looks like, <i>without</i>
 </pre>
 
 <p>
-If the <code>CF_MERGEDOWN</code> flag is set by the configuration handler,
-like so:
+If, on the other hand, the <code>CF_MERGEDOWN</code> flag is set by the
+configuration handler, like so:
 <pre>
   config_rec *c = NULL;
   ...
@@ -161,27 +240,138 @@ As most configuration handler functions call <code>add_config_param()</code>
 or <code>add_config_param_str()</code>, a developer might think that a
 directive that occurs multiple times might overwrite the previously set
 <code>config_rec</code>.  However, a new <code>config_rec</code> is generated
-and inserted into a <code>xaset_t</code>, which can handle configuration
-records of the same name.
+and inserted into a <code>xaset_t</code>, which can handle configuration records
+of the same, each time these parameter-storing functions are called.
 
 <p>
-For multiply defined configuration directives to <i>work</i> properly, however,
-the way in which they are retrieved needs to be handled carefully.  Most
-configuration records are retrieved via a single call to
-<code><a href="../api/functions.html#get_param_int">get_param_int()</a></code>,
-or perhaps to
-<code><a href="../api/functions.html#get_param_ptr">get_param_ptr()</a></code>.
-In order to handle configuration directives that might be multiply defined,
-the code that retrieves the <code>config_rec</code> will need to make use
-of
-<code><a href="../api/functions.html#find_config">find_config()</a></code>
-and
-<code><a href="../api/functions.html#find_config_next">find_config_next()</a></code>.
+Finally, if everything is in order, the configuration handler should signal
+to the parsing engine that the directive was successfully processed, using
+the
+<code><a href="../api/macros.html#HANDLED">HANDLED</a></code> macro.
 
 <p>
-However, this ranging a bit far afield from the original topic.  Should anyone
-read this, and wish to see an example, just email me, and I'll add it to
-this page.
+<b>Example handler</b><br>
+To demonstrate all of this in action, here's the configuration handler for the
+<code>RootLogin</code> directive, a configuration directive that accepts only
+a single Boolean parameter:
+<pre>
+MODRET set_rootlogin(cmd_rec *cmd) {
+  int bool;
+
+  <font color=blue>/* make sure there's at least one parameter */</font>
+  CHECK_ARGS(cmd, 1);
+
+  <font color=blue>/* check that the directive occurs in a legal context */</font>
+  CHECK_CONF(cmd, CONF_ROOT|CONF_VIRTUAL|CONF_ANON|CONF_GLOBAL);
+
+  <font color=blue>/* make sure a correct Boolean parameter was given, and return
+   * an informative error message if not.
+   */</font>
+  if ((bool = get_boolean(cmd, 1)) == -1)
+    CONF_ERROR(cmd, "expected boolean argument.");
+
+  <font color=blue>/* add the Boolean value to the configuration record set */</font>
+  add_config_param("RootLogin", 1, (void *) bool);
+
+  <font color=blue>/* this directive has been successfully handled */</font>
+  return HANDLED(cmd);
+}
+</pre>
+
+<p>
+<b>Parameter retrieval</b><br>
+While discussion of parameter retrieval does not properly belong in a
+discussion of configuratio handlers, it does follow quite naturally the
+discussion of parameter storage functions.  The way in which these records are
+retrieved needs to be handled carefully.  The retrieval/lookup functions are:
+<ul>
+  <li><a href="../api/functions.html#find_config"><code>find_config()</code></a>
+  <li><a href="../api/functions.html#find_config_next"><code>find_config_next()</code></a>
+  <li><a href="../api/functions.html#get_param_int"><code>get_param_int()</code></a>
+  <li><a href="../api/functions.html#get_param_int_next"><code>get_param_int_next()</code></a>
+  <li><a href="../api/functions.html#get_param_ptr"><code>get_param_ptr()</code></a>
+  <li><a href="../api/functions.html#get_param_ptr_next"><code>get_param_ptr_next()</code></a>
+</ul>
+
+<p>
+So how does the module developer know when to use which retrieval functions?
+It depends on what kind of information is stored in the record being retrieved.
+If that record only holds one parameter, a number or a string or other type
+of pointer, then the <code>get_param</code> functions can be used.  The
+<code>get_param_int()</code> function, despite its name, returns as a
+<code>long</code> value the first parameter in the matched record (available
+as <code>config_rec-&gt;argv[0]</code>).  <code>get_param_int_next()</code>
+can then be used to find and return the value of the next matching record.
+Similarly with the <code>get_param_ptr()</code> and
+<code>get_param_ptr_next()</code>, excepting that they return
+<code>void *</code>s rather than <code>long</code>s.  The
+<code>get_param_ptr()</code> function is often used to retrieve configuration
+data stored as a string.
+
+<p>
+For more complicated <code>config_rec</code>s, such as those that hold multiple
+pointers and data such as ACLs, the <code>find_config()</code> and
+<code>find_config_next()</code> are necessary.  These functions return pointers
+to the matched configuration record itself, rather than just the first
+argument of that record.  Any <code>config_rec</code> stored with more than
+one parameter will need to be accessed via these functions.  
+
+<p>
+The next consideration is use of the correct configuration set in which to
+look for the desired records.  Which configuration set to use depends on the
+directive and the configuration contexts in which it is allowed to appear.
+For example, there are some configuration directives (<i>e.g.</i>
+<code>DefaultRoot</code>) that are only allowed to appear in the server
+contexts of &quot;server config&quot;, <code>&lt;VirtualHost&gt;</code>, and
+<code>&lt;Global&gt;</code>.  This means that that configuration record will
+always be in <code>main_server-&gt;conf</code>, the top-level set for the
+server handling the current session.  If the directive may appear in the
+<code>&lt;Anonymous&gt;</code> context, use the <code>CF_MERGEDOWN</code>
+flag and the
+<a href="../api/macros.html#TOPLEVEL_CONF"><code>TOPLEVEL_CONF</code></a>
+macro as the search set, as it will expand appropriately to the correct set
+to use.  The mergedown flag, in this case, is necessary to have a directive
+that appears in a context &quot;higher&quot; than
+<code>&lt;Anonymous&gt;</code> appear in that context in the configuration
+tree as well.  Confused yet?  For those directives that should cascade down
+through every set, use the <code>CF_MERGEDOWN</code> flag, and use the
+<a href="../api/macros.html#CURRENT_CONF"><code>CURRENT_CONF</code></a>
+macro for the search set.
+
+<p>
+Failure to use the <code>CF_MERGEDOWN</code> flag when necessary, or searching
+in the wrong set, leads to &quot;mergedown&quot; bugs, and settings not
+taking effect when they should.
+
+<p>
+<b>Example retrieval code</b><br>
+Here's an example of a retrieval loop than can be used to deal with directives
+that can be used multiple times:
+<pre>
+  config_rec *c = NULL;
+  ...
+
+  <font color=blue>/* see if the DefaultRoot directive has been used */</font>
+  c = find_config(main_server->conf, CONF_PARAM, "DefaultRoot", FALSE);
+
+  while (c) {
+
+    <font color=blue>/* do some processing of the retrieved record here */</font>
+    ...
+
+    <font color=blue>/* search for the next occurrence */</font>
+    c = find_config_next(c, c->next, CONF_PARAM, "DefaultRoot", FALSE);
+  }
+</pre>
+
+<p>
+<b>Obligations</b><br>
+The last duty of the module developer, and the most important duty (from a
+user's point of view), is to document what has been developed.  The existing
+configuration directive documentation should suffice as a template.
+<b>Please</b> do everyone a favor and distribute documentation with your
+module, so that it can be used without requiring users to browse and decipher
+the source code.
 
 <p>
 <center><a href="../toc.html">Table of Contents</a></center><br>

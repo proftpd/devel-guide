@@ -1,0 +1,107 @@
+<!-- $Id$ -->
+<!-- $Source$ -->
+
+<html>
+<head>
+<title>ProFTPD Developer's Guide: NetIO API Functions</title>
+</head>
+
+<body bgcolor=white>
+
+<hr><br>
+<center>
+<img src="../../images/proftpd.png" border=0>
+<br><br>
+<h3><b>ProFTPD Developer's Guide: NetIO API Functions</b></h3>
+<i><b>ProFTPD Version 1.2</b></i><br>
+</center>
+<hr><br>
+
+<p>
+<center><a href="../../toc.html">Table of Contents</a></center><br>
+
+<p>
+<b>NetIO API Functions</b><br>
+
+<pre>
+  pr_netio_t *pr_alloc_netio(pool *<i>pool</i>);
+  int pr_register_netio(pr_netio_t *<i>netio</i>, int <i>strm_types</i>);
+  int pr_unregister_netio(int <i>strm_types</i>);
+</pre>
+
+<p>
+The <code>pr_alloc_netio()</code> function allocates a
+<code>pr_netio_stream_t</code> object from the given <i>pool</i>, and returns
+a pointer to that object.  The callback pointers for this object will all be
+initialized to the system default callbacks.
+
+<p>
+The <code>pr_register_netio()</code> function sets the given <i>netio</i>
+object as a stream to use from that point on, after verifying that the
+given <i>netio</i> has valid pointers for all of its callbacks.  If 
+<code>NULL</code> is given as a argument, this function will automatically
+instantiate a <code>pr_netio_stream_t</code> object and register it.  The
+<i>strm_types</i> parameter is used to signal for which types of streams
+this object should be used; <i>strm_types</i> may be one of the following flags:
+<ul>
+  <li><b><code>PR_NETIO_STRM_CTRL</code></b><br>
+    Use this stream for control channel I/O<br>
+  </li>
+
+  <p>
+  <li><b><code>PR_NETIO_STRM_DATA</code></b><br>
+    Use this stream for data channel I/O<br>
+  </li>
+
+  <p>
+  <li><b><code>PR_NETIO_STRM_OTHR</code></b><br>
+    Use this stream for &quot;other&quot; channels.  <b>Note</b>: this
+    is very rarely used (<i>e.g.</i> for streams used to perform
+    RFC913 identity lookups).
+  </li>
+</ul>
+These flags may be <code>OR</code>'d together to signal that the given
+stream is to be used for different stream types.  If no custom object has
+been registered to handle a given stream type, the default stream type is
+used.
+
+<p>
+The <code>pr_unregister_netio()</code> function removes any custom objects
+that have been registered for the given <i>strm_types</i>.  The default
+objects cannot be unregistered.
+
+<p>
+<b>Custom NetIO Functions</b><br>
+The following are the function prototypes to which any custom NetIO functions
+must adhere:
+
+<p>
+<pre>
+  void (*abort)(pr_netio_stream_t *<i>nstrm</i>);
+  int (*close)(pr_netio_stream_t *<i>nstrm</i>);
+  pr_netio_stream_t *(*open)(pr_netio_stream_t *<i>nstrm</i>, int <i>fd</i>, int <i>mode</i>);
+  int (*poll)(pr_netio_stream_t *<i>nstrm</i>);
+  int (*read)(pr_netio_stream_t *<i>nstrm</i>, char *<i>buf</i>, size_t <i>buflen</i>);
+  pr_netio_stream_t *(*reopen)(pr_netio_stream_t *<i>nstrm</i>, int <i>fd</i>, int <i>mode</i>);
+  int (*write)(pr_netio_stream_t *<i>nstrm</i>, char *<i>buf</i>, size_t <i>buflen</i>);
+</pre>
+
+<p>
+<center><a href="../../toc.html">Table of Contents</a></center><br>
+
+<hr><br>
+
+Author: <i>$Author$</i><br>
+Last Updated: <i>$Date$</i><br>
+
+<br><hr>
+
+<font size=2><b><i>
+&copy; Copyright 2000-2002 TJ Saunders<br>
+ All Rights Reserved<br>
+</i></b></font>
+
+<hr><br>
+
+</body>
+</html>

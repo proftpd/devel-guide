@@ -1,0 +1,139 @@
+<!-- $Id$ -->
+<!-- $Source$ -->
+
+<html>
+<head>
+<title>ProFTPD Developer's Guide: NetIO API Structures</title>
+</head>
+
+<body bgcolor=white>
+
+<hr><br>
+<center>
+<img src="../../images/proftpd.png" border=0>
+<br><br>
+<h3><b>ProFTPD Developer's Guide: NetIO API Structures</b></h3>
+<i><b>ProFTPD Version 1.2</b></i><br>
+</center>
+<hr><br>
+
+<p>
+<center><a href="../../toc.html">Table of Contents</a></center><br>
+
+<p>
+<b>NetIO API Structures</b><br>
+At the core of it, the NetIO API uses and manipulates a few structures.
+The structure called a <code>pr_netio_t</code> holds the pointers to the
+callback functions to be used.  The remaining structures,
+<code>pr_netio_stream_t</code> and <code>pr_netio_buffer_t</code>, define the
+internal structure of the network I/O streams.  The module developer may
+need to know these structures in order to devise the proper callbacks.
+
+<p>
+The code definining these structures is in
+<a href="../../src/include/netio.h.html">include/netio.h</a>, but is excerpted
+here for your reading pleasure:
+<pre>
+
+<font color=green>/* Network I/O objects */</font>
+
+typedef struct {
+
+  <font color=green>/* Pointer to the buffer memory. */</font>
+  char *buf;
+
+  <font color=green>/* Total length of the buffer. */</font>
+  unsigned long buflen;
+
+  <font color=green>/* Pointer to the current byte in the buffer. */</font>
+  char *current;
+
+  <font color=green>/* Number of bytes left in the buffer. */</font>
+  int remaining;
+
+} pr_netio_buffer_t;
+
+typedef struct {
+
+  <font color=green>/* Memory pool for this object. */</font>
+  pool *strm_pool;
+
+  <font color=green>/* Stream type */</font>
+  int strm_type;
+
+  <font color=green>/* File descriptor for this I/O stream. */</font>
+  int strm_fd;
+
+  <font color=green>/* I/O mode: PR_NETIO_IO_RD or PR_NETIO_IO_WR.  Patterned after
+   * open(2).
+   */</font>
+  int strm_mode;
+
+  <font color=green>/* Poll interval for this stream. */</font>
+  unsigned int strm_interval;
+
+  <font color=green>/* Internal use. */</font>
+  volatile unsigned long strm_flags;
+
+  <font color=green>/* Buffer. */</font>
+  pr_netio_buffer_t *strm_nbuf;
+
+  <font color=green>/* Arbitrary data for outside use. */</font>
+  void *strm_data;
+
+  <font color=green>/* errno, if applicable. */</font>
+  int strm_errno;
+
+} pr_netio_stream_t;
+</pre>
+
+<p>
+The <code>strm_data</code> field is where NetIO modules can store and pass
+around data specific to that module, <i>e.g.</i> transformation objects,
+custom structures, etc etc.
+
+<pre>
+typedef struct {
+
+  <font color=green>/* Memory pool for this object. */</font>
+  pool *pool;
+
+  <font color=green>/* NetIO callback pointers. */</font>
+  void (*abort)(pr_netio_stream_t *);
+  int (*close)(pr_netio_stream_t *);
+  pr_netio_stream_t *(*open)(pr_netio_stream_t *, int, int);
+  int (*poll)(pr_netio_stream_t *);
+  int (*read)(pr_netio_stream_t *, char *, size_t);
+  pr_netio_stream_t *(*reopen)(pr_netio_stream_t *, int, int);
+  int (*write)(pr_netio_stream_t *, char *, size_t);
+
+} pr_netio_t;
+</pre>
+
+<p>
+Also note that, when instantiated, a subpol is allocated from the given
+parent pool, and it is from this subpool (stored as
+<code>pr_netio_t->pool</code>) that the object is actually allocated.
+Therefore, to destroy a <code>pr_netio_t</code>, one needs merely to call
+<a href="../../api/functions.html#destroy_pool"><code>destroy_pool()</code></a>
+on the <code>pr_netio_t</code>'s pool.
+
+<p>
+<center><a href="../../toc.html">Table of Contents</a></center><br>
+
+<hr><br>
+
+Author: <i>$Author$</i><br>
+Last Updated: <i>$Date$</i><br>
+
+<br><hr>
+
+<font size=2><b><i>
+&copy; Copyright 2000-2002 TJ Saunders<br>
+ All Rights Reserved<br>
+</i></b></font>
+
+<hr><br>
+
+</body>
+</html>

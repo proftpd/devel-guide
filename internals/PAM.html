@@ -27,7 +27,11 @@ uses PAM to check whether a given user should or should not be allowed to
 login.  This means that the necessary information for a user must be defined
 some other source (<i>e.g.</i> <code>/etc/passwd</code>, an
 <code>AuthUserFile</code>, <code>mod_sql</code>, <code>mod_ldap</code>, etc)
-before PAM comes into play.
+before PAM comes into play.  The PAM API does not allow for information such
+as UID, GID, home directory, <i>etc</i> to be passed by PAM modules, and since
+<code>proftpd</code> requires this information in order to setup an FTP
+session properly, an auth module other than <code>mod_auth_pam</code> is
+needed. 
 
 <p>
 The PAM check only happens during the dispatching of the <code>auth_authenticate()</code> request; <code>mod_pam</code> registers only one authentication handler

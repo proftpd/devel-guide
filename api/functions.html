@@ -391,7 +391,7 @@ if explicitly denied.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static void _create_inet_pool()
+  static void _create_inet_pool(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/inet.c.html#_create_inet_pool">src/inet.c</a><br>
@@ -471,7 +471,7 @@ if explicitly denied.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static void _do_user_counts()
+  static void _do_user_counts(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_auth.c.html#_do_user_counts">modules/mod_auth.c</a><br>
@@ -724,7 +724,7 @@ an idle session.  The timer length is configurable via the
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static void _internal_abort()
+  static void _internal_abort(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/main.c.html#_internal_abort">src/main.c</a><br>
@@ -843,7 +843,7 @@ successfully authenticated.  The timer length is configurable via the
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static char *_prepare_core()
+  static char *_prepare_core(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/main.c.html#_prepare_core">src/main.c</a><br>
@@ -946,7 +946,7 @@ configuration set, <i>newparent</i>.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static void _retr_abort()
+  static void _retr_abort(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_xfer.c.html#_retr_abort">modules/mod_xfer.c</a><br>
@@ -956,7 +956,7 @@ configuration set, <i>newparent</i>.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static void _retr_done()
+  static void _retr_done(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_xfer.c.html#_retr_done">modules/mod_xfer.c</a><br>
@@ -1059,7 +1059,7 @@ broken up, rearranged!</i><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static void _stor_abort()
+  static void _stor_abort(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_xfer.c.html#_stor_abort">modules/mod_xfer.c</a><br>
@@ -1069,7 +1069,7 @@ broken up, rearranged!</i><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static void _stor_chown()
+  static void _stor_chown(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_xfer.c.html#_stor_chown">modules/mod_xfer.c</a><br>
@@ -1079,7 +1079,7 @@ broken up, rearranged!</i><br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static void _stor_done()
+  static void _stor_done(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_xfer.c.html#_stor_done">modules/mod_xfer.c</a><br>
@@ -1148,7 +1148,7 @@ symlink).  This recursing function catches symlink loops via the
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static void _xfer_exit()
+  static void _xfer_exit(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_xfer.c.html#_xfer_exit">modules/mod_xfer.c</a><br>
@@ -2187,7 +2187,7 @@ UID-to-name lookup for the given UID <i>uid</i>.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void block_signals()
+  void block_signals(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/support.c.html#block_signals">src/support.c</a><br>
@@ -2231,7 +2231,7 @@ from the configuration records.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  long bytes_in_free_blocks()
+  long bytes_in_free_blocks(void)
 </pre>
 <font color=blue>Comments</font>: Return the number of free block bytes.<br>
 <br>
@@ -2337,7 +2337,7 @@ chained <code>union block_hdr</code>s point to <code>union block_hdr</code>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void cleanup_for_exec()
+  void cleanup_for_exec(void)
 </pre>
 <font color=blue>Comments</font>: A wrapper function for
 <code>cleanup_pool_for_exec</code> that just blocks and unblocks alarms
@@ -2366,7 +2366,7 @@ allocated resources.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void clear_inet_pool()
+  void clear_inet_pool(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/inet.c.html#clear_inet_pool">src/inet.c</a><br>
@@ -2931,7 +2931,7 @@ file is displayed without trouble.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void data_cleanup()
+  void data_cleanup(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/data.c.html#data_cleanup">src/data.c</a><br>
@@ -2971,7 +2971,7 @@ file is displayed without trouble.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void data_reset()
+  void data_reset(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/data.c.html#data_reset">src/data.c</a><br>
@@ -3035,7 +3035,7 @@ closes; <code>-1</code> on error.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void debug_pool_info()
+  void debug_pool_info(void)
 </pre>
 <font color=blue>Comments</font>: Debugging function, for debugging pool
 resource management.<br>
@@ -3048,7 +3048,7 @@ resource management.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void debug_walk_pools()
+  void debug_walk_pools(void)
 </pre>
 <font color=blue>Comments</font>: Self-explanatory function, it does just what
 its name says.<br>
@@ -3286,8 +3286,12 @@ may not work if permissions cause problems somewhere up the tree.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void disc_children()
+  void disc_children(void)
 </pre>
+<font color=blue>Comments</font>: This function causes <code>SIGUSR1</code>
+to be sent to all children processed, terminating them, thus
+&quot;disconnecting&quot: those clients.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/main.c.html#disc_children">src/main.c</a><br>
 
@@ -3296,7 +3300,7 @@ may not work if permissions cause problems somewhere up the tree.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void discard_output()
+  void discard_output(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_ls.c.html#discard_output">modules/mod_ls.c</a><br>
@@ -3403,7 +3407,7 @@ is invoked before <code>_exit()</code> is used to terminate the process.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void end_login_noexit()
+  void end_login_noexit(void)
 </pre>
 <font color=blue>Comments</font>: As part of a session termination, this
 function is called.  All registered exit handlers are run, and all necessary
@@ -3417,7 +3421,7 @@ log files are closed.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  server_rec *end_new_server()
+  server_rec *end_new_server(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#end_new_server">src/dirtree.c</a><br>
@@ -3427,7 +3431,7 @@ log files are closed.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  config_rec *end_sub_config()
+  config_rec *end_sub_config(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#end_sub_config">src/dirtree.c</a><br>
@@ -3666,7 +3670,7 @@ always be <code>FALSE</code>.  Exceptions to this rule are very rare.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void fixup_globals()
+  void fixup_globals(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#fixup_globals">src/dirtree.c</a><br>
@@ -3676,7 +3680,7 @@ always be <code>FALSE</code>.  Exceptions to this rule are very rare.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void fixup_servers()
+  void fixup_servers(void)
 </pre>
 <font color=blue>Comments</font>: Go through each server configuration and
 complain if important information is missing, after the configuration file(s)
@@ -3729,7 +3733,7 @@ Alarms <b>must</b> be blocked before calling this function.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void free_conf_stacks()
+  void free_conf_stacks(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#free_conf_stacks">src/dirtree.c</a><br>
@@ -3739,7 +3743,7 @@ Alarms <b>must</b> be blocked before calling this function.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void free_dyn_stacks()
+  void free_dyn_stacks(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#free_dyn_stacks">src/dirtree.c</a><br>
@@ -3879,7 +3883,7 @@ this function for performance reasons, as this function is highly utilized.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  const char *fs_getcwd()
+  const char *fs_getcwd(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/fs.c.html#fs_getcwd">src/fs.c</a><br>
@@ -3902,7 +3906,7 @@ filesystem function.  However, it is included here for simplicity.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  const char *fs_getvwd()
+  const char *fs_getvwd(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/fs.c.html#fs_getvwd">src/fs.c</a><br>
@@ -4357,7 +4361,7 @@ handler functions.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static void get_extendedlogs()
+  static void get_extendedlogs(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_log.c.html#get_extendedlogs">modules/mod_log.c</a><br>
@@ -4570,7 +4574,7 @@ a caller-provided array of group names.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void handle_sig_alarm()
+  void handle_sig_alarm(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/timers.c.html#handle_sig_alarm">src/timers.c</a><br>
@@ -4987,7 +4991,7 @@ server configuration.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void init_alloc()
+  void init_alloc(void)
 </pre>
 <font color=blue>Comments</font>: Initialize the pool system by creating the
 base <code>permanent_pool</code>.<br>
@@ -5000,7 +5004,7 @@ base <code>permanent_pool</code>.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  int init_child_modules()
+  int init_child_modules(void)
 </pre>
 <font color=blue>Comments</font>:  Called after forking in order to inform
 and initialize any modules that need to know that a child connection has
@@ -5014,7 +5018,7 @@ been spawned.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void init_conf_stacks()
+  void init_conf_stacks(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#init_conf_stacks">src/dirtree.c</a><br>
@@ -5024,7 +5028,7 @@ been spawned.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void init_config()
+  void init_config(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#init_config">src/dirtree.c</a><br>
@@ -5034,7 +5038,7 @@ been spawned.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void init_dyn_stacks(pool *p,config_rec *top)
+  void init_dyn_stacks(pool *<i>p</i>, config_rec *<i>top</i>)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#init_dyn_stacks">src/dirtree.c</a><br>
@@ -5044,7 +5048,7 @@ been spawned.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  int init_fs()
+  int init_fs(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/fs.c.html#init_fs">src/fs.c</a><br>
@@ -5054,7 +5058,7 @@ been spawned.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void init_inet()
+  void init_inet(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/inet.c.html#init_inet">src/inet.c</a><br>
@@ -5064,7 +5068,7 @@ been spawned.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void init_io()
+  void init_io(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/io.c.html#init_io">src/io.c</a><br>
@@ -5074,7 +5078,7 @@ been spawned.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void init_log()
+  void init_log(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/log.c.html#init_log">src/log.c</a><br>
@@ -5108,7 +5112,7 @@ to initialize and prepare themselves for file parsing and session handling.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static void install_signal_handlers()
+  static void install_signal_handlers(void)
 </pre>
 <font color=blue>Comments</font>: The subpool for the child list is created
 the first time the server forks off a child.  To conserve memory, the pool and
@@ -5395,7 +5399,7 @@ otherwise.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void kludge_disable_umask()
+  void kludge_disable_umask(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#kludge_disable_umask">src/dirtree.c</a><br>
@@ -5405,7 +5409,7 @@ otherwise.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void kludge_enable_umask()
+  void kludge_enable_umask(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#kludge_enable_umask">src/dirtree.c</a><br>
@@ -5425,7 +5429,7 @@ otherwise.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void list_modules()
+  void list_modules(void)
 </pre>
 <font color=blue>Comments</font>:  This function simply prints out the
 list of modules compiled into the server at configure-time.<br>
@@ -5529,7 +5533,7 @@ log entry does not need to be seen by everyone.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  int log_child_init()
+  int log_child_init(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_log.c.html#log_child_init">modules/mod_log.c</a><br>
@@ -5539,7 +5543,7 @@ log entry does not need to be seen by everyone.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  int log_close_run()
+  int log_close_run(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/log.c.html#log_close_run">src/log.c</a><br>
@@ -5549,7 +5553,7 @@ log entry does not need to be seen by everyone.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void log_close_xfer()
+  void log_close_xfer(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/log.c.html#log_close_xfer">src/log.c</a><br>
@@ -5559,7 +5563,7 @@ log entry does not need to be seen by everyone.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void log_closesyslog()
+  void log_closesyslog(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/log.c.html#log_closesyslog">src/log.c</a><br>
@@ -5597,7 +5601,7 @@ greater than the current debug level, the message is silently ignored.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void log_discard()
+  void log_discard(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/log.c.html#log_discard">src/log.c</a><br>
@@ -5607,7 +5611,7 @@ greater than the current debug level, the message is silently ignored.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  int log_init()
+  int log_init(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_log.c.html#log_init">modules/mod_log.c</a><br>
@@ -5716,7 +5720,7 @@ the given <i>priority</i>.  <i>priority</i> should be one the
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void log_rm_run()
+  void log_rm_run(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/log.c.html#log_rm_run">src/log.c</a><br>
@@ -5736,7 +5740,7 @@ the given <i>priority</i>.  <i>priority</i> should be one the
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  int log_run_checkpath()
+  int log_run_checkpath(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/log.c.html#log_run_checkpath">src/log.c</a><br>
@@ -5756,7 +5760,7 @@ the given <i>priority</i>.  <i>priority</i> should be one the
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  const char *log_run_getpath()
+  const char *log_run_getpath(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/log.c.html#log_run_getpath">src/log.c</a><br>
@@ -5924,7 +5928,7 @@ return value from the entire function; if <code><i>and</i> == 0</code>, an
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void ls_terminate()
+  void ls_terminate(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_ls.c.html#ls_terminate">modules/mod_ls.c</a><br>
@@ -5954,7 +5958,7 @@ return value from the entire function; if <code><i>and</i> == 0</code>, an
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void main_set_idle()
+  void main_set_idle(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/main.c.html#main_set_idle">src/main.c</a><br>
@@ -6207,7 +6211,7 @@ explicit match; <code>-1</code> if it is an explicit mismatch (<i>i.e.</i>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static void p_endgrent()
+  static void p_endgrent(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_unixpw.c.html#p_endgrent">modules/mod_unixpw.c</a><br>
@@ -6217,7 +6221,7 @@ explicit match; <code>-1</code> if it is an explicit mismatch (<i>i.e.</i>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static void p_endpwent()
+  static void p_endpwent(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_unixpw.c.html#p_endpwent">modules/mod_unixpw.c</a><br>
@@ -6227,7 +6231,7 @@ explicit match; <code>-1</code> if it is an explicit mismatch (<i>i.e.</i>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static struct group *p_getgrent()
+  static struct group *p_getgrent(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_unixpw.c.html#p_getgrent">modules/mod_unixpw.c</a><br>
@@ -6257,7 +6261,7 @@ explicit match; <code>-1</code> if it is an explicit mismatch (<i>i.e.</i>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static struct passwd *p_getpwent()
+  static struct passwd *p_getpwent(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_unixpw.c.html#p_getpwent">modules/mod_unixpw.c</a><br>
@@ -6287,7 +6291,7 @@ explicit match; <code>-1</code> if it is an explicit mismatch (<i>i.e.</i>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static void p_setgrent()
+  static void p_setgrent(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_unixpw.c.html#p_setgrent">modules/mod_unixpw.c</a><br>
@@ -6297,7 +6301,7 @@ explicit match; <code>-1</code> if it is an explicit mismatch (<i>i.e.</i>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static void p_setpwent()
+  static void p_setpwent(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_unixpw.c.html#p_setpwent">modules/mod_unixpw.c</a><br>
@@ -6463,7 +6467,7 @@ character (<i>e.g.</i> <code>/</code>), to create a path.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void pool_release_free_block_list()
+  void pool_release_free_block_list(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/pool.c.html#pool_release_free_block_list">src/pool.c</a><br>
@@ -6861,7 +6865,7 @@ given <i>data</i> pointer.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void remove_exit_handlers()
+  void remove_exit_handlers(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/support.c.html#remove_exit_handlers">src/support.c</a><br>
@@ -6964,7 +6968,7 @@ is usually called after a connection has been made to a server.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void run_exit_handlers()
+  void run_exit_handlers(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/support.c.html#run_exit_handlers">src/support.c</a><br>
@@ -6974,7 +6978,7 @@ is usually called after a connection has been made to a server.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void run_schedule()
+  void run_schedule(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/support.c.html#run_schedule">src/support.c</a><br>
@@ -7021,7 +7025,7 @@ string if no token remains in the source string.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  int schedulep()
+  int schedulep(void)
 </pre>
 <font color=blue>Comments</font>:  Returns <code>TRUE</code> if there is
 a scheduled function waiting, <code>FALSE</code> otherwise.<br>
@@ -7152,7 +7156,7 @@ FTP protocol response with the given <i>numeric</i>.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void server_loop()
+  void server_loop(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/main.c.html#server_loop">src/main.c</a><br>
@@ -7951,7 +7955,7 @@ Boolean fields.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static void set_rlimits()
+  static void set_rlimits(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/main.c.html#set_rlimits">src/main.c</a><br>
@@ -8078,7 +8082,7 @@ Boolean fields.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void set_sig_alarm()
+  void set_sig_alarm(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/timers.c.html#set_sig_alarm">src/timers.c</a><br>
@@ -8551,7 +8555,7 @@ end of <i>dest</i> and refusing to copy more than <i>n</i> bytes.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void standalone_main()
+  void standalone_main(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/main.c.html#standalone_main">src/main.c</a><br>
@@ -8561,7 +8565,7 @@ end of <i>dest</i> and refusing to copy more than <i>n</i> bytes.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void start_daemon()
+  void start_daemon(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/main.c.html#start_daemon">src/main.c</a><br>
@@ -8811,7 +8815,7 @@ end of <i>dest</i> and refusing to copy more than <i>n</i> bytes.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void unblock_alarms()
+  void unblock_alarms(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/utils.c.html#unblock_alarms">src/utils.c</a><br>
@@ -8821,7 +8825,7 @@ end of <i>dest</i> and refusing to copy more than <i>n</i> bytes.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  void unblock_signals()
+  void unblock_signals(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/support.c.html#unblock_signals">src/support.c</a><br>
@@ -8831,7 +8835,7 @@ end of <i>dest</i> and refusing to copy more than <i>n</i> bytes.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static int unixpw_child()
+  static int unixpw_child(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_unixpw.c.html#unixpw_child">modules/mod_unixpw.c</a><br>
@@ -8841,7 +8845,7 @@ end of <i>dest</i> and refusing to copy more than <i>n</i> bytes.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  static int unixpw_init()
+  static int unixpw_init(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_unixpw.c.html#unixpw_init">modules/mod_unixpw.c</a><br>
@@ -9035,7 +9039,7 @@ or one or more of the arguments are invalid.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  int xfer_init_child()
+  int xfer_init_child(void)
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_xfer.c.html#xfer_init_child">modules/mod_xfer.c</a><br>

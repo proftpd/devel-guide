@@ -127,8 +127,8 @@ This module also contains code to handle the <code>DowncaseFileNames</code>
 and <code>UpcaseFileNames</code> configuration commands themselves.  To
 handle these multiple configuration commands, modules have <em>command
 tables</em> which declare their commands, and the corresponding configuration
-command handler.  The configuration command handler performs such checks
-as whether the configuration command is in an appropriate context, whether
+directive handler.  The configuration directive handler performs such checks
+as whether the configuration directive is in an appropriate context, whether
 the arguments are correct, <em>etc</em>.
 
 <p>
@@ -146,27 +146,27 @@ track them all down and dispose of them.
 With no further ado, the module itself:
 
 <pre>
-/* Declaration of command handler
- */
+<font color=green>/* Declaration of command handler
+ */</font>
 MODRET fixup_filenames(cmd_rec *);
 
-/* Declaration of configuration directive handlers
- */
+<font color=green>/* Declaration of configuration directive handlers
+ */</font>
 MODRET set_lowercase_filenames(cmd_rec *);
 MODRET set_uppercase_filenames(cmd_rec *);
 
-/* Define the "configuration handler" table, which links configuration file
+<font color=green>/* Define the "configuration handler" table, which links configuration file
  * directives with the appropriate handlers in this module
- */
+ */</font>
 static conftable case_conftab[] = {
   { "DowncaseFileNames",  set_downcase_filenames, NULL },
   { "UpcaseFilenames", set_upcase_filenames, NULL },
   { NULL }
 };
 
-/* Define the "command handler" table, which links client-issued commands
+<font color=green>/* Define the "command handler" table, which links client-issued commands
  * with the interested handlers in this module
- */
+ */</font>
 static cmdtable case_cmdtab[] = {
   { PRE_CMD, C_RETR, G_NONE, fixup_filenames, TRUE, FALSE },
   { 0, NULL }
@@ -174,15 +174,15 @@ static cmdtable case_cmdtab[] = {
 
 module case_module = {
 
-  NULL,                   /* pointer to the next module -- ALWAYS NULL */
-  NULL,                   /* pointer to the previous module -- ALWAYS NULL */
-  0x20,                   /* ProFTPD Module API version 2.0 */
-  "case",                 /* the module's name */
-  case_conftab,           /* configuration command handler table */
-  case_cmdtab,            /* command handler table */
-  NULL,                   /* authentication function table */
-  NULL,                   /* initialization function */
-  NULL                    /* "child" initialization function */
+  NULL,                   <font color=green>/* pointer to the next module -- ALWAYS NULL */</font>
+  NULL,                   <font color=green>/* pointer to the previous module -- ALWAYS NULL */</font>
+  0x20,                   <font color=green>/* ProFTPD Module API version 2.0 */</font>
+  "case",                 <font color=green>/* the module's name */</font>
+  case_conftab,           <font color=green>/* configuration command handler table */</font>
+  case_cmdtab,            <font color=green>/* command handler table */</font>
+  NULL,                   <font color=green>/* authentication function table */</font>
+  NULL,                   <font color=green>/* initialization function */</font>
+  NULL                    <font color=green>/* "child" initialization function */</font>
 };
 </pre>
 <br><br>
@@ -455,34 +455,34 @@ configuration handler, which looks like this (the <code>UpcaseFileNames</code>
 directive looks basically the same, and won't be shown here):
 
 <pre>
-MODRET set_lowercase_filenames(cmd_rec *command_rec) {
+MODRET set_lowercase_filenames(cmd_rec *cmd) {
 
   unsigned int bool = 0;
   config_rec *c = NULL;
 
-  /* make sure the directive was given one, and only one, argument
-   */
-  CHECK_ARGS(command_rec, 1);
+  <font color=green>/* make sure the directive was given one, and only one, argument
+   */</font>
+  CHECK_ARGS(cmd, 1);
 
-  /* check the context in which the directive was used, make sure that
+  <font color=green>/* check the context in which the directive was used, make sure that
    * it was one of the allowed contexts of "server config", &lt;Anonymous&gt;,
    * &lt;Limit&gt;, or &lt;VirtualHost&gt;.
-   */
-  CHECK_CONF(command_rec, CONF_ROOT|CONF_ANON|CONF_LIMIT|CONF_VIRTUAL);
+   */</font>
+  CHECK_CONF(cmd, CONF_ROOT|CONF_ANON|CONF_LIMIT|CONF_VIRTUAL);
 
-  /* get_boolean() couldn't find a valid Boolean value as an argument
-   */
-  if ((bool = get_boolean(command_rec, 1)) == -1)
-    CONF_ERROR(command_rec, "requires a boolean value");
+  <font color=green>/* get_boolean() couldn't find a valid Boolean value as an argument
+   */</font>
+  if ((bool = get_boolean(cmd, 1)) == -1)
+    CONF_ERROR(cmd, "requires a boolean value");
 
   c = add_config_param("DowncaseFileNames", 1, (void *) bool);
 
-  /* merge this configuration directive "down", so that it affects any
+  <font color=green>/* merge this configuration directive "down", so that it affects any
    * contained contexts
-   */
+   */</font>
   c->flags |= CF_MERGEDOWN;
 
-  return HANDLED(command_rec);
+  return HANDLED(cmd);
 }
 </pre>
 
@@ -539,15 +539,15 @@ ultimately done in the module's handlers, specifically for its
 filename handler, which looks more or less like this:
 
 <pre>
-MODRET fixup_filenames(cmd_rec *command_rec) {
+MODRET fixup_filenames(cmd_rec *cmd) {
 
   unsigned int index;
   char *current_filename = NULL, *new_filename = NULL;
   config_rec *conf_downcase = NULL, *conf_upcase = NULL;
 
-  /* check the current configuration context for the configuration
+  <font color=green>/* check the current configuration context for the configuration
    * directive boolean value, true or false.  If false, return now
-   */
+   */</font>
 
   conf_downcase = find_config(CURRENT_CONF, CONF_PARAM, "DowncaseFileNames",
     FALSE);
@@ -555,24 +555,22 @@ MODRET fixup_filenames(cmd_rec *command_rec) {
     FALSE);
 
   if (!conf_downcase && !conf_upcase)
-    return DECLINED(command_rec);
+    return DECLINED(cmd);
 
-  /* get an adjusted requested filename
-   */
+  <font color=green>/* get an adjusted requested filename
+   */</font>
   if (conf_downcase->argv[0] == TRUE)
-    new_filename = (command_rec->server->pool, command_rec->arg,
-      PR_CASE_DOWN);
+    new_filename = (cmd->server->pool, cmd->arg, PR_CASE_DOWN);
 
   else if (conf_upcase->argv[0] == TRUE)
-    new_filename = (command_rec->server->pool, command_rec->arg,
-      PR_CASE_UP);
+    new_filename = (cmd->server->pool, cmd->arg, PR_CASE_UP);
 
-  /* copy the new filename into the command record */
-  sstrcpy(command_rec->arg, new_filename, strlen(new_filename));
+  <font color=green>/* copy the new filename into the command record */</font>
+  sstrcpy(cmd->arg, new_filename, strlen(new_filename));
 
-  /* done -- proceed with the download
-   */
-  return DECLINED(command_rec);
+  <font color=green>/* done -- proceed with the download
+   */</font>
+  return DECLINED(cmd);
 }
 
 </pre>

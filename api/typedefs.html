@@ -185,35 +185,35 @@
 <pre>
  typedef struct cmd_struc {
 
-   <font color=blue>/* memory pool for this object */</font>
+   <font color=blue>/* Memory pool for this object */</font>
    pool *pool;
 
    server_rec *server;
    config_rec *config;
 
-   <font color=blue>/* temporary pool which only exists while the cmd's handler is running
+   <font color=blue>/* Temporary pool which only exists while the cmd's handler is running
     */</font>
    pool *tmp_pool;
 
    int argc;
    char **argv;
 
-   <font color=blue>/* entire argument (excluding command) */</font>
+   <font color=blue>/* Entire argument (excluding command) */</font>
    char *arg;
 
-   <font color=blue>/* command group */</font>
+   <font color=blue>/* Command group */</font>
    char *group;
 
-   <font color=blue>/* command class */</font>
+   <font color=blue>/* Command class */</font>
    int class;
 
-   <font color=blue>/* hack to speed up symbol hashing in modules.c */</font>
-   int symtable_index;
+   <font color=blue>/* Hack to speed up symbol hashing in modules.c */</font>
+   int stash_index;
 
-   <font color=blue>/* private data for passing/retaining among handlers */</font>
+   <font color=blue>/* Private data for passing/retaining among handlers */</font>
    privdata_t *private;
 
-   <font color=blue>/* internal use */</font>
+   <font color=blue>/* Internal use */</font>
    array_header *privarr;
 
  } cmd_rec;
@@ -228,20 +228,20 @@
 <pre>
  typedef struct {
 
-   <font color=blue>/* command types: PRE_CMD, CMD, POST_CMD, LOG_CMD */</font>
+   <font color=blue>/* Command phase: PRE_CMD, CMD, POST_CMD, LOG_CMD */</font>
    int cmd_type;
 
    char *command;
 
-   <font color=blue>/* command group */</font>
+   <font color=blue>/* Command group */</font>
    char *group;
 
    modret_t *(*handler)(cmd_rec *);
 
-   <font color=blue>/* is authentication required before this command may be used? */</font>
+   <font color=blue>/* Is authentication required before this command may be used? */</font>
    int requires_auth;
 
-   <font color=blue>/* is allowed to be issued during transfers? */</font>
+   <font color=blue>/* Is allowed to be issued during transfers? */</font>
    int interrupt_xfer;
 
    int class;
@@ -273,7 +273,7 @@
 
    modret_t *(*handler)(cmd_rec *);
 
-   <font color=blue>/* reference to owning module; set when the module is initialized
+   <font color=blue>/* Reference to owning module; set when the module is initialized
     */</font>
    module *m;
 
@@ -289,46 +289,45 @@
 <pre>
  typedef struct conn_struc {
 
-   <font color=blue>/* memory pool for this object */</font>
+   <font color=blue>/* Memory pool for this object */</font>
    pool *pool;
 
-   <font color=blue>/* current connection mode */</font>
+   <font color=blue>/* Current connection mode */</font>
    int mode;
 
-   <font color=blue>/* listening connection's file descriptor */</font>
+   <font color=blue>/* Listening connection's file descriptor */</font>
    int listen_fd;
 
-   <font color=blue>/* socket receive and send sizes */</font>
+   <font color=blue>/* Socket receive and send sizes */</font>
    int rcvbuf, sndbuf;
 
-   <font color=blue>/* set to errno if mode == CM_ERROR */</font>
+   <font color=blue>/* Set to errno if mode == CM_ERROR */</font>
    int xerrno;
 
    <font color=blue>/* IP addresses to which we're listening */</font>
    array_header *iplist;
-
    int niplist;
 
-   <font color=blue>/* read and write file descriptors */</font>
+   <font color=blue>/* Read and write file descriptors */</font>
    int rfd, wfd;
 
    <font color=blue>/* I/O streams */</font>
-   IOFILE *inf, *outf;
+   pr_netio_stream_t *instrm, *outstrm;
 
-   <font color=blue>/* remote address of this connection */</font>
+   <font color=blue>/* Remote address of this connection */</font>
    p_in_addr_t *remote_ipaddr;
 
-   <font color=blue>/* remote port of this connection */</font>
+   <font color=blue>/* Remote port of this connection */</font>
    int remote_port;
 
-   <font color=blue>/* remote FQDN of this connection */</font>
-   char *remote_name;
-
-   <font color=blue>/* local address of this connection */</font>
+   <font color=blue>/* Local address of this connection */</font>
    p_in_addr_t *local_ipaddr;
 
-   <font color=blue>/* local port of this connection */</font>
+   <font color=blue>/* Local port of this connection */</font>
    int local_port;
+
+   <font color=blue>/* Remote FQDN of this connection */</font>
+   char *remote_name;
 
  } conn_t;
 </pre>

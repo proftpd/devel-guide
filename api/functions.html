@@ -1273,7 +1273,7 @@ the given pointers are all assumed to be strings.
 <a href="#pstrdup"><code>pstrdup()</code></a> will be called on each pointer,
 using <code>permanent_pool</code> as the pool.<br>
 <br>
-<font color=blue>BUGS</font>: <code>config_rec->pool</code> <i>should
+<font color=blue>Bugs</font>: <code>config_rec->pool</code> <i>should
 really</i> be used instead.<br>
 <br>
 <font color=blue>Source File</font>:
@@ -1999,7 +1999,7 @@ GID-to-name lookup for the given GID <i>gid</i>.<br>
 The purpose of the dispatched-to authentication handler is to do a
 name-to-GID lookup for the given group <i>name</i>.<br>
 <br>
-<font color=blue>NOTES:</font> The caller of this function must take due
+<font color=blue>Notes:</font> The caller of this function must take due
 caution when handling the returned <code>gid_t</code>, and treat a
 <code>gid_t</code> of <code>-1</code> properly.<br>
 <br>
@@ -2019,7 +2019,7 @@ caution when handling the returned <code>gid_t</code>, and treat a
 The purpose of the dispatched-to authentication handler is to do a
 name-to-UID lookup for the given user <i>name</i>.<br>
 <br>
-<font color=blue>NOTES:</font> The caller of this function must take due
+<font color=blue>Notes:</font> The caller of this function must take due
 caution when handling the returned <code>uid_t</code>, and treat a
 <code>uid_t</code> of <code>-1</code> properly.<br>
 <br>
@@ -2795,7 +2795,7 @@ strings) of the original elements of <code>array_header</code> <i>arr</i>,
 allocated from the resources of <code>pool</code> <i>p</i>.<br>
 <br>
 <font color=blue>Source File</font>:
-  <a href="../src/src/poo.c.html#copy_array_str">src/pool.c</a><br>
+  <a href="../src/src/pool.c.html#copy_array_str">src/pool.c</a><br>
 
 <hr>
 <a name="core_chmod"><b>core_chmod</b><br>
@@ -3139,7 +3139,7 @@ It returns <code>TRUE</code> if an operation is allowed on the current
 &quot;*&quot;, strip it off.  Then, if <i>path</i> ends in &quot;/&quot;,
 strip it off, too.<br>
 <br>
-<font color=blue>NOTES</font>: this explanation is incomplete.<br>
+<font color=blue>Notes</font>: this explanation is incomplete.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#dir_match_path">src/dirtree.c</a><br>
@@ -3729,7 +3729,7 @@ and places the results in <i>buf</i>, where <i>len</i> indicates the size
 of <i>buf</i>.  If the concatenated path would be longer than
 <code>MAXPATHLEN</code>, then <i>buf</i> will default to &quot;/&quot;.<br>
 <br>
-<font color=blue>NOTES</font>: This function uses <code>strdup()</code> and
+<font color=blue>Notes</font>: This function uses <code>strdup()</code> and
 <code>free()</code>, rather than <code>pool</code>s, for memory, thus breaking
 the general rule of using <code>pool</code>s.  This is done intentionally in
 this function for performance reasons, as this function is highly utilized.<br>
@@ -4267,7 +4267,7 @@ specifically of the pathname component.  If a directory file descriptor,
 <i>ie</i> the <code>dir_fd</code> <code>DIR</code> structure element, is
 not available, then the second argument should be <code>0</code>.<br>
 <br>
-<font color=blue>NOTES</font>: A POSIX compliant system typically should
+<font color=blue>Notes</font>: A POSIX compliant system typically should
 <b>not</b> define <code>NAME_MAX</code>, since the value almost certainly
 varies across different file system types.  Refer to POSIX 1003.1a,
 Section 2.9.5, Table 2-5.<br>
@@ -4393,6 +4393,10 @@ as a group <code>AND</code> expression, which means that <i>all</i> group
 memberships must be valid for the expression to be true.  Returns
 <code>TRUE</code> if the current connected user matches the group expression,
 <code>FALSE</code> otherwise.<br>
+<br>
+<font color=blue>Bugs</font>: This function assumes use of
+<code>session.groups</code>.  Better would be to evaluate <i>expr</i> against
+a caller-provided array of group names.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#group_expression">src/dirtree.c</a><br>
@@ -5627,7 +5631,7 @@ terminal.  After disabling <b>stderr</b>, all messages will be sent to
 <code>wtmp/wtmpx</code>, and <b>must</b> be called as root <b>before</b> a
 <code>chroot()</code> occurs.<br>
 <br>
-<font color=blue>NOTES</font>: This function has some portability
+<font color=blue>Notes</font>: This function has some portability
 <code>#ifdef</code>s in it which <i>should</i> work, but haven't really been
 tested.<br>
 <br>
@@ -5664,7 +5668,7 @@ tested.<br>
 </pre>
 <font color=blue>Comments</font>:<br>
 <br>
-<font color=blue>NOTES</font>: If <code><i>and</i> == 1</code>, the log is
+<font color=blue>Notes</font>: If <code><i>and</i> == 1</code>, the log is
 short-circuited so that the first failure results in a <code>FALSE</code>
 return value from the entire function; if <code><i>and</i> == 0</code>, an
 <code>OR</code>ing operation is assumed, and the function will return
@@ -5819,7 +5823,7 @@ number of elements, each of <i>elt_size</i> size.<br>
 explicit match; <code>-1</code> if it is an explicit mismatch (<i>i.e.</i>
 &quot;NONE&quot;); <code>0</code> if there is no match.<br>
 <br>
-<font color=blue>NOTES</font>: this explanation is incomplete.<br>
+<font color=blue>Notes</font>: this explanation is incomplete.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#match_ip">src/dirtree.c</a><br>
@@ -6166,7 +6170,7 @@ for memory, this function will concatenate the given <code>char *</code>
 arguments into a string, each element separated by a directory separator
 character (<i>e.g.</i> <code>/</code>), to create a path.<br>
 <br>
-<font color=blue>NOTES:</font> The argument list <i>must</i> end with a
+<font color=blue>Notes:</font> The argument list <i>must</i> end with a
 <code>NULL</code>.  You have been warned.<br>
 <br>
 <font color=blue>Source File</font>:
@@ -6303,7 +6307,7 @@ character (<i>e.g.</i> <code>/</code>), to create a path.<br>
 for memory, this function will concatenate the given <code>char *</code>
 arguments into a string.<br>
 <br>
-<font color=blue>NOTES:</font>  The argument list <i>must</i> end with a
+<font color=blue>Notes:</font>  The argument list <i>must</i> end with a
 <code>NULL</code>.  You have been warned.<br>
 <br>
 <font color=blue>Source File</font>:
@@ -6751,7 +6755,7 @@ string if no token remains in the source string.<br>
 <font color=blue>Comments</font>:  Returns <code>TRUE</code> if there is
 a scheduled function waiting, <code>FALSE</code> otherwise.<br>
 <br>
-<font color=blue>NOTES:</font> This function should probably be given a more
+<font color=blue>Notes:</font> This function should probably be given a more
 descriptive name.<br>
 <br>
 <font color=blue>Source File</font>:
@@ -8577,6 +8581,10 @@ conditions must match for the current connected user for the expression to be
 true.  Returns <code>TRUE</code> if the expression evaluates thus for the
 current user, <code>FALSE</code> otherwise.<br>
 <br>
+<font color=blue>Bugs</font>: This function assumes use of
+<code>session.user</code>.  Better would be to evaluate <i>expr</i> against
+a caller-provided user name.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#user_expression">src/dirtree.c</a><br>
 
@@ -8681,6 +8689,7 @@ is truly a member of <i>set</i>.<br>
 Returns <code>1</code> if successful, <code>0</code> if the arguments are
 invalid, <code>-1</code> if there's an error (check <code>errno</code>, unused
 at this time).<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/sets.c.html#xaset_remove">src/sets.c</a><br>
 

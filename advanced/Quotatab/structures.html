@@ -1,0 +1,213 @@
+<!-- $Id$ -->
+<!-- $Source$ -->
+
+<html>
+<head>
+<title>ProFTPD Developer's Guide: mod_quotatab Structures</title>
+</head>
+
+<body bgcolor=white>
+
+<hr><br>
+<center>
+<img src="../../images/proftpd.png" border=0>
+<br><br>
+<h3><b>ProFTPD Developer's Guide: <code>mod_quotatab</code> Structure</b></h3>
+<i><b>ProFTPD Version 1.2</b></i><br>
+</center>
+<hr><br>
+
+<p>
+<center><a href="../../toc.html">Table of Contents</a></center><br>
+
+<p>
+The following data structures are all declared in <code>mod_quotatab.h</code>,
+but are provided here for ease of cross-reference.
+
+<p><a name="quota_type_t"></a>
+Quota &quot;client&quot; types:
+<pre>
+typedef enum {
+  all_quota = 10,
+  user_quota = 20,
+  group_quota = 30,
+  class_quota = 40
+} quota_type_t;
+</pre>
+
+<p><a name="quota_limit_type_t"></a>
+Quota byte limit types.  A &quot;hard&quot; limit is imposed by deleting any
+file that causes the tally to go over the configured limit.  A &quot;soft&quot;
+limit will allow that file to exist, but will not allow further uploads.
+<pre>
+typedef enum {
+  hard_limit = 1,
+  soft_limit = 2
+} quota_limit_type_t;
+</pre>
+
+<p><a name="quota_limit_t"></a>
+The quota limit structure:
+<pre>
+typedef struct {
+
+  <font color=green>/* Name refers to user, group, or class */</font>
+  char name[81];
+
+  <a href="#quota_type_t">quota_type_t</a> quota_type;
+
+  <font color=green>/* Are quotas enforced per session or not? */</font>
+  unsigned char quota_per_session;
+
+  <font color=green>/* Are byte quotas hard or soft? */</font>
+  quota_limit_type_t quota_limit_type;
+
+  <font color=green>/* Configured bytes limits. */</font>
+  double bytes_in_avail;
+  double bytes_out_avail;
+  double bytes_xfer_avail;
+
+  <font color=green>/* Configured files limits.  These have no "limit type", as they are
+   * always hard.
+   */</font>
+  unsigned long files_in_avail;
+  unsigned long files_out_avail;
+  unsigned long files_xfer_avail;
+
+} quota_limit_t;
+</pre>
+
+<p><a name="quota_tally_t"></a>
+The quota tally structure:
+<pre>
+typedef struct {
+  char name[81];
+
+  <a href="#quota_type_t">quota_type_t</a> quota_type;
+
+  <font color=green>/* Current bytes tallies. */</font>
+  double bytes_in_used;
+  double bytes_out_used;
+  double bytes_xfer_used;
+
+  <font color=green>/* Current files tallies. */</font>
+  unsigned long files_in_used;
+  unsigned long files_out_used;
+  unsigned long files_xfer_used;
+
+} quota_tally_t;
+</pre>
+
+<p><a name="quota_tabtype_t"></a>
+Quota table type (<i>i.e.</i> limit or tally):
+<pre>
+typedef enum {
+  type_limit = 100,
+  type_tally
+} quota_tabtype_t;
+</pre>
+
+<p><a name="quota_units_t"></a>
+Quota display units:
+<pre>
+typedef enum {
+  byte = 10,
+  kilo,
+  mega,
+  giga
+} quota_units_t;
+</pre>
+
+<p><a name="quota_deltas_t"></a>
+Quota deltas structure.  These are used to track the changes in tallies
+per-operation (<i>e.g.</i> for each APPE, RETR, STOR, or STOU). This structure
+is useful for some submodules (<i>e.g.</i> <code>mod_quotatab_sql</code>) that
+are more interested in the deltas, rather than in the current absolute
+tallies values.
+<pre>
+typedef struct {
+
+  <font color=green>/* Deltas of bytes tallies. */</font>
+  double bytes_in_delta;
+  double bytes_out_delta;
+  double bytes_xfer_delta;
+
+  <font color=green>/* Deltas of files tallies. */</font>
+  unsigned long files_in_delta;
+  unsigned long files_out_delta;
+  unsigned long files_xfer_delta;
+
+} quota_deltas_t;
+</pre>
+
+<p><a name="quota_table_t"></a>
+This is just an interim quota table abstraction, to be used until Confstreams
+are added to the core proftpd code.
+<pre>
+typedef struct table_obj {
+
+  <font color=green>/* Memory pool for this object. */</font>
+  pool *tab_pool;
+
+  <font color=green>/* Table type, limit or tally. */</font>
+  <a href="#quota_tabtype_t">quota_tabtype_t</a> tab_type;
+
+  <font color=green>/* Table handle */</font>
+  int tab_handle;
+
+  <font color=green>/* Table "magic" number.  Often used for the verification process. */</font>
+  unsigned long tab_magic;
+
+  <font color=green>/* Table record length */</font>
+  unsigned int tab_quotalen;
+
+  <font color=green>/* Arbitrary data pointer */</font>
+  void *tab_data;
+
+  <font color=green>/* Table I/O routines */</font>
+  int (*tab_close)(struct table_obj *);
+  int (*tab_create)(struct table_obj *);
+  unsigned char (*tab_lookup)(struct table_obj *, const char *, quota_type_t);
+  int (*tab_read)(struct table_obj *);
+  unsigned char (*tab_verify)(struct table_obj *);
+  int (*tab_write)(struct table_obj *);
+
+  <font color=green>/* Table locking routines */</font>
+  struct flock tab_lock;
+  int (*tab_rlock)(struct table_obj *);
+  int (*tab_unlock)(struct table_obj *);
+  int (*tab_wlock)(struct table_obj *);
+
+} quota_table_t;
+</pre>
+
+<p>
+The header file also defines some instances of the above structures that
+have scope for <code>mod_quotatab</code> and its submodules.  These
+structures are used as the key in-memory storage locations for quota
+information:
+<pre>
+  <a href="#quota_limit_t">quota_limit_t</a> limit;
+  <a href="#quota_tally_t">quota_tally_t</a> tally;
+  <a href="#quota_deltas_t">quota_deltas_t</a> deltas;
+</pre>
+
+<p>
+<center><a href="../../toc.html">Table of Contents</a></center><br>
+
+<hr><br>
+
+Author: <i>$Author$</i><br>
+Last Updated: <i>$Date$</i><br>
+
+<br><hr>
+
+<font size=2><b><i>
+&copy; Copyright 2000-2002 TJ Saunders<br>
+ All Rights Reserved<br>
+</i></b></font>
+
+<hr><br>
+
+</body>
+</html>

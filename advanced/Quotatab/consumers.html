@@ -1,0 +1,94 @@
+<!-- $Id$ -->
+<!-- $Source$ -->
+
+<html>
+<head>
+<title>ProFTPD Developer's Guide: Using the Quotatab Module</title>
+</head>
+
+<body bgcolor=white>
+
+<hr><br>
+<center>
+<img src="../../images/proftpd.png" border=0>
+<br><br>
+<h3><b>ProFTPD Developer's Guide: Using the Quotatab Module</b></h3>
+<i><b>ProFTPD Version 1.2</b></i><br>
+</center>
+<hr><br>
+
+<p>
+<center><a href="../../toc.html">Table of Contents</a></center><br>
+
+<p>
+Other modules may wish to obtain from and make use of the quota information,
+both of limits and current tallies, from the <code>mod_quotatab</code>
+module.  There are three main functions available for such uses, detailed
+below.  These functions are declared in <code>mod_quotatab.h</code>.
+
+<p>
+To look up a quota entry from either a limit or tally table, use the following
+function:
+<pre>
+  unsigned char quotatab_lookup(<a href="structures.html#quota_tabtype_t">quota_tabtype_t</a> <i>tab_type</i>, const char *<i>name</i>, <a href="structures.html#quota_type_t">quota_type_t</a> <i>quota_type</i>);
+</pre>
+This will search the configured table of the given type <i>tab_type</i>
+for a quota entry that matches both the given <i>name</i> and <i>quota_type</i>.
+Note, though, that it will only find the first occurrence of a matching
+entry in the table.  This means that if there is a malformed quota table, with
+duplicate name/type pairs, the duplicates will be ignored.  If
+<code>TRUE</code> returned, a match was found and the information was
+read from the table and stored into the appropriate structure (<i>i.e.</i>
+into <code>limit</i> if <i>tab_type</i> indicated a limit table, into
+<code>tally</i> if <i>tab_type</i> signalled a tally table).  Otherwise, a
+return value of <code>FALSE</code> indicates that no matching entry was
+found in the table.
+
+<p>
+For obtaining the current quota tallies for a session, use this function:
+<pre>
+  int quotatab_read(void);
+</pre>
+This function automatically reads the configured tally table for the
+quota tallies of the current client.  On success, a value of <code>0</code>
+will be returned and the requested data will be stored in the
+<code>tally</code>
+<a href="structures.html#quota_tally_t"><code>quota_tally_t</code></a>
+structure.  If an error occurred during the read, <code>-1</code> will
+be returned, with <code>errno</code> set appropriately.
+
+<p>
+For writing out the quota information currently stored in the
+<code>tally</code>
+<a href="structures.html#quota_tally_t"><code>quota_tally_t</code></a>
+structure:
+<pre>
+  int quotatab_write(double <i>bytes_in</i>, double <i>bytes_out</i>, double <i>bytes_xfer</i>,
+    unsigned long <i>files_in</i>, unsigned long <i>files_out</i>, unsigned long <i>files_xfer</i>);
+</pre>
+The parameters indicate the change in tallies due to the most recent data
+input/output command (<i>e.g.</code> APPE, RETR, STOR, or STOU).  Writes
+performed via this function are only ever done on the tally table.  It will
+return a value of <code>0</code> if the tally table was updated without
+incident, or <code>-1</code> (with <code>errno</code> set appropriately)
+if there was an error.
+
+<p>
+<center><a href="../../toc.html">Table of Contents</a></center><br>
+
+<hr><br>
+
+Author: <i>$Author$</i><br>
+Last Updated: <i>$Date$</i><br>
+
+<br><hr>
+
+<font size=2><b><i>
+&copy; Copyright 2000-2002 TJ Saunders<br>
+ All Rights Reserved<br>
+</i></b></font>
+
+<hr><br>
+
+</body>
+</html>

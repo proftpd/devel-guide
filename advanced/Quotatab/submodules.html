@@ -1,0 +1,326 @@
+<!-- $Id$ -->
+<!-- $Source$ -->
+
+<html>
+<head>
+<title>ProFTPD Developer's Guide: Writing Quotatab Submodules</title>
+</head>
+
+<body bgcolor=white>
+
+<hr><br>
+<center>
+<img src="../../images/proftpd.png" border=0>
+<br><br>
+<h3><b>ProFTPD Developer's Guide: Writing Quotatab Submodules</b></h3>
+<i><b>ProFTPD Version 1.2</b></i><br>
+</center>
+<hr><br>
+
+<p>
+<center><a href="../../toc.html">Table of Contents</a></center><br>
+
+<p>
+Writing submodules for the <code>mod_quotatab</code> module adds to the
+number of different data sources (tables) from which the module can obtain its
+quota information.  The submodule is primarily a collection of functions
+that know how to deal with that table (so that <code>mod_quotatab</code>
+does not have to), and a way of telling <code>mod_quotatab</code> to use
+those table-specific routines.
+
+<p>
+These backend routines are listed here:
+<ul>
+  <li><b>close</b><br>
+    This routine closes the table, freeing up any allocated resources.
+    It applies to both limit and tally tables.<br>
+  </li>
+  <br>
+
+  <li><b>create</b><br>
+    This routine is used to create a new quota entry, should one not exist
+    for the current client; the new entry <i>is only created in a tally
+    table</i>.  <code>mod_quotatab</code> treats a limit table as a read-only
+    object, and will never attempt to change its contents.<br>
+  </li>
+  <br>
+
+  <li><b>lookup</b><br>
+    This routine is used to lookup a quota entry for the current client
+    in both the limit and tally tables.<br>
+  </li>
+  <br>
+
+  <li><b>open</b><br>
+    This routine does the work of &quot;opening&quot; a table, allocating
+    any resources needed, preparing the table for use by
+    <code>mod_quotatab</code>.<br>
+  </li>
+  <br>
+
+  <li><b>read</b><br>
+    This routine reads the current client's quota information from the
+    tally table in use.  Limit tables are never read from using this
+    routine.<br>
+  </li>
+  <br>
+
+  <li><b>verify</b><br>
+    This routine is used to perform any table sanity-checking required,
+    and is invoked as part of the process of opening a table by
+    <code>mod_quotatab</code>.<br>
+  </li>
+  <br>
+
+  <li><b>write</b><br>
+    This routine writes the current session's quota tallies out to the
+    tally table.<br>
+  </li>
+  <br>
+
+  <li><b>rlock</b><br>
+    This routine is used to obtain read locks on both limit and tally
+    tables.  Such locks are used to insure that data does not become
+    corrupted by other processes seeking to change the tables at the
+    same time.<br>
+  </li>
+  <br>
+
+  <li><b>wlock</b><br>
+    This routine is used to obtain a write lock on the tally table (since
+    only that table will be written to).<br>
+  </li>
+  <br>
+
+  <li><b>unlock</b><br>
+    This routine releases locks, both read and write, that may have been
+    obtained on the given table, either limit or tally.<br>
+  </li>
+  <br>
+</ul>
+
+<p>
+The key function that a submodule uses to indicate its existence, and its
+willingness to handle a new table format to <code>mod_quotatab</code>, is
+the <code>quotatab_register()</code> function:
+<pre>
+int quotatab_register(const char *<i>srctype</i>,
+  <a href="structures.html#quota_table_t">quota_table_t</a> *(*<i>tab_open</i>)(pool *, quota_tabtype_t, const char *),
+  unsigned int <i>srcflags</i>);
+</pre>
+This function registers the submodule's <b>open</b> routine, associating
+it with a given string <i>srctype</i>, so that when <code>mod_quotatab</code>
+see that source type in a <code>QuotaLimitTable</code> or
+<code>QuotaTallyTable</code> configuration directive, it can invoke the
+submodule's routine.
+
+<p>
+Example <code>mod_quotatab</code> submodule code:
+<pre>
+#include "mod_quotatab.h"
+
+static int exampletab_close(<a href="structures.html#quota_table_t">quota_table_t</a> *exampletab) {
+  int res = 0;
+
+  <font color=green>/* Close/clean up after any table-used resources here.
+   */</font>
+
+  return res;
+}
+
+static int exampletab_create(<a href="structures.html#quota_table_t">quota_table_t</a> *exampletab) {
+  int res = 0;
+
+  <font color=green>/* Create a new entry in the tally table here.
+   */</font>
+
+  return res;
+}
+
+static unsigned char exampletab_lookup(<a href="structures.html#quota_table_t">quota_table_t</a> *exampletab,
+    const char *name, <a href="structures.html#quota_type_t">quota_type_t</a> quota_type) {
+  unsigned char res = FALSE;
+
+  <font color=green>/* Lookup an entry in the limit table that matches the given name and
+   * quota type here.  If found, read the data into the current limit
+   * structure and return TRUE, otherwise, return FALSE.
+   */</font>
+
+  return res;
+}
+
+static int exampletab_read(<a href="structures.html#quota_table_t">quota_table_t</a> *exampletab) {
+  int res = 0;
+
+  <font color=green>/* Read the current session's quota information from the tally table
+   * into the tally structure.  This is done before every update, so that
+   * the most current tallies are used (eg in the case of multiple users
+   * in a group, all sharing the same group quota, simultaneously logged
+   * in).  Return -1 if there was an error reading the data.
+   */</font>
+
+  return res;
+}
+
+static int exampletab_rlock(<a href="structures.html#quota_table_t">quota_table_t</a> *exampletab) {
+  int res = 0;
+
+  <font color=green>/* Obtain a read-lock on the table.  Return 0 if successful, -1 otherwise
+   * (and set errno appropriately).
+   */</font>
+
+  return res;
+}
+
+static int exampletab_unlock(<a href="structures.html#quota_table_t">quota_table_t</a> *exampletab) {
+  int res = 0;
+
+  /* Release a lock, either read- or write-lock, on the given table.  Return
+   * 0 if successful, -1 otherwise (and set errno appropriately).
+   */
+
+  return res;
+}
+
+static unsigned char exampletab_verify(<a href="structures.html#quota_table_t">quota_table_t</a> *exampletab) {
+  unsigned char res = FALSE;
+
+  <font color=green>/* After a table is opened, a verification check is done to see that
+   * that table format meets any special requirements.  Return TRUE
+   * if the table is OK, FALSE if it fails verification.
+   */</font>
+
+  return res;
+}
+
+static int exampletab_write(<a href="structures.html#quota_table_t">quota_table_t</a> *exampletab) {
+  int res = 0;
+
+  <font color=green>/* Write the current tally data from the tally structure out to the
+   * tally table.  Return -1 if there was an error writing to the table,
+   * 0 otherwise.
+   */</font>
+
+  return res;
+}
+
+static int exampletab_wlock(<a href="structures.html#quota_table_t">quota_table_t</a> *exampletab) {
+  int res = 0;
+
+  <font color=green>/* Obtain a write-lock on the table.  Return 0 if successful, -1
+   * otherwise (and set errno appropriately).
+   */</font>
+
+  return res;
+}
+
+static <a href="structures.html#quota_table_t">quota_table_t</a> *exampletab_open(pool *parent_pool,
+    <a href="structures.html#quota_tabtype_t">quota_tabtype_t</a> tab_type, const char *srcinfo) {
+
+  <a href="structures.html#quota_table_t">quota_table_t</a> *tab = NULL;
+
+  <font color=green>/* The pool pointer passed into this function will always be mod_quotatab's
+   * static module-specific pool.  Allocate a sub-pool from that pool for
+   * the new table's use.
+   */</font>
+  pool *tab_pool = make_sub_pool(parent_pool);
+
+  tab = (quota_table_t *) pcalloc(tab_pool, sizeof(<a href="structures.html#quota_table_t">quota_table_t</a>));
+  tab->tab_pool = tab_pool;
+  tab->tab_type = tab_type;
+
+  <font color=green>/* Now, perform whatever table-opening operations are necessary, depending
+   * on the table type (tab_type) being opened.  The srcinfo string
+   * given is the submodule-specific string set in the configuration
+   * file, as part of the Quota{Limit,Tally}Table directives parameters.
+   *
+   * If, for some reason, an error occurs while opening this table,
+   * set errno appropriately and return NULL to signal failure.
+   */</font>
+
+  <font color=green>/* Once done with all the prep work, make sure the table structure
+   * function pointer callbacks are filled.
+   */</font>
+
+  tab->tab_close = exampletab_close;
+  tab->tab_create = exampletab_create;
+  tab->tab_lookup = exampletab_lookup;
+  tab->tab_read = exampletab_read;
+  tab->tab_verify = exampletab_verify;
+  tab->tab_write = exampletab_write;
+
+  tab->tab_rlock = exampletab_rlock;
+  tab->tab_unlock = exampletab_unlock;
+  tab->tab_wlock = exampletab_wlock;
+
+  return tab;
+}
+
+static int exampletab_init(void) {
+
+  <font color=green>/* Initialize the quota source objects for this submodule's type
+   * ("example").  The registered type is the string that should
+   * appear as the src-type portion of the Quota{Limit,Tally}Table
+   * directives parameters (the part before the colon).
+   */</font>
+  quotatab_register("example", exampletab_open,
+    QUOTATAB_LIMIT_SRC|QUOTATAB_TALLY_SRC);
+
+  <font color=green>/* Notice how the third argument to the registration function is an
+   * OR of QUOTATAB_LIMIT_SRC and QUOTATAB_TALLY_SRC?  These flags
+   * tell mod_quotatab that this submodule can be used for both
+   * limit tables and tally tables.  If a submodule only supported
+   * one table or the other (for example, LDAP would be great at
+   * providing quota limit information, but is ill-suited for writes
+   * and thus not a good tally table format), it would use only the
+   * flag for the supported table type.
+   */</font>
+
+  return 0;
+}
+
+module quotatab_example_module = {
+  NULL, NULL,
+
+  <font color=green>/* Module API version 2.0 */</font>
+  0x20,
+
+  <font color=green>/* Module name */</font>
+  "quotatab_example",
+
+  <font color=green>/* Module configuration handler table */</font>
+  NULL,
+
+  <font color=green>/* Module command handler table */</font>
+  NULL,
+
+  <font color=green>/* Module authentication handler table */</font>
+  NULL,
+
+  <font color=green>/* Module initialization function */</font>
+  exampletab_init,
+
+  <font color=green>/* Module child initialization function */</font>
+  NULL
+};
+</pre>
+
+<p>
+<center><a href="../../toc.html">Table of Contents</a></center><br>
+
+<hr><br>
+
+Author: <i>$Author$</i><br>
+Last Updated: <i>$Date$</i><br>
+
+<br><hr>
+
+<font size=2><b><i>
+&copy; Copyright 2000-2002 TJ Saunders<br>
+ All Rights Reserved<br>
+</i></b></font>
+
+<hr><br>
+
+</body>
+</html>

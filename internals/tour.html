@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>ProFTPD Developer's Guide: Internals - Tour of a Connection</title>
+<title>ProFTPD Developer's Guide: Tour of a Connection</title>
 </head>
 
 <body bgcolor=white>
@@ -12,7 +12,7 @@
 <center>
 <img src="../images/proftpd.png">
 <br><br>
-<h3><b>ProFTPD Developer's Guide: Internals - Tour of a Connection</b></h3>
+<h3><b>ProFTPD Developer's Guide: Tour of a Connection</b></h3>
 <i><b>ProFTPD Version 1.2</b></i><br>
 </center>
 <hr><br>
@@ -46,7 +46,7 @@ cmd_loop()
 dispatch_cmd()
  - double-check command against Allow/DenyFilters
  - log command in scoreboard file via log_add_run()
- - call command handler
+ - call command handle/dispatch cycle
 end_login()
 
 <p>

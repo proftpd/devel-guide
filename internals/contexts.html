@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>ProFTPD Developer's Guide: Internals - Configuration Contexts</title>
+<title>ProFTPD Developer's Guide: Configuration Contexts</title>
 </head>
 
 <body bgcolor=white>
@@ -12,7 +12,7 @@
 <center>
 <img src="../images/proftpd.png">
 <br><br>
-<h3><b>ProFTPD Developer's Guide: Internals - Configuration Contexts</b></h3>
+<h3><b>ProFTPD Developer's Guide: Configuration Contexts</b></h3>
 <i><b>ProFTPD Version 1.2</b></i><br>
 </center>
 <hr><br>
@@ -42,7 +42,7 @@ configuration directive handler.
 <p>
 <b><code>&lt;Anonymous&gt;</code></b><br>
 The
-<a href="http://www.proftpd.net/docs/configuration.html#Anonymous">
+<a href="http://www.proftpd.org/docs/configuration.html#Anonymous">
 <code>&lt;Anonymous&gt;</code></a> section is used to set up the very common
 configuration of an anonymous FTP server.  It does a <code>chroot()</code>
 to the anonymous FTP directory by default, and turns off the requirement
@@ -70,7 +70,7 @@ the configuration directive is to be allowed in the
 <p>
 <b><code>&lt;Directory&gt;</code></b><br>
 The 
-<a href="http://www.proftpd.net/docs/configuration.html#Directory">
+<a href="http://www.proftpd.org/docs/configuration.html#Directory">
 <code>&lt;Directory&gt;</code></a> context is for configurations specific
 to directories, of course.  This includes views of the contained files
 based on the logged-in user's username or group membership or on the name
@@ -88,7 +88,7 @@ in an allowed context.
 <p>
 <b><code>&lt;Global&gt;</code></b><br>
 The description in the documentation for the
-<a href="http://www.proftpd.net/docs/configuration.html#Global">
+<a href="http://www.proftpd.org/docs/configuration.html#Global">
 <code>&lt;Global&gt;</code></a> context is good.  Another point to know is
 that if a directive is set in this context, and then the same directive is
 used in the main or <code>&lt;VirtualHost&gt;</code> contexts with different
@@ -104,7 +104,7 @@ In configuration directive handlers and context checks, this context uses the
 <p>
 <b><code>&lt;Limit&gt;</code></b><br>
 The 
-<a href="http://www.proftpd.net/docs/configuration.html#Limit">
+<a href="http://www.proftpd.org/docs/configuration.html#Limit">
 <code>&lt;Limit&gt;</code></a> context is used to place limits on who
 and how individual FTP commands, or groups of FTP commands, may be used.
 <br>
@@ -112,7 +112,7 @@ and how individual FTP commands, or groups of FTP commands, may be used.
 
 <p>
 <b><code>&lt;VirtualHost&gt;</code></b><br>
-<a href="http://www.proftpd.net/docs/configuration.html#VirtualHost">
+<a href="http://www.proftpd.org/docs/configuration.html#VirtualHost">
 <code>&lt;VirtualHost&gt;</code></a><br>
 <a href="../api/macros.html#CONF_VIRTUAL"><code>CONF_VIRTUAL</code></a>
 

@@ -29,15 +29,15 @@ does not have to), and a way of telling <code>mod_quotatab</code> to use
 those table-specific routines.
 
 <p>
-These backend routines are listed here:
+These submodule callbacks are listed here, along with the types of table
+(limit or tally) submodules the callbacks apply:
 <ul>
-  <li><b>close</b><br>
-    This routine closes the table, freeing up any allocated resources.
-    It applies to both limit and tally tables.<br>
+  <li><b>close</b>: <i>limit, tally tables</i><br>
+    This routine closes the table, freeing up any allocated resources.<br>
   </li>
   <br>
 
-  <li><b>create</b><br>
+  <li><b>create</b>: <i>tally table</i><br>
     This routine is used to create a new quota entry, should one not exist
     for the current client; the new entry <i>is only created in a tally
     table</i>.  <code>mod_quotatab</code> treats a limit table as a read-only
@@ -45,40 +45,43 @@ These backend routines are listed here:
   </li>
   <br>
 
-  <li><b>lookup</b><br>
+  <li><b>lookup</b>: <i>limit, tally tables</i><br>
     This routine is used to lookup a quota entry for the current client
     in both the limit and tally tables.<br>
   </li>
   <br>
 
-  <li><b>open</b><br>
+  <li><b>open</b>: <i>limit, tally tables</i><br>
     This routine does the work of &quot;opening&quot; a table, allocating
     any resources needed, preparing the table for use by
     <code>mod_quotatab</code>.<br>
   </li>
   <br>
 
-  <li><b>read</b><br>
+  <li><b>read</b>: <i>tally table</i><br>
     This routine reads the current client's quota information from the
     tally table in use.  Limit tables are never read from using this
     routine.<br>
   </li>
   <br>
 
-  <li><b>verify</b><br>
+  <li><b>verify</b>: <i>limit, tally tables</i><br>
     This routine is used to perform any table sanity-checking required,
     and is invoked as part of the process of opening a table by
-    <code>mod_quotatab</code>.<br>
+    <code>mod_quotatab</code>.  This callback is necessary, but most
+    submodules will probably need the callback to simply return
+    <code>TRUE</code>.  Its main purpose is to support verifying the
+    header on &quot;file&quot;-based quota tables.<br>
   </li>
   <br>
 
-  <li><b>write</b><br>
+  <li><b>write</b>: <i>tally table</i><br>
     This routine writes the current session's quota tallies out to the
     tally table.<br>
   </li>
   <br>
 
-  <li><b>rlock</b><br>
+  <li><b>rlock</b>: <i>limit, tally tables</i><br>
     This routine is used to obtain read locks on both limit and tally
     tables.  Such locks are used to insure that data do not become
     corrupted by other processes seeking to change the tables at the
@@ -86,13 +89,13 @@ These backend routines are listed here:
   </li>
   <br>
 
-  <li><b>wlock</b><br>
+  <li><b>wlock</b>: <i>tally table</i><br>
     This routine is used to obtain a write lock on the tally table (since
     only that table will be written to).<br>
   </li>
   <br>
 
-  <li><b>unlock</b><br>
+  <li><b>unlock</b>: <i>limit, tally tables</i><br>
     This routine releases locks, both read and write, that may have been
     obtained on the given table, either limit or tally.<br>
   </li>

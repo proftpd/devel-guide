@@ -125,7 +125,7 @@ Profiling the code can be considered a form of debugging, once all other
 functionality-related bugs have been fixed.  In order to compile a profile
 version of <code>proftpd</code>, you need the following:
 <pre>
-  CFLAGS=&quot;-DDEVEL_NO_DAEMON -DDEVEL_NO_FORK -g -pg -a&quot; LIBS=-pg ./configure --enable-devel ...
+  CFLAGS=&quot;-DPR_DEVEL_NO_DAEMON -DPR_DEVEL_NO_FORK -g -pg -a&quot; LIBS=-pg ./configure --enable-devel ...
 </pre>
 The resulting daemon will only handle one session, as is necessary (the
 daemonizing and <code>fork()</code> code interferes with the functioning of the

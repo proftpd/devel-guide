@@ -24,50 +24,50 @@
 <b>FS API Functions</b><br>
 
 <pre>
-  fs_rec *add_fs_rec(pool *<i>pool</i>, const char *<i>name</i>, const char *<i>path</i>);
-  fs_rec *create_fs_rec(pool *<i>pool</i>, const char *<i>name</i>);
-  fs_rec *get_fs_rec(const char *<i>path</i>, int *<i>exact</i>);
-  int insert_fs_rec(fs_rec *<i>fs</i>, const char *<i>path</i>);
-  int remove_fs_rec(const char *<i>path</i>);
+  pr_fs_t *add_fs(pool *<i>pool</i>, const char *<i>name</i>, const char *<i>path</i>);
+  pr_fs_t *create_fs(pool *<i>pool</i>, const char *<i>name</i>);
+  pr_fs_t *get_fs(const char *<i>path</i>, int *<i>exact</i>);
+  int insert_fs(pr_fs_t *<i>fs</i>, const char *<i>path</i>);
+  int remove_fs(const char *<i>path</i>);
 </pre>
 
 <p>
-The <code>add_fs_rec()</code> function is the one that FS modules should
+The <code>add_fs()</code> function is the one that FS modules should
 use primarily, for it handles the creation and registration of an
-<code>fs_rec</code> in one shot.  The <code>fs_rec *</code> returned allows
+<code>pr_fs_t</code> in one shot.  The <code>pr_fs_t *</code> returned allows
 the caller to store that pointer for other, module-specific, purposes.  The
 <i>name</i> argument is merely a descriptive label for the created
-<code>fs_rec</code>.  The <i>path</i> argument declares where the created
-<code>fs_rec</code> is to be registered in the filesystem, and is specific only 
-to the created <code>fs_rec</code>; an FS module may call
-<code>add_fs_rec()</code> multiple times for multiple paths.  Functionally,
-<code>add_fs_rec()</code> is equivalent to calling <code>create_fs_rec()</code>
-and <code>insert_fs_rec()</code>.
+<code>pr_fs_t</code>.  The <i>path</i> argument declares where the created
+<code>pr_fs_t</code> is to be registered in the filesystem, and is specific
+only to the created <code>pr_fs_t</code>; an FS module may call
+<code>add_fs()</code> multiple times for multiple paths.  Functionally,
+<code>add_fs()</code> is equivalent to calling <code>create_fs()</code>
+and <code>insert_fs()</code>.
 
 <p>
-The <code>fs_rec *</code> returned by both <code>add_fs_rec()</code> and
-<code>create_fs_rec()</code> has all of its function pointers initialized
+The <code>pr_fs_t *</code> returned by both <code>add_fs()</code> and
+<code>create_fs()</code> has all of its function pointers initialized
 to the system defaults.  To put the FS module's custom versions into effect,
 merely overwrite the appropriate function pointer.  Note that the FS access
 functions will check for <code>NULL</code> function pointers and return
 <code>EPERM</code> if need be, meaning that a given filesystem operation can
-easily be disabled by setting its <code>fs_rec</code> function pointer to
+easily be disabled by setting its <code>pr_fs_t</code> function pointer to
 <code>NULL</code>.
 
 <p>
-The <code>create_fs_rec()</code> function instantiates an <code>fs_rec</code>
-with the given <i>name</i>.  This <code>fs_rec *</code> could then be used
-multiple times, passing the same pointer to <code>insert_fs_rec()</code>
+The <code>create_fs()</code> function instantiates an <code>pr_fs_t</code>
+with the given <i>name</i>.  This <code>pr_fs_t *</code> could then be used
+multiple times, passing the same pointer to <code>insert_fs()</code>
 for multiple paths.
 
 <p>
-The <code>insert_fs_rec()</code> function inserts the given
-<code>fs_rec *</code> into a mapping of <code>fs_rec</code>s maintained by the
-FS layer.  This mapping is sorted and searched according to the given
+The <code>insert_fs()</code> function inserts the given
+<code>pr_fs_t *</code> into a mapping of <code>pr_fs_t</code>s maintained by
+the FS layer.  This mapping is sorted and searched according to the given
 <i>path</i>; it is <b>highly recommended</b> that the <code>path</code> field
-of a created <code>fs_rec</code> be left alone.  If the given <i>path</i>
+of a created <code>pr_fs_t</code> be left alone.  If the given <i>path</i>
 argument ends in a trailing slash, then that path will be treated a little
-differently than non-trailing-slash paths by <code>get_fs_rec()</code>.
+differently than non-trailing-slash paths by <code>get_fs()</code>.
 Deferred-resolution paths, <i>e.g.</i> relative paths, and &quot;~&quot; and
 &quot;.&quot; prefixed paths (but <b>not</b> &quot;..&quot; prefixed paths),
 are allowed.  They will be resolved into full paths at login time, after
@@ -75,59 +75,60 @@ successful authentication by the user.  This function will return
 <code>TRUE</code> upon successful insertion of the pointer into the map,
 <code>FALSE</code> otherwise.  At this point, the FS layer does not handle
 layering of FS modules, multiple modules that register identical paths; this
-function returns <code>FALSE</code> if there is already an <code>fs_rec</code>
+function returns <code>FALSE</code> if there is already an <code>pr_fs_t</code>
 in the map for handling the requested <i>path</i>.
 
 <p>
-The <code>get_fs_rec()</code> function serves as the <code>fs_rec</code>
-lookup/retrieval function, searching for the <code>fs_rec</code> that should
-handle the given <i>path</i>.  If the returned <code>fs_rec *</code> is
+The <code>get_fs()</code> function serves as the <code>pr_fs_t</code>
+lookup/retrieval function, searching for the <code>pr_fs_t</code> that should
+handle the given <i>path</i>.  If the returned <code>pr_fs_t *</code> is
 an <b>exact</b> match for the given <i>path</i>, meaning that there was an
-<code>fs_rec</i> in the FS layer's map whose <i>path</i> member matches
+<code>pr_fs_t</i> in the FS layer's map whose <i>path</i> member matches
 the given <i>path</i> exactly, then <code>*exact</code> will have a
-<code>TRUE</code> when <code>get_fs_rec()</code> returns.  Otherwise,
+<code>TRUE</code> when <code>get_fs()</code> returns.  Otherwise,
 <code>*exact</code> will be <code>FALSE</code>, meaning that the returned
-<code>fs_rec *</code> is a <b>best-match</b> <code>fs_rec</code> that
+<code>pr_fs_t *</code> is a <b>best-match</b> <code>pr_fs_t</code> that
 probably handles paths higher up the filesystem hierarchy from the given
 <i>path</i>.  This function <b>never</b> returns <code>NULL</code>, for there
-is <b>always</b> a root <code>fs_rec</code> to handle <code>/</code>, meaning
+is <b>always</b> a root <code>pr_fs_t</code> to handle <code>/</code>, meaning
 all paths.
 
 <p>
-When searching for an <code>fs_rec</code> to handle <i>path</i>,
-<code>get_fs_rec()</code> searches the map, starting at the root of
-<i>path</i> and looking for more path-specific <code>fs_rec</code>s.  It
-keeps tracks of <code>fs_rec</code>s for directories, as opposed to specific files, and distinguishes between them by looking for a trailing slash.  For
-example, if there was only two <code>fs_rec</code>s in the FS map, the root
-<code>fs_rec</code> and one registered to handle
+When searching for an <code>pr_fs_t</code> to handle <i>path</i>,
+<code>get_fs()</code> searches the map, starting at the root of
+<i>path</i> and looking for more path-specific <code>pr_fs_t</code>s.  It
+keeps tracks of <code>pr_fs_t</code>s for directories, as opposed to specific
+files, and distinguishes between them by looking for a trailing slash.  For
+example, if there was only two <code>pr_fs_t</code>s in the FS map, the root
+<code>pr_fs_t</code> and one registered to handle
 <pre>
   /path/to/dir
 </pre>
-and the <i>path</i> given to <code>get_fs_rec()</code> is
+and the <i>path</i> given to <code>get_fs()</code> is
 <pre>
   /path/to/dir/file1
 </pre>
-then the root <code>fs_rec</code> will be returned, as that's the best-matching
+then the root <code>pr_fs_t</code> will be returned, as that's the best-matching
 path.  <code>/path/to/dir</code> is considered to be a file, not a directory,
 by this function.  However, if instead of
 <pre>
   /path/to/dir
 </pre>
-the other <code>fs_rec</code> was registered to handle
+the other <code>pr_fs_t</code> was registered to handle
 <pre>
   /path/to/dir/
 </pre>
-then that <code>fs_rec</code> would be considered best-matching by the search
+then that <code>pr_fs_t</code> would be considered best-matching by the search
 algorithm.
 
 <p>
-Finally, the <code>remove_fs_rec()</code> function does just that - it searches
-the FS layer's map for <code>fs_rec</code>s whose paths match, removes them
+Finally, the <code>remove_fs()</code> function does just that - it searches
+the FS layer's map for <code>pr_fs_t</code>s whose paths match, removes them
 from the map, and destroys them.  It returns <code>TRUE</code> upon
-removing any matching <code>fs_rec</code>s, <code>FALSE</code> if there was
-no matching <code>fs_rec</code> in the map, if the given <i>path</i> was
+removing any matching <code>pr_fs_t</code>s, <code>FALSE</code> if there was
+no matching <code>pr_fs_t</code> in the map, if the given <i>path</i> was
 <code>NULL</code>, or if there is an attempt to remove the root
-<code>fs_rec</code>.
+<code>pr_fs_t</code>.
 
 <p>
 <b>Custom FS Functions</b><br>
@@ -136,42 +137,42 @@ adhere:
 <p>
 <i>File function prototypes</i><br>
 <pre>
-  int (*stat)(fs_rec *<i>fs</i>, const char *<i>filename</i>, struct stat *<i>sbuf</i>);
-  int (*lstat)(fs_rec *<i>fs</i>, const char *<i>filename</i>, struct stat *<i>sbuf</i>);
-  int (*rename)(fs_rec *<i>fs</i>, const char *<i>oldpath</i>, const char *<i>newpath</i>);
-  int (*unlink)(fs_rec *<i>fs</i>, const char *<i>path</i>);
-  int (*open)(fs_rec *<i>fs</i>, const char *<i>path</i>, int <i>flags</i>);
-  int (*creat)(fs_rec *<i>fs</i>, const char *<i>path</i>, mode_t <i>mode</i>);
-  int (*close)(fs_rec *<i>fs</i>, int <i>fd</i>);
-  int (*read)(fs_rec *<i>fs</i>, int <i>fd</i>, char *<i>buf</i>, size_t <i>count</i>);
-  int (*write)(fs_rec *<i>fs</i>, int <i>fd</i>, const char *<i>buf</i>, size_t <i>count</i>);
-  off_t (*lseek)(fs_rec *<i>fs</i>, int <i>fd</i>, off_t <i>offset</i>, int <i>whence</i>);
-  int (*link)(fs_rec *<i>fs</i>, const char *<i>oldpath</i>, const char *<i>newpath</i>);
-  int (*symlink)(fs_rec *<i>fs</i>, const char *<i>oldpath</i>, const char *<i>newpath</i>);
-  int (*readlink)(fs_rec *<i>fs</i>, const char *<i>path</i>, char *<i>buf</i>, size_t <i>buflen</i>);
-  int (*truncate)(fs_rec *<i>fs</i>, off_t <i>length</i>);
-  int (*chmod)(fs_rec *<i>fs</i>, const char *<i>path</i>, mode_t <i>mode</i>);
-  int (*chown)(fs_rec *<i>fs</i>, const char *<i>path</i>, uid_t <i>owner</i>, gid_t <i>group</i>);
+  int (*stat)(pr_fs_t *<i>fs</i>, const char *<i>filename</i>, struct stat *<i>sbuf</i>);
+  int (*lstat)(pr_fs_t *<i>fs</i>, const char *<i>filename</i>, struct stat *<i>sbuf</i>);
+  int (*rename)(pr_fs_t *<i>fs</i>, const char *<i>oldpath</i>, const char *<i>newpath</i>);
+  int (*unlink)(pr_fs_t *<i>fs</i>, const char *<i>path</i>);
+  int (*open)(pr_fs_t *<i>fs</i>, const char *<i>path</i>, int <i>flags</i>);
+  int (*creat)(pr_fs_t *<i>fs</i>, const char *<i>path</i>, mode_t <i>mode</i>);
+  int (*close)(pr_fs_t *<i>fs</i>, int <i>fd</i>);
+  int (*read)(pr_fs_t *<i>fs</i>, int <i>fd</i>, char *<i>buf</i>, size_t <i>count</i>);
+  int (*write)(pr_fs_t *<i>fs</i>, int <i>fd</i>, const char *<i>buf</i>, size_t <i>count</i>);
+  off_t (*lseek)(pr_fs_t *<i>fs</i>, int <i>fd</i>, off_t <i>offset</i>, int <i>whence</i>);
+  int (*link)(pr_fs_t *<i>fs</i>, const char *<i>oldpath</i>, const char *<i>newpath</i>);
+  int (*symlink)(pr_fs_t *<i>fs</i>, const char *<i>oldpath</i>, const char *<i>newpath</i>);
+  int (*readlink)(pr_fs_t *<i>fs</i>, const char *<i>path</i>, char *<i>buf</i>, size_t <i>buflen</i>);
+  int (*truncate)(pr_fs_t *<i>fs</i>, off_t <i>length</i>);
+  int (*chmod)(pr_fs_t *<i>fs</i>, const char *<i>path</i>, mode_t <i>mode</i>);
+  int (*chown)(pr_fs_t *<i>fs</i>, const char *<i>path</i>, uid_t <i>owner</i>, gid_t <i>group</i>);
 </pre>
 
 <p>
 The <code>open()</code> and <code>creat()</code> prototypes are a little
 different because, in the system version, they return and operate on file
-descriptors.  As the FS abstraction layer uses <code>fs_rec</code>s instead of
-<code>int</i>s as "file handles", these functions return <code>fs_rec</code>s,
+descriptors.  As the FS abstraction layer uses <code>pr_fs_t</code>s instead of
+<code>int</i>s as "file handles", these functions return <code>pr_fs_t</code>s,
 which must be captured by the caller for later use with the other custom FS
 functions.
 
 <p>
 <i>Directory function prototypes</i><br>
 <pre>
-  int (*chroot)(fs_rec *<i>fs</i>, const char *<i>path</i>);
-  int (*chdir)(fs_rec *<i>fs</i>, const char *<i>path</i>);
-  void *(*opendir)(fs_rec *<i>fs</i>, const char *<i>name</i>);
-  int (*closedir)(fs_rec *<i>fs</i>, void *<i>dir</i>);
-  struct dirent *(*readdir)(fs_rec *<i>fs</i>, void *<i>dir</i>);
-  int (*mkdir)(fs_rec *<i>fs</i>, const char *<i>path</i>, mode_t <i>mode</i>);
-  int (*rmdir)(fs_rec *<i>fs</i>, const char *<i>path</i>);
+  int (*chroot)(pr_fs_t *<i>fs</i>, const char *<i>path</i>);
+  int (*chdir)(pr_fs_t *<i>fs</i>, const char *<i>path</i>);
+  void *(*opendir)(pr_fs_t *<i>fs</i>, const char *<i>name</i>);
+  int (*closedir)(pr_fs_t *<i>fs</i>, void *<i>dir</i>);
+  struct dirent *(*readdir)(pr_fs_t *<i>fs</i>, void *<i>dir</i>);
+  int (*mkdir)(pr_fs_t *<i>fs</i>, const char *<i>path</i>, mode_t <i>mode</i>);
+  int (*rmdir)(pr_fs_t *<i>fs</i>, const char *<i>path</i>);
 </pre>
 
 <p>

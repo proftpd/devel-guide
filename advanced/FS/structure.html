@@ -23,66 +23,66 @@
 <p>
 <b>FS API Structures</b><br>
 At the core of it, the FS API uses and manipulates a structure called an
-<code>fs_rec</code> which has function pointers to the actual filesystem
+<code>pr_fs_t</code> which has function pointers to the actual filesystem
 functions to be used.  The FS access functions lookup the right
-<code>fs_rec</code> for the operation, and invoke the right function pointer.
+<code>pr_fs_t</code> for the operation, and invoke the right function pointer.
 Simple.
 
 <p>
-The code definining the structure of an <code>fs_rec</code> is in
+The code definining the structure of an <code>pr_fs_t</code> is in
 <a href="../../src/include/fs.h.html">include/fs.h</a>, but is included here
 for your reading pleasure:
 <pre>
 
 <font color=blue>/* Modular filesystem object */</font>
-struct pr_fs_rec_t {
+struct fs_rec {
 
   <font color=blue>/* these pointers will be effective once layered FS modules are
    * supported
    */</font>
-  fs_rec *next, *prev;
+  pr_fs_t *fs_next, *fs_prev;
 
-  <font color=blue>/* descriptive tag for this fs_rec */</font>
-  char *name;
+  <font color=blue>/* descriptive tag for this pr_fs_t */</font>
+  char *fs_name;
 
-  char *path;
+  char *fs_path;
 
   <font color=blue>/* slot for module-specific data */</font>
-  void *data;
+  void *fs_data;
 
   <font color=blue>/* pool for this object's use */</font>
-  pool *pool;
+  pool *fs_pool;
 
   <font>/* FS function pointers */</font>
-  int (*stat)(fs_rec *, const char *, struct stat *);
-  int (*lstat)(fs_rec *, const char *, struct stat *);
-  int (*rename)(fs_rec *, const char *, const char *);
-  int (*unlink)(fs_rec *, const char *);
-  int (*open)(fs_rec *, const char *, int);
-  int (*creat)(fs_rec *, const char *, mode_t);
-  int (*close)(fs_rec *, int);
-  int (*read)(fs_rec *, int, char *, size_t);
-  int (*write)(fs_rec *, int, const char *, size_t);
-  off_t (*lseek)(fs_rec *, int, off_t, int);
-  int (*link)(fs_rec *, const char *, const char *);
-  int (*symlink)(fs_rec *, const char *, const char *);
-  int (*readlink)(fs_rec *, const char *, char *, size_t);
-  int (*truncate)(fs_rec *, const char *, off_t);
-  int (*chmod)(fs_rec *, const char *, mode_t);
-  int (*chown)(fs_rec *, const char *, uid_t, gid_t);
+  int (*stat)(pr_fs_t *, const char *, struct stat *);
+  int (*lstat)(pr_fs_t *, const char *, struct stat *);
+  int (*rename)(pr_fs_t *, const char *, const char *);
+  int (*unlink)(pr_fs_t *, const char *);
+  int (*open)(pr_fs_t *, const char *, int);
+  int (*creat)(pr_fs_t *, const char *, mode_t);
+  int (*close)(pr_fs_t *, int);
+  int (*read)(pr_fs_t *, int, char *, size_t);
+  int (*write)(pr_fs_t *, int, const char *, size_t);
+  off_t (*lseek)(pr_fs_t *, int, off_t, int);
+  int (*link)(pr_fs_t *, const char *, const char *);
+  int (*symlink)(pr_fs_t *, const char *, const char *);
+  int (*readlink)(pr_fs_t *, const char *, char *, size_t);
+  int (*truncate)(pr_fs_t *, const char *, off_t);
+  int (*chmod)(pr_fs_t *, const char *, mode_t);
+  int (*chown)(pr_fs_t *, const char *, uid_t, gid_t);
 
   <font color=blue>/* for actual operations on the directory (or subdirs)
    * we cast the return from opendir to DIR* in src/fs.c, so
    * modules can use their own data type
    */</font>
 
-  int (*chdir)(fs_rec *, const char *);
-  int (*chroot)(fs_rec *, const char *);
-  void *(*opendir)(fs_rec *, const char *);
-  int (*closedir)(fs_rec *, void *);
-  struct dirent *(*readdir)(fs_rec *, void *);
-  int (*mkdir)(fs_rec *, const char *, mode_t);
-  int (*rmdir)(fs_rec *, const char *);
+  int (*chdir)(pr_fs_t *, const char *);
+  int (*chroot)(pr_fs_t *, const char *);
+  void *(*opendir)(pr_fs_t *, const char *);
+  int (*closedir)(pr_fs_t *, void *);
+  struct dirent *(*readdir)(pr_fs_t *, void *);
+  int (*mkdir)(pr_fs_t *, const char *, mode_t);
+  int (*rmdir)(pr_fs_t *, const char *);
 };
 </pre>
 
@@ -91,7 +91,7 @@ The most noteworthy points of this structure are the <code>next</code>,
 <code>prev</code> pointers (currently unused), and the <code>data</code>
 field.  The pointers are there for when layered FS modules - multiple modules
 that are register an interest in handling identical paths - are supported; at
-that point, the <code>fs_rec</code>s for that path will be maintained in a
+that point, the <code>pr_fs_t</code>s for that path will be maintained in a
 linked-list, which could then be walked for any FS operation.
 
 <p>
@@ -101,11 +101,11 @@ information, ACLs, ciphers, etc etc.
 
 <p>
 Also note that, when instantiated, a subpool is allocated from the given
-parent pool, and it is from this subpool (stored as <code>fs_rec->pool</code>)
-that the object is actually allocated.  Therefore, to destroy an
-<code>fs_rec</code>, one needs merely to call
+parent pool, and it is from this subpool (stored as
+<code>pr_fs_t->fs_pool</code>) that the object is actually allocated.
+Therefore, to destroy an <code>pr_fs_t</code>, one needs merely to call
 <a href="../../api/functions.html#destroy_pool"><code>destroy_pool()</code></a>
-on the <code>fs_rec</code>'s pool.
+on the <code>pr_fs_t</code>'s pool.
 
 <p>
 <center><a href="../../toc.html">Table of Contents</a></center><br>

@@ -24,7 +24,8 @@
 <b>Bindings API Functions</b><br>
 
 <pre>
-  int ipbind_open(server_rec *<i>server</i>, p_in_addr_t *<i>addr</i>, conn_t <i>listen_conn</i>, unsigned char <i>isdefault</i>, unsigned char <i>islocalhost</i>);
+  int ipbind_open(server_rec *<i>server</i>, p_in_addr_t *<i>addr</i>, conn_t <i>listen_conn</i>, unsigned char <i>isdefault</i>,
+    unsigned char <i>islocalhost</i>);
   int ipbind_close(p_in_addr_t *<i>addr</i>, unsigned int <i>port</i>);
   int ipbind_add_binds(server_rec *<i>server</i>);
   server_rec *ipbind_get_server(p_in_addr_t *<i>addr</i>, unsigned int <i>port</i>);
@@ -126,7 +127,7 @@ Last Updated: <i>$Date$</i><br>
 <br><hr>
 
 <font size=2><b><i>
-&copy; Copyright 2000,2001 TJ Saunders<br>
+&copy; Copyright 2000-2002 TJ Saunders<br>
  All Rights Reserved<br>
 </i></b></font>
 

@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>ProFTPD Developer's Guide: FS API Structures</title>
+<title>ProFTPD Developer's Guide: FSIO API Structures</title>
 </head>
 
 <body bgcolor=white>
@@ -12,7 +12,7 @@
 <center>
 <img src="../../images/proftpd.png" border=0>
 <br><br>
-<h3><b>ProFTPD Developer's Guide: FS API Structures</b></h3>
+<h3><b>ProFTPD Developer's Guide: FSIO API Structures</b></h3>
 <i><b>ProFTPD Version 1.2</b></i><br>
 </center>
 <hr><br>
@@ -21,23 +21,23 @@
 <center><a href="../../toc.html">Table of Contents</a></center><br>
 
 <p>
-<b>FS API Structures</b><br>
-At the core of it, the FS API uses and manipulates a structure called an
+<b>FSIO API Structures</b><br>
+At the core, the FSIO API uses and manipulates a structure called an
 <code>pr_fs_t</code>, which represents a &quot;filesystem&quot; by storing
-callback function pointers to the actual filesystem to be used.  The FS access
+callback function pointers to the actual filesystem to be used.  The FSIO access
 functions lookup the right <code>pr_fs_t</code> for the operation, and invoke
 the proper callback. Simple.
 
 <p>
 The code definining the structure of an <code>pr_fs_t</code> is in
-<a href="../../src/include/fs.h.html">include/fs.h</a>, but is included here
+<a href="../../src/include/fsio.h.html">include/fsio.h</a>, but is included here
 for your reading pleasure:
 <pre>
 
 <font color=green>/* Modular filesystem object */</font>
 struct fs_rec {
 
-  <font color=green>/* These pointers will be effective once layered FS modules are
+  <font color=green>/* These pointers will be effective once layered FSIO modules are
    * supported
    */</font>
   pr_fs_t *fs_next, *fs_prev;
@@ -53,7 +53,7 @@ struct fs_rec {
   <font color=green>/* Pool for this object's use */</font>
   pool *fs_pool;
 
-  <font>/* FS function pointers */</font>
+  <font>/* FSIO callback pointers */</font>
   int (*stat)(pr_fs_t *, const char *, struct stat *);
   int (*lstat)(pr_fs_t *, const char *, struct stat *);
   int (*rename)(pr_fs_t *, const char *, const char *);
@@ -72,7 +72,7 @@ struct fs_rec {
   int (*chown)(pr_fs_t *, const char *, uid_t, gid_t);
 
   <font color=green>/* For actual operations on the directory (or subdirs)
-   * we cast the return from opendir to DIR* in src/fs.c, so
+   * we cast the return from opendir to DIR* in src/fsio.c, so
    * modules can use their own data type
    */</font>
 
@@ -89,13 +89,13 @@ struct fs_rec {
 <p>
 The most noteworthy points of this structure are the <code>next</code>,
 <code>prev</code> pointers (currently unused), and the <code>data</code>
-field.  The pointers are there for when layered FS modules - multiple modules
+field.  The pointers are there for when layered FSIO modules - multiple modules
 that are register an interest in handling identical paths - are supported; at
 that point, the <code>pr_fs_t</code>s for that path will be maintained in a
-linked-list, which could then be walked for any FS operation.
+linked-list, which could then be walked for any FSIO operation.
 
 <p>
-The <code>data</code> is where FS modules can store and pass around
+The <code>data</code> is where FSIO modules can store and pass around
 data specific to that module, <i>e.g.</i> database handles, connection
 information, ACLs, ciphers, etc etc.
 

@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>ProFTPD Developer's Guide: Developing Custom FS Functions</title>
+<title>ProFTPD Developer's Guide: Developing Custom FSIO Functions</title>
 </head>
 
 <body bgcolor=white>
@@ -12,7 +12,7 @@
 <center>
 <img src="../../images/proftpd.png" border=0>
 <br><br>
-<h3><b>ProFTPD Developer's Guide: Developing Custom FS Functions</b></h3>
+<h3><b>ProFTPD Developer's Guide: Developing Custom FSIO Functions</b></h3>
 <i><b>ProFTPD Version 1.2</b></i><br>
 </center>
 <hr><br>
@@ -21,7 +21,7 @@
 <center><a href="../../toc.html">Table of Contents</a></center><br>
 
 <p>
-When defining your own custom implementations of these FS functions,
+When defining your own custom implementations of these FSIO functions,
 <b><i>PLEASE</i></b> use the POSIX errrors possible from the syscall/library
 versions.  Also honour the expected return values: <code>-1</code> for error,
 <code>0</code> for success.  Use <code>errno</code>.  The point, and the
@@ -35,15 +35,16 @@ a backend database, presenting a filesystem view of that database to the
 client.
 
 <p>
-When developing FS modules, debug messages showing the name of the
-<code>pr_fs_t</code> being invoked by the FS wrappers will be displayed
+When developing FSIO modules, debug messages showing the name of the
+<code>pr_fs_t</code> being invoked by the FSIO wrappers will be displayed
 using debug level 9.
 
 <p>
 If using <code>open(2)</code> in your implementation, <i>please</i> use
 the <code>PR_OPEN_MODE</code> macro (<code>0666</code>) as the third
 argument to the three-argument version of <code>open(2)</code>.  Failure to do
-so, where relevant, can be a security risk.
+so, where relevant, can be a security risk (it will also cause files to 
+have umask issues).
 
 <p>
 <center><a href="../../toc.html">Table of Contents</a></center><br>

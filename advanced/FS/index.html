@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>ProFTPD Developer's Guide: The FS API</title>
+<title>ProFTPD Developer's Guide: The FSIO API</title>
 </head>
 
 <body bgcolor=white>
@@ -12,7 +12,7 @@
 <center>
 <img src="../../images/proftpd.png" border=0>
 <br><br>
-<h3><b>ProFTPD Developer's Guide: The FS API</b></h3>
+<h3><b>ProFTPD Developer's Guide: The FSIO API</b></h3>
 <i><b>ProFTPD Version 1.2</b></i><br>
 </center>
 <hr><br>
@@ -21,7 +21,7 @@
 <center><a href="../../toc.html">Table of Contents</a></center><br>
 
 <p>
-The FS API is an abstraction layer for dealing with an underlying filesystem.
+The FSIO API is an abstraction layer for dealing with an underlying filesystem.
 Initially intended as an abstraction behind which implementations for
 Unix and Windows filesystems could be transparently used, this layer also
 allows a great deal of control of what the underlying filesystem <i>is</i>,
@@ -31,16 +31,16 @@ what it looks like to the user and how it operates.
 This layer was structured so that third-party modules could easily declare,
 or <i>register</i>, a set of custom filesystem functions and attach those
 functions at particular points in the filesystem.  To do this, there are
-five functions available for modules' use and a structure representing a
-filesystem handler or object.
+functions available for modules' use and a structure representing a filesystem
+handler or object.
 
 <p>
-The FS module developer should read the description of the
+The FSIO module developer should read the description of the
 filesystem <a href="structure.html">object</a> first, then the
 <a href="functions.html">functions</a> for working with these objects.
 There is also a <a href="development.html">development</a> document that
 contains some suggestions and notes to keep in mind when devising one's
-own FS modules.
+own FSIO modules.
 
 <p>
 <center><a href="../../toc.html">Table of Contents</a></center><br>

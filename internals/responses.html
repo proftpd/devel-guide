@@ -28,10 +28,10 @@ main ways of generating these responses, usually done from within a command
 handler.
 
 <p>
-<b>Response chains</b><br>
+<b>Response Chains</b><br>
 The first, and prefered, method of transmitting numeric-plus-text message
-responses back to clients is via the internal response chains.  Using these
-allows all handlers to add their own individual responses, which will then
+responses back to clients is via the internal <i>response chains</i>.  Using
+these allows all handlers to add their own individual responses, which will then
 all be sent <i>en masse</i> after the command successfully completes, or fails.
 
 <p>
@@ -100,9 +100,11 @@ See <a href="../src/include/ftp.h.html#R_110">include/ftp.h</a> for the full
 listing of response numerics.
 
 <p>
-The second way, a direct response method, is incompatible with other handlers,
-and should be used only if the handler is about to terminate the current
-connection, and thus kill the <code>fork()</code>ed child server, usually via
+<b>Direct Response</b><br>
+The second way, a <i>direct response</i> method, is incompatible with other
+handlers, and should be used only if the handler is about to terminate the
+current connection, and thus kill the <code>fork()</code>ed child server,
+usually via
 <a href="../api/functions.html#end_login"><code>end_login()</code></a>.
 This method must use one of the functions listed below, for the
 &quot;normal&quot; response chains will never be processed by the core

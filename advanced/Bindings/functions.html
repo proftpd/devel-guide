@@ -24,23 +24,23 @@
 <b>Bindings API Functions</b><br>
 
 <pre>
-  int ipbind_open(server_rec *<i>server</i>, p_in_addr_t *<i>addr</i>, conn_t <i>listen_conn</i>, unsigned char <i>isdefault</i>,
+  int pr_ipbind_open(server_rec *<i>server</i>, p_in_addr_t *<i>addr</i>, conn_t <i>listen_conn</i>, unsigned char <i>isdefault</i>,
     unsigned char <i>islocalhost</i>);
-  int ipbind_close(p_in_addr_t *<i>addr</i>, unsigned int <i>port</i>);
-  int ipbind_add_binds(server_rec *<i>server</i>);
-  server_rec *ipbind_get_server(p_in_addr_t *<i>addr</i>, unsigned int <i>port</i>);
-  ipbind_rec *find_ipbind(p_in_addr_t *<i>addr</i>, unsigned int <i>port</i>);
-  int ipbind_listen(fd_set *<i>readfds</i>);
-  conn_t *ipbind_accept_conn(fd_set *<i>readfds</i>, int *<i>listenfd</i>);
-  int namebind_open(server_rec *<i>server</i>, const char *<i>name</i>, p_in_addr_t *<i>addr</i>, unsigned int <i>port</i>); 
-  int namebind_close(const char *<i>name</i>, p_in_addr_t *<i>addr</i>, unsigned int <i>port</i>);
-  server_rec *namebind_get_server(const char *<i>name</i>, p_in_addr_t *<i>addr</i>, unsigned int <i>port</i>);
-  namebind_rec *find_namebind(const char *<i>name</i>, p_in_addr_t *<i>addr</i>, unsigned int <i>port</i>);
+  int pr_ipbind_close(p_in_addr_t *<i>addr</i>, unsigned int <i>port</i>);
+  int pr_ipbind_add_binds(server_rec *<i>server</i>);
+  server_rec *pr_ipbind_get_server(p_in_addr_t *<i>addr</i>, unsigned int <i>port</i>);
+  pr_ipbind_t *pr_find_ipbind(p_in_addr_t *<i>addr</i>, unsigned int <i>port</i>);
+  int pr_ipbind_listen(fd_set *<i>readfds</i>);
+  conn_t *pr_ipbind_accept_conn(fd_set *<i>readfds</i>, int *<i>listenfd</i>);
+  int pr_namebind_open(server_rec *<i>server</i>, const char *<i>name</i>, p_in_addr_t *<i>addr</i>, unsigned int <i>port</i>); 
+  int pr_namebind_close(const char *<i>name</i>, p_in_addr_t *<i>addr</i>, unsigned int <i>port</i>);
+  server_rec *pr_namebind_get_server(const char *<i>name</i>, p_in_addr_t *<i>addr</i>, unsigned int <i>port</i>);
+  pr_namebind_t *pr_find_namebind(const char *<i>name</i>, p_in_addr_t *<i>addr</i>, unsigned int <i>port</i>);
 </pre>
 
 <p>
-The <code>ipbind_open()</code> function creates a new IP-based binding for the
-server given, using the provided information.  The <i>isdefault</i> Boolean
+The <code>pr_ipbind_open()</code> function creates a new IP-based binding for
+the server given, using the provided information.  The <i>isdefault</i> Boolean
 argument signals whether the given server is the default server, as per the
 <code>DefaultServer</code> configuration directive.  The <i>islocalhost</i>
 Boolean argument signals whether the given server is for the local machine.
@@ -49,72 +49,72 @@ Bindings layer.  This function returns <code>0</code> on success,
 <code>-1</code> on failure.
 
 <p>
-The <code>ipbind_close()</code> function closes all bindings associated with
+The <code>pr_ipbind_close()</code> function closes all bindings associated with
 the given IP address/port combination.  The bindings are then marked as
-inactive so that future lookups via <code>find_ipbind()</code> skips these
+inactive so that future lookups via <code>pr_find_ipbind()</code> skips these
 bindings.  Returns <code>0</code> on success, <code>-1</code> on failure
 (<i>e.g.</i> there were no bindings for that address/port found).
 
 <p>
-The <code>ipbind_add_binds()</code> function searches through <i>server</i>'s
+The <code>pr_ipbind_add_binds()</code> function searches through <i>server</i>'s
 configuration records, and for each <code>Bind</code> directive found, creates
-an additional <code>ipbind_rec</code> for the configured <code>Bind</code>
+an additional <code>pr_ipbind_t</code> for the configured <code>Bind</code>
 address.  The <code>SocketBindTight</code> directive is honoured, if present.
 Returns <code>0</code> on success, <code>-1</code> on failure (<i>e.g.</i>
 <code><i>server</i> == NULL</code>, for example).
 
 <p>
-The <code>ipbind_get_server()</code> function searchs the list of bindings
+The <code>pr_ipbind_get_server()</code> function searchs the list of bindings
 maintained by the Bindings layer, and returns the <code>server_rec *</code>
 that is bound to the given IP address/port combination.  Returns
 <code>NULL</code> if no binding was found for that address/port.
 
 <p>
-The <code>find_ipbind()</code> function searchs the list of bindings maintained
-by the Bindings layer, and returns a pointer to the <code>ipbind_rec</code>
-associated with the given address and port.  Returns <code>NULL</code> if
-no matching <code>ipbind_rec</code> was found.
+The <code>pr_find_ipbind()</code> function searchs the list of bindings
+maintained by the Bindings layer, and returns a pointer to the
+<code>pr_ipbind_t</code> associated with the given address and port.  Returns
+<code>NULL</code> if no matching <code>pr_ipbind_t</code> was found.
 
 <p>
-The <code>ipbind_listen()</code> function causes the server to
+The <code>pr_ipbind_listen()</code> function causes the server to
 <code>listen()</code> on each file descriptor in <i>readfds</i>, and returns
 the relevant file descriptor when a connection request has arrived.  Returns
 <code>-1</code> on error, such as when the <code>fd_set</code> argument is
 <code>NULL</code>.
 
 <p>
-The <code>ipbind_accept_conn()</code> function uses a file descriptor
+The <code>pr_ipbind_accept_conn()</code> function uses a file descriptor
 returned by <code>select()</code>, <code>accept()</code>s it, and returns
 a pointer to the <code>conn_t</code> from the binding associated with that
 file descriptor.  Returns the <code>conn_t *</code> if successful,
 <code>NULL</code> if not found or if the arguments were <code>NULL</code>.
 
 <p>
-The <code>namebind_open()</code> function opens a <code>namebind_rec</code>,
-similar to an <code>ipbind_rec</code>, which associates the given <i>name</i>
+The <code>pr_namebind_open()</code> function opens a <code>pr_namebind_t</code>,
+similar to an <code>pr_ipbind_t</code>, which associates the given <i>name</i>
 (usually a DNS hostname) to the <i>server</i>.  The <i>addr</i> and <i>port</i>
-specified are used to associate this <code>namebind_rec</code> with an IP
+specified are used to associate this <code>pr_namebind_t</code> with an IP
 address, to which the DNS hostname should resolve.
 
 <p>
-The <code>namebind_close()</code> function marks the <code>namebind_rec</code>
-with the given <i>name</i>, <i>addr</i>, and <i>port</i> as inactive, so
-that future lookups of <code>namebind_rec</code>s via
-<code>find_namebind()</code> passes over it.  Returns <code>0</code> on
+The <code>pr_namebind_close()</code> function marks the
+<code>pr_namebind_t</code> with the given <i>name</i>, <i>addr</i>, and
+<i>port</i> as inactive, so that future lookups of <code>pr_namebind_t</code>s
+via <code>pr_find_namebind()</code> passes over it.  Returns <code>0</code> on
 success or <code>-1</code> on failure, such as when there was no matching
-<code>namebind_rec</code> found.
+<code>pr_namebind_t</code> found.
 
 <p>
-The <code>namebind_get_server()</code> function searches the list of bindings
+The <code>pr_namebind_get_server()</code> function searches the list of bindings
 maintained by the Bindings layer, and returns the <code>server_rec *</code>
 associated with the given <i>name</i>, <i>addr</i>, and <i>port</i>.  If none
 are found, <code>NULL</code> will be returned.
 
 <p>
-The <code>find_namebind()</code> function searches the list of bindings
+The <code>pr_find_namebind()</code> function searches the list of bindings
 maintained by the Bindings layer, and returns a pointer to the
-<code>namebind_rec</code> for the given name, address, and port.  Returns
-<code>NULL</code> if no matching <code>namebind_rec</code> is found.
+<code>pr_namebind_t</code> for the given name, address, and port.  Returns
+<code>NULL</code> if no matching <code>pr_namebind_t</code> is found.
 
 <p>
 <center><a href="../../toc.html">Table of Contents</a></center><br>

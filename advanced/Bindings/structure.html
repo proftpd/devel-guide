@@ -23,7 +23,7 @@
 <p>
 <b>Bindings API Structures</b><br>
 The Bindings API uses and manipulates two similar structures, called
-<code>ipbind_rec</code> and <code>namebind_rec</code>, respectively.
+<code>pr_ipbind_t</code> and <code>pr_namebind_t</code>, respectively.
 
 <p>
 The code definining the structures of these objects is in
@@ -32,44 +32,44 @@ included here for your reading pleasure:
 <pre>
 
 <font color=blue>/* Structure associating an IP address to a server_rec */</font>
-typedef struct ipbind_t {
-  struct ipbind_t *next;
+typedef struct ipbind_rec {
+  struct ipbind_rec *ib_next;
 
   <font color=blue>/* IP address to which this binding is &quot;bound&quot; */</font>
-  p_in_addr_t addr;
-  unsigned int port;
+  p_in_addr_t ib_addr;
+  unsigned int ib_port;
 
   <font color=blue>/* default server to handle requests to this binding.  If namebinds are
    * present, they will be checked before using this server
    */</font>
-  server_rec *server;
+  server_rec *ib_server;
 
   <font color=blue>/* List of name-based servers bound to the above IP address.  Note that
    * if this functionality becomes widely adopted and used, a more efficient
    * search-and-lookup mechanism will be needed, for performance reasons.
    */</font>
-  array_header *namebinds;
+  array_header *ib_namebinds;
 
   <font color=blue>/* listen connection, if separate from the main socket */</font>
-  conn_t *listen;
+  conn_t *ib_listen;
 
   <font color=blue>/* if this binding is the DefaultServer binding */</font>
-  unsigned char isdefault;
+  unsigned char ib_isdefault;
 
   <font color=blue>/* if this binding handles localhost requests */</font>
-  unsigned char islocalhost;
+  unsigned char ib_islocalhost;
 
   <font color=blue>/* if this binding is active */</font>
-  unsigned char isactive;
+  unsigned char ib_isactive;
 
-} ipbind_rec;
+} pr_ipbind_t;
 
 <font color=blue>/* Structure associating a name to a server_rec */</font>
-typedef struct namebind_t {
-  server_rec *server;
-  const char *name;
-  unsigned char isactive;
-} namebind_rec;
+typedef struct namebind_rec {
+  server_rec *nb_server;
+  const char *nb_name;
+  unsigned char nb_isactive;
+} pr_namebind_t;
 </pre>
 
 <p>

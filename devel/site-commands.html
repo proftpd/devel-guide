@@ -127,6 +127,12 @@ MODRET site_time(cmd_rec *cmd) {
 }
 </pre>
 
+The only remaining task is to register this command handler by adding
+an appropriate entry to the module's <code>cmdtable</code>:
+<pre>
+  { CMD, C_SITE, G_NONE, site_time, FALSE, FALSE },
+</pre>
+
 Simple.  The key points to keep in mind are: use the correct response codes
 as appropriate, provide support for the <code>SITE HELP</code> command
 as well as for the custom functionality, require authentication as necessary,

@@ -13,7 +13,7 @@
 <img src="../images/proftpd.png">
 <br><br>
 <h3><b>ProFTPD Developer's Guide: API - Functions</b></h3>
-<i><b>ProFTPD Version 1.2.0</b></i><br>
+<i><b>ProFTPD Version 1.2</b></i><br>
 </center>
 
 <hr>
@@ -563,6 +563,12 @@ the modules' symbol tables.<br>
 
 <hr>
 <a name="_hash_insert"><b>_hash_insert</b><br>
+<br>
+<font color=blue>Comments</font>: Inserts the given <i>sym</i> into the
+<code>xaset_t</code> symtable array, which is static to modules.c.  The
+<code><a href="#_compare_sym">_compare_sym()</a></code> function is used
+as the comparison function for the items in the symtable <code>xaset</code>.
+This function returns the index at which <i>sym</i> was inserted.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -2637,6 +2643,21 @@ elements of <code>array_header</code> <i>arr</i>, using the resources of
   <a href="../src/src/pool.c.html#copy_array_hdr">src/pool.c</a><br>
 
 <hr>
+<a name="copy_arrray_str"><b>copy_array_str</b><br>
+<br>
+<font color=blue>Comments</font>: Returns a pointer to an
+<code>array_header</code> which contains duplicate elements (<i>i.e.</i>
+strings) of the original elements of <code>array_header</code> <i>arr</i>,
+allocated from the resources of <code>pool</code> <i>p</i>.<br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+  array_header *copy_arra_str(pool *p, const array_header *arr)
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/poo.c.html#copy_array_str">src/pool.c</a><br>
+
+<hr>
 <a name="core_chmod"><b>core_chmod</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -3563,6 +3584,11 @@ Alarms <b>must</b> be blocked before calling this function.<br>
 
 <hr>
 <a name="fs_dircat"><b>fs_dircat</b><br>
+<br>
+<font color=blue>Comments</font>:  Concatenates <i>dir1</i> and <i>dir2</i>,
+and places the results in <i>buf</i>, where <i>len</i> indicates the size
+of <i>buf</i>.  If the concatenated path would be longer than
+<code>MAXPATHLEN</code>, then <i>buf</i> will default to &quot;/&quot;.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
@@ -8426,7 +8452,7 @@ the first duplicate.  If the set is not empty and not presorted, results
 are undefined.<br>
 <br>
 Returns <code>1</code> if successful, <code>0</code> if there are bad
-arguments or it's a duplicate member, <code>-1</code> if there's an error
+arguments or if it is a duplicate member, <code>-1</code> if there is an error
 (not used, but an applicable error would be <code>errno</code>).<br>
 <br>
 <font color=blue>Declaration</font>:<br>

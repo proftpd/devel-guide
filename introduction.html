@@ -13,7 +13,7 @@
 <img src="images/proftpd.png">
 <br><br>
 <h3><b>ProFTPD Developer's Guide: Introduction</b></h3>
-<i><b>ProFTPD Version 1.2.0</b></i><br>
+<i><b>ProFTPD Version 1.2</b></i><br>
 </center>
 <hr><br>
 
@@ -44,29 +44,29 @@ Here's an outline, to give you some bare idea of what's
 coming up, and in what order:
 
 <ul>
-	<li><a href="#Basics">Basic concepts.</a>
-	<menu>
-		<li><a href="#HMC">Handlers, Modules, and Commands</a>
-		<li><a href="#ModuleTour">A brief tour of a module</a>
-	</menu>
+  <li><a href="#Basics">Basic concepts.</a>
+  <menu>
+    <li><a href="#HMC">Handlers, Modules, and Commands</a>
+    <li><a href="#ModuleTour">A brief tour of a module</a>
+  </menu>
 
-	<li><a href="#Handlers">How handlers work</a>
-	<menu>
-		<li><a href="#CommandTour">A brief tour of the <code>cmd_rec</code></a>
-		<li><a href="#CommandOrigin">Where <code>cmd_rec</code> structures come
-				from</a>
-		<li><a href="#CommandReturn">Handling commands, declining, and returning
-				error codes</a>
-		<li><a href="#ResponseHandlers">Special considerations for response handlers
-				</a>
-		<li><a href="#AuthHandlers">Special considerations for authentication
-				handlers</a>
-		<li><a href="#LogHandlers">Special considerations for logging handlers</a>
-	</menu>
+  <li><a href="#Handlers">How handlers work</a>
+  <menu>
+    <li><a href="#CommandTour">A brief tour of the <code>cmd_rec</code></a>
+    <li><a href="#CommandOrigin">Where <code>cmd_rec</code> structures come
+        from</a>
+    <li><a href="#CommandReturn">Handling commands, declining, and returning
+        error codes</a>
+    <li><a href="#ResponseHandlers">Special considerations for response handlers
+        </a>
+    <li><a href="#AuthHandlers">Special considerations for authentication
+        handlers</a>
+    <li><a href="#LogHandlers">Special considerations for logging handlers</a>
+  </menu>
 
-	<li><a href="#Pools">Resource allocation and resource pools</a>
+  <li><a href="#Pools">Resource allocation and resource pools</a>
 
-	<li><a href="#Configuration">Configuration directives and the like</a>
+  <li><a href="#Configuration">Configuration directives and the like</a>
 </ul>
 
 <br><hr>
@@ -77,10 +77,10 @@ ProFTPD breaks down command handling into a series of simple steps, similar to
 the way the Apache API breaks down request handling.  These are:
 
 <ul>
-	<li>Preprocess the command
-	<li>Process the command
-	<li>Postprocess the command
-	<li>Log the command
+  <li>Preprocess the command
+  <li>Process the command
+  <li>Postprocess the command
+  <li>Log the command
 </ul>
 
 These phases are handled by looking at each of a succession of
@@ -89,13 +89,13 @@ phase, and attempting invoking it if so.  The handler can typically do
 one of three things:
 
 <ul>
-	<li><em>Handle</em> the command, and indicate to the processing engine
-			that it should consider the command completed, and continue its
-			processing.
-	<li><em>Decline</em> to handle the command, and indicate to the processing
-			engine that it should act as if the handler waas never called, and to
-			continue its procesing.
-	<li>Signal an <em>error</em>, by returning one of the FTP error codes.
+  <li><em>Handle</em> the command, and indicate to the processing engine
+      that it should consider the command completed, and continue its
+      processing.
+  <li><em>Decline</em> to handle the command, and indicate to the processing
+      engine that it should act as if the handler waas never called, and to
+      continue its procesing.
+  <li>Signal an <em>error</em>, by returning one of the FTP error codes.
        This terminates normal handling of the request; the command
        may be logged.
 </ul>
@@ -215,7 +215,7 @@ which contains per (virtual) server configuration data.
 <code>cmd_rec</code> struct.
 
 <h3><a name="CommandOrigin">Where <code>cmd_rec</code> structures come
-	from</a></h3>
+  from</a></h3>
 
 <p>
 Most <code>cmd_rec</code> structures are built by when the processing
@@ -234,12 +234,12 @@ indicate what happened.  That can be one of:
 
 <ul>
   <li><code>HANDLED</code> -- the command was handled successfully.  This may
-			or may not terminate the phase.
+      or may not terminate the phase.
   <li><code>DECLINED</code> -- no erroneous condition exists, but the module
-			declines to handle the phase; the server tries to find another.
+      declines to handle the phase; the server tries to find another.
   <li><code>ERROR</code>, <code>ERROR_INT</code>, <code>ERROR_MSG</code> -- an
-			error has occurred while processing the command, which aborts its
-			handling.
+      error has occurred while processing the command, which aborts its
+      handling.
 </ul>
 
 <h3><a name="ResponseHandlers">Special considerations for command
@@ -271,10 +271,10 @@ ProFTPD's response chain mechanisms.
 Stuff that should be discussed here:
 
 <ul>
-	<li>authentication commands of USER, PASS (RFC2228 AUTH, ADAT)
-	<li>authtab and specific authentication handlers (mod_unixpw and mod_lap
-		examples)
-	<li>relevant FTP error response codes
+  <li>authentication commands of USER, PASS (RFC2228 AUTH, ADAT)
+  <li>authtab and specific authentication handlers (mod_unixpw and mod_lap
+    examples)
+  <li>relevant FTP error response codes
 </ul>
 
 <h3><a name="LogHandlers">Special considerations for logging handlers</a></h3>
@@ -283,8 +283,8 @@ Stuff that should be discussed here:
 Stuff that should be discussed here:
 
 <ul>
-	<li>LOG_CMD, LOG_CMD_ERR
-	<li>mod_log, mod_xfer, mod_sample's log_cmd()
+  <li>LOG_CMD, LOG_CMD_ERR
+  <li>mod_log, mod_xfer, mod_sample's log_cmd()
 </ul>
 <br>
 
@@ -529,8 +529,8 @@ The entries in these tables are:
 <ul>
   <li>the name of the configuration directive
   <li>the function which handles it
-	<li>a pointer which is set to the &quot;owning&quot; module when the
-			 module code is compiled; should always be set to <code>NULL</code>.
+  <li>a pointer which is set to the &quot;owning&quot; module when the
+       module code is compiled; should always be set to <code>NULL</code>.
 </ul>
 
 <p>

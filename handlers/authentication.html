@@ -1,0 +1,195 @@
+<!-- $Id$ -->
+<!-- $Source$ -->
+
+<html>
+<head>
+<title>ProFTPD Developer's Guide: Authentication Handlers</title>
+</head>
+
+<body bgcolor=white>
+
+<hr><br>
+<center>
+<img src="../images/proftpd.png">
+<br><br>
+<h3><b>ProFTPD Developer's Guide: Authentication Handlers</b></h3>
+<i><b>ProFTPD Version 1.2.0</b></i><br>
+</center>
+<hr><br>
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+<p>
+<b>Authentication Handlers</b><br>
+Authentication handlers allow a module to provide (or overload)
+authentication, UID/GID-to-name and name-to-UID/GID mappings.
+
+<p>
+In order for a module to provide this functionality, it must export an
+<code>authtable</code> (via the module structure), and define one or more of the
+following handler <i>names</i> (authtable.name).
+
+<p>
+Each handler accepts data via the <code>cmd</code> structure and should return
+its data via the <code>MODRET->data</code> field.  The core function
+<code>mod_create_data()</code> can create this data structure properly for
+return to the caller.
+
+<p>
+Defined <code>authtable</code> names are:
+<ul>
+  <li><b><code>setpwent</code></b><br>
+      low-level emulation of <code>setpwent(3)</code> function.  Called by
+      src/auth.c's <code>auth_setpwent()</code> function.<br>
+  </li>
+  <br>
+
+  <li><b><code>setgrent</code></b><br>
+      low-level emulation of <code>setgrent(3)</code> function.  Called by
+      src/auth.c's <code>auth_setgrent()</code> function.<br>
+  </li>
+  <br>
+
+  <li><b><code>endpwent</code></b><br>
+      low-level emulation of <code>endpwent(3)</code> function.  Called by
+      src/auth.c's <code>auth_endpwent()</code> function.<br>
+  </li>
+  <br>
+
+  <li><b><code>endgrent</code></b><br>
+      low-level emulation of <code>endgrent(3)</code> function.  Called by
+      src/auth.c's <code>auth_endgrent()</code> function.<br>
+  </li>
+  <br>
+
+  <li><b><code>getpwent</code></b><br>
+      low-level emulation of <code>getpwent(3)</code> function.  Called by
+      src/auth.c's <code>auth_getpwent()</code> function.<br>
+  </li>
+  <br>
+
+  <li><b><code>getgrent</code></b><br>
+      low-level emulation of <code>getgrent(3)</code> function.  Called by
+      src/auth.c's <code>auth_getgrent()</code> function.<br>
+  </li>
+  <br>
+
+  <li><b><code>getpwnam</code></b><br>
+      low-level emulation of <code>getpwnam(3)</code> function.  Called by
+      src/auth.c's <code>auth_getpwnam()</code> function.<br>
+  </li>
+  <br>
+
+  <li><b><code>getgrnam</code></b><br>
+      low-level emulation of <code>getgrnam(3)</code> function.  Called by
+      src/auth.c's <code>auth_getgrnam()</code> function.<br>
+  </li>
+  <br>
+
+  <li><b><code>getpwuid</code></b><br>
+      low-level emulation of <code>getpwuid(3)</code> function.  Called by
+      src/auth.c's <code>auth_getpwuid()</code> function.<br>
+  </li>
+  <br>
+
+  <li><b><code>getgrgid</code></b><br>
+      low-level emulation of <code>getgrgid(3)</code> function.  Called by
+      src/auth.c's <code>auth_getgrid()</code> function.<br>
+  </li>
+  <br>
+
+  <li><b><code>auth</code></b><br>
+      authenticate user.  Called by src/auth.c's
+      <code>auth_authenticate()</code> function.<br>
+      <code>cmd->argv[0]</code> = user<br>
+      <code>cmd->argv[1]</code> = cleartext password<br>
+  </li>
+  <br>
+
+  <li><b><code>check</code></b><br>
+      compare supplied passwords.  Called by src/auth.c's
+      <code>auth_check()</code> function.<br>
+      <code>cmd->argv[0]</code> = hashed password<br>
+      <code>cmd->argv[1]</code> = user<br>
+      <code>cmd->argv[2]</code> = cleartext password<br>
+  </li>
+  <br>
+
+  <li><b><code>uid_name</code></b><br>
+      map UID to name.  Called by src/auth.c's
+      <code>auth_uid_name()</code> function.<br>
+      <code>cmd->argv[0] = (char *) uid</code><br>
+  </li>
+  <br>
+
+  <li><b><code>gid_name</code></b><br>
+      map GID to group.  Called by src/auth.c's
+      <code>auth_gid_name()</code> function.<br>
+      <code>cmd->argv[0] = (char *) gid</code><br>
+  </li>
+  <br>
+
+  <li><b><code>name_uid</code></b><br>
+      map name to UID.  Called by src/auth.c's
+      <code>auth_name_uid()</code> function.<br>
+      <code>cmd->argv[0] = name</code><br>
+  </li>
+  <br>
+
+  <li><b><code>name_gid</code></b><br>
+      map group to GID.  Called by src/auth.c's
+      <code>auth_name_gid()</code> function.<br>
+      <code>cmd->argv[0] = name</code><br>
+  </li>
+</ul>
+
+<p>
+The cascaded order of authentication handlers is similar to that of command
+handlers, although slightly different:
+<ol>
+  <li>If an authentication handler returns <code>DECLINED</code>, handlers in
+      other modules are called in priority load order, just as with command
+      handlers.  If <i>all</i> handlers for a particular function return
+      <code>DECLINED</code>, ProFTPD will assume that the operation failed.<br>
+  </li>
+  <br>
+
+  <li>If an authentication handler returns <code>HANDLED</code>, ProFTPD assumes
+      that the operation completed successfully, and will stop calling
+      auth handlers.  Most auth handlers <i>must</i> return data if they
+      complete successfully (note that some void-style handlers do not have
+      this requirement; <i>ie</i> <code>setpwent</code> and friends).<br>
+  </li>
+  <br>
+
+  <li>If an authentication handler returns <code>ERROR</code>, ProFTPD assumes
+      an error has occured and discontinues calling other handlers.  Some
+      functions (<code>auth</code>, for example), should use the
+      <code>ERROR_INT</code> macro to return a numeric error code (one of the
+      <code>AUTH_</code>* macros in
+      <a href="../src/include/modules.h.html#AUTH_NOPWD">
+      include/modules.h</a>) indicating the reason for failure.<br>
+  </li>
+  <br>
+</ol>
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+<hr><br>
+
+Author: <i>$Author$</i><br>
+Last Updated: <i>$Date$</i><br>
+
+<br><hr>
+
+<font size=2><b><i>
+&copy; Copyright 2000 TJ Saunders<br>
+ All Rights Reserved<br>
+</i></b></font>
+
+<hr><br>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!-- $Id$ -->
+<!-- $Source$ -->
+
+<html>
+<head>
+<title>ProFTPD Developer's Guide: Configuration Handlers</title>
+</head>
+
+<body bgcolor=white>
+
+<hr><br>
+<center>
+<img src="../images/proftpd.png">
+<br><br>
+<h3><b>ProFTPD Developer's Guide: Configuration Handlers</b></h3>
+<i><b>ProFTPD Version 1.2.0</b></i><br>
+</center>
+<hr><br>
+
+<p>
+<center><a hover=none href="../toc.html">Table of Contents</a></center><br>
+
+<p>
+<b>Configuration Handlers</b><br>
+The typical configuration directive handler does three things.  First, it
+checks to make sure that the requirements for using the configuration directive
+are met, such as number and types of arguments, and context in which the
+directive appears.  Next, the typical handler, depending on its complexity,
+will allocate any necessary resources and perform any needed computations on
+the directive arguments.  Last, a configuration record will be set, 
+  1. contexts, context merging (see include/dirtree.h) w/ examples
+     (see doc/mod_sample.c:
+<pre>
+  /* By adding the CF_MERGEDOWN flag to the parameter we just created
+   * we are telling ProFTPD that this parameter should be copied and
+   * "merged" into all "lower" contexts until it either hits a
+   * parameter w/ the same name or bottoms out.
+   *
+   * Example _without_ CF_MERGEDOWN:
+   *
+   * <VirtualHost>
+   *      |----------\
+   *             <Anonymous>
+   *                 | - FooBarDirective  <------- Config places it here
+   *                 |-----------\
+   *                         <Directory>  <------- Doesn't apply here
+   *                             |-------------\
+   *                                        <Limit> <--- Or here.....
+   *
+   * Now, if we specify CF_MERGDOWN, the tree ends up looking like:
+   *
+   * <VirtualHost>
+   *      |----------\
+   *             <Anonymous>
+   *                 | - FooBarDirective  <------- Config places it here
+   *                 |-----------\
+   *                         <Directory>  <------- Now, it DOES apply here
+   *                             | - FooBarDirective
+   *                             |-------------\
+   *                                        <Limit> <-------- And here ...
+   *                                           | - FooBarDirective
+   *
+   */
+
+  c->flags |= CF_MERGEDOWN;
+</pre>
+     )
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+<hr><br>
+
+Author: <i>$Author$</i><br>
+Last Updated: <i>$Date$</i><br>
+
+<br><hr>
+
+<font size=2><b><i>
+&copy; Copyright 2000 TJ Saunders<br>
+ All Rights Reserved<br>
+</i></b></font>
+
+<hr><br>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!-- $Id$ -->
+<!-- $Source$ -->
+
+<html>
+<head>
+<title>ProFTPD Developer's Guide: Internals - Tour of a Connection</title>
+</head>
+
+<body bgcolor=white>
+
+<hr><br>
+<center>
+<img src="../images/proftpd.png">
+<br><br>
+<h3><b>ProFTPD Developer's Guide: Internals - Tour of a Connection</b></h3>
+<i><b>ProFTPD Version 1.2.0</b></i><br>
+</center>
+<hr><br>
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+<p>
+<b>Tour of a Connection</b><br>
+server starts up
+server_loop()
+fork_server()
+ - block SIGTERM, SIGCHLD, SIGUSR1, SIGUSR2 while it's forking
+ - parent closes the socket fd, adds the child to its maintained list of
+   children, then unblocks the signals
+ - child unblocks signals, registers handlers for SIGUSR1, SIGUSR2.  Returns
+   default handler to SIGCHLD, ignores SIGHUP (good!)
+ - do reverse DNS lookups (twice?), set socket options
+ - find the server for this connection, deallocate all other servers
+   (interesting...no cross-server communication allowed...cool!)
+ - assigns permanent_pool to session.pool (what the hell?)
+ - check for /etc/shutmsg
+ - check for <Limit LOGIN> directives
+ - attempt to get ID of remote user using RFC1413 identd
+ - call all module child init functions
+cmd_loop() 
+ - display connection information, greetings
+ - set/reset timers
+ - double-check argument against CommandBufferSize
+ - dispatch command to handlers
+dispatch_cmd()
+ - double-check command against Allow/DenyFilters
+ - log command in scoreboard file via log_add_run()
+ - call command handler
+end_login()
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+<hr><br>
+
+Author: <i>$Author$</i><br>
+Last Updated: <i>$Date$</i><br>
+
+<br><hr>
+
+<font size=2><b><i>
+&copy; Copyright 2000 TJ Saunders<br>
+ All Rights Reserved<br>
+</i></b></font>
+
+<hr><br>
+
+</body>
+</html>

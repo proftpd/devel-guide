@@ -1,0 +1,142 @@
+<!-- $Id$ -->
+<!-- $Source$ -->
+
+<html>
+<head>
+<title>ProFTPD Developer's Guide: Module Tips</title>
+</head>
+
+<body bgcolor=white>
+
+<hr><br>
+<center>
+<img src="../images/proftpd.png">
+<br><br>
+<h3><b>ProFTPD Developer's Guide: Module Tips</b></h3>
+<i><b>ProFTPD Version 1.2.0</b></i><br>
+</center>
+<hr><br>
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+    <li>style notes: respecting other modules, log_pri() at various debug levels
+    <li>OS dependencies and idiosyncrasies, #defines
+    <li>Command handlers that handle every command except some...
+    <li>proper log_{pri,auth,debug}() calls -- at least _three_ parameters
+        to prevent format string attacks!
+<p>
+<b>Tips and Tricks</b><br>
+These are some recommendations and things to keep in mind when programming
+a module for ProFTPD.
+
+<ol>
+  <li><i><b>Always</b> check function return values for errors</i>.
+  </li>
+  <br>
+
+  <li><i>Always add the proper argument checks to handlers</i> (<i>eg</i>
+      CHECK_ARGS, CHECK_CONF)
+  </li>
+  <br>
+
+  <li>Always be aware of the current context when retrieving configuration
+      records.
+  </li>
+  <br>
+
+  <li>Keep in mind the lifetime of a pool when allocating memory from it.
+  </li>
+  <br>
+
+  <li>#define version in the module:<br>
+<pre>
+        <code>#define MOD_NIFTY_VERSION "mod_nifty/2.0"</code>
+</pre>
+  </li>
+  <br>
+
+  <li>respect other modules' configuration records, <i>especially</i> if
+      relevant.  TimesGMT, UserAlias
+  </li>
+  <br>
+
+  <li>use <code>log_debug()</code> for debugging, <code>log_auth()</code>
+      during the authentication/authorization of a connection, and use
+      <code>log_pri()</code> for logging as appropriate<br>
+	    message: access denied, funny arguments, libc/syscall errors, etc
+  </li>
+  <br>
+
+  <li>use the provided string functions of <code>sstrcat()</code>,
+      <code>sstrcpy()</code>.
+  </li>
+  <br>
+
+  <li>use <code>palloc()</code>, <code>pcalloc()</code>, <b>not ever</b>
+      malloc/free.
+  </li>
+  <br>
+
+  <li>sending <code>SIGUSR2</code> to a running proftpd master daemon will
+      cause it to call
+      <a href="api/functions.html#debug_walk_pools">debug_walk_pools()</a>,
+      which will cause it to log/print out information about the current
+      memory allocation.<br>
+      <br>
+      Example output:
+<pre>
+     localhost.localdomain - Memory pool allocation:
+     localhost.localdomain - 0x00002600 bytes
+     localhost.localdomain - \- 0x00000200 bytes
+     localhost.localdomain - \- 0x00000200 bytes
+     localhost.localdomain - \- 0x00000200 bytes
+     localhost.localdomain -    \- 0x00000200 bytes
+     localhost.localdomain -    \- 0x00000400 bytes
+     localhost.localdomain - \- 0x00000200 bytes
+     localhost.localdomain - \- 0x00000200 bytes
+     localhost.localdomain -    \- 0x00000200 bytes
+     localhost.localdomain -    \- 0x00000400 bytes
+     localhost.localdomain -       \- 0x00000200 bytes
+     localhost.localdomain -    \- 0x00000200 bytes
+     localhost.localdomain -       \- 0x00000400 bytes
+     localhost.localdomain -    \- 0x00000200 bytes
+     localhost.localdomain -    \- 0x00000400 bytes
+     localhost.localdomain -    \- 0x00000600 bytes
+     localhost.localdomain - \- 0x00000200 bytes
+     localhost.localdomain - Total 0x00005200 bytes allocated
+     localhost.localdomain - Free block list: 0x00000200 bytes
+     localhost.localdomain - 37 count blocks malloc'd.
+     localhost.localdomain - 109 count blocks reused.
+</pre>
+  </li>
+  <br>
+</ol>
+
+<p>
+Module are prioritized in the <i>inverse</i> order of which they were loaded.
+In other words, the last loaded module is the <i>first</i> to receive calls
+for a particular configuration directive, FTP command or authentication request.
+This can be used to allow later loaded modules (higher priority) to
+(optionally) "override" lower priority modules.  Thus, load order of the
+modules can be <i>very</i> important.
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+<hr><br>
+
+Author: <i>$Author$</i><br>
+Last Updated: <i>$Date$</i><br>
+
+<br><hr>
+
+<font size=2><b><i>
+&copy; Copyright 2000 TJ Saunders<br>
+ All Rights Reserved<br>
+</i></b></font>
+
+<hr><br>
+
+</body>
+</html>

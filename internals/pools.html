@@ -1,0 +1,265 @@
+<!-- $Id$ -->
+<!-- $Source$ -->
+
+<html>
+<head>
+<title>ProFTPD Developer's Guide: Internals - Resource Pools</title>
+</head>
+
+<body bgcolor=white>
+
+<hr><br>
+<center>
+<img src="../images/proftpd.png">
+<br><br>
+<h3><b>ProFTPD Developer's Guide: Internals - Resource Pools</b></h3>
+<i><b>ProFTPD Version 1.2.0</b></i><br>
+</center>
+<hr><br>
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+<p>
+<b>Resource Pools</b><br>
+
+<p>
+The primitive for creating a subpool is 
+<a href="../api/functions.html#make_sub_pool"><code>make_sub_pool</code></a>,
+which takes another <code>pool</code> - the parent <code>pool</code> - as an
+argument.  When the main <code>pool</code> is cleared, the subpool will be
+destroyed.  The subpool may also be cleared or destroyed at any time, by
+calling the functions
+<a href="../api/functions.html#clear_pool"><code>clear_pool()</code></a> and
+<a href="../api/functions.html#destroy_pool"><code>destroy_pool()</code></a>,
+respectively. The difference is that <code>clear_pool()</code> frees resources
+associated with the <code>pool</code>, while <code>destroy_pool()</code> also
+deallocates the <code>pool</code> itself.  In the former case, you can
+allocate new resources within the <code>pool</code>, and clear it again, and
+so forth; in the latter case, the <code>pool</code> is simply gone.
+
+<p>
+<b>Example</b>
+<pre>
+  config_rec *c = NULL;
+  pool *subpool = NULL;
+
+  subpool = make_sub_pool(parent_pool);
+  c = (config_rec *) pcalloc(subpool, sizeof(config_rec));
+  c->pool = subpool;
+</pre>
+
+<p>
+As you can see, you allocate a subpool first, then allocate the object
+(in this case, a <code>config_rec</code>) from that subpool.  You then
+store the pointer to the subpool in the appropriate field of the allocated
+object, so that later, when that object is no longer needed, you can do
+<pre>
+  destroy_pool(c->pool);
+</pre>
+which will take care of the entire object.
+
+<p>
+If you make your own subpool, be sure to call <code>clear_pool()</code> if you
+plan to reuse that subpool later, or <code>destroy_pool()</code> if you are
+completely finished with your subpool.  As when using <code>malloc()</code>
+and <code>free()</code>, if you allocate your own <code>pool</code>s, then
+you are responsible for cleaning up after yourself.  Well, not precisely.
+When your parent <code>pool</code> is cleared or destroyed, your subpool will
+be cleared or destroyed as well.
+
+<p>
+On rare occasions, too-free use of
+<a href="../api/functions.html#palloc"><code>palloc()</code></a> and the
+associated primitives may result in undesirably profligate resource
+allocation.  You can deal with such a case by creating a subpool, allocating
+within the subpool rather than the main <code>pool</code>, and clearing or
+destroying the subpool, which releases the resources which were associated
+with it.  This really <i>is</i> a rare situation; the only case in which it
+comes up in the standard module set is in case of listing directories, and
+then only with <i>very</i> large directories.  Unnecessary use of the
+primitives discussed here can hair up your code quite a bit, with very little
+gain.
+
+<p>
+<b>Most Frequently Used Pools</b><br>
+The following are <code>pool</code>s that already exist in the most common
+structures within ProFTPD, and should be used for most purposes.
+
+<p>
+<b><code>permanent_pool</code></b><br>
+Never <i>ever <b>ever</b></i> allocate memory directly from
+<code>permanent_pool</code> using one of the <code>p*()</code> pool
+functions listed below.  Instead, make a subpool, do what you need to, and
+clear or destroy that subpool.  <code>permanent_pool</code> only gets cleared
+once, on shutdown.  Abuse of this pool <b>will</b> lead to memory leaks.<br>
+<br>
+<i>Allocated</i>: in
+<a href="../api/functions.html#init_alloc"><code>init_alloc()</code></a>,
+when the master daemon first starts up<br>
+<br>
+<i>Deallocated</i>: automatically, when the master daemon calls
+<code>_exit()</code><br>
+
+<p>
+<b><code>server_rec->pool</code></b><br>
+<br>
+<i>Allocated</i>: in
+<a href="../api/functions.html#start_new_server"><code>start_new_server()</code></a>, which is called if a <code>&lt;VirtualHost&gt;</code> section is
+encountered as the master parses the configuration file.  As a special case,
+the <code>main_server</code> variable, the default &quot;main&quot; server,
+is allocated in
+<a href="../api/functions.html#init_config"><code>init_config()</code></a>.<br>
+<br>
+<i>Deallocated</i>: when forking a new server to handle an incoming connection,
+that connection is handed the appropriate <code>server_rec</code>, and all
+other <code>server_rec</code>s are destroyed.  This occurs in the forked
+child's process space, though; this prevents inter-server communication among
+concurrent connections.<br> This <code>pool</code> is also deallocated if a
+<code>SIGHUP</code> signal is received by the master daemon, all
+<code>server_rec->pool</code>s are destroyed in
+<a href="../api/functions.html#main_rehash"><code>main_rehash()</code></a>.<br>
+
+<p>
+<b><code>session_t->pool</code></b><br>
+<br>
+<i>Allocated</i>: this <code>pool</code> is not actually allocated, rather it
+is set using the same pointer to <code>permanent_pool</code> when the session
+starts, in
+<a href="../api/functions.html#fork_server"><code>fork_server()</code></a>.
+This usage of the <code>permanent_pool</code> pointer is an exception to the
+normal rules of <code>pool</code> usage.  In this case, however, this pointer
+assignment occurs <i>after</i> the process has
+<code>fork</code>ed, meaning that parent process' allocated heap memory
+(along with the rest of the process image) is duplicated.  It is this
+duplicated memory space that the child process, via
+<code>session_t->pool</code>, is accessing, and not the long-running
+(if using &quot;<code>ServerType standalone</code>&quot;) master daemon's
+<code>permanent_pool</code>.<br>
+<br>
+<i>Deallocated</i>: this <code>pool</code>, being a duplicate of, and <i>not</i>
+synonymous with, <code>permanent_pool</code>, is deallocated when the child
+process exits.
+
+<p>
+<b><code>session_t.xfer->pool</code></b><br>
+<br>
+<i>Allocated</i>: in the
+<a href="../api/functions.html#cmd_rnfr"><code>cmd_rnfr</code></a> command
+handler, and the
+<a href="../api/functions.html#_data_new_xfer"><code>_data_new_xfer()</code></a>
+function.<br>
+<br>
+<i>Deallocated</i>: in
+<a href="../api/functions.html#cmd_rnto"><code>cmd_rnto</code></a> command
+handler, if <code>session.xfer.path</code> has not been set, if an error
+occurred during the renaming of the file, or if the renaming succeeded.  Also,
+in
+<a href="../api/functions.html#cmd_rnfr"><code>cmd_rnfr()</code></a>, prior
+to reallocating the same pool, to clear out any previous use.  And similarly
+in
+<a href="../api/functions.html#_data_new_xfer"><code>_data_new_xfer()</code></a>, prior to reallocating the same pointer, to clear out previous usage.<br>
+in
+<a href="../api/functions.html#data_cleanup"><code>data_cleanup()</code></a>,
+and in
+<a href="../api/functions.html#data_abort"><code>data_abort()</code></a> --
+see comment in code for these two functions.<br>
+
+<p>
+<b><code>conn_t->pool</code></b><br>
+<br>
+<i>Allocated</i>: in either
+<a href="../api/functions.html#inet_initialize_connection"><code>inet_initialize_connection()</code></a>, a static function (need to track when this
+is called -- I think by inet_create_connection, but why different from
+inet_copy_connection?), or in
+<a href="../api/functions.html#inet_copy_connection"><code>inet_copy_connection()</code></a>.<br>
+<br>
+<i>Deallocated</i>: in
+<a href="../api/functions.html#inet_close"><code>inet_close()</code></a>,
+when a connection is done.<br>
+
+<p>
+<b><code>config_rec->pool</code></b><br>
+<br>
+<i>Allocated</i>: in
+<a href="../api/functions.html#add_config_set"><code>add_config_set()</code></a>, called by the <code>add_config_*()</code> functions. The parent
+<code>pool</code> is that of the containing <code>server_rec</code>'s set, at
+the time when the configuration directive was parsed.<br>
+<br>
+<i>Deallocated</i>: in
+<a href="../api/functions.html#remove_config"><code>remove_config()</code></a>, or when the containing <code>server_rec</code>'s <code>pool</code> is
+destroyed.<br>
+
+<p>
+<b><code>cmd_rec->pool</code></b><br>
+<br>
+<i>Allocated</i>: for configuration directives, this allocation occurs in
+<a href="../api/functions.html#get_config_cmd"><code>get_config_cmd()</code></a>, after a line has been read from the configuration file but before that
+configuration command has been dispatched to its configuration handler.
+For commands, the allocation occurs in
+<a href="../api/functions.html#cmd_loop"><code>cmd_loop()</code></a>, before
+dispatching to the appropriate command handler.<br>
+<br>
+<i>Deallocated</i>: for configuration directives, this happens in 
+<a href="../api/functions.html#parse_config_file"><code>parse_config_file()</code></a>, after the configuration handler has returned.  And, for commands, it
+happens in
+<a href="../api/functions.html#cmd_loop"><code>cmd_loop()</code></a> after
+the command handler dispatch has returned.<br>
+
+<p>
+<b><code>cmd_rec->tmp_pool</code></b><br>
+<br>
+<i>Allocated</i>: this occurs, for commands, in 
+<a href="../api/functions.html#_dispatch"><code>_dispatch()</code></a>, prior
+to the call to
+<a href="../api/functions.html#log_add_run"><code>log_add_run()</code></a>
+and the call to
+<a href="../api/functions.html#call_module_cmd"><code>call_module_cmd()</code></a>, which does the &quot;dispatch&quot; of the command to its handler(s).
+<a href="../api/functions.html#call_module"><code>call_module()</code></a>
+will also allocate this <code>pool</code>, if it is not already present.<br>
+<br>
+<i>Deallocated</i>: in
+<a href="../api/functions.html#_dispatch"><code>_dispatch()</code></a>, after
+the command handler has returned, and after any possible handler errors are
+dealt with.<br>
+
+<p>
+<b>Pool Functions</b><br>
+<ul>
+  <li><a href="../api/functions.html#clear_inet_pool">clear_inet_pool</a>
+  <li><a href="../api/functions.html#clear_pool">clear_pool</a>
+  <li><a href="../api/functions.html#destroy_pool">destroy_pool</a>
+  <li><a href="../api/functions.html#make_named_sub_pool">make_named_sub_pool</a>
+  <li><a href="../api/functions.html#make_sub_pool">make_sub_pool</a>
+  <li><a href="../api/functions.html#palloc">palloc</a>
+  <li><a href="../api/functions.html#pcalloc">pcalloc</a>
+  <li><a href="../api/functions.html#pclosef">pclosef</a>
+  <li><a href="../api/functions.html#pdircat">pdircat</a>
+  <li><a href="../api/functions.html#pfclose">pfclose</a>
+  <li><a href="../api/functions.html#pfdopen">pfdopen</a>
+  <li><a href="../api/functions.html#pfopen">pfopen</a>
+  <li><a href="../api/functions.html#popenf">popenf</a>
+  <li><a href="../api/functions.html#pstrcat">pstrcat</a>
+  <li><a href="../api/functions.html#pstrdup">pstrdup</a>
+  <li><a href="../api/functions.html#pstrndup">pstrndup</a>
+</ul>
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+<hr><br>
+
+Author: <i>$Author$</i><br>
+Last Updated: <i>$Date$</i><br>
+
+<br><hr>
+
+<font size=2><b><i>
+&copy; Copyright 2000 TJ Saunders<br>
+ All Rights Reserved<br>
+</i></b></font>
+
+<hr><br>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!-- $Id$ -->
+<!-- $Source$ -->
+
+<html>
+<head>
+<title>ProFTPD Developer's Guide: Server Internals</title>
+</head>
+
+<body bgcolor=white>
+
+<hr><br>
+<center>
+<img src="../images/proftpd.png">
+<br><br>
+<h3><b>ProFTPD Developer's Guide: Server Internals</b></h3>
+<i><b>ProFTPD Version 1.2.0</b></i><br>
+</center>
+<hr><br>
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+<p>
+<b>Descriptions of ProFTPD Server Internals</b><br>
+This is a collection of descriptions of some of the internal mechanisms
+and workings of the core server, such as how it decides which handlers to
+call when, resolution of paths, <i>etc etc</i>.  I decided to put these
+descriptions here for now, for lack of a better place for them; they are not
+<i>exactly</i> related to programming ProFTPD modules.
+
+<p>
+Please feel free to contribute explanations to this section.  The source
+for ProFTPD is sadly lacking in in-source comments, and these descriptions
+aim to fill the gap for aspiring developers.
+
+<ul>
+  <li><a href="contexts.html">Configuration directive contexts</a>
+  <li><a href="directory.html">Resolution of <code>&lt;Directory&gt;</code>
+      paths</a>
+  <li><a href="expressions.html">Configuration &quot;expressions&quot;</a>
+  <li><a href="ftpaccess.html"><code>.ftpaccess</code> usage</a>
+  <li><a href="hashtables.html">Module hash tables</a>
+  <li><a href="limit.html">Scope of <code>&lt;Limit&gt;</code> commands</a>
+  <li><a href="responses.html">Response handlers</a>
+  <li><a href="pools.html">Resource pools</a>
+  <li><a href="tour.html">Tour of a Connection</a>
+</ul>
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+<hr><br>
+
+Author: <i>$Author$</i><br>
+Last Updated: <i>$Date$</i><br>
+
+<br><hr>
+
+<font size=2><b><i>
+&copy; Copyright 2000 TJ Saunders<br>
+ All Rights Reserved<br>
+</i></b></font>
+
+<hr><br>
+
+</body>
+</html>

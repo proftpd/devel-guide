@@ -1,0 +1,594 @@
+<!-- $Id$ -->
+<!-- $Source$ -->
+
+<html>
+<head>
+<title>ProFTPD Developer's Guide: API - Structs</title>
+</head>
+
+<body bgcolor=white>
+
+<hr><br>
+<center>
+<img src="../images/proftpd.png">
+<br><br>
+<h3><b>ProFTPD Developer's Guide: API - Structs</b></h3>
+<i><b>ProFTPD Version 1.2.0</b></i><br>
+</center>
+
+<hr>
+<a name="Class"><b>Class</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ struct Class {
+
+   char *Class;
+   unsigned long Count;
+
+  };
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/ftpcount.c.html#Class">src/ftpcount.c</a><br>
+
+<hr>
+<a name="IO_Buffer"><b>IO_Buffer</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ struct IO_Buffer {
+
+   char *buf, *cp;
+   int left, bufsize;
+
+ };
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/include/io.h.html#IO_Buffer">include/io.h</a><br>
+
+<hr>
+<a name="IO_File"><b>IO_File</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ struct IO_File {
+
+   <font color=green>/* memory pool for this object */</font>
+   pool *pool;
+   int fd;
+
+   <font color=green>/* 0 == read, 1 == write */</font>
+   int mode;
+
+   <font color=green>/* errno, if applicable */</font>
+   int xerrno;
+
+   int flags;
+   unsigned int restart_secs;
+ 
+   IOBUF *buf;
+    
+   <font color=green>/* request buffer size */</font>
+   IOREQ *req;
+
+   <font color=green>/* default size of the request buffer */</font>
+   int bufsize;
+
+ };
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/include/io.h.html#IO_File">include/io.h</a><br>
+
+<hr>
+<a name="IO_Request"><b>IO_Request</b></a><br>
+<br>
+<font color=blue>Comments</font>: <code>(*cl_read)</code> can be used during
+ write operations to asynchronously gather data from a function.  If
+ <code>(*cl_read)</code> returns <code>-1</code>, an error is assumed,
+ otherwise <code>0 == EOF</code> (ie, the write completed).<br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ struct IO_Request {
+
+   IOREQ *next, *prev;
+
+   <font color=green>/* memory pool for this object */</font>
+   pool *pool;
+
+   <font color=green>/* read or write */</font>
+   int req_type;
+
+   <font color=green>/* request flags */</font>
+   int req_flags;
+       
+   IOFILE *file;
+
+   char *buf;
+   char *bp, *bufnext;
+
+   <font color=green>/* buffer size */</font>
+   int bufsize;
+
+   <font color=green>/* client buffer, and head pointer */</font>
+   char *cl_buf, *cl_bp;
+
+   <font color=green>/* bytes remaining in the client buffer */</font>
+   int cl_bytes;
+
+   <font color=green>/* client IO funtion (for async operations) */</font>
+   int (*cl_io)(IOREQ *, char *, int);
+
+   <font color=green>/* error occurred */</font>
+   void (*cl_err)(IOREQ *, int);
+
+   <font color=green>/* remote side closed */</font>
+   void (*cl_close)(IOREQ *);
+
+ };
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/include/io.h.html#IO_Request">include/io.h</a><br>
+
+<hr>
+<a name="XAset"><b>XAset</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ struct XAset {
+    
+   xasetmember_t *xas_list;
+
+   <font color=green>/* memory pool for this object */</font>
+   pool *mempool;
+
+   XASET_COMPARE xas_compare;
+
+ };
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/include/sets.h.html#XAset">include/sets.h</a><br>
+
+<hr>
+<a name="XAsetmember"><b>XAsetmember</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ struct XAsetmember {
+
+   xasetmember_t *next, *prev;
+
+ };
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/include/sets.h.html#XAsetmember">include/sets.h</a><br>
+
+<hr>
+<a name="cleanup"><b>cleanup</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ struct cleanup {
+
+   void *data;
+   void (*plain_cleanup)(void *);
+   void (*child_cleanup)(void *);
+   struct cleanup *next;
+
+ };
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/pool.c.html#cleanup">src/pool.c</a><br>
+
+<hr>
+<a name="config_struc"><b>config_struc</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ struct config_struc {
+
+   struct config_struc *next, *prev;
+ 
+   <font color=green>/* this will be one of the CONF_* types */</font>
+   int config_type;
+
+   <font color=green>/* memory pool for this object */</font>
+   pool *pool;
+
+   <font color=green>/* the set in which we're stored */</font>
+   xaset_t *set;
+
+   char *name;
+   int argc;
+   void **argv;
+
+   <font color=green>/* override classes */</font>
+   long overrides;
+
+   <font color=green>/* flags */</font>
+   long flags;
+
+   <font color=green>/* server to which this config element is attached */</font>
+   server_rec *server;
+
+   <font color=green>/* parent configuration record */</font>
+   config_rec *parent;
+
+   <font color=green>/* sub-configuration */</font>
+   xaset_t *subset;
+
+ };
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/include/dirtree.h.html#config_struc">include/dirtree.h</a><br>
+
+<hr>
+<a name="filename"><b>filename</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ struct filename {
+
+   struct filename *down;
+   struct filename *right;
+   int top;
+   char line[1];
+
+ };
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_ls.c.html#filename">modules/mod_ls.c</a><br>
+
+<hr>
+<a name="fs_dir_handler"><b>fs_dir_handler</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ struct fs_dir_handler {
+
+   fsdir_t *next;
+   char *name;
+
+   <font color=green>/* parent handlers */</font>
+   fsdir_t *parent;
+   void *private;
+
+   <font color=green>/* actual handler functions */</font>
+   int (*stat)(fsdir_t *, const char *, struct stat *);
+   int (*lstat)(fsdir_t *, const char *, struct stat *);
+   int (*rename)(fsdir_t *, const char *, const char *);
+   int (*unlink)(fsdir_t *, const char *);
+   int (*open)(fsdir_t *, const char *, int);
+   int (*creat)(fsdir_t *, const char *, mode_t);
+   int (*close)(fsdir_t *, int);
+   int (*read)(fsdir_t *, int, char *, size_t);
+   int (*write)(fsdir_t *, int, char char *, size_t);
+   off_t (*lseek)(fsdir_t *, int, off_t, int);
+   int (*link)(fsdir_t *, const char *, const char *);
+   int (*symlink)(fsdir_t *, const char *, const char *);
+   int (*readlink)(fsdir_t *, const char *, char *, size_t);
+   int (*chmod)(fsdir_t *, const char *, mode_t);
+   int (*chown)(fsdir_t *, const char *, uid_t, gid_t);
+   int (*chdir)(fsdir_t *, const char *);
+
+   <font color=green>/* for actual operations on the directory (or subdirs)
+    * we cast the return from opendir to DIR * in src/fs.c
+    * so modules can use their own data type
+    */</font>
+   void *(*opendir)(fsdir_t *, const char *);
+
+   int (*closedir)(fsdir_t *, void *);
+   struct dirent *(*readdir)(fsdir_t *, void *);
+
+ };
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/include/fs.h.html#fs_dir_handler">include/fs.h</a><br>
+
+<hr>
+<a name="fs_dir_match"><b>fs_dir_match</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ struct fs_dir_match {
+
+   fsmatch_t *next;
+   char *name;
+   int opmask;
+
+   int (*dir_hit)(fsdir_t *, const char *, int);
+   int (*file_hit)(fsdir_t *, const char *, int);
+
+ };
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/include/fs.h.html#fs_dir_match">include/fs.h</a><br>
+
+<hr>
+<a name="logfile_struc"><b>logfile_struc</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ struct logfile_struc {
+
+   logfile_t *next, *prev;
+       
+   int lf_fd;
+   int lf_classes;
+   char *lf_filename;
+   logformat_t *lf_format;
+
+   <font color=green>/* pointer to the "owning" configuration */</font>
+   config_rec *lf_conf;
+
+ };
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_log.c.html#logfile_struc">modules/mod_log.c</a><br>
+
+<hr>
+<a name="logformat_struc"><b>logformat_struc</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ struct logformat_struc {
+
+   logformat_t *next, *prev;
+
+   char *lf_nickname;
+   unsigned char *lf_format;
+ 
+ };
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_log.c.html#logformat_struc">modules/mod_log.c</a><br>
+
+<hr>
+<a name="modret_struc"><b>modret_struc</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ struct modret_struc {
+
+   <font color=green>/* which module handled this? */</font>
+   module *mr_handler_module;
+
+   <font color=green>/* not zero if there was an error */</font>
+   int mr_error;
+
+   <font color=green>/* numeric error code */</font>
+   char *mr_numeric;
+
+   <font color=green>/* text message */</font>
+   char *mr_message;
+
+   <font color=green>/* additional data -- undefined */</font>
+   void *data;
+
+ };
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/include/modules.h.html#modret_struc">include/modules.h</a><br>
+
+<hr>
+<a name="module_struc"><b>module_struc</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ struct module_struc {
+
+   module *next, *prev;
+
+   <font color=green>/* module API version -- NOT module version */</font>
+   int ver;
+
+   <font color=green>/* module name */</font>
+   char *name;
+
+   <font color=green>/* configuration directive table */</font>
+   conftable *conftable;
+
+   <font color=green>/* command handler table */</font>
+   cmdtable *cmdtable;
+
+   <font color=green>/* authentication handler table */</font>
+   authtable *authtable;
+
+   <font color=green>/* module initialization */</font>
+   int (*module_init)();
+
+   <font color=green>/* post-fork initialization */</font>
+   int (*module_init_child)();
+
+   <font color=green>/* internal use, greater number == higher priority */</font>
+   int priority;
+
+ };
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/include/modules.h.html#module_struc">include/modules.h</a><br>
+
+<hr>
+<a name="opendir_struct"><b>opendir_struct</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ struct opendir_struct {
+
+   opendir_t *next, *prev;
+   DIR *dir;
+   fsdir_t *fsdir;
+
+ };
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/fs.c.html#opendir_struct">src/fs.c</a><br>
+
+<hr>
+<a name="option"><b>option</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ struct option
+
+#<font color=red>if</font> __STDC__
+   const char *name;
+#<font color=red>else</font>
+   char *name;
+#<font color=red>endif</font>
+
+   <font color=green>/* has_arg can't be enum because some compilers complain
+    * about type mismatches in all the code that assumes
+    * it is an int.
+    */</font>
+   int has_arg;
+
+   int *flag;
+   int val;
+
+ };
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/lib/getopt.h.html#option">lib/getopt.h</a><br>
+
+<hr>
+<a name="option_help"><b>option_help</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ struct option_help {
+
+   char *long_opt, *short_opt, *desc;
+
+ };
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/ftpcount.c.html#option_help">src/ftpcount.c</a><br>
+
+<hr>
+<a name="pool"><b>pool</b></a><br>
+<br>
+<font color=blue>Comments</font>: Pool internals and management<br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ struct pool {
+
+   union block_hdr *first;
+   union block_hdr *last;
+   struct clean *cleanups;
+   struct pool *sub_pools;
+   struct pool *sub_next;
+   struct pool *sub_prev;
+   struct pool *parent;
+   char *free_first_avail;
+   char symbol;
+
+ }
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/pool.c.html#pool">src/pool.c</a><br>
+
+<hr>
+<a name="privdata"><b>privdata</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ struct privdata {
+
+   char *tag;
+ 
+   union {
+
+     void *ptr_val;
+     int int_val;
+     long long_val;
+     char *str_val;
+
+   } value;
+
+   module *m;
+
+ };
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/include/modules.h.html#privdata">include/modules.h</a><br>
+
+<hr>
+<a name="rehash"><b>rehash</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ struct rehash {
+
+   struct rehash *next;
+   void *data;
+   void (*rehash)(void *);
+
+ };
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/main.c.html#rehash">src/main.c</a><br>
+
+<hr>
+<a name="sort_filename"><b>sort_filename</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ struct sort_filename {
+
+   time_t mtime;
+   char *name, *suffix;
+
+ };
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/modules/mod_ls.c.html#sort_filename">modules/mod_ls.c</a><br>
+
+<hr>
+<a name="symbol_hash"><b>symbol_hash</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ struct symbol_hash {
+
+   struct symbol_hash *next, *prev;
+
+   <font color=green>/* pointer to the directive, command, or other symbol */</font>
+   char *sym_name;
+
+   <font color=green>/* one of the SYM_* macros */</font>
+   char sym_type;
+
+   module *sym_module;
+
+   union {
+
+     conftable *sym_conf;
+     cmdtable *sym_cmd;
+     authtable *sym_auth;
+     void *sym_generic;
+
+   } ptr;
+
+ };
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/src/modules.c.html#symbol_hash">src/modules.c</a><br>
+
+<hr><br>
+
+Author: <i>$Author$</i><br>
+Last Updated: <i>$Date$</i><br>
+
+<br><hr>
+
+<font size=2><b><i>
+&copy; Copyright 2000 TJ Saunders<br>
+ All Rights Reserved<br>
+</i></b></font>
+
+<hr><br>
+
+</body>
+</html>

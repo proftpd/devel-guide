@@ -1,0 +1,117 @@
+<!-- $Id$ -->
+<!-- $Source$ -->
+
+<html>
+<head>
+<title>ProFTPD Developer's Guide: Module Development</title>
+</head>
+
+<body bgcolor=white>
+
+<hr><br>
+<center>
+<img src="../images/proftpd.png">
+<br><br>
+<h3><b>ProFTPD Developer's Guide: Module Development</b></h3>
+<i><b>ProFTPD Version 1.2.0</b></i><br>
+</center>
+<hr><br>
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+<p>
+<b>Common tasks</b><br>
+As you develop your module, you will find that there are some routines and
+operations needed that will have inevitably been done before, either in
+other modules, or in the core code itself.  This page describes some of these
+<a href="tasks.html">common tasks</a> you can expect to counter, and how
+they can be done.
+
+<p>
+<b>Development</b><br>
+As with any software development, there are certain things to watch out for
+when building a module.  There are also other things to consider as part of
+the development process, such as configure scripts and documentation.
+
+<p>
+Overall ProFTPD philosophy: no <code>exec*e()</code>, no <code>system()</code>,
+no external programs, <code>mod_site</code>.  links to secure programming
+sites/docs.
+
+<p>
+Here are some other <a href="tips.html">tips</a> to keep in mind as you work
+on your module.
+
+<p>
+<b>Licensing</b><br>
+For the most part, this is easy -- GPL.  However, when working with 
+third-party libraries or code, be sure to include the necessary copyrights
+and licensing information as required by the use of those files.  If
+writing security modules, please be cognizant of any governmental laws or
+restrictions on the code you are writing.
+
+<p>
+<b>Security</b><br>
+Always, <i>always</i>, <b><i>always</i></b> check, verify, and sanitize user
+input, be it from configuration files such as <code>.ftpaccess</code>, from
+the configuration directive arguments for your modules, from any FTP commands
+you've created, etc etc.
+
+<p>
+<b>Debugging</b><br>
+    <li><code>proftpd -n -d 5</code> for debugging
+    <li><code>log_debug()</code> for debugging statements
+
+Signal 11 == usually, a NULL pointer:
+
+<pre>
+<code>
+    localhost.localdomain (localhost.localdomain[127.0.0.1]) - ProFTPD terminating (signal 11)
+</code>
+</pre>
+
+<p>
+<b>Configuration</b><br>
+This refers to any third-party libraries that your module might require, such
+as libwrap.a (the tcpwrappers library), the OpenSSL library, the MySQL
+libraries, etc.  Such dependencies will require changes to the configure
+script which is run before ProFTPD is compiled.
+
+<p>
+<b>Installation</b><br>
+    <li>copy module code into <code>contrib/</code>
+    <li><code>./configure --with-module=XXX</code> and module ordering
+Install required third-party libraries/files, and <i>note their locations</i>
+(eg mysql). copy module to <code>contrib/</code>, use --with-module=mod_nifty.
+Use --with-includes, --with-libraries, --enable-nifty, etc as necessary.
+
+<p>
+<b>Documentation</b><br>
+<i><b>No</b> modules or patches will be accepted into the ProFTPD source
+<b>without documentation.</b></i>  Modules submitted without documents on what
+they do, or on how to properly use any configuration directives the module
+might define, are next to useless by the ProFTPD community.  Patches without
+descriptions of what they are fixing <i>and why</i> force developers to read the
+code of the patch in order to decipher the purpose; most developers have better
+things to do with their time.
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+<hr><br>
+
+Author: <i>$Author$</i><br>
+Last Updated: <i>$Date$</i><br>
+
+<br><hr>
+
+<font size=2><b><i>
+&copy; Copyright 2000 TJ Saunders<br>
+ All Rights Reserved<br>
+</i></b></font>
+
+<hr><br>
+
+</body>
+</html>

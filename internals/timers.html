@@ -182,13 +182,11 @@ is checked, to see if any are available.  If none are avaiable, a new timer
 is allocated.  The timer is given the caller's parameters, then inserted
 into the active timer list.
 <p>
-At present, the callback function is invoked thus, from src/timers.c:80:
+At present, the callback function is invoked thus, from src/timers.c:86:
 <pre>
-           t->callback(0,t->timerno,t->interval - t->count,NULL) == 0) {
+  t->callback(t->interval, t->timerno, t->interval - t->count, t->mod) == 0 {
 </pre>
-This shows what is actually passed as the arguments in the callback_t.  Note
-the NULL -- in the future, I hope to change this to be the module pointer.
-What that leading 0 should be is a mystery.
+This shows what is actually passed as the arguments in the callback_t.
 <p>
 Be aware that the pending signal set for a process is reset when
 <code>fork()</code> is called.  This is why modules should and do register

@@ -1,0 +1,120 @@
+<!-- $Id$ -->
+<!-- $Source$ -->
+
+<html>
+<head>
+<title>ProFTPD Developer's Guide: Controls API Functions</title>
+</head>
+
+<body bgcolor=white>
+
+<hr><br>
+<center>
+<img src="../../images/proftpd.png">
+<br><br>
+<h3><b>ProFTPD Developer's Guide: Controls API Functions</b></h3>
+<i><b>ProFTPD Version 1.2</b></i><br>
+</center>
+<hr><br>
+
+<p>
+<center><a href="../../toc.html">Table of Contents</a></center><br>
+
+<p>
+<b>Controls API Functions</b><br>
+
+<pre>
+  int pr_ctrls_add(module *<i>module</i>, const char *<i>action</i>,
+    int (*<i>ctrls_cb</i>)(pr_ctrls_t *, int, char **));
+  int pr_ctrls_del(module *<i>module</i>, const char *<i>action</i>);
+  int pr_ctrls_add_arg(pr_ctrls_t *<i>ctrl</i>, char *<i>ctrls_arg</i>);
+  int pr_ctrls_add_response(pr_ctrls_t *<i>ctrl</i>, char *<i>fmt</i>, ...);
+  int pr_ctrls_connect(void);
+  int pr_ctrls_copy_args(pr_ctrls_t *<i>src_ctrl</i>, pr_ctrls_t *<i>dest_ctrl</i>);
+  int pr_ctrls_copy_resps(pr_ctrls_t *<i>src_ctrl</i>, pr_ctrls_t *<i>dest_ctrl</i>);
+  int pr_ctrls_recv_request(pr_ctrls_cl_t *<i>cl</i>);
+  int pr_ctrls_recv_response(pool *<i>resp_pool</i>, int ctrls_sockfd, int *<i>status</i>, char ***<i>respargv</i>); 
+  int pr_ctrls_send_msg(int <i>sockfd</i>, int <i>msgstatus</i>, unsigned int <i>msgargc</i>, char **<i>msgargv</i>);
+  pr_ctrls_t *pr_find_ctrls(module *<i>module</i>, const char *<i>action</i>);
+  pr_ctrls_t *pr_find_next_ctrls(module *<i>module</i>);
+  void pr_block_ctrls();
+  void pr_unblock_ctrls();
+  int pr_check_ctrls();
+  int pr_run_ctrls(module *<i>module</i>, const char *<i>action</i>);
+  void pr_clear_ctrls();
+  void pr_init_ctrls();
+</pre>
+
+<p>
+<code>pr_ctrls_add()</code> function
+
+<p>
+<code>pr_ctrls_del()</code> function
+
+<p>
+<code>pr_ctrls_add_arg()</code> function
+
+<p>
+The <code>pr_ctrls_add_response()</code> function is used by control handlers
+to add a text response string to the object that will eventually be returned
+to the requesting client.
+
+<p>
+<code>pr_ctrls_connect()</code> function
+
+<p>
+<code>pr_ctrls_copy_args()</code> function
+
+<p>
+<code>pr_ctrls_copy_resps()</code> function
+
+<p>
+<code>pr_ctrls_recv_request()</code> function
+
+<p>
+<code>pr_ctrls_recv_response()</code> function
+
+<p>
+<code>pr_ctrls_send_msg()</code> function
+
+<p>
+<code>pr_ctrls_find_ctrls()</code> function
+<code>pr_ctrls_find_next_ctrls()</code> function
+
+<p>
+<code>pr_block_ctrls()</code> function
+
+<p>
+<code>pr_unblock_ctrls()</code> function
+
+<p>
+<code>pr_check_ctrls()</code> function
+
+<p>
+<code>pr_run_ctrls()</code> function
+
+<p>
+<code>pr_clear_ctrls()</code> function
+
+<p>
+<code>pr_init_ctrls()</code> function
+
+<p>
+<center><a href="../../toc.html">Table of Contents</a></center><br>
+
+<hr><br>
+
+Author: <i>$Author$</i><br>
+Last Updated: <i>$Date$</i><br>
+
+<br><hr>
+
+<font size=2><b><i>
+&copy; Copyright 2000,2001 TJ Saunders<br>
+ All Rights Reserved<br>
+</i></b></font>
+
+<hr><br>
+
+</body>
+</html>

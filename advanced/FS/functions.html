@@ -149,6 +149,7 @@ adhere:
   int (*link)(fs_rec *<i>fs</i>, const char *<i>oldpath</i>, const char *<i>newpath</i>);
   int (*symlink)(fs_rec *<i>fs</i>, const char *<i>oldpath</i>, const char *<i>newpath</i>);
   int (*readlink)(fs_rec *<i>fs</i>, const char *<i>path</i>, char *<i>buf</i>, size_t <i>buflen</i>);
+  int (*truncate)(fs_rec *<i>fs</i>, off_t <i>length</i>);
   int (*chmod)(fs_rec *<i>fs</i>, const char *<i>path</i>, mode_t <i>mode</i>);
   int (*chown)(fs_rec *<i>fs</i>, const char *<i>path</i>, uid_t <i>owner</i>, gid_t <i>group</i>);
 </pre>

@@ -2871,11 +2871,12 @@ allocated from the resources of <code>pool</code> <i>p</i>.<br>
 <br>
 <font color=blue>Declaration</font>:<br>
 <pre>
-  int core_display_file(const char *<i>numeric</i>, const char *<i>fn</i>)
+  int core_display_file(const char *<i>numeric</i>, const char *<i>fn</i>, const char *<i>fs</i>)
 </pre>
-<font color=blue>Comments</font>: Displays the file <i>fn</i> via the given
-response <i>numeric</i>.  The file is displayed in normal RFC959 multiline
-mode, unless <code>MultilineRFC2228</code> is set.<br>
+<font color=blue>Comments</font>: Displays the file <i>fn</i>, which lives on
+the filesystem <i>fs</i>, via the given response <i>numeric</i>.  The file is
+displayed in normal RFC959 multiline mode, unless <code>MultilineRFC2228</code>
+is set.<br>
 <br>
 This function returns <code>-1</code> on error, or <code>0</code> if the
 file is displayed without trouble.<br>
@@ -3206,8 +3207,21 @@ to be treated as a &quot;hidden&quot; file.  Returns <code>TRUE</code> if so,
 &quot;*&quot;, strip it off.  Then, if <i>path</i> ends in &quot;/&quot;,
 strip it off, too.<br>
 <br>
-<font color=blue>Notes</font>: this explanation is incomplete.<br>
-<br>
+<font color=blue>Notes</font>: For this function to work correctly, the
+<i>path</i> given <i>must be an absolute path</b>.  This is particularly
+important when working with paths during anonymous sessions, for in such
+sessions the paths are modified by the <code>chroot()</code>ing of anonymous
+sessions.  As in other places in the core code, it is wise to have logic such
+as this <i>before</i> calling <code>dir_match_path()</code>:
+<pre>
+    config_rec *dir_config = NULL;
+    char *fullpath = path;
+
+    if (session.anon_config)
+      fullpath = pdircat(p, session.anon_root, path, NULL);
+
+    dir_config = dir_match_path(p, fullpath);
+</pre>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#dir_match_path">src/dirtree.c</a><br>
 

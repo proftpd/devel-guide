@@ -103,6 +103,7 @@ typedef struct {
   int (*close)(pr_netio_stream_t *);
   pr_netio_stream_t *(*open)(pr_netio_stream_t *, int, int);
   int (*poll)(pr_netio_stream_t *);
+  int (*postopen)(pr_netio_stream_t *);
   int (*read)(pr_netio_stream_t *, char *, size_t);
   pr_netio_stream_t *(*reopen)(pr_netio_stream_t *, int, int);
   int (*write)(pr_netio_stream_t *, char *, size_t);

@@ -36,9 +36,9 @@ static pr_netio_t *netiolog_netio = NULL;
 <font color=green>/* NetIO Callbacks
  */</font>
 
-static void netiolog_abort(pr_netio_stream_t *nstrm) {
+static void netiolog_abort_cb(pr_netio_stream_t *nstrm) {
 
-  log_debug(DEBUG0, MOD_NETIOLOG_VERSION ": %s %s netiolog_abort(): called",
+  log_debug(DEBUG0, MOD_NETIOLOG_VERSION ": %s %s netiolog_abort_cb(): called",
     nstrm->strm_type == PR_NETIO_STRM_CTRL ? "[ctrl]" :
     nstrm->strm_type == PR_NETIO_STRM_DATA ? "[data]" : "[othr]",
     nstrm->strm_mode == PR_NETIO_IO_RD ? "[read]" :
@@ -47,10 +47,10 @@ static void netiolog_abort(pr_netio_stream_t *nstrm) {
   nstrm->strm_flags |= PR_NETIO_SESS_ABORT;
 }
 
-static int netiolog_close(pr_netio_stream_t *nstrm) {
+static int netiolog_close_cb(pr_netio_stream_t *nstrm) {
   int res;
 
-  log_debug(DEBUG0, MOD_NETIOLOG_VERSION ": %s %s netiolog_close(): called",
+  log_debug(DEBUG0, MOD_NETIOLOG_VERSION ": %s %s netiolog_close_cb(): called",
     nstrm->strm_type == PR_NETIO_STRM_CTRL ? "[ctrl]" :
     nstrm->strm_type == PR_NETIO_STRM_DATA ? "[data]" : "[othr]",
     nstrm->strm_mode == PR_NETIO_IO_RD ? "[read]" : 
@@ -78,15 +78,14 @@ static int netiolog_close(pr_netio_stream_t *nstrm) {
  * mod_init time, which means that it will be used for <i>all</i> connections
  * established; this may or may not be desired, depending.
  */</font>
-static pr_netio_stream_t *netiolog_open(pr_netio_stream_t *nstrm, int fd,
+static pr_netio_stream_t *netiolog_open_cb(pr_netio_stream_t *nstrm, int fd,
     int mode) {
 
-  log_debug(DEBUG0, MOD_NETIOLOG_VERSION ": %s %s netiolog_open(): called",
+  log_debug(DEBUG0, MOD_NETIOLOG_VERSION ": %s %s netiolog_open_cb(): called",
     nstrm->strm_type == PR_NETIO_STRM_CTRL ? "[ctrl]" :
     nstrm->strm_type == PR_NETIO_STRM_DATA ? "[data]" : "[othr]",
     nstrm->strm_mode == PR_NETIO_IO_RD ? "[read]" :
     nstrm->strm_mode == PR_NETIO_IO_WR ? "[write]" : "[none]");
-
 
   nstrm->strm_fd = fd;
   nstrm->strm_mode = mode;
@@ -94,11 +93,11 @@ static pr_netio_stream_t *netiolog_open(pr_netio_stream_t *nstrm, int fd,
   return nstrm;
 }
 
-static int netiolog_poll(pr_netio_stream_t *nstrm) {
+static int netiolog_poll_cb(pr_netio_stream_t *nstrm) {
   fd_set rfds, wfds;
   struct timeval tval;
 
-  log_debug(DEBUG0, MOD_NETIOLOG_VERSION ": %s %s netiolog_poll(): called",
+  log_debug(DEBUG0, MOD_NETIOLOG_VERSION ": %s %s netiolog_poll_cb(): called",
     nstrm->strm_type == PR_NETIO_STRM_CTRL ? "[ctrl]" :
     nstrm->strm_type == PR_NETIO_STRM_DATA ? "[data]" : "[othr]",
     nstrm->strm_mode == PR_NETIO_IO_RD ? "[read]" :
@@ -120,9 +119,20 @@ static int netiolog_poll(pr_netio_stream_t *nstrm) {
   return select(nstrm->strm_fd + 1, &rfds, &wfds, NULL, &tval);
 }
 
-static int netiolog_read(pr_netio_stream_t *nstrm, char *buf, size_t buflen) {
+static int netiolog_postopen_cb(pr_netio_stream_t *nstrm) {
 
-  log_debug(DEBUG0, MOD_NETIOLOG_VERSION ": %s %s netiolog_read(): called",
+  log_debug(DEBUG0, MOD_NETIOLOG_VERSION ": %s %s netiolog_postopen_cb(): called",
+    nstrm->strm_type == PR_NETIO_STRM_CTRL ? "[ctrl]" :
+    nstrm->strm_type == PR_NETIO_STRM_DATA ? "[data]" : "[othr]",
+    nstrm->strm_mode == PR_NETIO_IO_RD ? "[read]" :
+    nstrm->strm_mode == PR_NETIO_IO_WR ? "[write]" : "[none]");
+
+  return 0;
+}
+
+static int netiolog_read_cb(pr_netio_stream_t *nstrm, char *buf, size_t buflen) {
+
+  log_debug(DEBUG0, MOD_NETIOLOG_VERSION ": %s %s netiolog_read_cb(): called",
     nstrm->strm_type == PR_NETIO_STRM_CTRL ? "[ctrl]" :
     nstrm->strm_type == PR_NETIO_STRM_DATA ? "[data]" : "[othr]",
     nstrm->strm_mode == PR_NETIO_IO_RD ? "[read]" :
@@ -131,10 +141,10 @@ static int netiolog_read(pr_netio_stream_t *nstrm, char *buf, size_t buflen) {
   return read(nstrm->strm_fd, buf, buflen);
 }
 
-static pr_netio_stream_t *netiolog_reopen(pr_netio_stream_t *nstrm, int fd,
+static pr_netio_stream_t *netiolog_reopen_cb(pr_netio_stream_t *nstrm, int fd,
     int mode) {
 
-  log_debug(DEBUG0, MOD_NETIOLOG_VERSION ": %s %s netiolog_reopen(): called",
+  log_debug(DEBUG0, MOD_NETIOLOG_VERSION ": %s %s netiolog_reopen_cb(): called",
     nstrm->strm_type == PR_NETIO_STRM_CTRL ? "[ctrl]" :
     nstrm->strm_type == PR_NETIO_STRM_DATA ? "[data]" : "[othr]",
     nstrm->strm_mode == PR_NETIO_IO_RD ? "[read]" :
@@ -149,10 +159,10 @@ static pr_netio_stream_t *netiolog_reopen(pr_netio_stream_t *nstrm, int fd,
   return nstrm;
 }
 
-static int netiolog_write(pr_netio_stream_t *nstrm, char *buf,
+static int netiolog_write_cb(pr_netio_stream_t *nstrm, char *buf,
     size_t buflen) {
 
-  log_debug(DEBUG0, MOD_NETIOLOG_VERSION ": %s %s netiolog_write(): called",
+  log_debug(DEBUG0, MOD_NETIOLOG_VERSION ": %s %s netiolog_write_cb(): called",
     nstrm->strm_type == PR_NETIO_STRM_CTRL ? "[ctrl]" :
     nstrm->strm_type == PR_NETIO_STRM_DATA ? "[data]" : "[othr]",
     nstrm->strm_mode == PR_NETIO_IO_RD ? "[read]" :
@@ -170,13 +180,15 @@ static void netiolog_install(void) {
     permanent_pool));
   int strm_types = PR_NETIO_STRM_CTRL|PR_NETIO_STRM_DATA|PR_NETIO_STRM_OTHR;
 
-  netio->abort = netiolog_abort;
-  netio->close = netiolog_close;
-  netio->open = netiolog_open;
-  netio->poll = netiolog_poll;
-  netio->read = netiolog_read;
-  netio->reopen = netiolog_reopen;
-  netio->write = netiolog_write;
+  /* Install this module's NetIO callbacks. */
+  netio->abort = netiolog_abort_cb;
+  netio->close = netiolog_close_cb;
+  netio->open = netiolog_open_cb;
+  netio->poll = netiolog_poll_cb;
+  netio->postopen = netiolog_postopen_cb;
+  netio->read = netiolog_read_cb;
+  netio->reopen = netiolog_reopen_cb;
+  netio->write = netiolog_write_cb;
 
   pr_unregister_netio(strm_types);
 

@@ -3591,6 +3591,9 @@ exists, <code>FALSE</code> otherwise.<br>
 <pre>
   config_rec *find_config(xaset_t *<i>set</i>, int <i>type</i>, const char *<i>name</i>, int <i>recurse</i>)
 </pre>
+<font color=blue>Comments</font>: The <i>recurse</i> parameter should almost
+always be <code>FALSE</code>.  Exceptions to this rule are very rare.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#find_config">src/dirtree.c</a><br>
 
@@ -3602,6 +3605,9 @@ exists, <code>FALSE</code> otherwise.<br>
   config_rec *find_config_next(config_rec *<i>prev</i>, config_rec *<i>c</i>, int <i>type</i>, const char *<i>name</i>,
     int <i>recurse</i>)
 </pre>
+<font color=blue>Comments</font>: The <i>recurse</i> parameter should almost
+always be <code>FALSE</code>.  Exceptions to this rule are very rare.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/dirtree.c.html#find_config_next">src/dirtree.c</a><br>
 
@@ -4444,7 +4450,9 @@ Section 2.9.5, Table 2-5.<br>
 in a <a href="macros.html#CONF_PARAM"><code>CONF_PARAM</code></a> configuration
 record.  If more than one, or all, arguments are needed, the caller will
 need to use <a href="#find_config"><code>find_config()</code></a> instead,
-and iterate through the <code>argv</code> arguments itself.<br>
+and iterate through the <code>argv</code> arguments itself. The <i>recurse</i>
+parameter should almost always be <code>FALSE</code>.  Exceptions to this rule
+are very rare.<br>
 <br>
 Returns <code>-1</code> if the parameter <i>name</i> is not found.  Note that
 parameters are not allowed to contain negative integers.<br>
@@ -4481,7 +4489,9 @@ function was not preceded by a call to <code>get_param_int()</code>.<br>
 in a <a href="macros.html#CONF_PARAM"><code>CONF_PARAM</code></a> configuration
 record.  If more than one, or all, arguments are needed, the caller will
 need to use <a href="#find_config"><code>find_config()</code></a> instead,
-and iterate through the <code>argv</code> arguments itself.<br>
+and iterate through the <code>argv</code> arguments itself.  The <i>recurse</i>
+parameter should almost always be <code>FALSE</code>.  Exceptions to this rule
+are very rare.<br>
 <br>
 Returns <code>NULL</code> if the parameter <i>name</i> is not found.<br>
 <br>

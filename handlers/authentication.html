@@ -22,10 +22,9 @@
 
 <p>
 <b>Authentication Handlers</b><br>
-Authentication handlers allow a module to provide (or overload)
-authentication, UID/GID-to-name and name-to-UID/GID mappings.
-
-<p>
+Authentication handlers allow a module to implement (or overload)
+the authentication layer, for providing account information (password,
+ID, home directory, and shell) and UID/GID-to-name and name-to-UID/GID mappings.
 In order for a module to provide this functionality, it must export an
 <code><a href="../api/typedefs.html#authtable">authtable</a></code>
 (via the module structure), and define <i>all</i> of the
@@ -87,6 +86,14 @@ Defined <code>authtable</code> handler names are:
       <code>getgrent(3)</code> library function.  The handler is accessed
       via the
       <code><a href="../api/functions.html#auth_getgrent">auth_getgrent()</a></code> function.<br>
+  </li>
+  <br>
+
+  <li><b><code>getgroups</code></b><br>
+      This handler provides a list of supplemental groups for the given
+      user, providing a custom implementation of the <code>getgroups(2)</code>
+      system call.  The handler is accessed via the
+      <code><a href="../api/functions.html#auth_getgroups">auth_getgroups()</a></code> function.<br>
   </li>
   <br>
 
@@ -208,7 +215,36 @@ Defined <code>authtable</code> handler names are:
 </ul>
 
 <p>
-<b>Authentication Cascade Order</b><br>
+<b>Use of the Authentication layer</b><br>
+An authentication module's handlers are used at various times during the
+lifetime of the server:
+<ul>
+  <li><code>getpwnam</code> handlers are called to resolve the User and
+      Group configuration directives
+  <li><code>getpwnam</code> handlers are used to obtain account information
+      for the name following a <code>USER</code> FTP command when a client is
+      logging in.
+  <li><code>getgrent</code> handlers are used repeatedly to obtain a list of
+      supplemental groups for the user. (<i>Note that currently this is
+      specific to <code>mod_unixpw</code>; other authentication modules may
+      use the <code>getgroups</code> handler for retrieiving supplemental
+      group membership information.</i>)
+  <li><code>auth</code> handlers are invoked to authenticate a username and
+      cleartext password after a <code>PASS</code> FTP command is received
+      from the client.  A similar function to this is the <code>check</code>
+      handler, whose purpose is to support configuration directives such as
+      <code>UserPassword</code>.
+  <li><code>gid_name</code> and <code>uid_name</code> handlers are used to
+      resolve IDs to names for legible directory listings.
+</ul>
+
+The author has a small patch that adds debug reporting of the authentication
+layer dispatching to the various handlers.  This reporting could be of use
+to aspiring authentication module developers, to help understand the workings
+of the authentication handlers.  Contact the author via email for this patch.
+
+<p>
+<b>Cascading Authentication module order</b><br>
 The cascaded order of authentication handlers is similar to that of command
 handlers:
 <ol>
@@ -254,6 +290,22 @@ to &quot;skip&quot; the module without reason.  At present,
 <code>mod_pam</code> exhibits this behavior: it is an authentication module,
 but provides no mechanisms for providing group information or IDs.  It solely
 provides <code>auth</code>'s &quot;yes/no&quot; answer.
+
+<p>
+This cascading structure also allows authentication modules the opportunity
+to be impolite, as when the module implements <code>*Authoritative</code>
+configuration directives.  In general, I tend to discourage the use of such
+<code>*Authoritative</code> options.  This design of the authentication
+mechanism allows for several different authentication mechanisms to coexist
+simultaneously, so that one could use <code>/etc/passwd</code>, SQL tables, and
+LDAP servers all at same time.  The source which contains the information for
+a given username is the module that responds with the requested information
+first.  Having an <code>*Authoritative</code> module, which would return
+<code>ERROR</code> instead of <code>DECLINED</code> from its authentication
+handlers, breaks this layering model.  The <code>AuthOrder</code> directive
+(currently available as a patch) lets one explicitly set the order in which
+authentication modules are searched and was written specifically to address
+this issue.
 
 <p>
 <center><a href="../toc.html">Table of Contents</a></center><br>

@@ -133,6 +133,16 @@ Defined <code>authtable</code> handler names are:
 </pre>
       The handler is accessed via the
       <code><a href="../api/functions.html#auth_authenticate">auth_authenticate()</a></code> function.<br>
+      <br>
+      <b>NOTE</b>: it is <i>critical</i> that an authentication module's
+      <code>auth</code> handler return, in case of a failed authentication
+      check, a value indicating the cause of the failure.  The required
+      values are defined by the following macros:
+      <a href="../api/macros.html#AUTH_AGEPWD"><code>AUTH_AGEPWD</code></a>,
+      <a href="../api/macros.html#AUTH_BADPWD"><code>AUTH_BADPWD</code></a>,
+      <a href="../api/macros.html#AUTH_DISABLEDPWD"><code>AUTH_DISABLEDPWD</code></a>, and
+      <a href="../api/macros.html#AUTH_NOPWD"><code>AUTH_NOPWD</code></a>.
+      <br><br>
   </li>
   <br>
 
@@ -234,6 +244,16 @@ handlers:
   </li>
   <br>
 </ol>
+
+<p>
+In order for this cascading mechanism to function properly and as expected,
+the authentication module author <i>should</i> provide handlers for all of
+the auth slots.  Failure to do so means that the authentication module
+provides an incomplete authentication layer, and cascaded calls will appear
+to &quot;skip&quot; the module without reason.  At present,
+<code>mod_pam</code> exhibits this behavior: it is an authentication module,
+but provides no mechanisms for providing group information or IDs.  It solely
+provides <code>auth</code>'s &quot;yes/no&quot; answer.
 
 <p>
 <center><a href="../toc.html">Table of Contents</a></center><br>

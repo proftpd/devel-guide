@@ -35,7 +35,7 @@ structure at the bottom of your module source file:
 
     <font color=green>/* Session initialization function */</font>
     NULL
-  }
+  };
 </pre>
 Rather than having <code>NULL</code>, you would have the name of your 
 initialization callback function there.  Both initialization callback
@@ -63,7 +63,7 @@ context of the server contacted by the client.
 The two above callbacks suffice for the majority of situations in which a
 module developer might want to have initialization code executed.  However,
 every now and then, there arises the case where a module may need to be
-initialized <i>based on configured directives</code>, but still as part
+initialized <i>based on configured directives</i>, but still as part
 of the daemon startup process.  Remember, the module initialization callback
 is called <b>before</b> the configuration file is parsed, not after.  To
 handle this scenario, a new registration function was added in 1.2.8rc1:
@@ -103,7 +103,7 @@ For example:
 
     <font color=green>/* Session initialization function */</font>
     NULL
-  }
+  };
 </pre>
 
 <p>

@@ -33,9 +33,13 @@ function:
 <pre>
   <a href="../src/src/support.c.html#pr_rehash_register_handler"><code>pr_rehash_register_handler(void *<i>arg</i>, void (*<i>cb</i>)(void *))</code></a>
 </pre>
-Keep in mind that these callback functions are executed within the daemon
-process space, and are executed in the <i>inverse</i> order of their
-registration, prior to the re-parsing of the configuration file.
+The first argument, <i>arg</i>, is a pointer that is passed to the callback
+function when the callback is invoked.  Almost always <i>arg</i> is
+<code>NULL</code>; expect to see this registration function changed to accept
+only the function pointer in the future.  Keep in mind that these callback
+functions are executed within the daemon process space, and are executed in the
+<i>inverse</i> order of their registration, prior to the re-parsing of the
+configuration file.
 
 <p>
 <b><i>Do not</i></b> re-register rehash handlers; register them only once,

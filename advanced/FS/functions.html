@@ -26,7 +26,7 @@
 <pre>
   pr_fs_t *pr_register_fs(pool *<i>pool</i>, const char *<i>name</i>, const char *<i>path</i>);
   pr_fs_t *pr_create_fs(pool *<i>pool</i>, const char *<i>name</i>);
-  pr_fs_t *get_fs(const char *<i>path</i>, int *<i>exact</i>);
+  pr_fs_t *pr_get_fs(const char *<i>path</i>, int *<i>exact</i>);
   int pr_insert_fs(pr_fs_t *<i>fs</i>, const char *<i>path</i>);
   int pr_unregister_fs(const char *<i>path</i>);
 </pre>
@@ -67,7 +67,7 @@ the FSIO layer.  This mapping is sorted and searched according to the given
 <i>path</i>; it is <b>highly recommended</b> that the <code>path</code> field
 of a created <code>pr_fs_t</code> be left alone.  If the given <i>path</i>
 argument ends in a trailing slash, then that path will be treated a little
-differently than non-trailing-slash paths by <code>get_fs()</code>.
+differently than non-trailing-slash paths by <code>pr_get_fs()</code>.
 Deferred-resolution paths, <i>e.g.</i> relative paths, and &quot;~&quot; and
 &quot;.&quot; prefixed paths (but <b>not</b> &quot;..&quot; prefixed paths),
 are allowed.  They will be resolved into full paths at login time, after
@@ -85,7 +85,7 @@ handle the given <i>path</i>.  If the returned <code>pr_fs_t *</code> is
 an <b>exact</b> match for the given <i>path</i>, meaning that there was an
 <code>pr_fs_t</code> in the FSIO layer's map whose <i>path</i> member matches
 the given <i>path</i> exactly, then <code>*exact</code> will have a
-<code>TRUE</code> when <code>get_fs()</code> returns.  Otherwise,
+<code>TRUE</code> when <code>pr_get_fs()</code> returns.  Otherwise,
 <code>*exact</code> will be <code>FALSE</code>, meaning that the returned
 <code>pr_fs_t *</code> is a <b>best-match</b> <code>pr_fs_t</code> that
 probably handles paths higher up the filesystem hierarchy from the given
@@ -95,7 +95,7 @@ all paths.
 
 <p>
 When searching for an <code>pr_fs_t</code> to handle <i>path</i>,
-<code>get_fs()</code> searches the map, starting at the root of
+<code>pr_get_fs()</code> searches the map, starting at the root of
 <i>path</i> and looking for more path-specific <code>pr_fs_t</code>s.  It
 keeps tracks of <code>pr_fs_t</code>s for directories, as opposed to specific
 files, and distinguishes between them by looking for a trailing slash.  For
@@ -104,7 +104,7 @@ example, if there was only two <code>pr_fs_t</code>s in the FSIO map, the root
 <pre>
   /path/to/dir
 </pre>
-and the <i>path</i> given to <code>get_fs()</code> is
+and the <i>path</i> given to <code>pr_get_fs()</code> is
 <pre>
   /path/to/dir/file1
 </pre>

@@ -326,16 +326,6 @@ if explicitly denied.<br>
   <a href="../src/src/inet.c.html#_create_inet_pool">src/inet.c</a><br>
 
 <hr>
-<a name="_cvt_octal"><b>_cvt_octal</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static unsigned long _cvt_octal(char *<i>buf</i>, int <i>size</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#_cvt_octal">modules/mod_tar.c</a><br>
-
-<hr>
 <a name="_data_active_open"><b>_data_active_open</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -414,16 +404,6 @@ if explicitly denied.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_auth.c.html#_do_user_counts">modules/mod_auth.c</a><br>
-
-<hr>
-<a name="_dump"><b>_dump</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static void _dump(tardir_t *<i>t</i>, int <i>tab</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#_dump">modules/mod_tar.c</a><br>
 
 <hr>
 <a name="_exists"><b>_exists</b><br>
@@ -2225,16 +2205,6 @@ respectively.<br>
   <a href="../src/src/support.c.html#check_shutmsg">src/support.c</a><br>
 
 <hr>
-<a name="checktarfile"><b>checktarfile</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static tarfile_t *checktarfile(fsdir_t *<i>f</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#checktarfile">modules/mod_tar.c</a><br>
-
-<hr>
 <a name="chk_on_blk_list"><b>chk_on_blk_list</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -2301,16 +2271,6 @@ allocated resources.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/pool.c.html#clear_pool">src/pool.c</a><br>
-
-<hr>
-<a name="closetarfile"><b>closetarfile</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static void closetarfile(fsdir_t *<i>f</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#closetarfile">modules/mod_tar.c</a><br>
 
 <hr>
 <a name="cmd_abor"><b>cmd_abor</b><br>
@@ -2828,26 +2788,6 @@ file is displayed without trouble.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_core.c.html#core_display_file">modules/mod_core.c</a><br>
-
-<hr>
-<a name="create_tar_directory"><b>create_tar_directory</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static tardir_t *create_tar_directory(tarfile_t *<i>tf</i>, tardir_t *<i>parent</i>, const char *<i>path</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#create_tar_directory">modules/mod_tar.c</a><br>
-
-<hr>
-<a name="create_tar_dirlink"><b>create_tar_dirlink</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static tardir_t *create_tar_dirlink(tarfile_t *<i>tf</i>, tardir_t *<i>t</i>, const char *<i>name</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#create_tar_dirlink">modules/mod_tar.c</a><br>
 
 <hr>
 <a name="data_abort"><b>data_abort</b><br>
@@ -4263,16 +4203,6 @@ as determined by the RFC 1413 ident protocol.  Returns
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/ident.c.html#get_ident">src/ident.c</a><br>
-
-<hr>
-<a name="get_local"><b>get_local</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static int get_local(fsdir_t *<i>f</i>, const char *<i>path</i>, char *<i>buf</i>, int <i>maxlen</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#get_local">modules/mod_tar.c</a><br>
 
 <hr>
 <a name="get_name_max"><b>get_name_max</b><br>
@@ -5988,16 +5918,6 @@ explicit match; <code>-1</code> if it is an explicit mismatch (<i>i.e.</i>
   <a href="../src/src/pool.c.html#null_alloc">src/pool.c</a><br>
 
 <hr>
-<a name="opentarfile"><b>opentarfile</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static tarfile_t *opentarfile(fsdir_t *<i>f</i>, const char *<i>name</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#opentarfile">modules/mod_tar.c</a><br>
-
-<hr>
 <a name="outputfiles"><b>outputfiles</b><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -6339,6 +6259,12 @@ arguments into a string.<br>
 <pre>
  char *pstrdup(struct pool *<i>p</i>, const char *<i>s</i>)
 </pre>
+<font color=blue>Comments</font>: This function returns a pointer to a new
+string, <code>NUL</code>-terminated, which is a duplicate of the string
+<i>s</i>.  Memory for the new string is obtained from the given
+<code>pool</code> <i>p</i>, and is freed when that <code>pool</code> is
+destroyed.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/pool.c.html#pstrdup">src/pool.c</a><br>
 
@@ -6349,6 +6275,12 @@ arguments into a string.<br>
 <pre>
  char *pstrndup(struct pool *<i>p</i>, const char *<i>s</i>, int <i>n</i>)
 </pre>
+<font color=blue>Comments</font>: Similar to <code>pstrdup()</code>, this
+function returns a pointer to a new string, <code>NUL</code>-terminated, which
+is a duplicate of the first <i>n</i> characters of the string <i>s</i>.
+Memory for the new string is obtained from the given <code>pool</code>
+<i>p</i>, and is freed when that <code>pool</code> is destroyed.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/pool.c.html#pstrndup">src/pool.c</a><br>
 
@@ -6566,26 +6498,6 @@ quotes must be duplicated.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/modules/mod_readme.c.html#readme_add_entry">modules/mod_readme.c</a><br>
-
-<hr>
-<a name="readtarfile_directory"><b>readtarfile_directory</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static int readtarfile_directory(tarfile_t *<i>tf</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#readtarfile_directory">modules/mod_tar.c</a><br>
-
-<hr>
-<a name="readtarfile_ent"><b>readtarfile_ent</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static tardir_t *readtarfile_ent(tarfile_t *<i>tf</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#readtarfile_ent">modules/mod_tar.c</a><br>
 
 <hr>
 <a name="register_cleanup"><b>register_cleanup</b><br>
@@ -8386,156 +8298,6 @@ children by the master daemon.<br>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/lib/strsep.c.html#strsep">lib/strsep.c</a><br>
-
-<hr>
-<a name="tar_chdir"><b>tar_chdir</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static int tar_chdir(fsdir_t *<i>f</i>, const char *<i>path</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#tar_chdir">modules/mod_tar.c</a><br>
-
-<hr>
-<a name="tar_close"><b>tar_close</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static int tar_close(fsdir_t *<i>f</i>, int <i>fd</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#tar_close">modules/mod_tar.c</a><br>
-
-<hr>
-<a name="tar_closedir"><b>tar_closedir</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static int tar_closedir(fsdir_t *<i>f</i>, void *<i>_dir</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#tar_closedir">modules/mod_tar.c</a><br>
-
-<hr>
-<a name="tar_hit"><b>tar_hit</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static int tar_hit(fsdir_t *<i>f</i>, const char *<i>path</i>, int <i>op</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#tar_hit">modules/mod_tar.c</a><br>
-
-<hr>
-<a name="tar_init"><b>tar_init</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static int tar_init()
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#tar_init">modules/mod_tar.c</a><br>
-
-<hr>
-<a name="tar_lseek"><b>tar_lseek</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static off_t tar_lseek(fsdir_t *<i>f</i>, int <i>fd</i>, off_t <i>offset</i>, int <i>whence</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#tar_lseek">modules/mod_tar.c</a><br>
-
-<hr>
-<a name="tar_lstat"><b>tar_lstat</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static int tar_lstat(fsdir_t *<i>f</i>, const char *<i>path</i>, struct stat *<i>sbuf</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#tar_lstat">modules/mod_tar.c</a><br>
-
-<hr>
-<a name="tar_open"><b>tar_open</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static int tar_open(fsdir_t *<i>f</i>, const char *<i>path</i>, int <i>access</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#tar_open">modules/mod_tar.c</a><br>
-
-<hr>
-<a name="tar_opendir"><b>tar_opendir</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static void *tar_opendir(fsdir_t *<i>f</i>, const char *<i>path</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#tar_opendir">modules/mod_tar.c</a><br>
-
-<hr>
-<a name="tar_read"><b>tar_read</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static int tar_read(fsdir_t *<i>f</i>, int <i>fd</i>, char *<i>buf</i>, size_t <i>size</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#tar_read">modules/mod_tar.c</a><br>
-
-<hr>
-<a name="tar_readdir"><b>tar_readdir</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static struct dirent *tar_readdir(fsdir_t *<i>f</i>, void *<i>_dir</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#tar_readdir">modules/mod_tar.c</a><br>
-
-<hr>
-<a name="tar_readlink"><b>tar_readlink</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static int tar_readlink(fsdir_t *<i>f</i>, const char *<i>path</i>, char *<i>buf</i>, size_t <i>bufsiz</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#tar_readlink">modules/mod_tar.c</a><br>
-
-<hr>
-<a name="tar_stat"><b>tar_stat</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static int tar_stat(fsdir_t *<i>f</i>, const char *<i>path</i>, struct stat *<i>sbuf</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#tar_stat">modules/mod_tar.c</a><br>
-
-<hr>
-<a name="tar_write"><b>tar_write</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static int tar_write(fsdir_t *<i>f</i>, int <i>fd</i>, const char *<i>buf</i>, size_t <i>size</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#tar_write">modules/mod_tar.c</a><br>
-
-<hr>
-<a name="tarfile_gettardir"><b>tarfile_gettardir</b><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- static tardir_t *tarfile_gettardir(tarfile_t *<i>tf</i>, tardir_t *<i>t</i>, const char *<i>path</i>)
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/modules/mod_tar.c.html#tarfile_gettardir">modules/mod_tar.c</a><br>
 
 <hr>
 <a name="timer_sleep"><b>timer_sleep</b><br>

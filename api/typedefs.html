@@ -130,37 +130,6 @@
   <a href="../src/include/modules.h.html#authtable">include/modules.h</a><br>
 
 <hr>
-<a name="binding_t"><b>binding_t</b></a><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- typedef struct _binding {
-
-   struct _binding *next;
-
-   <font color=blue>/* server to handle the request */</font>
-   server_rec *server;
-
-   <font color=blue>/* IP address to which we're "bound" */</font>
-   p_in_addr_t ipaddr;
-
-   int port;
-
-   <font color=blue>/* listen connection (if separate) */</font>
-   connt_t *listen;
-
-   <font color=blue>/* if default connection */</font>
-   char isdefault;
-
-   <font color=blue>/* if handles localhost */</font>
-   char islocalhost;
-
- } binding_t;
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/main.c.html#binding_t">src/main.c</a><br>
-
-<hr>
 <a name="callback_t"><b>callback_t</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -382,26 +351,6 @@
   <a href="../src/src/support.c.html#exithandler_t">src/support.c</a><br>
 
 <hr>
-<a name="fsdir_t"><b>fsdir_t</b></a><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- typedef struct fs_dir_handler fsdir_t;
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/include/fs.h.html#fsdir_t">include/fs.h</a><br>
-
-<hr>
-<a name="fsmatch_t"><b>fsmatch_t</b></a><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- typedef struct fs_dir_match fsmatch_t;
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/include/fs.h.html#fsmatch_t">include/fs.h</a><br>
-
-<hr>
 <a name="glob_t"><b>glob_t</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -493,16 +442,6 @@
   <a href="../src/include/modules.h.html#module">include/modules.h</a><br>
 
 <hr>
-<a name="opendir_t"><b>opendir_t</b></a><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- typedef struct opendir_struct opendir_t;
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/src/fs.c.html#opendir_t">src/fs.c</a><br>
-
-<hr>
 <a name="p_in_addr_t"><b>p_in_addr_t</b></a><br>
 <br>
 <font color=blue>Declaration</font>:<br>
@@ -547,6 +486,21 @@
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/include/dirtree.h.html#privdata_t">include/dirtree.h</a><br>
+
+<hr>
+<a name="pr_response_t"><b>pr_response_t</b></a><br>
+<br>
+<font color=blue>Declaration</font>:<br>
+<pre>
+ typedef struct resp_struc {
+   struct resp_struc *next;
+   char *num;
+   char *msg;
+
+ } pr_response_t;
+</pre>
+<font color=blue>Source File</font>:
+  <a href="../src/include/response.h.html#pr_response_t">include/proftpd.h</a><br>
 
 <hr>
 <a name="pr_scoreboard_entry_t"><b>pr_scoreboard_entry_t</b></a><br>
@@ -599,22 +553,6 @@ nt>
 </pre>
 <font color=blue>Source File</font>:
   <a href="../src/include/scoreboard.h.html#pr_scoreboard_header_t">include/scoreboard.h</a><br>
-
-<hr>
-<a name="response_t"><b>response_t</b></a><br>
-<br>
-<font color=blue>Declaration</font>:<br>
-<pre>
- typedef struct response_struc {
-
-   struct response_struc *next;
-   char *num;
-   char *msg;
-
- } response_t;
-</pre>
-<font color=blue>Source File</font>:
-  <a href="../src/include/proftpd.h.html#response_t">include/proftpd.h</a><br>
 
 <hr>
 <a name="sched_t"><b>sched_t</b></a><br>
@@ -699,20 +637,29 @@ nt>
 <pre>
  typedef struct {
 
-   <font color=blue>/* memory pool for this object */</font>
+   <font color=blue>/* Memory pool for this object */</font>
    pool *pool;
 
-   <font color=blue>/* session and state flags */</font>
-   long flags;
+   <font color=blue>/* Session state flags */</font>
+   volatile int sf_flags;
 
-   <font color=blue>/* remote data address */</font>
+   <font color=blue>/* Session protection flags */</font>
+   volatile int sp_flags;
+
+   <font color=blue>/* Remote data address */</font>
    p_in_addr_t data_addr;
 
-   <font color=blue>/* remote data port */</font>
+   <font color=blue>/* Remote data port */</font>
    short data_port;
 
-   <font color=blue>/* user identified by ident protocol */</font>
+   <font color=blue>/* Is RFC931 (ident) protocol used? */</font>
+   unsigned char ident_lookups;
+
+   <font color=blue>/* User identified by ident protocol */</font>
    char *ident_user;
+
+   <font color=blue>/* RFC2228 authentication mechanism used */</font>
+   const char *rfc2228_mech;
 
    <font color=blue>/* current working directory */</font>
    char cwd[MAX_PATH_LEN];
@@ -771,14 +718,11 @@ nt>
    <font color=blue>/* data connection */</font>
    struct conn_struc *d; 
 
-   <font color=blue>/* active data connection request */</font>
-   struct IO_Request *d_req;
-
    <font color=blue>/* hide password from logs/ps listing */</font>
    int hide_password;
 
-   <font color=blue>/* &lt;Anonymous&gt; root directory */</font>
-   char *anon_root;
+   <font color=blue>/* Chroot directory */</font>
+   char *chroot_path;
 
    <font color=blue>/* &lt;Anonymous&gt; configuration */</font>
    struct config_struc *anon_config;
@@ -787,7 +731,7 @@ nt>
    char *anon_user;
 
    <font color=blue>/* restart marked position */</font>
-   unsigned long restart_pos;
+   off_t restart_pos;
 
    struct {
 
@@ -809,25 +753,30 @@ nt>
      char *path_hidden;
 
      char *bufstart, *buf;
-     int bufsize, buflen;
+     unsigned int int bufsize, buflen;
                 
-     <font color=blue>/* time current transfer started */</font>
+     <font color=blue>/* Time current transfer started */</font>
      struct timeval start_time;
 
-     <font color=blue>/* total size of file (if known) */</font>
-     unsigned long file_size;
+     <font color=blue>/* Total size of file (if known) */</font>
+     off_t file_size;
 
-     <font color=blue>/* total bytes transferred */</font>
-     unsigned long total_bytes;
-
-     int (*get_data)(struct IO_FILE *, char *, int);
-     int (*complete)(struct IO_FILE *);
-     int (*abort)(struct IO_FILE *, int err); 
+     <font color=blue>/* Total bytes transferred */</font>
+     off_t total_bytes;
 
    } xfer;
 
-   <font color=blue>/* total bytes transferred for this session */</font>
-   unsigned long total_bytes;
+   <font color=blue>/* Total bytes transferred for this session */</font>
+   off_t total_bytes;
+
+   <font color=blue>/* Total number of files uploaded in this session */</font>
+   unsigned int total_files_in;
+
+   <font color=blue>/* Total number of files downloaded in this session */</font>
+   unsigned int total_files_out;
+
+   <font color=blue>/* Total number of files transferred (both uploaded and download) in this session */</font>
+   unsigned int total_files_xfer;
 
  } session_t;
 </pre>

@@ -3079,9 +3079,10 @@ its name says.<br>
 </pre>
 <font color=blue>Comments</font>:  Takes a directory <i>path</i> and returns
 its corresponding <i>absolute</i> path, which is based on the root
-directory, not on a <code>chroot</code>ed directory.  If <i>interpolate</i>
-is <code>TRUE</code>, <code>~username</code> references will be interpolated
-appropriately.<br>
+directory, not on a <code>chroot</code>ed directory (<i>i.e.</i>
+<code>chroot()</code> does <b>not</b> affect the absolute path).
+If <i>interpolate</i> is <code>TRUE</code>, <code>~username</code> references
+will be interpolated appropriately.<br>
 <br>
 <font color=blue>Source File</font>:
   <a href="../src/src/support.c.html#dir_abs_path">src/support.c</a><br>
@@ -3107,6 +3108,11 @@ of <i>path</i> do not exist, they are ignored.<br>
 <pre>
   char *dir_canonical_path(pool *<i>p</i>, const char *<i>path</i>)
 </pre>
+<font color=blue>Comments</font>:  Takes a directory <i>path</i> and returns
+its corresponding <i>canonical</i> path, which is based on the current
+working directory (<i>i.e.</i> <code>chroot()</code> does affect the canonical
+path).  <code>~username</code> references are interpolated.<br>
+<br>
 <font color=blue>Source File</font>:
   <a href="../src/src/support.c.html#dir_canonical_path">src/support.c</a><br>
 

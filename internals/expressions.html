@@ -61,13 +61,17 @@ catch the administrator offguard:
   user2,!user3
 </pre>
 As an OR expression, this would evaluate to TRUE for <code>user1</code>, for
-<code>user1</code> != <code>user3</code> is TRUE.  Similarly for class
-names.  There <i>are</i> times when the developer may want to use
-user or class names in AND expressions; the above expression:
+<code>user1</code> != <code>user3</code> is TRUE.  All of this is valid for
+class names.
+
+<p>
+There <i>are</i> times when the developer may want to use user or class names
+in AND expressions, <i>e.g.</i>:
 <pre>
-  user2,!user3
+  !user2,!user3
 </pre>
-would evaluate to FALSE for <code>user1</code> as an AND expression.
+would evaluate to TRUE, as an AND expression, for any user other than
+<code>user2</code> and <code>user3</code>.
 
 <p>
 The ProFTPD API functions for performing the evaluation of a given expression are:

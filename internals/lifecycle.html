@@ -1,0 +1,120 @@
+<!-- $Id$ -->
+<!-- $Source$ -->
+
+<html>
+<head>
+<title>ProFTPD Developer's Guide: Process Life Cycle</title>
+</head>
+
+<body bgcolor=white>
+
+<hr><br>
+<center>
+<img src="../images/proftpd.png" border=0>
+<br><br>
+<h3><b>ProFTPD Developer's Guide: Process Life Cycle</b></h3>
+<i><b>ProFTPD Version 1.2</b></i><br>
+</center>
+<hr><br>
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+<p>
+<b>Process Life Cycle</b><br>
+The aim here is to provide a walkthrough of an FTP process, from start to
+finish, in detail.  This will help to know what the server is doing at a
+given point during a session, and at what points modules are called upon to
+do their magic during the handling of that session.
+
+<p>
+The basic model is a core engine which provides services via APIs to
+pluggable modules that do all the work.  The core engine handles
+the difficult work such as filesystem I/O, network I/O, timers, and
+calling out to modules, at various points during the process life cycle.
+
+<p>
+First, the server must be started.  On startup, the server performs the
+following tasks, in order:
+<ul>
+  <li>parse and handle command-line parameters
+  <li>initialize subsystems
+  <li>call all module initialization functions
+  <li>parse the configuration file(s)
+</ul>
+At this point, the behavior of the server process depends on the
+<code>ServerType</code> configuration directive.  If set to <em>inetd</em>,
+the process will immediately start processing the given file descriptor
+as a client connection.  If <em>standalone</em> is configured instead,
+the process will daemonize, separating itself from the parent process,
+open the necessary sockets, and start listening for connections.
+
+<p>
+The server process calls <a href="../src/src/main.c.html#fork_server"><code>fork_server()</code></a> to handle connecting clients.  Again the
+<code>ServerType</code> directive changes the behavior of the process; when
+acting as a <em>standalone</em> server, the process forks a new process to
+handle the client.  <b>This is an important point to remember</b>.  Changes
+made to the child process (also called the <i>session process</i>) will not
+be visible to the parent daemon process.  For <em>inetd</em> servers, the
+<code>inetd</code>/<code>xinetd</code> daemon is the parent process.  From
+this point on, the process handles the connection as an FTP session.
+
+<p>
+Before handling any FTP commands the client may have sent, the session
+process has some preparations to do:
+<ul>
+  <li>close any listening sockets; the child process no longer needs
+      those file descriptors
+  <li>register signal handlers for <code>SIGUSR1</code> and <code>SIGUSR2</code>
+  <li>prepare for logging, either syslog or to the <code>SystemLog</code> or
+      <code>ServerLog</code> file
+  <li>set protocol options on the TCP connection
+  <li>lookup the server configuration to be used for handling this client
+  <li>perform reverse and reverse-reverse DNS resolution
+  <li>check for any scheduled shutdowns in <code>/etc/shutmsg</code>
+  <li>check for any applicable <code>&lt;Limit LOGIN&gt;</code> sections
+  <li>lookup the appropriate <code>&lt;Class&gt;</code> for the connected
+      client, if any
+  <li>call all module session initialization functions
+  <li>get the remote user identity via RFC1413 (ident) resolution
+  <li>set the session resource limits
+</ul>
+
+<p>
+Now the session process enters <a href="../src/src/main.c.html#cmd_loop"><code>cmd_loop()</code></a>, an endless loop for processing FTP commands and
+issuing responses.  Before the process handles the first command, though,
+it displays the server welcome message to the client.  Commands are
+handled via command handlers, a separate cycle described
+<a href="../handlers/command.html">here</a>.
+
+<p>
+All commands are checked against <code>Allow</code> and <code>Deny</code>
+filters.  In addition, some commands are not allowed prior to authentication;
+this access check is performed during the command dispatch cycle as well.
+Allowed commands are recorded in the scoreboard entry for the session,
+and then dispatched to the modules.
+
+<p>
+Once a session has ended, either because the client gave the <code>QUIT</code>
+command, the TCP connection closed, the session timed out, or some more
+sinister mistake occurred, the <a href="../src/src/main.c.html#end_login"><code>end_login()</code></a> is called to clean up after the client.
+
+<p>
+<center><a href="../toc.html">Table of Contents</a></center><br>
+
+<hr><br>
+
+Author: <i>$Author$</i><br>
+Last Updated: <i>$Date$</i><br>
+
+<br><hr>
+
+<font size=2><b><i>
+&copy; Copyright 2000-2004 TJ Saunders<br>
+ All Rights Reserved<br>
+</i></b></font>
+
+<hr><br>
+
+</body>
+</html>

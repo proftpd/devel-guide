@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>ProFTPD Developer's Guide: Tour of a Session</title>
+<title>ProFTPD Developer's Guide: The <code>session</code> Structure</title>
 </head>
 
 <body bgcolor=white>
@@ -12,7 +12,7 @@
 <center>
 <img src="../images/proftpd.png" border=0>
 <br><br>
-<h3><b>ProFTPD Developer's Guide: Tour of a Session</b></h3>
+<h3><b>ProFTPD Developer's Guide: The <code>session</code> Structure</b></h3>
 <i><b>ProFTPD Version 1.2</b></i><br>
 </center>
 <hr><br>
@@ -21,48 +21,34 @@
 <center><a href="../toc.html">Table of Contents</a></center><br>
 
 <p>
-<b>Tour of a Session</b><br>
-The aim here is to provide a walkthrough of an FTP session, from start to
-finish, in detail.  This will help to know what the server is doing at a
-given point during a session, and at what points modules are called upon to
-do their magic during the handling of that session.
+<b>The <code>session</code> structure</b><br>
+session.anon_config
+session.c
+session.chroot_path
+session.curr_cmd
+session.curr_phase
+session.d
+session.dir_config
+session.pool
+session.xfer
+session.xfer.xfer_type
+session.xfer.path
+session.xfer.file_size
+session.xfer.total_bytes
+link to credentials page
 
 <p>
-First, the server must be started.  On startup, the server parses and handles
-any command line options, initializes some subsystems, calls all registered
-modules' initialization functions (if they registered one), parses the
-configuration file(s), then readies itself to receive FTP client connection
-requests.
-
-server_loop()
-
-fork_server()
- - block SIGTERM, SIGCHLD, SIGUSR1, SIGUSR2 while it's forking
- - parent closes the socket fd, adds the child to its maintained list of
-   children, then unblocks the signals
- - child unblocks signals, registers handlers for SIGUSR1, SIGUSR2.  Returns
-   default handler to SIGCHLD, ignores SIGHUP (good!)
- - do reverse DNS lookups (twice?), set socket options
- - find the server for this connection (IP vs DNS names,
-   FTP protocol limitations, DefaultServer), deallocate all other servers
-   (interesting...no cross-server communication allowed...cool!)
- - assigns permanent_pool to session.pool (what the hell?)
- - check for /etc/shutmsg
- - check for <Limit LOGIN> directives
- - attempt to get ID of remote user using RFC1413 identd
- - call all module child init functions
-
-cmd_loop() 
- - display connection information, greetings
- - set/reset timers
- - double-check argument against CommandBufferSize
- - dispatch command to handlers: dispatch cycle, commands allowed before/after
-    authentication
-dispatch_cmd()
- - double-check command against Allow/DenyFilters
- - log command in scoreboard file via log_add_run()
- - call command handler
-end_login()
+<b>Other global variables</b><br>
+<code>main_server</code>
+<code>permanent_pool</code>
+AddressCollisionCheck
+MultilineRFC2228
+ServerMaxInstances
+ServerType
+ServerUseReverseDNS
+SocketBindTight
+is_master
+mpid
 
 <p>
 <center><a href="../toc.html">Table of Contents</a></center><br>
@@ -75,7 +61,7 @@ Last Updated: <i>$Date$</i><br>
 <br><hr>
 
 <font size=2><b><i>
-&copy; Copyright 2000-2003 TJ Saunders<br>
+&copy; Copyright 2000-2004 TJ Saunders<br>
  All Rights Reserved<br>
 </i></b></font>
 

@@ -269,8 +269,9 @@ a single Boolean parameter, as it currently exists in the core code:
     <font color=green>/* Make sure a correct Boolean parameter was given, and return
      * an informative error message if not.
      */</font>
-    if ((bool = get_boolean(cmd, 1)) == -1)
-      CONF_ERROR(cmd, "expected boolean argument.");
+    bool = get_boolean(cmd, 1);
+    if (bool == -1)
+      CONF_ERROR(cmd, "expected Boolean parameter");
 
     <font color=green>/* Allocate a <code>config_rec</code>. The NULL is just a temporary placeholder. */</font>
     c = add_config_param(cmd->argv[0], 1, NULL);

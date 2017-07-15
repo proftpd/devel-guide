@@ -20,6 +20,7 @@ change as we gain experience with it.  However, it will be easy to adapt
 modules to any changes that are made.
 
 ----------
+
 ## Handlers, Modules, and Commands
 
 ProFTPD breaks down command handling into a series of simple steps or _phases_,
@@ -406,7 +407,9 @@ more or less like this:
     }
 
     if (new_filename != NULL) {
-      /* Copy the new filename into the cmd_rec, for use by the remaining handlers. */
+      /* Copy the new filename into the cmd_rec, for use by the remaining
+       * handlers.
+       */
       sstrcpy(cmd->arg, new_filename, strlen(new_filename));
     }
 

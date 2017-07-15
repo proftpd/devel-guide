@@ -2,6 +2,12 @@
 
 ---
 
+Status
+
+[![Build Status](https://travis-ci.org/proftpd/devel-guide.svg?branch=master)](https://travis-ci.org/proftpd/devel-guide)
+
+---
+
 [Table of Contents](toc.md)
 
 ---

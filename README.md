@@ -1,7 +1,7 @@
 ProFTPD Developer Guide
 =======================
 ---
-[Table of Contents][toc.md]
+(Table of Contents)[toc.md]
 ---
 
 ## Purpose
@@ -83,5 +83,5 @@ s/he should be held responsible for not describing things exactly as ProFTPD
 is behaving.  As always, _caveat emptor_.
 
 ---
-[Table of Contents][toc.md]
+(Table of Contents)[toc.md]
 ---

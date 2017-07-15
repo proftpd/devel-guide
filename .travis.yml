@@ -1,0 +1,7 @@
+install:
+  - sudo apt-get update -qq
+  # for Markdown linting
+  - gem install mdl
+
+script:
+  - mdl .

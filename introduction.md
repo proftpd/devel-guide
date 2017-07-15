@@ -14,8 +14,8 @@ deal with, _etc_.  They are not yet nearly complete, but hopefully, they will
 help you get your bearings.  Keep in mind that the API is still subject to
 change as we gain experience with it.  However, it will be easy to adapt
 modules to any changes that are made.
-----------
 
+----------
 ## Handlers, Modules, and Commands
 
 ProFTPD breaks down command handling into a series of simple steps or _phases_,
@@ -99,8 +99,8 @@ With no further ado, the "casing" module itself:
     NULL,                   /* Pointer to the previous module -- ALWAYS NULL */
     0x20,                   /* ProFTPD Module API version 2.0 */
     "casing",               /* Module name */
-    case_conftab,           /* Configuration directive handler table */
-    case_cmdtab,            /* Command handler table */
+    casing_conftab,         /* Configuration directive handler table */
+    casing_cmdtab,          /* Command handler table */
     NULL,                   /* Authentication function table */
     NULL,                   /* Module initialization function */
     NULL                    /* Connection initialization function */
@@ -258,7 +258,7 @@ function, which takes a pointer to a pool, and the additional arguments, of
 which the _last_ one *must* be `NULL`. The function allocates enough contiguous
 memory to fit copies of each of the strings, as a unit; for example:
 ```
-     pstrcat(cmd->pool, "foo", "/", "bar", NULL);
+  pstrcat(cmd->pool, "foo", "/", "bar", NULL);
 ```
 returns a pointer to 8 bytes worth of memory, initialized to `"foo/bar"`.
 
@@ -345,7 +345,7 @@ of the configuration directive's `cmd_rec` is pointed to by `cmd->server`.
 The "casing" module configuration table has entries for these directives,
 which look like this (as seen above):
 ```
-  static conftable case_conftab[] = {
+  static conftable casing_conftab[] = {
     { "DowncaseFileNames",  set_downcase_filenames, NULL },
     { "UpcaseFilenames",    set_upcase_filenames,   NULL },
     { NULL }
@@ -362,7 +362,7 @@ in the module's handlers, specifically for its filename handler, which looks
 more or less like this:
 ```
   MODRET fixup_filenames(cmd_rec *cmd) {
-    char *current_filename = NULL, *new_filename = NULL;
+    char *new_filename = NULL;
     config_rec *downcase = NULL, *upcase = NULL;
 
     /* Check the current configuration context for the configuration
@@ -395,8 +395,10 @@ more or less like this:
       }
     }
 
-    /* Copy the new filename into the cmd_rec, for use by the remaining handlers. */
-    sstrcpy(cmd->arg, new_filename, strlen(new_filename));
+    if (new_filename != NULL) {
+      /* Copy the new filename into the cmd_rec, for use by the remaining handlers. */
+      sstrcpy(cmd->arg, new_filename, strlen(new_filename));
+    }
 
     /* Done with adjustments; let the remaining handlers continue processing. */
     return PR_DECLINED(cmd);

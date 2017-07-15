@@ -1,7 +1,9 @@
-ProFTPD Developer Guide
-=======================
+# ProFTPD Developer Guide
+
 ---
+
 [Table of Contents](toc.md)
+
 ---
 
 ## Purpose
@@ -57,6 +59,7 @@ inaccuracies.
 
 This document may be reproduced in whole or in part, without fee, subject to
 the following restrictions:
+
 * The copyright notice above and this permission notice must be preserved
   complete on all complete or partial copies.
 * Any translation or derived work must be approved by the author in writing
@@ -83,5 +86,7 @@ s/he should be held responsible for not describing things exactly as ProFTPD
 is behaving.  As always, _caveat emptor_.
 
 ---
+
 [Table of Contents](toc.md)
+
 ---

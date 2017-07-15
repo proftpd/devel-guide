@@ -1,8 +1,10 @@
-ProFTPD Developer Guide: Acknowledgments
-========================================
+# ProFTPD Developer Guide: Acknowledgments
+
+---
 
 ## Acknowledgments
-* Jesse Sipprell (<i>a.k.a</i> Floody)
+
+* Jesse Sipprell (_a.k.a_ Floody)
 * John Morrissey
 * Andrew Houghton
 * Michael Renner
@@ -11,4 +13,5 @@ ProFTPD Developer Guide: Acknowledgments
 * Habeeb J. Dihu (_a.k.a_ MacGyver)
 
 And to Rob Schulhof for making a request that started this all.
+
 ---

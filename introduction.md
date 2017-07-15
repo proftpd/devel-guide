@@ -19,7 +19,7 @@ help you get your bearings.  Keep in mind that the API is still subject to
 change as we gain experience with it.  However, it will be easy to adapt
 modules to any changes that are made.
 
-----------
+---
 
 ## Handlers, Modules, and Commands
 

@@ -139,14 +139,13 @@ FTP commands in order to calculate the total data transfer for a session.
 
 ### Post-Command Error Phase
 
-<code>POST_CMD_ERR</code> type handlers handle any reporting and logging
-of error conditions that may occur during the processing of a
-<code>PRE_CMD</code> or <code>CMD</code> handler.  One thing that distinguishes
-a <code>POST_CMD_ERR</code> handler from a <code>LOG_CMD_ERR</code> handler
-is that any error responses added during a <code>POST_CMD_ERR</code> handle,
-using <code>add_response_err()</code>, will be seen by the client when the
-error response chain is flushed; similar responses added by a
-<code>LOG_CMD_ERR</code> handler are not seen by the client.
+`POST_CMD_ERR` handlers handle any reporting and logging of error conditions
+that may occur during the processing of a `PRE_CMD` or `CMD` handler.  One
+thing that distinguishes a `POST_CMD_ERR` handler from a `LOG_CMD_ERR` handler
+is that any error responses added during by a  `POST_CMD_ERR` handler,
+using `pr_response_add_err()`, **will** be sent to the client when the
+error response chain is flushed; similar responses added by a `LOG_CMD_ERR`
+handler are **not** sent to the client.
 
 #### Example `POST_CMD_ERR` Handlers
 

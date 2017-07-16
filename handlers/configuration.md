@@ -72,14 +72,15 @@ those parameters will be used later by the module code.
 
 First, there is the matter of accessing the parameters that appeared in the
 configuration file.  A configuration directive handler accepts a single
-argument, a `cmd_rec *`.  The parameter values for the directive are stored in
-this structure in a manner similar to what is passed, by the operating system,
-to any C program's `main()` function: an `int argc` denoting the number of
-parameters, and a `void **argv` containing the array of parameters as strings.  In the given `cmd_rec *` argument, then, `cmd->argc` is the number of
-parameters used **including** the directive name itself, and `cmd->argv` are
-those parameters, also including the directive name itself.  The first
-parameter is the directive name: `cmd->argv[0]`.  The `cmd->argv` array
-is `NULL`-terminated; `cmd->argv[cmd->argc]` is always `NULL`.
+argument, a `cmd_rec *`.  The parameter values for the directive are stored
+in this structure in a manner similar to what is passed, by the operating
+system, to any C program's `main()` function: an `int argc` denoting the
+number of parameters, and a `void **argv` containing the array of parameters
+as strings.  In the given `cmd_rec *` argument, then, `cmd->argc` is the
+number of parameters used **including** the directive name itself, and
+`cmd->argv` are those parameters, also including the directive name itself.
+The first parameter is the directive name: `cmd->argv[0]`.  The `cmd->argv`
+array is `NULL`-terminated; `cmd->argv[cmd->argc]` is always `NULL`.
 
 One common type of configuration directive is a simple on/off Boolean switch.
 For parsing a parameter that should be a Boolean value, there is the
@@ -158,7 +159,6 @@ server that this `config_rec` should be copied and "merged down" into all
 lower contexts until it either hits a configuration record with the same name,
 or bottoms out.
 
-<p>
 Here is an example of what the configuration tree looks like, _without_
 `CF_MERGEDOWN`, for a fictitious `ExampleDirective`, assuming that directive
 appeared within an `<Anonymous>` section in the configuration file:
@@ -296,7 +296,7 @@ and data such as ACLs, the `find_config()` and `find_config_next()` API is
 necessary.  These functions return pointers to the matched configuration
 record itself, rather than just the first argument of that record.  Any
 `config_rec` stored with more than one parameter will need to be accessed via
-these functions.  
+these functions.
 
 The next consideration is in which correct configuration _set_ to look for the
 desired records.  Which configuration set to use depends on the directive and

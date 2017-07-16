@@ -91,7 +91,7 @@ back to the client.
 
 ### Direct Responses
 
-The second way of sending responses to clients, the <i>direct response</i>
+The second way of sending responses to clients, the _direct response_
 method, is incompatible with other handlers, and should be used only if the
 handler is about to close the connection to the client, and terminate the
 child process handling that connection.  This method **must** use one of the

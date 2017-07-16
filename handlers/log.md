@@ -18,7 +18,6 @@ mod_log, mod_xfer
 
 Not just for logging!
 
-
 ---
 
 [Table of Contents](../toc.md)

@@ -166,7 +166,6 @@ Used to map a group name to a GID.  The name to be mapped is passed via
 
 The handler is accessed via the Auth API `pr_auth_name2gid()` function.
 
-
 ## Using the Auth API
 
 An authentication module's handlers are used at various times during the
@@ -188,6 +187,7 @@ lifetime of the server:
   legible directory listings.
 
 ### Authentication Module Order
+
 The "cascading" order of authentication handlers is similar to that of command
 handlers:
 

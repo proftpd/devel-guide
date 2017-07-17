@@ -35,8 +35,9 @@
 1. [ProFTPD Internals](internals/README.md)
 
    * Configuration Sections (or _contexts_)
-   * Module Hash Tables
+   * Symbol Tables
    * Timers
+   * Events
 
 1. [ProFTPD API](api/README.md)
 1. [ProFTPD Advanced APIs](advanced/README.md)

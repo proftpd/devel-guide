@@ -84,7 +84,7 @@ configure option.  Then, run your compiled `proftpd` executable like so:
   Type "show copying" to see the conditions.
   There is absolutely no warranty for GDB.  Type "show warranty" for details.
   (no debugging symbols found)...
-  (gdb) 
+  (gdb)
 ```
 
 At the prompt, start running the program, and pass it any of the usual

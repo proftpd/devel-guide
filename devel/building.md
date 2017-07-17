@@ -55,7 +55,7 @@ For example, `mod_ldap` requires that the linker use the `libldap` and
 
 ```
   /*
-   * $Libraries: -lldap -llber$ 
+   * $Libraries: -lldap -llber$
    */
 ```
 

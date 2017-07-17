@@ -33,7 +33,7 @@ MODRET site_time(cmd_rec *cmd) {
 
   /* This case does the work of returning the local time to the client. */
   if (strcasecmp(cmd->argv[1], "TIME") == 0) {
-    char timestr[80] = {'\0'};
+    char time_text[80] = {'\0'};
     time_t now = time(NULL);
     struct tm *tnow = NULL;
 
@@ -74,13 +74,13 @@ MODRET site_time(cmd_rec *cmd) {
     }
 
     /* Print the local time into the string buffer. */
-    strftime(timestr, sizeof(timestr), "%a %b %d %T %Z %Y", tnow); 
-    timestr[sizeof(timestr)-1] = '\0';
+    strftime(time_text, sizeof(time_text), "%a %b %d %T %Z %Y", tnow);
+    time_text[sizeof(time_text)-1] = '\0';
 
     /* The 200 response code is the normal value for such "generic" commands
      * as site-specific SITE commands.
      */
-    pr_response_add(R_200, "The current time is: %s", timestr);
+    pr_response_add(R_200, "The current time is: %s", time_text);
 
     /* If you want to add a multiline response, use the R_DUP macro, like
      * so:

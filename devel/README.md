@@ -59,8 +59,8 @@ third-party libraries or code, be sure to include the necessary copyrights and
 licensing information as required by the use of those files.  Some licensing
 issues to keep in mind are mentioned here:
 
-* [http://www.gnu.org/licenses/gpl-faq.html#GPLModuleLicense]
-* [http://www.gnu.org/licenses/gpl-faq.html#GPLAndPlugins]
+* <http://www.gnu.org/licenses/gpl-faq.html#GPLModuleLicense>
+* <http://www.gnu.org/licenses/gpl-faq.html#GPLAndPlugins>
 
 Due to the nature of the ProFTPD odule interface, third-party modules are
 considered part of the main binary, and thus by definition fall under the GPL

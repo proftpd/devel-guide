@@ -5,4 +5,4 @@ install:
   - gem install mdl
 
 script:
-  - mdl --rules ~MD013 .
+  - mdl --rules ~MD013,~MD033 .

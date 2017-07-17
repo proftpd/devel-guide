@@ -29,7 +29,7 @@ Descriptions:
 * [Configuration contexts](contexts.md)
 * [Handling signals](signals.md)
 * [Scoreboard](scoreboard.md)
-* [Resolving <Directory> paths](directory.md)
+* [Resolving `<Directory>` paths](directory.md)
 * [Configuration "expressions"](expressions.md)
 * [`.ftpaccess` files](ftpaccess.md)
 * [Configuration parsing](parsing.md)

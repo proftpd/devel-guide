@@ -46,7 +46,7 @@ There are some additional resources which provide good overall descriptions
 of FTP; useful as references, and for sending to others:
 
 * Dan J. Bernstein's [FTP protocol description](http://cr.yp.to/ftp.html)
-* [Active _vs_ Passive FTP](http://slacksite.com/other/ftp.html)
+* [Active vs Passive FTP](http://slacksite.com/other/ftp.html)
 
 ---
 

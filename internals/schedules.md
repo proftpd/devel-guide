@@ -18,9 +18,9 @@ than a quiescent one.
 The Schedule API to use when dealing with schedules is:
 
 * `void schedule(void (*cb)(void *, void *, void *, void *), int nloops, void *a1, void *a2, void *a3, void *a4)`
-*  `void run_schedule()`
+* `void run_schedule()`
 
-The `schedule() function (which would ideally be named `pr_schedule_add()`)
+The `schedule()` function (which would ideally be named `pr_schedule_add()`)
 registers a schedule callback function _cb_, which handles four `void *`
 arguments, to be run every _nloops_.  When called, _cb_ will be passed the
 registered pointers _a1_ through _a4_, which correspond to the four `void *`
@@ -89,7 +89,7 @@ is invoked at the following points in the core processing engine:
 
 Similar to timers, schedules **do not** provide fine-grained time resolution,
 and are not meant for precise work.  In fact, the nature of the loops means
-the time at which a schedule is triggered is very coarse.  Schedules are a 
+the time at which a schedule is triggered is very coarse.  Schedules are a
 mechanism for scheduling something to happen _at some point_ in the future,
 when that activity is not time-critical.  Periodically checking state,
 performing scrubbing or cleanup activities, these are activities suited for

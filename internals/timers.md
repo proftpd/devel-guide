@@ -61,10 +61,10 @@ int login_timeout_cb(CALLBACK_FRAME) {
   /* Is this the proper behavior when timing out? */
   pr_response_send_async(R_421,
     "Login Timeout (%d seconds): closing control connection.", TimeoutLogin);
-  
+
   pr_log_pri(PR_LOG_NOTICE, "%s", "FTP login timed out, disconnected.", 0, NULL);
   pr_session_disconnect(&auth_module, PR_SESS_DISCONNECT_TIMEOUT, "TimeoutLogin");
- 
+
   /* Don't restart the timer */
   return 0;
 }

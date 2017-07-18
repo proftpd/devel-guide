@@ -49,7 +49,7 @@ from queueing; a process can see _which_ signals are pending, but not _how
 many_ of each particular signal have been raised.  The lack of kernel-level
 support for queueing of blocked signals is, I suspect, a design decision,
 possibly because of the possibility of having to queue an infinite number of
-signals. 
+signals.
 
 ### Signal Blocking and Masking
 
@@ -86,14 +86,14 @@ The core engine implements handlers for the following signals:
   processes.
 * `SIGILL`: Handled by the `SIGTERM` handler in both daemon and session
   processes.
-* `SIGFPE1: Handled by the `SIGTERM` handler in both daemon and session
+* `SIGFPE`: Handled by the `SIGTERM` handler in both daemon and session
   processes.
 * `SIGSEGV`: Handled by the `SIGTERM` handler in both daemon and session
   processes.
 * `SIGURG`: Ignored in both daemon and session processes.
 * `SIGSTKFLT`: If defined, this signal is handled by the `SIGTERM` handler in
   both daemon and session processes.
-* `SIGBUS`: If defined, this signal is handled by the `SIGTERM` handler in 
+* `SIGBUS`: If defined, this signal is handled by the `SIGTERM` handler in
   both daemon and session processes.
 * `SIGIO`: Ignored in both daemon and session processes.
 

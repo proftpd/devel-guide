@@ -82,7 +82,7 @@ during its shutdown process, to remove the scoreboard.  There is no reason to
 leave a scoreboard around when the daemon is not running (unless the daemon
 has a `ServerType` of "inetd").
 
-`pr_open_scoreboard() is called to open the scoreboard.  The given _mode_ is
+`pr_open_scoreboard()` is called to open the scoreboard.  The given _mode_ is
 the same as that given to `open(2)`, and is usually `O_RDONLY`.  If non-`NULL`,
 _daemon_pid_ will point to the process ID of the currently running daemon for
 the scoreboard upon return of the function.

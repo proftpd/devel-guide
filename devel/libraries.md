@@ -1,4 +1,4 @@
-# ProFTPD Developer Guide: Module Development: Third-party Libraries
+# ProFTPD Developer Guide: Module Development: Third-Party Libraries
 
 ---
 

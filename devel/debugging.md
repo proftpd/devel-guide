@@ -31,17 +31,24 @@ By itself, this option has two side effects:
    and warnings, before contributing it.
 
 The `--enable-devel` option can also take parameters that alter ProFTPD
-behavior.  These parameters are: <code>coredump</code>,
-<code>nodaemon</code>, and <code>nofork</code>.  The first parameter,
-<code>coredump</code>, enables <code>proftpd</code> to generate a
-<code>core</code> file under certain conditions (segfault,
-<code>SIGABRT</code>); unless this parameter is used, the code takes stringent
-steps explicitly in order to <b>not</b> generate coredumps, by design.
-The second parameter, <code>nodaemon</code>, makes <code>proftpd</code> not
-use any of the functions it would normally use when daemonizing.  Finally,
-the <code>nofork</code> parameter means that <code>proftpd</code> will not
-<code>fork()</code> a process to handle a connecting client--all sessions will
-be handled by the same <code>proftpd</code> process.
+behavior.  These parameters are:
+
+* `coredump`: Enables `proftpd` to generate a `core` file under certain
+  conditions (_e.g._ segfault, `SIGABRT`, _etc_).  Without this option,
+  ProFTPD takes _stringent_ steps to explicitly **not** create `core` files,
+  as they leak too much information.
+* `coverage`: Enables the compiling of `proftpd` with code coverage support
+  enabled; used for the [code coverage statistics](https://coveralls.io/github/proftpd/proftpd) for ProFTPD.
+* `nodaemon`: Tells `proftpd` to not _daemonize_, but instead to always run
+  in the foreground.  Debuggers often have issues when programs daemonize, as
+  this process usually involves multiple `fork(2)` calls.
+* `nofork`: Tells `proftpd` to **not** use `fork(2)` to create a new process
+  for each connection; useful for debugging code paths only used during the
+  handling of a session.  Newer versions of ProFTPD, however, provide the
+  `-X` command-line option for this functionality, and do not require this
+  build-time option.
+* `profile`: Enables the compiling of `proftpd` with profiling support (see
+  below).
 
 These parameters can be combined when using the `--enable-devel` option, like
 so:

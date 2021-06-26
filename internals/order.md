@@ -19,21 +19,23 @@ is thus _very_ important.
 
 To see just what your module load order is, use:
 
-    $ proftpd -l
-    Compiled-in modules:
-      mod_core.c
-      mod_xfer.c
-      mod_rlimit.c
-      mod_auth_unix.c
-      mod_auth_file.c
-      mod_auth.c
-      mod_ls.c
-      mod_log.c
-      mod_site.c
-      mod_delay.c
-      mod_facts.c
-      mod_auth_pam.c
-      mod_tls.c
+```
+$ proftpd -l
+Compiled-in modules:
+  mod_core.c
+  mod_xfer.c
+  mod_rlimit.c
+  mod_auth_unix.c
+  mod_auth_file.c
+  mod_auth.c
+  mod_ls.c
+  mod_log.c
+  mod_site.c
+  mod_delay.c
+  mod_facts.c
+  mod_auth_pam.c
+  mod_tls.c
+```
 
 The modules will be listed from lowest priority to highest priority.
 

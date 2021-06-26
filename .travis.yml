@@ -1,8 +1,0 @@
-sudo: false
-
-install:
-  # for Markdown linting
-  - gem install mdl
-
-script:
-  - mdl --rules ~MD013,~MD026,~MD033,~MD039 .

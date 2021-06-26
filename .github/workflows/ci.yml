@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    container: ubuntu:18.04
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+
+      - name: Whitespace check
+        run: |
+          if [[ -n $(git diff --check HEAD^) ]]; then
+            echo "You must remove whitespace before submitting a pull request"
+            echo ""
+            git diff --check HEAD^
+            exit 1
+          fi
+
+      - name: Install packages
+        run: |
+          # Need to add other repos for e.g. libsodium
+          apt-get update -qq
+          # for builds
+          apt-get install -y git make
+
+          # for HTML validation
+          apt-get install -y tidy
+
+          # for Markdown validation
+          apt-get install -y ruby
+          gem install -N chef-utils -v 16.6.14
+          gem install -N mdl
+
+      - name: Check HTML docs
+        run: |
+          for f in $(find . -type f -name "*.html" -print); do echo "Processing $f"; tidy -errors -omit -q $f; done || exit 0
+
+      - name: Check Markdown docs
+        run: |
+          mdl --rules ~MD013,~MD026,~MD033,~MD039 .

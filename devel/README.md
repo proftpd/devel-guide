@@ -47,6 +47,7 @@ common tasks you can expect to encounter, and how they can be done:
 * Using third-party [libraries](libraries.md) in your module
 * [Initializing](initializing.md) your module
 * Using session [credentials](credentials.md) (_e.g._ user, groups, class)
+* Handling [disconnects](disconnects.md) in your module
 * Adding new [`SITE`](site.md) commands with your module
 * [Logging](logging.md) in your module
 * [Chroot](chroot.md) workarounds in your module

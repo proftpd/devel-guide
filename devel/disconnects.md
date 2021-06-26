@@ -25,6 +25,7 @@ Given this, how can you know just _how_ a client disconnected?
 For this, you should use the [`pr_session_get_disconnect_reason()`](https://github.com/proftpd/proftpd/blob/master/src/session.c#L156) function; see [here](https://github.com/proftpd/proftpd/blob/master/include/session.h#L28) for the list
 of disconnect reason codes.  You can implement a listener for the `core.exit`
 event to do this:
+
 ```
 /* Custom exit event handler */
 static void custom_exit_ev(const void *event_data, void *user_data) {

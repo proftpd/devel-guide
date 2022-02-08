@@ -20,7 +20,7 @@ However, other protocols such as SSH/SFTP have no such explicit command.  In
 addition, many clients (FTP and otherwise) do not _use_ such commands to
 disconnect politely; they just close their TCP connection when they are done.
 
-Given this, how can you know just _how_ a client disconnected?
+Given this, how can you know just _why_ a client disconnected?
 
 For this, you should use the [`pr_session_get_disconnect_reason()`](https://github.com/proftpd/proftpd/blob/master/src/session.c#L156) function; see [here](https://github.com/proftpd/proftpd/blob/master/include/session.h#L28) for the list
 of disconnect reason codes.  You can implement a listener for the `core.exit`
